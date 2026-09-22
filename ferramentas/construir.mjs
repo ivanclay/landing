@@ -9,7 +9,7 @@ import {
   RAIZ, PASTA_SITE, PASTA_SAIDA, PASTA_MODELOS, ehPastaDePagina, lerJson, listarPastas,
   readFile, writeFile, mkdir, cp, rm, existsSync, path,
 } from './lib/arquivos.mjs';
-import { validarPagina, nomeDeExibicao, FORMATO_SLUG } from './lib/pagina.mjs';
+import { validarPagina, nomeDeExibicao, ehDemonstracao, FORMATO_SLUG } from './lib/pagina.mjs';
 import { cabecalhoDaPagina, cabecalhoDoIndice, urlDaPagina } from './lib/seo.mjs';
 import { escaparHtml } from './lib/html.mjs';
 
@@ -35,14 +35,18 @@ async function construir() {
   erros.push(...(await gerarRedirecionamentos(config, publicadas)));
   if (erros.length) return falhar(erros);
 
-  await gerarIndice(config, publicadas);
+  // A demonstração só abre pelo link direto: fica fora do índice e do sitemap (ADR-004).
+  const listaveis = publicadas.filter((p) => !ehDemonstracao(p));
+  await gerarIndice(config, listaveis);
   await copiarModelo('404.html', '404.html', config);
-  await writeFile(path.join(PASTA_SAIDA, 'sitemap.xml'), sitemap(config, publicadas.filter((p) => p.publicar)));
+  await writeFile(path.join(PASTA_SAIDA, 'sitemap.xml'), sitemap(config, listaveis.filter((p) => p.publicar)));
   await writeFile(path.join(PASTA_SAIDA, 'robots.txt'),
     `User-agent: *\nAllow: /\n\nSitemap: ${new URL('sitemap.xml', config.urlBase).href}\n`);
 
   const rascunhos = publicadas.filter((p) => !p.publicar).length;
+  const demonstracoes = publicadas.filter((p) => p.publicar && ehDemonstracao(p)).length;
   console.log(`_site/ pronto: ${publicadas.length - rascunhos} página(s) publicada(s)`
+    + (demonstracoes ? ` (${demonstracoes} de demonstração, só por link direto)` : '')
     + (rascunhos ? ` e ${rascunhos} rascunho(s) com noindex — NÃO publique esta construção` : '') + '.');
 }
 

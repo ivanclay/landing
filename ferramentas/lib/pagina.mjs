@@ -1,6 +1,8 @@
 // O contrato do pagina.json: o que toda página precisa declarar para ser construída e publicada.
 // Cada mensagem cita a regra do CLAUDE.md que ela garante.
 
+import { normalizar } from './html.mjs';
+
 export const FORMATO_SLUG = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 const FORMATO_DATA = /^\d{4}-\d{2}-\d{2}$/;
 const FORMATO_E164 = /^\+\d{10,15}$/;
@@ -20,6 +22,8 @@ export function validarPagina(pagina, pasta) {
     'slug ausente ou fora do formato (minúsculas, dígitos e hífen; sem acento) — regra 7');
   exigir(pagina.slug === pasta, `slug "${pagina.slug}" diferente da pasta "${pasta}" — regra 7`);
   exigir(typeof pagina.publicar === 'boolean', 'publicar precisa ser true ou false');
+  exigir(pagina.demonstracao === undefined || typeof pagina.demonstracao === 'boolean',
+    'demonstracao, se existir, precisa ser true ou false — ADR-004');
 
   const medico = pagina.medico ?? {};
   exigir(texto(medico.nome), 'medico.nome ausente — regra 2');
@@ -40,6 +44,10 @@ export function validarPagina(pagina, pasta) {
 
   exigir(texto(pagina.resumo) && pagina.resumo.length >= 50 && pagina.resumo.length <= 160,
     'resumo precisa ter entre 50 e 160 caracteres (vira a meta description e o texto do índice)');
+  if (ehDemonstracao(pagina)) {
+    exigir(texto(pagina.resumo) && normalizar(pagina.resumo).includes('demonstracao'),
+      'resumo de página de demonstração precisa dizer "demonstração": é o que aparece na prévia do link, onde o aviso da página não aparece — ADR-004');
+  }
   exigir(texto(pagina.cidade), 'cidade ausente (aparece no índice)');
   exigir(UFS.includes(pagina.uf), 'uf ausente ou inválida (aparece no índice)');
 
@@ -53,12 +61,15 @@ export function validarPagina(pagina, pasta) {
 
   if (pagina.publicar === true) {
     const revisao = pagina.revisao ?? {};
-    exigir(FORMATO_DATA.test(revisao.crmConferidoEm ?? ''),
-      'revisao.crmConferidoEm ausente: CRM e RQE conferidos no portal do CFM antes de publicar — regra 4');
+    // Na demonstração não há médico para conferir CRM nem aprovar; a conferência CFM continua (ADR-004).
+    if (!ehDemonstracao(pagina)) {
+      exigir(FORMATO_DATA.test(revisao.crmConferidoEm ?? ''),
+        'revisao.crmConferidoEm ausente: CRM e RQE conferidos no portal do CFM antes de publicar — regra 4');
+      exigir(FORMATO_DATA.test(revisao.aprovadoPeloMedicoEm ?? ''),
+        'revisao.aprovadoPeloMedicoEm ausente: a página só publica com a aprovação do médico — regra 4');
+    }
     exigir(FORMATO_DATA.test(revisao.conferenciaCfmEm ?? ''),
       'revisao.conferenciaCfmEm ausente: a conferência da publicidade médica não foi feita — regra 3');
-    exigir(FORMATO_DATA.test(revisao.aprovadoPeloMedicoEm ?? ''),
-      'revisao.aprovadoPeloMedicoEm ausente: a página só publica com a aprovação do médico — regra 4');
     exigir(FORMATO_DATA.test(pagina.atualizadoEm ?? ''), 'atualizadoEm ausente (vai para o sitemap)');
   }
   return erros;
@@ -72,6 +83,18 @@ export function nomeDeExibicao(pagina) {
 /** "Médico" ou "Médica" — a palavra que o art. 4º, I da Res. CFM 2.336/2023 exige junto do CRM. */
 export function palavraMedico(pagina) {
   return pagina.medico.generoGramatical === 'F' ? 'Médica' : 'Médico';
+}
+
+/** Página de médico fictício, só por link direto: noindex, fora do índice e do sitemap (ADR-004). */
+export function ehDemonstracao(pagina) {
+  return pagina.demonstracao === true;
+}
+
+/** O texto exato que o elemento data-aviso-demonstracao mostra no topo da página (ADR-004). */
+export function avisoDeDemonstracao(pagina) {
+  const ficticio = pagina.medico.generoGramatical === 'F' ? 'uma médica fictícia' : 'um médico fictício';
+  return `Página de demonstração. ${nomeDeExibicao(pagina)} é ${ficticio}; CRM, RQE e contatos são fictícios. `
+    + 'Os hospitais e planos citados não têm relação com esta página.';
 }
 
 function texto(valor) {

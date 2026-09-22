@@ -1,7 +1,7 @@
 // O que só a construção escreve: endereço absoluto (canonical, og:url, og:image) e dados estruturados.
 // A página nunca digita a URL base — ela muda no dia em que houver domínio próprio (D-01, regra 8).
 import { escaparHtml } from './html.mjs';
-import { nomeDeExibicao } from './pagina.mjs';
+import { nomeDeExibicao, ehDemonstracao } from './pagina.mjs';
 
 export function urlDaPagina(config, slug) {
   return new URL(`${slug}/`, config.urlBase).href;
@@ -20,7 +20,8 @@ export function cabecalhoDaPagina(pagina, config, { rascunho = false } = {}) {
     linhas.push(`<meta property="og:image" content="${escaparHtml(new URL(pagina.imagemSocial, url).href)}">`);
     linhas.push(`<meta name="twitter:card" content="summary_large_image">`);
   }
-  if (rascunho) linhas.push('<meta name="robots" content="noindex, nofollow">');
+  // Rascunho e demonstração nunca vão para o Google; a demonstração, nem publicada (ADR-004).
+  if (rascunho || ehDemonstracao(pagina)) linhas.push('<meta name="robots" content="noindex, nofollow">');
   linhas.push(`<script type="application/ld+json">${JSON.stringify(dadosEstruturados(pagina, url))}</script>`);
   return linhas.join('\n    ');
 }

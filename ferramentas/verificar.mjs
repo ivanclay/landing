@@ -7,8 +7,11 @@ import {
   RAIZ, PASTA_SITE, PASTA_SAIDA, PASTA_REGRAS, PASTA_DOCS_PAGINAS, lerJson, listarPastas,
   listarArquivosRecursivo, tamanhoEmBytes, readFile, existsSync, path,
 } from './lib/arquivos.mjs';
-import { tags, conteudoDoElementoCom, textoVisivel, normalizar, semComentarios } from './lib/html.mjs';
-import { palavraMedico } from './lib/pagina.mjs';
+import { readdir } from 'node:fs/promises';
+import {
+  tags, aberturaDoElementoCom, conteudoDoElementoCom, textoVisivel, normalizar, semComentarios,
+} from './lib/html.mjs';
+import { palavraMedico, ehDemonstracao, avisoDeDemonstracao } from './lib/pagina.mjs';
 
 const LIMITE_IMAGEM_BYTES = 250 * 1024;
 const LIMITE_PAGINA_BYTES = 900 * 1024;
@@ -42,6 +45,8 @@ async function verificar() {
     const pagina = await lerJson(fonte);
     const html = await readFile(path.join(PASTA_SAIDA, pasta, 'index.html'), 'utf8');
     verificarIdentificacaoCfm(html, pagina, `${pasta}/index.html`);
+    if (ehDemonstracao(pagina)) await verificarDemonstracao(html, pagina, pasta);
+    else verificarSemBancoDeImagem(html, pasta);
     if (pagina.publicar && !existsSync(path.join(PASTA_DOCS_PAGINAS, pasta, 'briefing.md'))) {
       erros.push(`${pasta}: sem docs/paginas/${pasta}/briefing.md — todo fato da página precisa de fonte (regra 1)`);
     }
@@ -167,6 +172,67 @@ function verificarIdentificacaoCfm(html, pagina, relativo) {
   for (const item of [...(pagina.medico.especialidades ?? []), ...(pagina.medico.areasDeAtuacao ?? [])]) {
     exigir(item.nome, 'a especialidade');
     exigir(`RQE ${item.rqe}`, 'o RQE');
+  }
+}
+
+/** ADR-004: a demonstração não pode passar por página real — nem no topo, nem na aba, nem nas imagens. */
+async function verificarDemonstracao(html, pagina, pasta) {
+  const relativo = `${pasta}/index.html`;
+  const aviso = aberturaDoElementoCom(html, 'data-aviso-demonstracao');
+  const textoAviso = conteudoDoElementoCom(html, 'data-aviso-demonstracao');
+  if (!aviso || textoAviso === null) {
+    erros.push(`${relativo}: sem o elemento data-aviso-demonstracao — página de demonstração avisa no topo que o médico é fictício (ADR-004)`);
+  } else {
+    const esperado = avisoDeDemonstracao(pagina);
+    if (normalizar(textoVisivel(textoAviso)) !== normalizar(esperado)) {
+      erros.push(`${relativo}: o data-aviso-demonstracao precisa dizer exatamente: "${esperado}" (ADR-004)`);
+    }
+    const h1 = /<h1\b/i.exec(semComentarios(html));
+    if (h1 && aviso.indice > h1.index) erros.push(`${relativo}: o data-aviso-demonstracao vem depois do <h1> — ele fica no topo (ADR-004)`);
+    if ('hidden' in aviso.atributos || aviso.atributos['aria-hidden'] === 'true') {
+      erros.push(`${relativo}: o data-aviso-demonstracao está escondido (hidden/aria-hidden) — ADR-004`);
+    }
+  }
+  const titulo = /<title>([^<]*)<\/title>/i.exec(html)?.[1] ?? '';
+  if (!normalizar(titulo).includes('demonstracao')) erros.push(`${relativo}: o <title> precisa dizer "Demonstração" — é o que aparece na aba e na prévia do link (ADR-004)`);
+
+  // Toda imagem ilustrativa (as de imagens/, menos os logotipos) dentro de <figure> com a legenda.
+  const ilustrativas = (trecho) => tags(trecho, 'img').filter((t) => /^imagens\/(?!marcas\/)/.test(t.atributos.src ?? '')).length;
+  const legendadas = [...semComentarios(html).matchAll(/<figure\b[\s\S]*?<\/figure>/gi)]
+    .filter(([figura]) => /<figcaption\b/i.test(figura) && normalizar(textoVisivel(figura)).includes('imagem ilustrativa'))
+    .reduce((soma, [figura]) => soma + ilustrativas(figura), 0);
+  const semLegenda = ilustrativas(html) - legendadas;
+  if (semLegenda > 0) erros.push(`${relativo}: ${semLegenda} imagem(ns) de imagens/ sem <figure> com <figcaption> "Imagem ilustrativa" (ADR-004)`);
+
+  const arquivoCreditos = path.join(PASTA_DOCS_PAGINAS, pasta, 'creditos-imagens.md');
+  const pastaImagens = path.join(PASTA_SITE, pasta, 'imagens');
+  const social = pagina.imagemSocial ? path.basename(pagina.imagemSocial) : null;
+  const prefixos = new Set(
+    (existsSync(pastaImagens) ? await readdir(pastaImagens, { withFileTypes: true }) : [])
+      .filter((item) => item.isFile() && item.name !== social)
+      .map((item) => item.name.replace(/(-\d+)?\.[a-z0-9]+$/i, '')),
+  );
+  if (!prefixos.size) return;
+  if (!existsSync(arquivoCreditos)) {
+    erros.push(`${pasta}: sem docs/paginas/${pasta}/creditos-imagens.md — toda imagem de banco da demonstração tem autor, banco e licença registrados (ADR-004)`);
+    return;
+  }
+  const linhasDaTabela = (await readFile(arquivoCreditos, 'utf8')).split('\n').filter((linha) => linha.trimStart().startsWith('|'));
+  for (const prefixo of prefixos) {
+    const citado = new RegExp(`(?<![\\w-])${prefixo.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}(?![\\w-])`);
+    if (!linhasDaTabela.some((linha) => citado.test(linha))) {
+      erros.push(`${pasta}: a imagem "${prefixo}" (site/${pasta}/imagens/) não tem linha em creditos-imagens.md (ADR-004)`);
+    }
+  }
+}
+
+/** Regra 12: página real não usa banco de imagem. Os dois sinais que o CI enxerga (ADR-004). */
+function verificarSemBancoDeImagem(html, pasta) {
+  if (existsSync(path.join(PASTA_DOCS_PAGINAS, pasta, 'creditos-imagens.md'))) {
+    erros.push(`${pasta}: creditos-imagens.md numa página real — banco de imagem só em página de demonstração (regra 12, ADR-004)`);
+  }
+  if (normalizar(textoVisivel(html)).includes('imagem ilustrativa')) {
+    erros.push(`${pasta}/index.html: "Imagem ilustrativa" numa página real — a foto é do médico ou não há foto (regra 12, ADR-004)`);
   }
 }
 

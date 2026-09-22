@@ -137,6 +137,8 @@ construção e de método.
     a abertura é **tipográfica** — decisão de direção de arte, não buraco. **Logotipo de hospital ou
     convênio só com autorização escrita**; por padrão, o nome em texto. Imagem gerada por IA não
     representa pessoa, consultório nem procedimento.
+    ⌗ **Única exceção:** página com `"demonstracao": true` (médico fictício, ADR-004) pode usar banco de
+    imagem com licença livre, com a legenda "Imagem ilustrativa" e o `creditos-imagens.md` — verificado.
 
 ### Método (herdadas do S-Card, reescritas para cá)
 

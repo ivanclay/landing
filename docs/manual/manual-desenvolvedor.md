@@ -40,6 +40,18 @@ Confere o que está em `_site/`. **Erro** reprova (exit 1); **aviso** é impress
 | `docs/paginas/<slug>/briefing.md` existe (página publicada) | erro |
 | Imagem > 250 KB; pasta > 900 KB | aviso |
 
+**Em página com `"demonstracao": true`** ([ADR-004](../decisoes/adr/ADR-004-modo-demonstracao.md)):
+
+| Checagem | Nível |
+|---|---|
+| `data-aviso-demonstracao` antes do `h1`, sem `hidden`/`aria-hidden`, com o texto exato de `avisoDeDemonstracao()` (`lib/pagina.mjs`) | erro |
+| `<title>` com "Demonstração" | erro |
+| Toda `<img>` de `imagens/` (menos `imagens/marcas/`) dentro de `<figure>` com `<figcaption>` "Imagem ilustrativa" | erro |
+| `docs/paginas/<slug>/creditos-imagens.md` com uma linha de tabela citando cada prefixo de `site/<slug>/imagens/` (`retrato` cobre `retrato-480.avif`…; a `imagemSocial` é dispensada) | erro |
+
+**Em página real:** `creditos-imagens.md` na pasta da página, ou "Imagem ilustrativa" no texto, reprova
+(regra 12 — banco de imagem só na demonstração).
+
 ⌗ A leitura de HTML é por expressão regular (`ferramentas/lib/html.mjs`). Serve para o HTML deste
 repositório, não para qualquer HTML (B-02). Mudou uma checagem? Prove com um caso que reprova e um
 que passa, e descreva os dois no PR.
@@ -62,8 +74,20 @@ O código é o contrato: `ferramentas/lib/pagina.mjs`. O modelo está em
 - Cada item de `especialidades[]` e de `areasDeAtuacao[]` exige `rqe`.
 - Com `publicar: true`, também são obrigatórios `atualizadoEm` e as três datas de `revisao`.
 
+**Modo demonstração** (`"demonstracao": true`, ADR-004): `publicar: true` dispensa `crmConferidoEm` e
+`aprovadoPeloMedicoEm`, mas continua exigindo `conferenciaCfmEm` e `atualizadoEm`; o `resumo` precisa
+conter "demonstração". A construção põe `noindex, nofollow` e deixa a página fora do índice e do sitemap:
+ela só abre pelo link direto.
+
 **Campos opcionais, usados pelo JSON-LD:** `locais[]` (`nome`, `tipo`, `endereco`), `convenios[]`,
 `redes{}`, `imagemSocial`.
+
+## Testes — `ferramentas/testes/`
+
+`npm run testar` (`node --test`, embutido no Node, sem dependência). Cada teste monta um site
+descartável numa pasta temporária e roda `construir.mjs` e `verificar.mjs` de verdade, apontados para ele
+pela variável `LANDING_RAIZ` (`lib/arquivos.mjs`; sem ela, a raiz é o repositório). O `verificar.yml`
+roda os testes antes da verificação. Checagem nova entra com um caso que reprova e um que passa.
 
 ## Fontes e imagens
 

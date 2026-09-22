@@ -4,11 +4,14 @@ import { existsSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-export const RAIZ = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
+// O código mora sempre aqui; o site pode morar em outra raiz (LANDING_RAIZ), que é como os testes montam
+// um site descartável numa pasta temporária sem tocar no repositório.
+const RAIZ_DO_CODIGO = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
+export const RAIZ = process.env.LANDING_RAIZ ? path.resolve(process.env.LANDING_RAIZ) : RAIZ_DO_CODIGO;
 export const PASTA_SITE = path.join(RAIZ, 'site');
 export const PASTA_SAIDA = path.join(RAIZ, '_site');
-export const PASTA_MODELOS = path.join(RAIZ, 'ferramentas', 'modelos');
-export const PASTA_REGRAS = path.join(RAIZ, 'ferramentas', 'regras');
+export const PASTA_MODELOS = path.join(RAIZ_DO_CODIGO, 'ferramentas', 'modelos');
+export const PASTA_REGRAS = path.join(RAIZ_DO_CODIGO, 'ferramentas', 'regras');
 export const PASTA_DOCS_PAGINAS = path.join(RAIZ, 'docs', 'paginas');
 
 /** Pastas de site/ que não são páginas: os ativos compartilhados e tudo que começa com _ ou . */

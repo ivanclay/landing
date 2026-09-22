@@ -23,6 +23,12 @@ export function lerAtributos(trecho) {
   return atributos;
 }
 
+/** A tag de abertura do primeiro elemento que tem o atributo dado: posição (sem comentários) e atributos. */
+export function aberturaDoElementoCom(html, atributo) {
+  const abertura = new RegExp(`<([a-z][a-z0-9]*)\\b([^>]*\\s${atributo}(?=[\\s=>])[^>]*)>`, 'i').exec(semComentarios(html));
+  return abertura && { indice: abertura.index, atributos: lerAtributos(abertura[2]) };
+}
+
 /** O conteúdo do elemento que tem o atributo dado, respeitando o aninhamento de tags de mesmo nome. */
 export function conteudoDoElementoCom(html, atributo) {
   const limpo = semComentarios(html);

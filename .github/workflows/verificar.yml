@@ -20,6 +20,10 @@ jobs:
           node-version: 22
 
       # construir.mjs e verificar.mjs não têm dependência: não há npm ci aqui de propósito.
+      # Os testes das ferramentas (node:test, sem dependência): cada checagem reprova o que deve reprovar.
+      - name: Testar as ferramentas
+        run: node --test "ferramentas/testes/*.test.mjs"
+
       - name: Construir e verificar _site/
         run: |
           node ferramentas/construir.mjs
