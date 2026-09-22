@@ -1,0 +1,371 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Demonstração — Dr. Paulo de Tarso, cardiologista em São Paulo</title>
+    <meta name="description" content="Demonstração: página de um cardiologista fictício em São Paulo, com arritmia, marca-passo, planos por local e contato pelo WhatsApp.">
+    <meta property="og:title" content="Demonstração — Dr. Paulo de Tarso, cardiologista em São Paulo">
+    <meta property="og:description" content="Demonstração: página de um cardiologista fictício em São Paulo, com arritmia, marca-passo, planos por local e contato pelo WhatsApp.">
+    <meta name="theme-color" content="#f2f0eb">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <!-- @gerado:cabecalho -->
+    <link rel="preload" href="../assets/fontes/instrument-serif/instrument-serif-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="../assets/fontes/instrument-serif/fonte.css">
+    <link rel="stylesheet" href="../assets/fontes/hanken-grotesk/fonte.css">
+    <link rel="stylesheet" href="../assets/css/base.css">
+    <link rel="stylesheet" href="../assets/css/componentes.css">
+    <link rel="stylesheet" href="tema.css">
+    <link rel="stylesheet" href="pagina.css">
+    <script src="../assets/js/pagina.js" defer></script>
+    <script src="pagina.js" defer></script>
+  </head>
+  <body>
+    <a class="pular-para-conteudo" href="#conteudo">Ir para o conteúdo</a>
+
+    <p class="aviso-demonstracao" data-aviso-demonstracao>Página de demonstração. Dr. Paulo de Tarso Lopes Pontes é um médico fictício; CRM, RQE e contatos são fictícios. Os hospitais e planos citados não têm relação com esta página.</p>
+
+    <header class="cabeca">
+      <div class="conteudo cabeca__linha">
+        <p class="cabeca__nome">Dr. Paulo de Tarso</p>
+        <nav class="cabeca__nav" aria-label="Seções">
+          <a href="#planos">Planos e locais</a>
+          <a href="#antes-de-marcar">Antes de marcar</a>
+          <a href="#o-que-levar">O que levar</a>
+          <a href="#particular">Particular</a>
+        </nav>
+        <a class="botao botao--principal cabeca__contato" href="https://wa.me/5511900000000?text=Ol%C3%A1!%20Gostaria%20de%20marcar%20uma%20consulta%20com%20o%20Dr.%20Paulo%20de%20Tarso." target="_blank" rel="noopener">Marcar pelo WhatsApp</a>
+      </div>
+    </header>
+
+    <main id="conteudo">
+      <section class="abertura" aria-labelledby="titulo-principal">
+        <div class="conteudo abertura__grade">
+          <div class="abertura__texto">
+            <p class="abertura__sobre">Cardiologia · São Paulo</p>
+            <h1 id="titulo-principal" class="abertura__nome"><span class="visualmente-oculto">Dr. </span>Paulo de Tarso <span class="abertura__sobrenome">Lopes Pontes</span></h1>
+            <p class="abertura__apoio">Cardiologista. Atende adultos com palpitação, arritmia, fibrilação atrial e pressão alta, e faz a avaliação do coração antes de uma cirurgia ou de começar a treinar.</p>
+            <p class="abertura__acoes" data-contato-topo>
+              <a class="botao botao--principal" href="https://wa.me/5511900000000?text=Ol%C3%A1!%20Gostaria%20de%20marcar%20uma%20consulta%20com%20o%20Dr.%20Paulo%20de%20Tarso." target="_blank" rel="noopener">Marcar pelo WhatsApp</a>
+              <a class="botao botao--secundario" href="tel:+551130000000">Ligar (11) 3000-0000</a>
+            </p>
+            <p class="identificacao-cfm abertura__identificacao">Médico · CRM-SP 000000 · Cardiologia, RQE 00001</p>
+          </div>
+          <figure class="abertura__retrato figura">
+            <picture>
+              <source type="image/avif" srcset="imagens/retrato-480.avif 480w, imagens/retrato-720.avif 720w, imagens/retrato-1000.avif 1000w" sizes="(min-width: 60rem) 36vw, 100vw">
+              <source type="image/webp" srcset="imagens/retrato-480.webp 480w, imagens/retrato-720.webp 720w, imagens/retrato-1000.webp 1000w" sizes="(min-width: 60rem) 36vw, 100vw">
+              <img src="imagens/retrato-720.jpg" srcset="imagens/retrato-480.jpg 480w, imagens/retrato-720.jpg 720w, imagens/retrato-1000.jpg 1000w" sizes="(min-width: 60rem) 36vw, 100vw" width="1000" height="1250" alt="Homem de uns cinquenta anos, barba grisalha e óculos, de blazer escuro, sentado junto a uma janela" fetchpriority="high" decoding="async">
+            </picture>
+            <figcaption>Imagem ilustrativa</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="marcas" aria-labelledby="titulo-marcas">
+        <div class="conteudo marcas__grade">
+          <h2 id="titulo-marcas" class="marcas__titulo">Onde atende e por quais planos</h2>
+          <!-- Nomes em tipo. Para trocar por logotipo autorizado: docs/paginas/dr-paulo-de-tarso/autorizacoes.md -->
+          <ul class="marcas__lista marcas__lista--locais" role="list">
+            <li class="marca" data-marca="einstein"><span class="marca__nome">Einstein</span></li>
+            <li class="marca" data-marca="sirio-libanes"><span class="marca__nome">Sírio-Libanês</span></li>
+            <li class="marca" data-marca="oswaldo-cruz"><span class="marca__nome">Oswaldo Cruz</span></li>
+            <li class="marca" data-marca="hcor"><span class="marca__nome">HCor</span></li>
+          </ul>
+          <ul class="marcas__lista marcas__lista--planos" role="list">
+            <li class="marca" data-marca="bradesco-saude"><span class="marca__nome">Bradesco Saúde</span></li>
+            <li class="marca" data-marca="sulamerica"><span class="marca__nome">SulAmérica</span></li>
+            <li class="marca" data-marca="amil"><span class="marca__nome">Amil</span></li>
+            <li class="marca" data-marca="porto-saude"><span class="marca__nome">Porto Saúde</span></li>
+            <li class="marca" data-marca="omint"><span class="marca__nome">Omint</span></li>
+            <li class="marca" data-marca="care-plus"><span class="marca__nome">Care Plus</span></li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="areas" class="secao" aria-labelledby="titulo-areas">
+        <div class="conteudo secao__grade">
+          <h2 id="titulo-areas" class="secao__titulo">Áreas com título de especialista</h2>
+          <div class="secao__corpo">
+            <dl class="areas">
+              <div class="area">
+                <dt>Cardiologia <span class="area__rqe">RQE 00001</span></dt>
+                <dd>A especialidade: coração e vasos no adulto, da pressão alta ao check-up antes de uma cirurgia.</dd>
+              </div>
+              <div class="area">
+                <dt>Eletrofisiologia Clínica Invasiva <span class="area__rqe">RQE 00002</span></dt>
+                <dd>O estudo do sistema elétrico do coração: de onde vem uma arritmia e como ela se comporta.</dd>
+              </div>
+              <div class="area">
+                <dt>Estimulação Cardíaca Eletrônica Implantável <span class="area__rqe">RQE 00003</span></dt>
+                <dd>Marca-passo e cardiodesfibrilador: indicação, acompanhamento e ajuste do aparelho.</dd>
+              </div>
+              <div class="area">
+                <dt>Ergometria <span class="area__rqe">RQE 00004</span></dt>
+                <dd>O teste ergométrico: como o coração responde ao esforço, na esteira.</dd>
+              </div>
+            </dl>
+
+            <h3 class="secao__subtitulo">Também atende</h3>
+            <p>Arritmias e palpitação, fibrilação atrial, hipertensão, avaliação cardiológica antes de cirurgia e avaliação para atividade física.</p>
+
+            <h3 class="secao__subtitulo">Exames no consultório</h3>
+            <ul class="exames" role="list">
+              <li><strong>Holter.</strong> Um gravador pequeno registra o ritmo do coração por 24 horas, na sua rotina. Serve para flagrar a palpitação que não aparece na consulta.</li>
+              <li><strong>Teste ergométrico.</strong> Caminhada na esteira com o coração monitorado. Mostra como ele se comporta no esforço, antes de começar a treinar ou para investigar um sintoma.</li>
+              <li><strong>Avaliação de marca-passo.</strong> A leitura do aparelho, feita por um programador próprio: bateria, cabos, registros de arritmia e o ajuste, se for preciso.</li>
+            </ul>
+          </div>
+          <figure class="secao__figura figura">
+            <picture>
+              <source type="image/avif" srcset="imagens/consultorio-400.avif 400w, imagens/consultorio-640.avif 640w, imagens/consultorio-900.avif 900w" sizes="(min-width: 60rem) 34vw, 100vw">
+              <source type="image/webp" srcset="imagens/consultorio-400.webp 400w, imagens/consultorio-640.webp 640w, imagens/consultorio-900.webp 900w" sizes="(min-width: 60rem) 34vw, 100vw">
+              <img src="imagens/consultorio-640.jpg" srcset="imagens/consultorio-400.jpg 400w, imagens/consultorio-640.jpg 640w, imagens/consultorio-900.jpg 900w" sizes="(min-width: 60rem) 34vw, 100vw" width="900" height="1125" alt="Sala clara com mesa de madeira, cadeira e cortinas de voil diante da janela" loading="lazy" decoding="async">
+            </picture>
+            <figcaption>Imagem ilustrativa</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section id="planos" class="planos" aria-labelledby="titulo-planos">
+        <div class="conteudo">
+          <h2 id="titulo-planos" class="planos__titulo">Qual é o seu plano?</h2>
+          <p class="planos__apoio">Escolha o seu plano e veja onde o Dr. Paulo atende por ele. Sem plano, a consulta é particular, com recibo para pedir reembolso.</p>
+
+          <div class="seletor so-com-js" role="group" aria-label="Seu plano">
+            <button type="button" class="seletor__opcao" data-plano="bradesco" aria-pressed="false">Bradesco Saúde</button>
+            <button type="button" class="seletor__opcao" data-plano="sulamerica" aria-pressed="false">SulAmérica</button>
+            <button type="button" class="seletor__opcao" data-plano="amil" aria-pressed="false">Amil</button>
+            <button type="button" class="seletor__opcao" data-plano="porto" aria-pressed="false">Porto Saúde</button>
+            <button type="button" class="seletor__opcao" data-plano="omint" aria-pressed="false">Omint</button>
+            <button type="button" class="seletor__opcao" data-plano="careplus" aria-pressed="false">Care Plus</button>
+            <button type="button" class="seletor__opcao" data-plano="particular" aria-pressed="false">Particular</button>
+          </div>
+          <p class="seletor__resposta so-com-js" aria-live="polite" data-resposta></p>
+
+          <ol class="locais" role="list">
+            <li class="lugar" data-local="consultorio" data-planos="bradesco sulamerica amil porto omint careplus particular">
+              <h3 class="lugar__nome">Consultório <span class="lugar__bairro">Jardim Paulista</span></h3>
+              <address class="lugar__endereco">Rua Fictícia dos Cardiologistas, 100 — Jardim Paulista, São Paulo/SP</address>
+              <p class="lugar__marcador"></p>
+              <p class="lugar__acoes">
+                <a href="https://www.google.com/maps/search/?api=1&amp;query=Jardim%20Paulista%2C%20S%C3%A3o%20Paulo%20SP" target="_blank" rel="noopener">Ver o bairro no mapa</a>
+                <a href="https://wa.me/5511900000000?text=Ol%C3%A1!%20Gostaria%20de%20marcar%20uma%20consulta%20com%20o%20Dr.%20Paulo%20de%20Tarso%20no%20consult%C3%B3rio%20do%20Jardim%20Paulista.%20Meu%20plano%20%C3%A9%3A%20" target="_blank" rel="noopener" data-whatsapp-local="no consultório do Jardim Paulista">Marcar aqui pelo WhatsApp</a>
+              </p>
+            </li>
+            <li class="lugar" data-local="einstein" data-planos="bradesco sulamerica omint careplus particular">
+              <h3 class="lugar__nome">Einstein <span class="lugar__bairro">Morumbi</span></h3>
+              <address class="lugar__endereco">Av. Albert Einstein, 627/701 — Morumbi, São Paulo/SP, 05652-900</address>
+              <p class="lugar__marcador"></p>
+              <p class="lugar__acoes">
+                <a href="https://www.google.com/maps/search/?api=1&amp;query=Av.%20Albert%20Einstein%2C%20627%2C%20Morumbi%2C%20S%C3%A3o%20Paulo%20SP" target="_blank" rel="noopener">Ver no mapa</a>
+                <a href="https://wa.me/5511900000000?text=Ol%C3%A1!%20Gostaria%20de%20marcar%20uma%20consulta%20com%20o%20Dr.%20Paulo%20de%20Tarso%20no%20Einstein%20Morumbi.%20Meu%20plano%20%C3%A9%3A%20" target="_blank" rel="noopener" data-whatsapp-local="no Einstein Morumbi">Marcar aqui pelo WhatsApp</a>
+              </p>
+            </li>
+            <li class="lugar" data-local="sirio" data-planos="bradesco sulamerica porto omint careplus particular">
+              <h3 class="lugar__nome">Sírio-Libanês <span class="lugar__bairro">Bela Vista</span></h3>
+              <address class="lugar__endereco">Rua Dona Adma Jafet, 115 — Bela Vista, São Paulo/SP, 01308-050</address>
+              <p class="lugar__marcador"></p>
+              <p class="lugar__acoes">
+                <a href="https://www.google.com/maps/search/?api=1&amp;query=Rua%20Dona%20Adma%20Jafet%2C%20115%2C%20S%C3%A3o%20Paulo%20SP" target="_blank" rel="noopener">Ver no mapa</a>
+                <a href="https://wa.me/5511900000000?text=Ol%C3%A1!%20Gostaria%20de%20marcar%20uma%20consulta%20com%20o%20Dr.%20Paulo%20de%20Tarso%20no%20S%C3%ADrio-Liban%C3%AAs.%20Meu%20plano%20%C3%A9%3A%20" target="_blank" rel="noopener" data-whatsapp-local="no Sírio-Libanês">Marcar aqui pelo WhatsApp</a>
+              </p>
+            </li>
+            <li class="lugar" data-local="oswaldo" data-planos="bradesco sulamerica amil porto omint particular">
+              <h3 class="lugar__nome">Oswaldo Cruz <span class="lugar__bairro">Unidade Paulista</span></h3>
+              <address class="lugar__endereco">R. Treze de Maio, 1815 — Bela Vista, São Paulo/SP, 01327-001</address>
+              <p class="lugar__marcador"></p>
+              <p class="lugar__acoes">
+                <a href="https://www.google.com/maps/search/?api=1&amp;query=R.%20Treze%20de%20Maio%2C%201815%2C%20S%C3%A3o%20Paulo%20SP" target="_blank" rel="noopener">Ver no mapa</a>
+                <a href="https://wa.me/5511900000000?text=Ol%C3%A1!%20Gostaria%20de%20marcar%20uma%20consulta%20com%20o%20Dr.%20Paulo%20de%20Tarso%20no%20Oswaldo%20Cruz%20(Unidade%20Paulista).%20Meu%20plano%20%C3%A9%3A%20" target="_blank" rel="noopener" data-whatsapp-local="no Oswaldo Cruz (Unidade Paulista)">Marcar aqui pelo WhatsApp</a>
+              </p>
+            </li>
+            <li class="lugar" data-local="hcor" data-planos="bradesco sulamerica amil porto careplus particular">
+              <h3 class="lugar__nome">HCor <span class="lugar__bairro">Paraíso</span></h3>
+              <address class="lugar__endereco">Rua Desembargador Eliseu Guilherme, 147 — Paraíso, São Paulo/SP, 04004-030</address>
+              <p class="lugar__marcador"></p>
+              <p class="lugar__acoes">
+                <a href="https://www.google.com/maps/search/?api=1&amp;query=Rua%20Desembargador%20Eliseu%20Guilherme%2C%20147%2C%20S%C3%A3o%20Paulo%20SP" target="_blank" rel="noopener">Ver no mapa</a>
+                <a href="https://wa.me/5511900000000?text=Ol%C3%A1!%20Gostaria%20de%20marcar%20uma%20consulta%20com%20o%20Dr.%20Paulo%20de%20Tarso%20no%20HCor.%20Meu%20plano%20%C3%A9%3A%20" target="_blank" rel="noopener" data-whatsapp-local="no HCor">Marcar aqui pelo WhatsApp</a>
+              </p>
+            </li>
+          </ol>
+
+          <details class="matriz" open data-matriz>
+            <summary>Tabela completa: plano × local</summary>
+            <div class="matriz__rolagem" role="region" aria-labelledby="legenda-matriz" tabindex="0">
+              <table>
+                <caption id="legenda-matriz">Onde cada plano é aceito</caption>
+                <thead>
+                  <tr>
+                    <th scope="col">Plano</th>
+                    <th scope="col">Consultório</th>
+                    <th scope="col">Einstein</th>
+                    <th scope="col">Sírio-Libanês</th>
+                    <th scope="col">Oswaldo Cruz</th>
+                    <th scope="col">HCor</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><th scope="row">Bradesco Saúde</th><td>sim</td><td>sim</td><td>sim</td><td>sim</td><td>sim</td></tr>
+                  <tr><th scope="row">SulAmérica</th><td>sim</td><td>sim</td><td>sim</td><td>sim</td><td>sim</td></tr>
+                  <tr><th scope="row">Amil</th><td>sim</td><td>não</td><td>não</td><td>sim</td><td>sim</td></tr>
+                  <tr><th scope="row">Porto Saúde</th><td>sim</td><td>não</td><td>sim</td><td>sim</td><td>sim</td></tr>
+                  <tr><th scope="row">Omint</th><td>sim</td><td>sim</td><td>sim</td><td>sim</td><td>não</td></tr>
+                  <tr><th scope="row">Care Plus</th><td>sim</td><td>sim</td><td>sim</td><td>não</td><td>sim</td></tr>
+                  <tr><th scope="row">Particular</th><td>sim</td><td>sim</td><td>sim</td><td>sim</td><td>sim</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </details>
+          <p class="planos__nota">A rede de cada plano muda, e o seu contrato pode ter regras próprias. Confirme ao marcar.</p>
+        </div>
+      </section>
+
+      <section id="antes-de-marcar" class="secao" aria-labelledby="titulo-antes">
+        <div class="conteudo secao__grade">
+          <h2 id="titulo-antes" class="secao__titulo">Antes de marcar</h2>
+          <div class="secao__corpo perguntas">
+            <details>
+              <summary>O Dr. Paulo atende o meu plano?</summary>
+              <p>Atende Bradesco Saúde, SulAmérica, Amil, Porto Saúde, Omint e Care Plus, mas nem todo plano vale em todo local. <a href="#planos">Escolha o seu plano</a> e veja onde. Sem plano, a consulta é particular, com recibo para reembolso.</p>
+            </details>
+            <details>
+              <summary>Onde é a consulta?</summary>
+              <p>No consultório do Jardim Paulista ou num dos quatro hospitais: Einstein (Morumbi), Sírio-Libanês (Bela Vista), Oswaldo Cruz (Unidade Paulista) e HCor (Paraíso). Ao marcar pelo WhatsApp, diga o local que prefere.</p>
+            </details>
+            <details>
+              <summary>O que eu levo?</summary>
+              <p>Documento, carteirinha do plano, a lista dos remédios que você toma e os exames do coração que já tiver. <a href="#o-que-levar">A lista completa</a> dá para imprimir.</p>
+            </details>
+            <details>
+              <summary>Como funciona o retorno?</summary>
+              <p>Se a consulta pedir exames, o retorno para mostrar os resultados é marcado em até 30 dias, no mesmo local. No particular, esse retorno não é cobrado.</p>
+            </details>
+            <details>
+              <summary>Preciso de encaminhamento?</summary>
+              <p>Pelo plano, em geral não. Alguns contratos pedem — confira no aplicativo do seu plano antes de marcar.</p>
+            </details>
+            <details>
+              <summary>Atende crianças?</summary>
+              <p>Não. O Dr. Paulo atende adultos, a partir de 18 anos. Para crianças e adolescentes, procure um cardiologista pediátrico.</p>
+            </details>
+          </div>
+        </div>
+      </section>
+
+      <section id="o-que-levar" class="secao secao--pedra levar" aria-labelledby="titulo-levar">
+        <div class="conteudo secao__grade">
+          <h2 id="titulo-levar" class="secao__titulo">O que levar à primeira consulta</h2>
+          <div class="secao__corpo">
+            <ul class="levar__lista" role="list">
+              <li>Documento com foto e a carteirinha do plano.</li>
+              <li>A lista dos remédios que você toma, com a dose — ou as caixas.</li>
+              <li>Exames do coração dos últimos dois anos: eletrocardiograma, ecocardiograma, Holter, teste ergométrico.</li>
+              <li>Exames de sangue recentes: colesterol, glicemia, função dos rins.</li>
+              <li>Relatórios de internação, cirurgia ou pronto-socorro, se houver.</li>
+              <li>Medidas de pressão feitas em casa, com data e hora, se você tiver.</li>
+              <li>Quem tem marca-passo ou cardiodesfibrilador: a carteirinha do aparelho.</li>
+              <li>Avaliação antes de cirurgia: o pedido do cirurgião e a data prevista.</li>
+            </ul>
+            <p class="levar__acoes so-com-js"><button type="button" class="botao botao--secundario" data-imprimir>Imprimir esta lista</button></p>
+          </div>
+        </div>
+      </section>
+
+      <section id="quando-procurar" class="secao" aria-labelledby="titulo-quando">
+        <div class="conteudo secao__grade">
+          <h2 id="titulo-quando" class="secao__titulo">Quando procurar um cardiologista</h2>
+          <div class="secao__corpo">
+            <aside class="emergencia" aria-labelledby="titulo-emergencia">
+              <h3 id="titulo-emergencia" class="emergencia__titulo">Isto não espera consulta</h3>
+              <p>Dor no peito forte ou que não passa, falta de ar de repente, desmaio: vá ao pronto-socorro mais próximo ou ligue <a href="tel:192">192 (SAMU)</a>.</p>
+            </aside>
+            <ul class="sinais" role="list">
+              <li><strong>Palpitação que vem e vai.</strong> O coração dispara ou falha sem motivo aparente, em repouso ou à noite.</li>
+              <li><strong>Falta de ar maior que o esforço.</strong> Cansar numa escada que antes era fácil.</li>
+              <li><strong>Pressão alta repetida.</strong> Medidas de 14 por 9 ou mais em dias diferentes.</li>
+              <li><strong>Tontura forte ou quase desmaio.</strong> Principalmente se acontece junto com palpitação.</li>
+              <li><strong>Antes de uma cirurgia.</strong> Quando o cirurgião pede a avaliação do coração.</li>
+              <li><strong>Antes de começar a treinar.</strong> Depois dos 40, ou com pressão alta, colesterol alto, diabetes ou histórico na família.</li>
+            </ul>
+            <p class="sinais__limite">O Dr. Paulo não atende crianças nem urgências. Para crianças, cardiologista pediátrico; para urgência, pronto-socorro.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="particular" class="secao secao--pedra" aria-labelledby="titulo-particular">
+        <div class="conteudo secao__grade">
+          <h2 id="titulo-particular" class="secao__titulo">Particular, com reembolso</h2>
+          <div class="secao__corpo">
+            <p>Muitos planos reembolsam parte da consulta feita fora da rede. O caminho:</p>
+            <ol class="passos" role="list">
+              <li><strong>Você paga a consulta</strong> no local do atendimento.</li>
+              <li><strong>Recebe o recibo</strong> com o nome e o CRM do médico, a especialidade, a data e o valor.</li>
+              <li><strong>Pede o reembolso</strong> no aplicativo ou no site do seu plano. O valor devolvido depende do seu contrato.</li>
+            </ol>
+            <h3 class="secao__subtitulo">Documentos que o consultório fornece</h3>
+            <ul>
+              <li>Recibo ou nota fiscal da consulta e dos exames.</li>
+              <li>Relatório médico, quando o plano pedir.</li>
+              <li>Pedido dos exames, com a justificativa clínica.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section id="encaminhamento" class="secao" aria-labelledby="titulo-encaminhamento">
+        <div class="conteudo secao__grade">
+          <h2 id="titulo-encaminhamento" class="secao__titulo">Para médicos que encaminham</h2>
+          <div class="secao__corpo">
+            <p>Arritmia, avaliação de marca-passo, teste ergométrico ou avaliação antes de cirurgia: a secretaria marca e, com a autorização do paciente, o relatório da consulta volta para quem encaminhou.</p>
+            <p class="encaminhamento__acoes">
+              <a class="botao botao--secundario" href="tel:+551130000000">Secretaria (11) 3000-0000</a>
+              <a class="botao botao--secundario" href="https://wa.me/5511900000000?text=Ol%C3%A1!%20Sou%20m%C3%A9dico(a)%20e%20gostaria%20de%20encaminhar%20um%20paciente%20ao%20Dr.%20Paulo%20de%20Tarso." target="_blank" rel="noopener">Encaminhar pelo WhatsApp</a>
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="fecho" aria-labelledby="titulo-fecho">
+        <figure class="fecho__cidade figura">
+          <picture>
+              <source type="image/avif" srcset="imagens/cidade-640.avif 640w, imagens/cidade-1100.avif 1100w" sizes="100vw">
+              <source type="image/webp" srcset="imagens/cidade-640.webp 640w, imagens/cidade-1100.webp 1100w" sizes="100vw">
+              <img src="imagens/cidade-1100.jpg" srcset="imagens/cidade-640.jpg 640w, imagens/cidade-1100.jpg 1100w" sizes="100vw" width="1100" height="619" alt="Copas de árvore diante de um prédio de tijolos, em São Paulo, no fim da tarde" loading="lazy" decoding="async">
+            </picture>
+          <figcaption class="conteudo">Imagem ilustrativa</figcaption>
+        </figure>
+        <div class="conteudo fecho__grade">
+          <h2 id="titulo-fecho" class="fecho__titulo">Marque pelo WhatsApp, com o seu plano e o local.</h2>
+          <p class="fecho__acoes">
+            <a class="botao botao--principal" href="https://wa.me/5511900000000?text=Ol%C3%A1!%20Gostaria%20de%20marcar%20uma%20consulta%20com%20o%20Dr.%20Paulo%20de%20Tarso." target="_blank" rel="noopener">Marcar pelo WhatsApp</a>
+            <a class="botao botao--secundario" href="tel:+551130000000">Ligar (11) 3000-0000</a>
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="rodape-legal">
+      <div class="conteudo">
+        <p class="identificacao-cfm" data-identificacao-cfm>
+          <strong>Paulo de Tarso Lopes Pontes</strong> — Médico — CRM-SP 000000<br>
+          Cardiologia — RQE 00001<br>
+          Eletrofisiologia Clínica Invasiva — RQE 00002<br>
+          Estimulação Cardíaca Eletrônica Implantável — RQE 00003<br>
+          Ergometria — RQE 00004
+        </p>
+        <p>Página de demonstração: o médico, o CRM, os RQE, o consultório, os contatos e a relação de planos por local são fictícios. Os hospitais e planos citados não têm relação com esta página.</p>
+        <p>As informações desta página são educativas e não substituem a consulta.</p>
+        <p>Esta página não usa cookies nem coleta dados. O contato acontece pelo WhatsApp ou pelo telefone, nos termos desses serviços.</p>
+        <p>Imagens: Edmond Dantès / Pexels · Max Vakhtbovych / Pexels · Washington Gama / Pexels.</p>
+        <p>Atualizada em 22 de setembro de 2026.</p>
+      </div>
+    </footer>
+
+    <nav class="barra-contato" aria-label="Contato">
+      <a class="botao botao--principal" href="https://wa.me/5511900000000?text=Ol%C3%A1!%20Gostaria%20de%20marcar%20uma%20consulta%20com%20o%20Dr.%20Paulo%20de%20Tarso." target="_blank" rel="noopener">Marcar pelo WhatsApp</a>
+      <a class="botao botao--secundario" href="tel:+551130000000">Ligar</a>
+    </nav>
+  </body>
+</html>

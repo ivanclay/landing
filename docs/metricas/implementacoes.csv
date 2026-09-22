@@ -1,1 +1,2 @@
 inicio,fim,duracao_min,slug,tipo,tokens_entrada,tokens_saida,tokens_cache,custo_usd,origem,observacao
+2026-09-22T20:33:28-03:00,2026-09-22T20:57:15-03:00,24,dr-paulo-de-tarso,pagina,260,136906,19610900,9.07,ccusage,"demonstracao (ADR-004) + modo demonstracao nas ferramentas; cache = criacao 378033 + leitura 19232867; 1 sessao; subagentes de coleta (enderecos e imagens) podem nao estar somados"

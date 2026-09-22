@@ -1,0 +1,117 @@
+{
+  "slug": "dr-paulo-de-tarso",
+  "publicar": true,
+  "demonstracao": true,
+  "atualizadoEm": "2026-09-22",
+  "medico": {
+    "tratamento": "Dr.",
+    "nome": "Paulo de Tarso Lopes Pontes",
+    "generoGramatical": "M",
+    "crm": [
+      {
+        "numero": "000000",
+        "uf": "SP"
+      }
+    ],
+    "especialidades": [
+      {
+        "nome": "Cardiologia",
+        "rqe": "00001"
+      }
+    ],
+    "areasDeAtuacao": [
+      {
+        "nome": "Eletrofisiologia Clínica Invasiva",
+        "rqe": "00002"
+      },
+      {
+        "nome": "Estimulação Cardíaca Eletrônica Implantável",
+        "rqe": "00003"
+      },
+      {
+        "nome": "Ergometria",
+        "rqe": "00004"
+      }
+    ]
+  },
+  "resumo": "Demonstração: página de um cardiologista fictício em São Paulo, com arritmia, marca-passo, planos por local e contato pelo WhatsApp.",
+  "cidade": "São Paulo",
+  "uf": "SP",
+  "contato": {
+    "whatsapp": "+5511900000000",
+    "telefone": "+551130000000",
+    "agendamento": ""
+  },
+  "locais": [
+    {
+      "nome": "Consultório — Jardim Paulista",
+      "tipo": "consultorio",
+      "endereco": {
+        "logradouro": "Rua Fictícia dos Cardiologistas, 100",
+        "bairro": "Jardim Paulista",
+        "cidade": "São Paulo",
+        "uf": "SP",
+        "cep": ""
+      }
+    },
+    {
+      "nome": "Einstein Hospital Israelita — unidade Morumbi",
+      "tipo": "hospital",
+      "endereco": {
+        "logradouro": "Av. Albert Einstein, 627/701",
+        "bairro": "Morumbi",
+        "cidade": "São Paulo",
+        "uf": "SP",
+        "cep": "05652-900"
+      }
+    },
+    {
+      "nome": "Hospital Sírio-Libanês — Bela Vista",
+      "tipo": "hospital",
+      "endereco": {
+        "logradouro": "Rua Dona Adma Jafet, 115",
+        "bairro": "Bela Vista",
+        "cidade": "São Paulo",
+        "uf": "SP",
+        "cep": "01308-050"
+      }
+    },
+    {
+      "nome": "Hospital Alemão Oswaldo Cruz — Unidade Paulista",
+      "tipo": "hospital",
+      "endereco": {
+        "logradouro": "R. Treze de Maio, 1815",
+        "bairro": "Bela Vista",
+        "cidade": "São Paulo",
+        "uf": "SP",
+        "cep": "01327-001"
+      }
+    },
+    {
+      "nome": "HCor — Hospital do Coração",
+      "tipo": "hospital",
+      "endereco": {
+        "logradouro": "Rua Desembargador Eliseu Guilherme, 147",
+        "bairro": "Paraíso",
+        "cidade": "São Paulo",
+        "uf": "SP",
+        "cep": "04004-030"
+      }
+    }
+  ],
+  "convenios": [
+    "Bradesco Saúde",
+    "SulAmérica",
+    "Amil",
+    "Porto Saúde",
+    "Omint",
+    "Care Plus"
+  ],
+  "redes": {},
+  "imagemSocial": "imagens/social.jpg",
+  "revisao": {
+    "crmConferidoEm": "",
+    "conferenciaCfmEm": "2026-09-22",
+    "aprovadoPeloMedicoEm": ""
+  }
+}

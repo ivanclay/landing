@@ -102,6 +102,8 @@ test('passa: demonstração publicada sem CRM conferido nem aprovação, com avi
   assert.equal(resultado.status, 0, resultado.stderr);
   const pagina = await readFile(path.join(raiz, '_site', SLUG, 'index.html'), 'utf8');
   assert.match(pagina, /<meta name="robots" content="noindex, nofollow">/);
+  assert.match(pagina, /<meta property="og:image:width" content="1200">/);
+  assert.match(pagina, /<meta property="og:image:alt" content="Demonstração: /);
   assert.doesNotMatch(await readFile(path.join(raiz, '_site', 'sitemap.xml'), 'utf8'), new RegExp(SLUG));
   assert.doesNotMatch(await readFile(path.join(raiz, '_site', 'index.html'), 'utf8'), new RegExp(SLUG));
 }));

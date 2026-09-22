@@ -16,14 +16,31 @@ export function cabecalhoDaPagina(pagina, config, { rascunho = false } = {}) {
     `<meta property="og:type" content="website">`,
     `<meta property="og:locale" content="pt_BR">`,
   ];
+  if (config.indice?.titulo) linhas.push(`<meta property="og:site_name" content="${escaparHtml(config.indice.titulo)}">`);
   if (pagina.imagemSocial) {
-    linhas.push(`<meta property="og:image" content="${escaparHtml(new URL(pagina.imagemSocial, url).href)}">`);
-    linhas.push(`<meta name="twitter:card" content="summary_large_image">`);
+    // WhatsApp, Facebook, LinkedIn e X leem estas tags. A imagem social sai sempre em 1200 × 630 JPEG
+    // (otimizar-imagens.mjs --social); declarar o tamanho deixa a prévia aparecer já no primeiro compartilhamento.
+    const imagem = escaparHtml(new URL(pagina.imagemSocial, url).href);
+    linhas.push(`<meta property="og:image" content="${imagem}">`);
+    linhas.push(`<meta property="og:image:secure_url" content="${imagem}">`);
+    linhas.push('<meta property="og:image:type" content="image/jpeg">');
+    linhas.push('<meta property="og:image:width" content="1200">');
+    linhas.push('<meta property="og:image:height" content="630">');
+    linhas.push(`<meta property="og:image:alt" content="${escaparHtml(textoDaImagemSocial(pagina))}">`);
+    linhas.push('<meta name="twitter:card" content="summary_large_image">');
+    linhas.push(`<meta name="twitter:image" content="${imagem}">`);
   }
   // Rascunho e demonstração nunca vão para o Google; a demonstração, nem publicada (ADR-004).
   if (rascunho || ehDemonstracao(pagina)) linhas.push('<meta name="robots" content="noindex, nofollow">');
   linhas.push(`<script type="application/ld+json">${JSON.stringify(dadosEstruturados(pagina, url))}</script>`);
   return linhas.join('\n    ');
+}
+
+/** O alt da imagem social: quem, o quê, onde — e, na demonstração, que é demonstração (ADR-004). */
+function textoDaImagemSocial(pagina) {
+  const especialidade = (pagina.medico.especialidades ?? [])[0]?.nome;
+  const texto = [nomeDeExibicao(pagina), especialidade, `${pagina.cidade}/${pagina.uf}`].filter(Boolean).join(' — ');
+  return ehDemonstracao(pagina) ? `Demonstração: ${texto}` : texto;
 }
 
 /**
@@ -74,7 +91,7 @@ export function cabecalhoDoIndice(config) {
 }
 
 function endereco(dado) {
-  return {
+  const campos = {
     '@type': 'PostalAddress',
     streetAddress: dado.logradouro,
     addressLocality: dado.cidade,
@@ -82,4 +99,6 @@ function endereco(dado) {
     postalCode: dado.cep,
     addressCountry: 'BR',
   };
+  // Campo sem valor sai: "postalCode": "" é pior que não dizer (o validador acusa).
+  return Object.fromEntries(Object.entries(campos).filter(([, valor]) => valor));
 }
