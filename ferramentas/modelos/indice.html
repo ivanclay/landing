@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{TITULO}}</title>
+    <meta name="description" content="{{DESCRICAO}}">
+    <meta property="og:title" content="{{TITULO}}">
+    <meta property="og:description" content="{{DESCRICAO}}">
+    <!-- @gerado:cabecalho -->
+    <link rel="preload" href="assets/fontes/newsreader/newsreader-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="assets/fontes/newsreader/fonte.css">
+    <link rel="stylesheet" href="assets/fontes/atkinson-hyperlegible-next/fonte.css">
+    <link rel="stylesheet" href="assets/css/base.css">
+    <link rel="stylesheet" href="assets/css/componentes.css">
+    <link rel="stylesheet" href="assets/css/indice.css">
+    <script src="assets/js/indice.js" defer></script>
+  </head>
+  <body>
+    <a class="pular-para-conteudo" href="#lista">Ir para a lista</a>
+    <header class="indice-cabeca">
+      <div class="conteudo">
+        <h1 class="indice-cabeca__titulo">{{TITULO}}</h1>
+        <p class="indice-cabeca__descricao">{{DESCRICAO}}</p>
+      </div>
+    </header>
+    <main class="conteudo" id="lista">
+      <div class="busca so-com-js">
+        <label class="busca__rotulo" for="busca">Procure por nome, especialidade ou cidade</label>
+        <input class="busca__campo" id="busca" type="search" autocomplete="off" spellcheck="false" placeholder="cardiologia, Salvador…" data-busca-campo>
+        <p class="busca__contagem" aria-live="polite" data-busca-contagem></p>
+      </div>
+      <ol class="indice" role="list">
+        <!-- @gerado:lista -->
+        <li class="indice__nenhum" data-busca-nenhum hidden>Nenhuma página com esse nome, especialidade ou cidade.</li>
+      </ol>
+    </main>
+    <footer class="indice-rodape">
+      <div class="conteudo">
+        <p>Cada página é mantida com o médico que ela apresenta e só vai ao ar com a aprovação dele.</p>
+      </div>
+    </footer>
+  </body>
+</html>

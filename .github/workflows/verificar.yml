@@ -1,0 +1,26 @@
+# Roda em todo pull request para o main. É o gate do merge: com erro aqui, nada publica.
+# Ative em Settings › Branches › main: "Require status checks to pass" → "verificar".
+name: verificar
+
+on:
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  verificar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      # construir.mjs e verificar.mjs não têm dependência: não há npm ci aqui de propósito.
+      - name: Construir e verificar _site/
+        run: |
+          node ferramentas/construir.mjs
+          node ferramentas/verificar.mjs

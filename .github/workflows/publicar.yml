@@ -1,0 +1,50 @@
+# Publica no GitHub Pages a cada push no main — ou seja, a cada merge de pull request.
+# Pré-requisito, uma vez: Settings › Pages › Build and deployment › Source = "GitHub Actions".
+name: publicar
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Um deploy por vez; um novo push espera o anterior terminar em vez de cancelá-lo no meio.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  construir:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - uses: actions/configure-pages@v5
+
+      # A mesma verificação do pull request: o que publica é exatamente o que passou.
+      - name: Construir e verificar _site/
+        run: |
+          node ferramentas/construir.mjs
+          node ferramentas/verificar.mjs
+
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: _site
+
+  publicar:
+    needs: construir
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - id: deploy
+        uses: actions/deploy-pages@v4

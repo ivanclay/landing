@@ -1,0 +1,4 @@
+/*
+ * pagina.css — o layout e o gesto desta página. Lê só os tokens do tema.css e a escala do base.css.
+ * Sem número mágico: espaço vem de --espaco-*, tipo de --texto-*. Mobile primeiro.
+ */

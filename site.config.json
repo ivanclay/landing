@@ -1,0 +1,10 @@
+{
+  "urlBase": "https://ivanclay.github.io/landing/",
+  "indice": {
+    "titulo": "Médicos",
+    "descricao": "As páginas dos médicos que atendemos: onde atendem, por quais convênios e como marcar a consulta.",
+    "indexavel": true
+  },
+  "redirecionamentos": {},
+  "verificacaoGoogle": ""
+}

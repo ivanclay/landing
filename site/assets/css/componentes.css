@@ -1,0 +1,101 @@
+/*
+ * componentes.css — as peças que toda página de médico tem e que não mudam de natureza de uma página
+ * para outra: contêiner, botão de contato, barra de contato no celular, identificação CFM, convênios,
+ * locais, rodapé legal.
+ *
+ * ⌗ Só estrutura. Cor e fonte vêm do tema da página (contrato em base.css). A personalidade da página —
+ *   o hero, o ritmo, o gesto memorável — mora em site/<slug>/pagina.css, não aqui (direcao-de-arte-landing).
+ * ⌗ Mudou algo aqui? Mudou em TODAS as páginas publicadas. Confira cada uma antes do merge (qa-landing).
+ */
+
+.conteudo {
+  width: min(100% - 2 * var(--margem-lateral), var(--largura-maxima));
+  margin-inline: auto;
+}
+
+.texto-corrido { max-width: var(--medida); }
+.texto-corrido > * + * { margin-top: var(--espaco-4); }
+
+/* Botão — um <a> para tel:, wa.me ou o agendamento; nunca <button> que finge link. */
+.botao {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--espaco-2);
+  min-height: var(--alvo-minimo);
+  padding: var(--espaco-3) var(--espaco-5);
+  border: 2px solid transparent;
+  border-radius: var(--raio-botao, 999px);
+  font-family: var(--fonte-texto);
+  font-size: var(--texto-apoio);
+  font-weight: 600;
+  line-height: 1.2;
+  text-decoration: none;
+  transition: background-color 150ms ease, color 150ms ease, border-color 150ms ease;
+}
+.botao svg { width: 1.25em; height: 1.25em; flex: none; }
+
+.botao--principal { background: var(--cor-marca); color: var(--cor-sobre-marca); }
+.botao--principal:hover { background: color-mix(in oklab, var(--cor-marca) 86%, var(--cor-texto)); }
+
+.botao--secundario { border-color: currentColor; color: var(--cor-texto); }
+.botao--secundario:hover { background: color-mix(in oklab, var(--cor-texto) 8%, transparent); }
+
+/* Barra de contato fixa no celular: o paciente decide no meio da página, não só no topo. */
+.barra-contato {
+  position: fixed;
+  inset: auto 0 0 0;
+  z-index: 50;
+  display: flex;
+  gap: var(--espaco-2);
+  padding: var(--espaco-3) var(--margem-lateral) calc(var(--espaco-3) + env(safe-area-inset-bottom));
+  background: color-mix(in oklab, var(--cor-fundo) 92%, transparent);
+  backdrop-filter: blur(10px);
+  border-top: 1px solid var(--cor-linha);
+}
+.barra-contato .botao { flex: 1; }
+body:has(.barra-contato) { padding-bottom: calc(var(--alvo-minimo) + 2 * var(--espaco-3) + env(safe-area-inset-bottom)); }
+@media (min-width: 48rem) {
+  .barra-contato { display: none; }
+  body:has(.barra-contato) { padding-bottom: 0; }
+}
+
+/* Identificação CFM (Res. 2.336/2023, arts. 4º e 6º). O conteúdo é conferido por ferramentas/verificar.mjs. */
+.identificacao-cfm {
+  font-size: var(--texto-apoio);
+  color: var(--cor-texto-suave);
+  line-height: 1.5;
+}
+.identificacao-cfm strong { color: var(--cor-texto); font-weight: 600; }
+
+/* Convênios: texto, nunca logotipo sem autorização (regra 12). */
+.lista-convenios {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--espaco-2);
+  padding: 0;
+  list-style: none;
+}
+.lista-convenios li {
+  padding: var(--espaco-1) var(--espaco-3);
+  border: 1px solid var(--cor-linha);
+  border-radius: var(--raio-etiqueta, 999px);
+  font-size: var(--texto-apoio);
+}
+
+/* Locais de atendimento. O mapa é link para fora, nunca iframe (regra 6). */
+.local { display: grid; gap: var(--espaco-1); }
+.local__nome { font-family: var(--fonte-titulo); font-size: var(--texto-destaque); }
+.local__endereco { font-style: normal; color: var(--cor-texto-suave); }
+.local__mapa { font-size: var(--texto-apoio); min-height: var(--alvo-minimo); display: inline-flex; align-items: center; }
+
+.rodape-legal {
+  padding-block: var(--espaco-7) var(--espaco-6);
+  border-top: 1px solid var(--cor-linha);
+  font-size: var(--texto-meta);
+  color: var(--cor-texto-suave);
+}
+.rodape-legal > * + * { margin-top: var(--espaco-3); }
+
+.barra-contato { transition: transform 200ms ease; }
+.barra-contato[data-oculta] { transform: translateY(110%); }

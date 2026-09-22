@@ -1,0 +1,20 @@
+/*
+ * tema.css — a identidade desta página: cor e fonte (regra 10). Nenhum outro arquivo desta página
+ * digita cor. Cada valor saiu do plano de direção de arte em docs/paginas/<slug>/direcao-de-arte.md.
+ * Contraste conferido: texto e texto-suave ≥ 4,5:1 sobre fundo e superfície; sobre-marca ≥ 4,5:1 sobre marca.
+ */
+:root {
+  --cor-fundo: PENDENTE;
+  --cor-superficie: PENDENTE;
+  --cor-texto: PENDENTE;
+  --cor-texto-suave: PENDENTE;
+  --cor-linha: PENDENTE;
+  --cor-marca: PENDENTE;
+  --cor-sobre-marca: PENDENTE;
+  --cor-foco: PENDENTE;
+
+  --fonte-titulo: PENDENTE;
+  --fonte-texto: PENDENTE;
+
+  --raio-botao: PENDENTE;
+}

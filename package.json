@@ -1,0 +1,25 @@
+{
+  "name": "landing",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Landing pages de médicos, estáticas, publicadas no GitHub Pages a cada merge no main.",
+  "type": "module",
+  "license": "UNLICENSED",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "construir": "node ferramentas/construir.mjs",
+    "rascunhos": "node ferramentas/construir.mjs --rascunhos",
+    "verificar": "node ferramentas/construir.mjs && node ferramentas/verificar.mjs",
+    "servir": "node ferramentas/construir.mjs --rascunhos && npx --yes serve@14 _site -l 4173",
+    "fontes": "node ferramentas/copiar-fontes.mjs",
+    "imagens": "node ferramentas/otimizar-imagens.mjs",
+    "verificar:rascunhos": "node ferramentas/construir.mjs --rascunhos && node ferramentas/verificar.mjs"
+  },
+  "devDependencies": {
+    "@fontsource-variable/atkinson-hyperlegible-next": "^5.3.0",
+    "@fontsource-variable/newsreader": "^5.3.0",
+    "sharp": "^0.35.4"
+  }
+}

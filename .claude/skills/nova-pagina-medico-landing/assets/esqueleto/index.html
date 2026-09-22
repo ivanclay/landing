@@ -1,0 +1,155 @@
+<!doctype html>
+<!--
+  ESQUELETO de página de médico. Não é um design: é a ordem das seções, o que cada uma precisa provar e
+  as peças que a verificação exige. A identidade visual é decidida por página (direcao-de-arte-landing).
+  Toda marca PENDENTE trava a construção de propósito (regra 1). Apague estes comentários de guia ao terminar.
+-->
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Título: nome, especialidade e cidade. É o que aparece no Google e na aba. -->
+    <title>PENDENTE Nome — Especialidade em Cidade</title>
+    <!-- Igual ao "resumo" do pagina.json (50–160 caracteres). -->
+    <meta name="description" content="PENDENTE">
+    <meta property="og:title" content="PENDENTE Nome — Especialidade em Cidade">
+    <meta property="og:description" content="PENDENTE">
+    <meta name="theme-color" content="PENDENTE cor de fundo do tema">
+    <!-- @gerado:cabecalho -->
+    <!-- Fontes locais (ferramentas/copiar-fontes.mjs). Preload só da fonte do título. -->
+    <link rel="preload" href="../assets/fontes/PENDENTE/PENDENTE.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="../assets/fontes/PENDENTE/fonte.css">
+    <link rel="stylesheet" href="../assets/css/base.css">
+    <link rel="stylesheet" href="../assets/css/componentes.css">
+    <link rel="stylesheet" href="tema.css">
+    <link rel="stylesheet" href="pagina.css">
+    <script src="../assets/js/pagina.js" defer></script>
+  </head>
+  <body>
+    <a class="pular-para-conteudo" href="#conteudo">Ir para o conteúdo</a>
+
+    <header class="cabeca">
+      <div class="conteudo cabeca__linha">
+        <p class="cabeca__nome">PENDENTE Dr./Dra. Nome</p>
+        <nav aria-label="Seções">
+          <!-- Só as seções que existem nesta página. -->
+          <a href="#tratamentos">Tratamentos</a>
+          <a href="#locais">Onde atende</a>
+          <a href="#convenios">Convênios</a>
+        </nav>
+        <a class="botao botao--principal" href="https://wa.me/PENDENTE?text=PENDENTE" target="_blank" rel="noopener">Marcar consulta</a>
+      </div>
+    </header>
+
+    <main id="conteudo">
+      <!--
+        1. ABERTURA — em cinco segundos: quem é, o que trata, onde, e como marcar.
+        O gesto memorável da página costuma morar aqui (direcao-de-arte-landing). Sem foto real, a
+        abertura é tipográfica — nunca banco de imagem no lugar do médico (regra 12).
+      -->
+      <section class="abertura" aria-labelledby="titulo-principal">
+        <div class="conteudo">
+          <h1 id="titulo-principal">PENDENTE frase de abertura (o que a pessoa ganha, sem promessa de resultado)</h1>
+          <p class="abertura__apoio">PENDENTE especialidade, público e cidade, em linguagem de paciente</p>
+          <p class="abertura__acoes" data-contato-topo>
+            <a class="botao botao--principal" href="https://wa.me/PENDENTE?text=PENDENTE" target="_blank" rel="noopener">Marcar pelo WhatsApp</a>
+            <a class="botao botao--secundario" href="tel:PENDENTE">Ligar</a>
+          </p>
+          <!-- Identificação curta junto ao nome; a completa está no rodapé (data-identificacao-cfm). -->
+          <p class="identificacao-cfm">PENDENTE Dr./Dra. Nome · Médico(a) · CRM-UF 00000 · RQE 00000</p>
+        </div>
+      </section>
+
+      <!--
+        2. O QUE TRATA — as condições e os exames, com uma frase educativa cada. Específico vence genérico:
+        "falta de ar ao subir escada" diz mais que "cuidado integral do coração". Nada de "especialista em"
+        sem RQE (publicidade-medica-cfm-landing).
+      -->
+      <section id="tratamentos" aria-labelledby="titulo-tratamentos">
+        <div class="conteudo">
+          <h2 id="titulo-tratamentos">PENDENTE</h2>
+        </div>
+      </section>
+
+      <!-- 3. COMO É A CONSULTA — é sequência de verdade, então aqui cabe numeração. Tira o medo do desconhecido. -->
+      <section id="consulta" aria-labelledby="titulo-consulta">
+        <div class="conteudo">
+          <h2 id="titulo-consulta">PENDENTE</h2>
+          <ol>
+            <li>PENDENTE</li>
+          </ol>
+        </div>
+      </section>
+
+      <!-- 4. FORMAÇÃO — só fato com fonte no briefing: instituição, ano, residência, título. Sem adjetivo. -->
+      <section id="formacao" aria-labelledby="titulo-formacao">
+        <div class="conteudo">
+          <h2 id="titulo-formacao">PENDENTE</h2>
+        </div>
+      </section>
+
+      <!-- 5. ONDE ATENDE — cada local com endereço e link de rota (https://www.google.com/maps/search/?api=1&query=...). -->
+      <section id="locais" aria-labelledby="titulo-locais">
+        <div class="conteudo">
+          <h2 id="titulo-locais">Onde atende</h2>
+          <ul role="list">
+            <li class="local">
+              <h3 class="local__nome">PENDENTE</h3>
+              <address class="local__endereco">PENDENTE</address>
+              <a class="local__mapa" href="https://www.google.com/maps/search/?api=1&amp;query=PENDENTE" target="_blank" rel="noopener">Ver no mapa</a>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- 6. CONVÊNIOS — texto, não logotipo (regra 12). Particular e valor só se o briefing disser (D-05). -->
+      <section id="convenios" aria-labelledby="titulo-convenios">
+        <div class="conteudo">
+          <h2 id="titulo-convenios">Convênios</h2>
+          <ul class="lista-convenios">
+            <li>PENDENTE</li>
+          </ul>
+          <p>A lista de convênios muda. Confirme o seu ao marcar a consulta.</p>
+        </div>
+      </section>
+
+      <!-- 7. PERGUNTAS — <details>, funciona sem JS. Respostas educativas, sem diagnóstico à distância. -->
+      <section id="perguntas" aria-labelledby="titulo-perguntas">
+        <div class="conteudo">
+          <h2 id="titulo-perguntas">Perguntas frequentes</h2>
+          <details>
+            <summary>PENDENTE</summary>
+            <p>PENDENTE</p>
+          </details>
+        </div>
+      </section>
+
+      <!-- 8. FECHO — o mesmo convite da abertura, com o mesmo nome de ação. -->
+      <section class="fecho" aria-labelledby="titulo-fecho">
+        <div class="conteudo">
+          <h2 id="titulo-fecho">PENDENTE</h2>
+          <a class="botao botao--principal" href="https://wa.me/PENDENTE?text=PENDENTE" target="_blank" rel="noopener">Marcar pelo WhatsApp</a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="rodape-legal">
+      <div class="conteudo">
+        <!-- Conferido por ferramentas/verificar.mjs: nome, Médico/Médica, CRM-UF número, cada especialidade com "RQE número". -->
+        <p class="identificacao-cfm" data-identificacao-cfm>
+          <strong>PENDENTE Nome completo</strong> — Médico(a) — CRM-UF 00000<br>
+          PENDENTE Especialidade — RQE 00000
+        </p>
+        <p>As informações desta página são educativas e não substituem a consulta.</p>
+        <p>Esta página não usa cookies nem coleta dados. O contato acontece pelo WhatsApp ou telefone, nos termos desses serviços.</p>
+        <p>Atualizada em PENDENTE.</p>
+      </div>
+    </footer>
+
+    <!-- Barra de contato do celular (some no desktop e enquanto o contato do topo está visível). -->
+    <nav class="barra-contato" aria-label="Contato">
+      <a class="botao botao--principal" href="https://wa.me/PENDENTE?text=PENDENTE" target="_blank" rel="noopener">WhatsApp</a>
+      <a class="botao botao--secundario" href="tel:PENDENTE">Ligar</a>
+    </nav>
+  </body>
+</html>

@@ -1,0 +1,124 @@
+/*
+ * indice.css — a identidade do índice, e só dele (regra 10).
+ *
+ * Direção: um índice remissivo de livro. Os nomes em serifa, a especialidade e a cidade alinhadas à
+ * direita e ligadas ao nome por uma linha pontilhada — o gesto de "procurar e achar" de um sumário.
+ * Papel de tom mineral e tinta de pinho: calmo, sem o azul-hospital e sem o creme com terracota.
+ */
+:root {
+  --cor-fundo: #eef1ee;
+  --cor-superficie: #f7f8f6;
+  --cor-texto: #182a2c;
+  --cor-texto-suave: #4c5e60;
+  --cor-linha: #c3ccc8;
+  --cor-marca: #285f55;
+  --cor-sobre-marca: #f7f8f6;
+  --cor-foco: #b8551f;
+
+  --fonte-titulo: 'Newsreader Variable', 'Iowan Old Style', 'Palatino Linotype', Georgia, serif;
+  --fonte-texto: 'Atkinson Hyperlegible Next Variable', 'Segoe UI', system-ui, sans-serif;
+}
+
+.indice-cabeca {
+  padding-block: var(--espaco-9) var(--espaco-7);
+  border-bottom: 1px solid var(--cor-texto);
+}
+.indice-cabeca__titulo {
+  font-size: var(--texto-vitrine);
+  font-weight: 380;
+  letter-spacing: -0.02em;
+}
+.indice-cabeca__descricao {
+  margin-top: var(--espaco-5);
+  max-width: 44ch;
+  font-size: var(--texto-destaque);
+  color: var(--cor-texto-suave);
+  line-height: 1.45;
+}
+
+.busca {
+  display: grid;
+  gap: var(--espaco-2);
+  margin-block: var(--espaco-6) var(--espaco-4);
+  max-width: 32rem;
+}
+.busca__rotulo { font-size: var(--texto-apoio); color: var(--cor-texto-suave); }
+.busca__campo {
+  min-height: var(--alvo-minimo);
+  padding: var(--espaco-3) 0;
+  border: 0;
+  border-bottom: 2px solid var(--cor-texto);
+  background: transparent;
+  width: 100%;
+  font-size: var(--texto-destaque);
+  font-family: var(--fonte-titulo);
+}
+.busca__campo::placeholder { color: var(--cor-texto-suave); opacity: 0.7; }
+.busca__campo:focus-visible { outline-offset: 2px; }
+.busca__contagem { font-size: var(--texto-meta); color: var(--cor-texto-suave); min-height: 1.5em; }
+
+/* margin, e não padding: o ol[role='list'] do base.css zera o padding com especificidade maior. */
+.indice { margin: 0 0 var(--espaco-9); }
+
+.indice__link {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--espaco-1);
+  padding-block: var(--espaco-4);
+  border-bottom: 1px solid var(--cor-linha);
+  text-decoration: none;
+}
+.indice__nome {
+  font-family: var(--fonte-titulo);
+  font-size: var(--texto-secao);
+  font-weight: 420;
+  line-height: 1.15;
+  transition: color 150ms ease;
+}
+.indice__especialidade, .indice__cidade { font-size: var(--texto-apoio); color: var(--cor-texto-suave); }
+.indice__link:hover .indice__nome { color: var(--cor-marca); }
+
+@media (min-width: 52rem) {
+  .indice__link {
+    grid-template-columns: auto 1fr 15rem 12rem;
+    align-items: baseline;
+    column-gap: var(--espaco-4);
+    border-bottom: 0;
+    padding-block: var(--espaco-3);
+  }
+  /* A linha pontilhada de sumário entre o nome e o resto. */
+  .indice__link::after {
+    content: '';
+    grid-column: 2;
+    grid-row: 1;
+    align-self: end;
+    margin-bottom: 0.45em;
+    border-bottom: 2px dotted var(--cor-linha);
+  }
+  .indice__especialidade { grid-column: 3; }
+  .indice__cidade { grid-column: 4; }
+}
+
+.indice__vazio, .indice__nenhum {
+  padding-block: var(--espaco-6);
+  font-family: var(--fonte-titulo);
+  font-size: var(--texto-destaque);
+  color: var(--cor-texto-suave);
+}
+
+.indice-rodape {
+  padding-block: var(--espaco-6);
+  border-top: 1px solid var(--cor-texto);
+  font-size: var(--texto-meta);
+  color: var(--cor-texto-suave);
+}
+
+.pagina-simples {
+  display: grid;
+  place-content: center;
+  gap: var(--espaco-5);
+  min-height: 100vh;
+  text-align: center;
+  padding: var(--margem-lateral);
+}
+.pagina-simples h1 { font-size: var(--texto-titulo); font-weight: 380; }

@@ -1,0 +1,36 @@
+{
+  "slug": "PENDENTE",
+  "publicar": false,
+  "atualizadoEm": "",
+  "medico": {
+    "tratamento": "PENDENTE Dr. | Dra. | vazio",
+    "nome": "PENDENTE",
+    "generoGramatical": "PENDENTE M | F",
+    "crm": [{ "numero": "PENDENTE", "uf": "PENDENTE" }],
+    "especialidades": [{ "nome": "PENDENTE", "rqe": "PENDENTE" }],
+    "areasDeAtuacao": []
+  },
+  "resumo": "PENDENTE — 50 a 160 caracteres; vira meta description e texto do índice",
+  "cidade": "PENDENTE",
+  "uf": "PENDENTE",
+  "contato": {
+    "whatsapp": "PENDENTE +55DDDNUMERO",
+    "telefone": "",
+    "agendamento": ""
+  },
+  "locais": [
+    {
+      "nome": "PENDENTE",
+      "tipo": "PENDENTE hospital | clinica | consultorio",
+      "endereco": { "logradouro": "", "bairro": "", "cidade": "", "uf": "", "cep": "" }
+    }
+  ],
+  "convenios": [],
+  "redes": {},
+  "imagemSocial": "",
+  "revisao": {
+    "crmConferidoEm": "",
+    "conferenciaCfmEm": "",
+    "aprovadoPeloMedicoEm": ""
+  }
+}
