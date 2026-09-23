@@ -20,7 +20,9 @@ legenda "Imagem ilustrativa". Licença conferida na página de cada imagem em 20
 | `socio-juliana` | `socio-juliana-320/640` | https://www.pexels.com/photo/a-woman-in-a-business-suit-smiling-27086922/ | Helena Lopes | Sócios — Juliana Pacheco Sá |
 | `socio-eduardo` | `socio-eduardo-320/640` | https://www.pexels.com/photo/man-in-suit-17582358/ | Sandro Tavares | Sócios — Eduardo Mafra Lins |
 
-A imagem social (`social.jpg`) é tipográfica, sem foto.
+A imagem social (`social.jpg`, 1200×630) deriva de `reuniao`: nome e § à esquerda, a reunião à direita com "Imagem
+ilustrativa", faixa vermelha "Demonstração · escritório fictício" (refeita em 2026-09-23 — a 1ª era só tipográfica
+e a prévia do WhatsApp não mostrava as fotos da 2ª versão).
 
 ## Tratamento (o mesmo em todas)
 
