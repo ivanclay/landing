@@ -15,4 +15,4 @@
 | B-05 | O `publicar.yml` não roda `npm run testar` (o `verificar.yml` roda) | Nenhum enquanto todo merge passa pelo PR | Com a D-06 |
 | B-06 | Hub: perguntas ao cliente (agrupamento e identidade de ICESP, MV, FIDI, L2D, TL2, IQG; logotipos; profissão da Carla; contatos; base dos números; domínio) | A proposta afirma só o que o site oficial afirma | Antes da aprovação do Hub |
 | B-07 | `og:site_name` sai "Médicos" (título do índice) também no hub | Prévia do link com o nome do índice | Com a D-02 |
-| B-08 | Dr. Paulo (demo): a foto do consultório está simples demais para o padrão "atende nos principais hospitais de SP"; a seção "Áreas com título de especialista" precisa de mais presença (pedido do dono, 2026-09-22) | A demo vende menos do que entregamos | Logo depois da entrega do hub |
+| B-08 | Dr. Paulo (demo): a foto do consultório está simples demais para o padrão "atende nos principais hospitais de SP"; a seção "Áreas com título de especialista" precisa de mais presença (pedido do dono, 2026-09-22) | A demo vende menos do que entregamos | **Feito em 2026-09-22** (credenciais + consultório premium + social no modelo do hub) |

@@ -167,35 +167,80 @@
     padding-right: var(--espaco-6);
   }
   .secao__corpo { grid-column: 5 / -1; }
-  #areas .secao__corpo { grid-column: 5 / span 5; }
-  .secao__figura { grid-column: 10 / -1; grid-row: 1; }
 }
 
-/* Áreas com RQE: a credibilidade é o fato, não o adjetivo. */
-.areas { display: grid; gap: 0; }
-.area {
-  padding-block: var(--espaco-4);
-  border-top: 1px solid var(--cor-linha);
-}
-.area:last-child { border-bottom: 1px solid var(--cor-linha); }
-.area dt {
-  font-family: var(--fonte-titulo);
-  font-size: var(--texto-destaque);
-  line-height: 1.2;
-}
-.area__rqe {
-  font-family: var(--fonte-texto);
-  font-size: var(--texto-meta);
-  font-variant-numeric: tabular-nums;
-  color: var(--cor-texto-suave);
-  white-space: nowrap;
-}
-.area dd { margin: var(--espaco-1) 0 0; color: var(--cor-texto-suave); }
-
-.exames { display: grid; gap: var(--espaco-4); }
-.exames strong,
 .sinais strong,
 .passos strong { font-weight: 650; }
+
+/* ---------- Credenciais: as quatro áreas com RQE, com presença ---------- */
+.credenciais {
+  padding-block: var(--espaco-9);
+  border-top: 1px solid var(--cor-linha);
+}
+.credenciais__cabeca { display: grid; gap: var(--espaco-5); }
+.credenciais__titulo {
+  font-size: var(--texto-titulo);
+  font-weight: 400;
+  max-width: 14ch;
+}
+.credenciais__apoio { max-width: 52ch; color: var(--cor-texto-suave); }
+.credenciais__lista {
+  display: grid;
+  margin-top: var(--espaco-8);
+  border-top: 2px solid var(--cor-texto);
+}
+.credencial {
+  display: grid;
+  grid-template-rows: auto auto 1fr auto;
+  gap: var(--espaco-3);
+  padding-block: var(--espaco-6);
+  border-bottom: 1px solid var(--cor-linha);
+}
+.credencial__rqe {
+  font-size: var(--texto-apoio);
+  font-weight: 650;
+  font-variant-numeric: tabular-nums;
+  color: var(--cor-marca);
+}
+.credencial__nome {
+  font-size: var(--texto-secao);
+  font-weight: 400;
+  line-height: 1.1;
+}
+.credencial__texto { color: var(--cor-texto-suave); }
+.credencial__exame {
+  padding-top: var(--espaco-4);
+  border-top: 1px solid var(--cor-linha);
+  font-size: var(--texto-apoio);
+}
+.credencial__exame span { display: block; font-weight: 650; }
+.credenciais__tambem {
+  max-width: var(--medida);
+  margin-top: var(--espaco-7);
+  color: var(--cor-texto-suave);
+}
+.credenciais__tambem strong { color: var(--cor-texto); font-weight: 650; }
+
+@media (min-width: 48rem) {
+  .credenciais__lista { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: var(--espaco-6); }
+}
+@media (min-width: 72rem) {
+  .credenciais__cabeca { grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--espaco-6); align-items: end; }
+  .credenciais__titulo { grid-column: 1 / span 6; }
+  .credenciais__apoio { grid-column: 7 / -1; }
+  .credenciais__lista { grid-template-columns: repeat(4, minmax(0, 1fr)); grid-template-rows: repeat(4, auto); column-gap: 0; }
+  /* subgrid: RQE, nome, texto e exame alinhados de uma coluna para a outra. */
+  .credencial { grid-row: span 4; grid-template-rows: subgrid; row-gap: var(--espaco-3); padding-inline: var(--espaco-5); border-bottom: 0; }
+  .credencial + .credencial { border-left: 1px solid var(--cor-linha); }
+  .credencial:first-child { padding-left: 0; }
+}
+
+/* O consultório: faixa de ponta a ponta entre as credenciais e o seletor de planos. */
+.consultorio img { aspect-ratio: 4 / 5; }
+@media (min-width: 48rem) {
+  .consultorio img { aspect-ratio: 21 / 9; max-height: 38rem; }
+}
+.consultorio figcaption { padding-block: var(--espaco-2) var(--espaco-7); }
 
 /* ---------- O gesto: "Qual é o seu plano?" ---------- */
 .planos {

@@ -121,3 +121,9 @@ legenda "Imagem ilustrativa". Nenhuma foto de hospital citado.
 
 Teste da capa: cobrindo o nome, a página continua sendo *a do cardiologista do Jardim Paulista que
 responde "meu plano vale onde?"* — nenhuma outra página do repositório tem o seletor como gesto.
+
+## 9. Ajuste pedido pelo dono (2026-09-22)
+
+- **"A foto do consultório está muito simples — ele atende nos melhores hospitais de São Paulo."** A sala clara de madeira de pinus saiu. Entrou uma sala em andar alto, madeira escura, latão e cimento queimado, com a cidade ao fim da tarde (Unsplash, David Kristianto), com o mesmo tratamento de cor. Ela deixou de ser miniatura no canto e virou **faixa de ponta a ponta** (21:9 no desktop, 4:5 no celular) entre as credenciais e o seletor de planos — a transição do "quem é" para o "onde e por qual plano".
+- **"A seção precisa melhorar."** "Áreas com título de especialista" virou **credenciais**: título grande com a explicação do RQE ao lado (e como o paciente confere), quatro colunas com o RQE em destaque, o nome da área em Instrument Serif e, embaixo, o exame ou a consulta ligada a ela. As linhas se alinham entre colunas (subgrid). A lista separada de exames saiu — cada exame mora na área que o justifica.
+- **Imagem social** no modelo do hub: painel verde-garrafa com nome, especialidade e "Página de demonstração · médico fictício", e o busto à direita.

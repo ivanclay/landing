@@ -42,3 +42,16 @@ seu link de WhatsApp ✔ · perguntas em `<details>` ✔.
 - Zoom de 200% e a navegação por Tab do começo ao fim, feitos à mão.
 - `wa.me` e `tel:` num celular real (os números são fictícios).
 - JSON-LD no validator.schema.org (ver `seo.md`).
+
+## Reconferência depois do ajuste (2026-09-22, B-08)
+
+Nova seção de credenciais, faixa do consultório premium e imagem social no modelo do hub.
+
+| Execução | Performance | Acessibilidade | Boas práticas | SEO | LCP | CLS | Peso |
+|---|---|---|---|---|---|---|---|
+| 1 | 99 | 100 | 100 | 69 | 1,88 s | 0,001 | 148 KB |
+| 2 | 99 | 100 | 100 | 69 | 1,89 s | 0,001 | 148 KB |
+| 3 | 99 | 100 | 100 | 69 | 1,89 s | 0,001 | 148 KB |
+| **Mediana** | **99** | **100** | **100** | **69** | **1,89 s** | **0,001** | **148 KB** |
+
+Larguras 320–1920 sem rolagem lateral; sem JS, tabela visível. Capturas novas: `capturas/areas-1440.png`, `capturas/consultorio-1440.png`, `capturas/360.png`, `capturas/1440.png`.

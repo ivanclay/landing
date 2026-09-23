@@ -59,3 +59,14 @@ Nenhum aviso de termo. Um aviso de peso da **pasta** (≈1,3 MB): é a soma de t
 2. O relatório volta ao médico que encaminhou — por qual meio?
 3. Quais documentos a secretaria emite para reembolso (recibo, nota fiscal)?
 4. A matriz plano × local, linha a linha.
+
+## Reconferência do ajuste (2026-09-22)
+
+| Frase nova | Decisão | Por quê |
+|---|---|---|
+| "Quatro títulos registrados no CRM-SP, cada um com o seu RQE… qualquer paciente pode conferi-lo na busca de médicos do portal do CFM." | mantida | Educativa e verificável; explica o que dá direito a "especialista" (art. 4º) sem se exaltar |
+| "Avaliação cardiológica, inclusive antes de uma cirurgia e de começar a treinar." | mantida | O rascunho dizia "completa": adjetivo sobre o serviço, saiu |
+| Exames sob cada área ("No consultório: Holter…", "Teste ergométrico…", "Avaliação de marca-passo…") | mantidas | Mesmo conteúdo da lista anterior, reagrupado; descrevem o exame, não prometem resultado |
+| Faixa do consultório ("Imagem ilustrativa") | mantida | Banco de imagem só pela exceção do ADR-004; a vista não é de São Paulo e a legenda não diz que é |
+
+`npm run verificar`: nenhum aviso de termo.
