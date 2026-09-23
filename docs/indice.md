@@ -6,6 +6,10 @@
 - **Decisões:** [ADRs](decisoes/adr/) · [backlog](decisoes/backlog.md)
 - **Métricas:** [`metricas/implementacoes.csv`](metricas/implementacoes.csv)
 
+## Estado do projeto
+
+**Pausado em 2026-09-22.** Checkpoints: [dr-paulo-de-tarso](paginas/dr-paulo-de-tarso/checkpoint.md) · [hub-saude-negocios](paginas/hub-saude-negocios/checkpoint.md). Pendências do dono: trocar Settings › Pages › Source para "GitHub Actions"; respostas da Carla (B-06).
+
 ## Páginas
 
 Estado: `rascunho` · `aguardando médico` · `publicada` · `redirecionada` · `fora do ar`.
