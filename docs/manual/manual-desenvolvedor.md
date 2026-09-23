@@ -35,9 +35,10 @@ Confere o que está em `_site/`. **Erro** reprova (exit 1); **aviso** é impress
 | Recurso de fora (`http…`, `//…`, `data:`) ou caminho absoluto `/…` | erro (exceto `404.html` com a URL base) |
 | Arquivo referenciado inexistente (HTML e `url()` do CSS) | erro |
 | Links: só `https:`, `tel:`, `mailto:`; `_blank` com `noopener` | erro |
-| Termos de `ferramentas/regras/termos-vedados.json` | erro ou aviso, conforme o termo |
+| Termos de `ferramentas/regras/termos-vedados.json` (CFM; em página de advocacia, `termos-vedados-oab.json`) | erro ou aviso, conforme o termo |
 | `PENDENTE`, `DESCREVA A IMAGEM`, `{{`, `TODO`, `XXX`, lorem ipsum | erro |
 | `data-identificacao-cfm` com nome, Médico/Médica, `CRM-UF` e número, cada especialidade e `RQE n` | erro |
+| Advocacia: `data-identificacao-oab` com a razão social, `OAB/UF número` de cada registro da sociedade e cada sócio administrador com a inscrição; todo advogado do `pagina.json` com a inscrição em algum ponto da página | erro |
 | `docs/paginas/<slug>/briefing.md` existe (página publicada) | erro |
 | Imagem > 250 KB; pasta > 900 KB | aviso |
 
@@ -86,6 +87,14 @@ exige `organizacao.nome` em vez de `medico`; sem CRM, sem identificação CFM; p
 sitemap, exigindo `siteOficial` e o `data-aviso-proposta` (texto de `avisoDeProposta()`). JSON-LD
 `ProfessionalService`.
 
+**Página de advocacia** (`"tipo": "advocacia"`, [ADR-006](../decisoes/adr/ADR-006-pagina-de-advocacia.md)):
+exige `sociedade.nome`, `sociedade.razaoSocial` (com "Advogados"), `sociedade.registros[]` (`uf`,
+`numero` como "12.345" ou "12.345-S"), `advogados[]` (`nome`, `oab[]`) com ao menos um
+`socioAdministrador: true`, `cidade` e `uf`. Opcionais: `sociedade.categoria`, `areas[]`, `escritorios[]`,
+`contato.email`. Publicar exige `revisao.oabConferidaEm`, `conferenciaOabEm` e `aprovadoPeloEscritorioEm`;
+com `"demonstracao": true`, só `conferenciaOabEm`, e o aviso tem texto próprio. JSON-LD `LegalService`;
+sem `og:site_name` (o título do índice é "Médicos"). O piso de termos é `termos-vedados-oab.json`.
+
 **Índice:** `site.config.json › indice.mostrarDemonstracoes` mostra demonstrações e propostas numa seção
 à parte da raiz, etiquetadas (continuam fora do Google e do sitemap).
 
@@ -96,7 +105,9 @@ sitemap, exigindo `siteOficial` e o `data-aviso-proposta` (texto de `avisoDeProp
 
 `npm run testar` (`node --test`, embutido no Node, sem dependência). Cada teste monta um site
 descartável numa pasta temporária e roda `construir.mjs` e `verificar.mjs` de verdade, apontados para ele
-pela variável `LANDING_RAIZ` (`lib/arquivos.mjs`; sem ela, a raiz é o repositório). O `verificar.yml`
+pela variável `LANDING_RAIZ` (`lib/arquivos.mjs`; sem ela, a raiz é o repositório). O site descartável
+mora em `testes/apoio.mjs` (`comSite({ pagina, html, creditos }, conferir)`); cada `*.test.mjs` diz o que
+a página tem: `demonstracao.test.mjs` (ADR-004 e ADR-005), `advocacia.test.mjs` (ADR-006). O `verificar.yml`
 roda os testes antes da verificação. Checagem nova entra com um caso que reprova e um que passa.
 
 ## Fontes e imagens

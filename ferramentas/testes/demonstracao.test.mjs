@@ -1,17 +1,12 @@
-// Prova do ADR-004 (modo demonstração): monta um site descartável numa pasta temporária e roda a
-// construção e a verificação de verdade, apontadas para ele por LANDING_RAIZ.
+// Prova do ADR-004 (modo demonstração) e do ADR-005 (negócio e proposta), sobre o site descartável de apoio.mjs.
 //
 //   node --test ferramentas/testes/        (npm run testar)
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { spawnSync } from 'node:child_process';
-import { mkdtemp, mkdir, writeFile, readFile, cp, rm } from 'node:fs/promises';
-import { tmpdir } from 'node:os';
+import { readFile } from 'node:fs/promises';
 import path from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { SLUG, comSite as comSiteDeTeste } from './apoio.mjs';
 
-const RAIZ_DO_CODIGO = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
-const SLUG = 'demo-teste';
 const AVISO = 'Página de demonstração. Dr. Fulano de Teste é um médico fictício; CRM, RQE e contatos são fictícios. '
   + 'Os hospitais e planos citados não têm relação com esta página.';
 
@@ -64,39 +59,8 @@ const CREDITOS = `| Imagem | Autor | Banco | Licença |
 | \`retrato\` | Autor de Teste | Unsplash | Unsplash License |
 `;
 
-/** Monta o site de teste e devolve a raiz. Cada opção desliga uma peça para provar que ela é exigida. */
-async function montarSite({ pagina = paginaJson(), html = indexHtml(), creditos = CREDITOS } = {}) {
-  const raiz = await mkdtemp(path.join(tmpdir(), 'landing-teste-'));
-  await cp(path.join(RAIZ_DO_CODIGO, 'site', 'assets'), path.join(raiz, 'site', 'assets'), { recursive: true });
-  await cp(path.join(RAIZ_DO_CODIGO, 'site.config.json'), path.join(raiz, 'site.config.json'));
-  const pasta = path.join(raiz, 'site', SLUG);
-  await mkdir(path.join(pasta, 'imagens'), { recursive: true });
-  await writeFile(path.join(pasta, 'pagina.json'), JSON.stringify(pagina));
-  await writeFile(path.join(pasta, 'index.html'), html);
-  await writeFile(path.join(pasta, 'imagens', 'retrato-480.jpg'), 'jpeg de teste');
-  await writeFile(path.join(pasta, 'imagens', 'social.jpg'), 'jpeg de teste');
-  const docs = path.join(raiz, 'docs', 'paginas', SLUG);
-  await mkdir(docs, { recursive: true });
-  await writeFile(path.join(docs, 'briefing.md'), '# Briefing de teste\n');
-  if (creditos !== null) await writeFile(path.join(docs, 'creditos-imagens.md'), creditos);
-  return raiz;
-}
-
-function rodar(raiz) {
-  const opcoes = { cwd: raiz, env: { ...process.env, LANDING_RAIZ: raiz }, encoding: 'utf8' };
-  const construcao = spawnSync(process.execPath, [path.join(RAIZ_DO_CODIGO, 'ferramentas', 'construir.mjs')], opcoes);
-  if (construcao.status !== 0) return construcao;
-  return spawnSync(process.execPath, [path.join(RAIZ_DO_CODIGO, 'ferramentas', 'verificar.mjs')], opcoes);
-}
-
-async function comSite(opcoes, conferir) {
-  const raiz = await montarSite(opcoes);
-  try {
-    await conferir(rodar(raiz), raiz);
-  } finally {
-    await rm(raiz, { recursive: true, force: true });
-  }
-}
+/** O site de teste da demonstração; cada opção desliga uma peça para provar que ela é exigida. */
+const comSite = (opcoes, conferir) => comSiteDeTeste({ pagina: paginaJson(), html: indexHtml(), creditos: CREDITOS, ...opcoes }, conferir);
 
 test('passa: demonstração publicada sem CRM conferido nem aprovação, com aviso e créditos', () => comSite({}, async (resultado, raiz) => {
   assert.equal(resultado.status, 0, resultado.stderr);

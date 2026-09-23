@@ -217,7 +217,14 @@ gerado, índice, sitemap, conferências) cabe em duas ferramentas sem dependênc
   em `.claude/skills/nova-pagina-medico-landing/assets/esqueleto/`)
 
 **Estado:** repositório aberto em 2026-09-22 com a fundação: ferramentas, CI, índice vazio, time de
-skills. Nenhuma página publicada.
+skills. Nenhuma página de cliente publicada; três demonstrações/propostas no ar só por link
+(`dr-paulo-de-tarso`, `hub-saude-negocios`, `arruda-seixas`).
+
+⌗ **Além de médicos** (ADR-005, ADR-006): `"tipo": "negocio"` para empresa de saúde sem CRM, e
+`"tipo": "advocacia"` para sociedade de advogados. Numa página de advocacia, as regras 2 e 3 leem-se com
+a **OAB** no lugar do CFM — inscrição na OAB em vez de CRM/RQE (`data-identificacao-oab`), **Provimento
+205/2021 do CFOAB** e Código de Ética da OAB em vez da Res. CFM 2.336/2023 (`conferencia-oab.md`,
+`termos-vedados-oab.json`); a regra 4 vira `oabConferidaEm` + `conferenciaOabEm` + `aprovadoPeloEscritorioEm`.
 
 ### Decisões abertas
 

@@ -1,0 +1,59 @@
+{
+  "slug": "arruda-seixas",
+  "tipo": "advocacia",
+  "publicar": true,
+  "demonstracao": true,
+  "atualizadoEm": "2026-09-23",
+  "sociedade": {
+    "nome": "Arruda Seixas Advogados",
+    "razaoSocial": "Arruda Seixas Sociedade de Advogados",
+    "categoria": "Advocacia empresarial",
+    "registros": [
+      { "uf": "SP", "numero": "00.000" },
+      { "uf": "RJ", "numero": "00.000" },
+      { "uf": "DF", "numero": "00.000" }
+    ],
+    "areas": [
+      "Societário e Fusões e Aquisições",
+      "Contencioso e Arbitragem",
+      "Tributário",
+      "Trabalhista",
+      "Regulatório e Concorrencial",
+      "Mercado de Capitais e Bancário",
+      "Reestruturação e Insolvência",
+      "Imobiliário e Infraestrutura",
+      "Proteção de Dados e Tecnologia",
+      "Ambiental"
+    ],
+    "escritorios": [
+      { "logradouro": "", "cidade": "São Paulo", "uf": "SP" },
+      { "logradouro": "", "cidade": "Rio de Janeiro", "uf": "RJ" },
+      { "logradouro": "", "cidade": "Brasília", "uf": "DF" }
+    ]
+  },
+  "advogados": [
+    { "nome": "Helena Arruda", "cargo": "Sócia fundadora", "socioAdministrador": true, "oab": [{ "uf": "SP", "numero": "000.001" }] },
+    { "nome": "Otávio Seixas", "cargo": "Sócio fundador", "socioAdministrador": true, "oab": [{ "uf": "SP", "numero": "000.002" }, { "uf": "RJ", "numero": "000.002-S" }] },
+    { "nome": "Marina Kfouri Lage", "cargo": "Sócia", "oab": [{ "uf": "SP", "numero": "000.003" }] },
+    { "nome": "Caio Bettencourt Nunes", "cargo": "Sócio", "oab": [{ "uf": "SP", "numero": "000.004" }] },
+    { "nome": "Beatriz Farah Ondina", "cargo": "Sócia", "oab": [{ "uf": "DF", "numero": "000.005" }] },
+    { "nome": "Rafael Tessitore", "cargo": "Sócio", "oab": [{ "uf": "SP", "numero": "000.006" }] },
+    { "nome": "Lívia Guaraciaba Mendes", "cargo": "Sócia", "oab": [{ "uf": "RJ", "numero": "000.007" }] },
+    { "nome": "Tomás Albernaz Vieira", "cargo": "Sócio", "oab": [{ "uf": "SP", "numero": "000.008" }] },
+    { "nome": "Juliana Pacheco Sá", "cargo": "Sócia", "oab": [{ "uf": "SP", "numero": "000.009" }] },
+    { "nome": "Eduardo Mafra Lins", "cargo": "Sócio", "oab": [{ "uf": "DF", "numero": "000.010" }] }
+  ],
+  "resumo": "Demonstração: página de um escritório de advocacia empresarial fictício, com dez áreas, índice de matérias e sócios em SP, RJ e DF.",
+  "cidade": "São Paulo",
+  "uf": "SP",
+  "contato": {
+    "telefone": "+551130000000",
+    "whatsapp": "+5511900000000"
+  },
+  "imagemSocial": "imagens/social.jpg",
+  "revisao": {
+    "oabConferidaEm": "",
+    "conferenciaOabEm": "2026-09-23",
+    "aprovadoPeloEscritorioEm": ""
+  }
+}

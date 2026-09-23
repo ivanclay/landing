@@ -115,6 +115,23 @@ Uma demonstração é a página de um **médico fictício**, feita para mostrar 
    contatos, retorno, documentos de reembolso.
 5. As três datas de `revisao`, com a aprovação do médico por escrito (regra 4).
 
+## Demonstração de escritório de advocacia
+
+Existe também uma demonstração de **escritório de advocacia fictício**
+([ADR-006](../decisoes/adr/ADR-006-pagina-de-advocacia.md)): `https://ivanclay.github.io/landing/arruda-seixas/`.
+Mostre pelo link direto, como a do Dr. Paulo.
+
+- **A norma é outra:** no lugar do CFM, o **Provimento 205/2021 da OAB** e o Código de Ética da OAB. Na
+  prática: nada de "um dos maiores", "referência", número de advogados, ranking, prêmio, clientes, casos,
+  resultados, honorários ou "primeira reunião sem custo"; "atua em", nunca "especialista" sem título.
+- **Identificação obrigatória:** razão social com o registro da sociedade em cada seccional
+  (`OAB/SP 12.345`) e os sócios administradores com a inscrição, no rodapé; cada advogado citado com a
+  própria inscrição. A verificação confere.
+- **Para um escritório real:** página nova no slug do escritório; fatos com fonte no briefing; as três
+  datas de `revisao` — inscrições conferidas no Cadastro Nacional dos Advogados (`oabConferidaEm`),
+  conferência OAB (`conferenciaOabEm`) e a aprovação de um sócio administrador por escrito
+  (`aprovadoPeloEscritorioEm`). Antes do primeiro, falta a skill de conferência da OAB (B-09).
+
 ## Proposta de site para um negócio (não médico)
 
 Para refazer o site de uma empresa de saúde (consultoria, hub) antes da aprovação do dono

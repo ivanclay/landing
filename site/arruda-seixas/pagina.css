@@ -1,0 +1,419 @@
+/*
+ * pagina.css — o layout e o gesto desta página ("Rubrica", docs/paginas/arruda-seixas/direcao-de-arte.md):
+ * a página composta como um livro de direito — título de seção na margem, em itálico e na cor da rubrica,
+ * corpo na coluna larga — e o índice remissivo de matérias. Nenhuma cor é digitada aqui (regra 10).
+ */
+
+/* ---------- Aviso de demonstração (ADR-004, ADR-006) ---------- */
+.aviso-demonstracao {
+  padding: var(--espaco-3) var(--margem-lateral);
+  background: var(--cor-superficie);
+  border-bottom: 1px solid var(--cor-linha);
+  font-family: var(--fonte-interface);
+  font-size: var(--texto-meta);
+  line-height: 1.45;
+  text-align: center;
+}
+
+/* Interface em Public Sans: botões, navegação, números de telefone e de inscrição. */
+.botao,
+.cabeca,
+.letras,
+.socio__oab,
+.socio__cargo,
+.abertura__registro,
+.escritorio__telefone,
+.area__socio {
+  font-family: var(--fonte-interface);
+}
+
+.botao--claro {
+  background: var(--cor-noite-texto);
+  color: var(--cor-noite);
+}
+.botao--claro:hover { background: var(--cor-fundo); }
+
+/* ---------- A folha: margem de notas + corpo ---------- */
+.folha {
+  display: grid;
+  gap: var(--espaco-4);
+}
+.folha__margem { min-width: 0; }
+.folha__corpo { min-width: 0; }
+
+.rubrica {
+  font-family: var(--fonte-titulo);
+  font-size: var(--texto-destaque);
+  font-style: italic;
+  font-weight: 450;
+  color: var(--cor-marca);
+}
+
+@media (min-width: 60rem) {
+  .folha {
+    grid-template-columns: 12rem minmax(0, 1fr);
+    column-gap: var(--espaco-8);
+  }
+  .folha__margem {
+    padding-top: 0.3em;
+  }
+}
+
+.secao {
+  padding-block: var(--espaco-9) 0;
+}
+.secao > .folha {
+  padding-top: var(--espaco-5);
+  border-top: 1px solid var(--cor-texto);
+}
+.secao__abertura {
+  max-width: var(--medida);
+  font-size: var(--texto-destaque);
+  line-height: 1.45;
+}
+
+/* ---------- Cabeça ---------- */
+.cabeca {
+  border-bottom: 1px solid var(--cor-linha);
+}
+.cabeca__linha {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--espaco-5);
+  min-height: 4.5rem;
+}
+.cabeca__marca {
+  font-family: var(--fonte-titulo);
+  font-size: var(--texto-destaque);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  text-decoration: none;
+  min-height: var(--alvo-minimo);
+  display: inline-flex;
+  align-items: center;
+}
+.cabeca__nav {
+  display: none;
+  gap: var(--espaco-5);
+  margin-inline-start: auto;
+  font-size: var(--texto-apoio);
+}
+.cabeca__nav a {
+  min-height: var(--alvo-minimo);
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+}
+.cabeca__nav a:hover { text-decoration: underline; }
+@media (min-width: 60rem) {
+  .cabeca__nav { display: flex; }
+}
+
+/* ---------- Abertura ---------- */
+.abertura {
+  padding-block: var(--espaco-8) 0;
+}
+.abertura__corpo {
+  display: grid;
+  gap: 0 var(--espaco-8);
+}
+@media (min-width: 60rem) {
+  .abertura__corpo {
+    grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+    align-items: end;
+  }
+  .abertura__corpo .abertura__apoio { margin-top: 0; }
+  .sumario { grid-column: 1 / -1; }
+}
+
+/* O sumário: as dez áreas logo na abertura — o porte do escritório dito pela amplitude, não por número. */
+.sumario {
+  margin-top: var(--espaco-8);
+  border-top: 1px solid var(--cor-texto);
+}
+.sumario ul {
+  columns: 1;
+  column-gap: var(--espaco-7);
+}
+@media (min-width: 40rem) { .sumario ul { columns: 2; } }
+@media (min-width: 76rem) { .sumario ul { columns: 3; } }
+.sumario li {
+  break-inside: avoid;
+  border-bottom: 1px solid var(--cor-linha);
+}
+.sumario a {
+  display: flex;
+  align-items: center;
+  min-height: 3.25rem;
+  font-size: var(--texto-apoio);
+  text-decoration: none;
+}
+.sumario a::before {
+  content: '§';
+  margin-inline-end: var(--espaco-3);
+  color: var(--cor-marca);
+}
+.sumario a:hover { color: var(--cor-marca); }
+.abertura__paragrafo {
+  font-family: var(--fonte-titulo);
+  font-size: var(--texto-titulo);
+  line-height: 1;
+  color: var(--cor-marca);
+}
+@media (min-width: 60rem) {
+  .abertura__paragrafo {
+    font-size: clamp(6rem, 3rem + 6vw, 10rem);
+    font-weight: 300;
+    text-align: end;
+  }
+}
+.abertura__nome {
+  font-size: clamp(2.75rem, 1.6rem + 5vw, 7rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  max-width: 12ch;
+}
+.abertura__advogados {
+  display: block;
+  font-weight: 300;
+  font-style: italic;
+}
+.abertura__apoio {
+  margin-top: var(--espaco-6);
+  max-width: 36ch;
+  font-size: var(--texto-destaque);
+  line-height: 1.4;
+}
+.abertura__acoes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--espaco-3);
+  margin-top: var(--espaco-6);
+}
+.abertura__registro {
+  margin-top: var(--espaco-5);
+  font-size: var(--texto-meta);
+  color: var(--cor-texto-suave);
+}
+
+/* ---------- Áreas ---------- */
+.areas {
+  margin-top: var(--espaco-7);
+}
+.area {
+  display: grid;
+  gap: var(--espaco-2);
+  padding-block: var(--espaco-5);
+  border-top: 1px solid var(--cor-linha);
+  scroll-margin-top: var(--espaco-6);
+}
+.area:target .area__nome { color: var(--cor-marca); }
+.area__nome {
+  font-size: var(--texto-destaque);
+  font-weight: 600;
+}
+.area__texto {
+  max-width: var(--medida);
+}
+.area__socio {
+  font-size: var(--texto-apoio);
+  color: var(--cor-texto-suave);
+}
+@media (min-width: 60rem) {
+  .area {
+    grid-template-columns: 15rem minmax(0, 1fr) 13rem;
+    column-gap: var(--espaco-6);
+    align-items: baseline;
+  }
+  .area__socio { text-align: end; }
+}
+
+/* ---------- O gesto: o índice de matérias ---------- */
+.indice-materias__nota {
+  margin-top: var(--espaco-3);
+  font-size: var(--texto-apoio);
+  font-style: italic;
+  color: var(--cor-texto-suave);
+  max-width: 24ch;
+}
+.letras ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--espaco-1);
+}
+.letras a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--alvo-minimo);
+  height: var(--alvo-minimo);
+  border: 1px solid var(--cor-linha);
+  font-size: var(--texto-apoio);
+  font-weight: 600;
+  text-decoration: none;
+}
+.letras a:hover {
+  border-color: var(--cor-marca);
+  color: var(--cor-marca);
+}
+.indice-materias {
+  margin-top: var(--espaco-6);
+  columns: 1;
+  column-gap: var(--espaco-7);
+}
+@media (min-width: 40rem) { .indice-materias { columns: 2; } }
+@media (min-width: 76rem) { .indice-materias { columns: 3; } }
+.letra {
+  break-inside: avoid;
+  padding-bottom: var(--espaco-5);
+}
+.letra__inicial {
+  scroll-margin-top: var(--espaco-6);
+  font-size: var(--texto-secao);
+  font-weight: 600;
+  line-height: 1.1;
+  color: var(--cor-marca);
+}
+.entrada {
+  display: flex;
+  align-items: baseline;
+  gap: var(--espaco-2);
+  min-height: var(--alvo-minimo);
+  padding-block: var(--espaco-2);
+  font-size: var(--texto-apoio);
+  line-height: 1.35;
+  text-decoration: none;
+}
+.entrada__materia { flex: 0 1 auto; }
+/* A linha pontilhada entre a matéria e a área, como no índice de um código. */
+.entrada__area {
+  flex: 1 0 auto;
+  max-width: 55%;
+  display: flex;
+  align-items: baseline;
+  gap: var(--espaco-2);
+  font-style: italic;
+  color: var(--cor-texto-suave);
+  text-align: end;
+}
+.entrada__area::before {
+  content: '';
+  flex: 1;
+  min-width: var(--espaco-4);
+  border-bottom: 1px dotted var(--cor-texto-suave);
+  transform: translateY(-0.3em);
+}
+.entrada:hover .entrada__materia { text-decoration: underline; }
+.entrada:hover .entrada__area { color: var(--cor-marca); }
+
+/* ---------- Sócios ---------- */
+.socios {
+  display: grid;
+  gap: 0 var(--espaco-7);
+}
+@media (min-width: 48rem) {
+  .socios { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+.socio {
+  display: grid;
+  gap: var(--espaco-1);
+  padding-block: var(--espaco-4);
+  border-top: 1px solid var(--cor-linha);
+}
+.socio__nome {
+  font-family: var(--fonte-titulo);
+  font-size: var(--texto-destaque);
+  font-weight: 600;
+}
+.socio__cargo {
+  font-size: var(--texto-apoio);
+}
+.socio__cargo a {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--alvo-minimo);
+}
+.socio__oab {
+  font-size: var(--texto-meta);
+  color: var(--cor-texto-suave);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- Escritórios e contato: a faixa escura ---------- */
+.contato {
+  margin-top: var(--espaco-9);
+  padding-block: var(--espaco-8);
+  background: var(--cor-noite);
+  color: var(--cor-noite-texto);
+}
+.contato :focus-visible { outline-color: var(--cor-noite-foco); }
+.contato .rubrica { color: var(--cor-noite-rubrica); }
+.contato__texto {
+  max-width: var(--medida);
+  font-size: var(--texto-destaque);
+  line-height: 1.45;
+}
+.escritorios {
+  display: grid;
+  gap: var(--espaco-5);
+  margin-top: var(--espaco-7);
+}
+@media (min-width: 48rem) {
+  .escritorios { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+.escritorio {
+  display: grid;
+  gap: var(--espaco-1);
+  padding-top: var(--espaco-4);
+  border-top: 1px solid var(--cor-noite-suave);
+}
+.escritorio__cidade {
+  font-size: var(--texto-secao);
+  font-weight: 500;
+}
+.escritorio__bairro {
+  font-style: italic;
+  color: var(--cor-noite-suave);
+}
+.escritorio__telefone {
+  justify-self: start;
+  min-height: var(--alvo-minimo);
+  display: inline-flex;
+  align-items: center;
+  font-size: var(--texto-destaque);
+  font-variant-numeric: tabular-nums;
+}
+.contato__whatsapp {
+  margin-top: var(--espaco-7);
+}
+
+/* ---------- Rodapé ---------- */
+.rodape-legal {
+  border-top: 0;
+}
+.rodape__marca {
+  font-family: var(--fonte-titulo);
+  font-size: var(--texto-secao);
+  color: var(--cor-marca);
+  line-height: 1;
+}
+@media (min-width: 60rem) {
+  .rodape__marca { text-align: end; }
+}
+.rodape__corpo {
+  display: grid;
+  gap: var(--espaco-3);
+  max-width: var(--medida);
+}
+.identificacao-oab {
+  font-size: var(--texto-apoio);
+  line-height: 1.5;
+}
+.identificacao-oab strong { color: var(--cor-texto); font-weight: 600; }
+.rodape__corpo a {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--alvo-minimo);
+}

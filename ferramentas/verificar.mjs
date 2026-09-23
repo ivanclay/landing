@@ -12,7 +12,7 @@ import {
   tags, aberturaDoElementoCom, conteudoDoElementoCom, textoVisivel, normalizar, semComentarios,
 } from './lib/html.mjs';
 import {
-  palavraMedico, ehDemonstracao, ehNegocio, ehProposta, avisoDeDemonstracao, avisoDeProposta,
+  palavraMedico, ehAdvocacia, ehDemonstracao, ehNegocio, ehProposta, avisoDeDemonstracao, avisoDeProposta,
 } from './lib/pagina.mjs';
 
 const LIMITE_IMAGEM_BYTES = 250 * 1024;
@@ -25,7 +25,14 @@ const avisos = [];
 async function verificar() {
   if (!existsSync(PASTA_SAIDA)) throw new Error('_site/ não existe — rode "npm run construir" antes');
   const config = await lerJson(path.join(RAIZ, 'site.config.json'));
-  const { termos } = await lerJson(path.join(PASTA_REGRAS, 'termos-vedados.json'));
+  // Cada norma tem o seu piso: a do CFM para páginas de saúde, índice e 404; a da OAB para advocacia (ADR-006).
+  const { termos: termosCfm } = await lerJson(path.join(PASTA_REGRAS, 'termos-vedados.json'));
+  const { termos: termosOab } = await lerJson(path.join(PASTA_REGRAS, 'termos-vedados-oab.json'));
+  const pastasDeAdvocacia = new Set();
+  for (const pasta of await listarPastas(PASTA_SAIDA)) {
+    const fonte = path.join(PASTA_SITE, pasta, 'pagina.json');
+    if (existsSync(fonte) && ehAdvocacia(await lerJson(fonte))) pastasDeAdvocacia.add(pasta);
+  }
 
   const arquivosHtml = (await listarArquivosRecursivo(PASTA_SAIDA)).filter((a) => a.endsWith('.html'));
   for (const arquivo of arquivosHtml) {
@@ -36,6 +43,7 @@ async function verificar() {
     verificarSeparacao(html, relativo);
     verificarRecursos(html, arquivo, relativo, config, { permitirUrlBase: relativo === '404.html' });
     verificarLinks(html, relativo);
+    const termos = pastasDeAdvocacia.has(relativo.split(path.sep)[0]) ? termosOab : termosCfm;
     if (!ehRedirecionamento) verificarTermos(html, relativo, termos);
     verificarPendencias(html, relativo);
   }
@@ -46,8 +54,9 @@ async function verificar() {
     if (!existsSync(fonte)) continue; // redirecionamento
     const pagina = await lerJson(fonte);
     const html = await readFile(path.join(PASTA_SAIDA, pasta, 'index.html'), 'utf8');
-    // Identificação do CFM é de página de médico; negócio não tem CRM (ADR-005).
-    if (!ehNegocio(pagina)) verificarIdentificacaoCfm(html, pagina, `${pasta}/index.html`);
+    // Identificação do CFM é de página de médico; negócio não tem CRM (ADR-005); advocacia tem a da OAB (ADR-006).
+    if (ehAdvocacia(pagina)) verificarIdentificacaoOab(html, pagina, `${pasta}/index.html`);
+    else if (!ehNegocio(pagina)) verificarIdentificacaoCfm(html, pagina, `${pasta}/index.html`);
     if (ehProposta(pagina)) {
       verificarAvisoNoTopo(html, `${pasta}/index.html`, 'data-aviso-proposta', avisoDeProposta(pagina),
         'a proposta avisa no topo que não é o site oficial (ADR-005)');
@@ -179,6 +188,32 @@ function verificarIdentificacaoCfm(html, pagina, relativo) {
   for (const item of [...(pagina.medico.especialidades ?? []), ...(pagina.medico.areasDeAtuacao ?? [])]) {
     exigir(item.nome, 'a especialidade');
     exigir(`RQE ${item.rqe}`, 'o RQE');
+  }
+}
+
+/**
+ * CED da OAB, art. 44, e Provimento 205/2021, art. 1º, § 1º (ADR-006): no data-identificacao-oab, a razão
+ * social, o registro da sociedade em cada seccional e os sócios administradores com a inscrição; e todo
+ * advogado do pagina.json com a própria inscrição em algum ponto da página.
+ */
+function verificarIdentificacaoOab(html, pagina, relativo) {
+  const bloco = conteudoDoElementoCom(html, 'data-identificacao-oab');
+  if (bloco === null) {
+    erros.push(`${relativo}: sem o elemento data-identificacao-oab (regra 2, ADR-006)`);
+    return;
+  }
+  const exigir = (onde, trecho, oQue) => {
+    if (!onde.texto.includes(normalizar(trecho))) erros.push(`${relativo}: ${onde.nome} não mostra ${oQue} ("${trecho}") — regra 2 (ADR-006)`);
+  };
+  const noBloco = { texto: normalizar(textoVisivel(bloco)), nome: 'a identificação OAB' };
+  const naPagina = { texto: normalizar(textoVisivel(html)), nome: 'a página' };
+  const { sociedade, advogados = [] } = pagina;
+  exigir(noBloco, sociedade.razaoSocial, 'a razão social');
+  for (const registro of sociedade.registros) exigir(noBloco, `OAB/${registro.uf} ${registro.numero}`, 'o registro da sociedade');
+  for (const advogado of advogados) {
+    const onde = advogado.socioAdministrador ? noBloco : naPagina;
+    exigir(onde, advogado.nome, advogado.socioAdministrador ? 'o sócio administrador' : 'o advogado');
+    for (const inscricao of advogado.oab) exigir(onde, `OAB/${inscricao.uf} ${inscricao.numero}`, `a inscrição de ${advogado.nome}`);
   }
 }
 

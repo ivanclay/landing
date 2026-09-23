@@ -1,0 +1,30 @@
+/*
+ * tema.css — a identidade desta página: cor e fonte (regra 10). Nenhum outro arquivo desta página
+ * digita cor. Cada valor saiu de docs/paginas/arruda-seixas/direcao-de-arte.md ("Rubrica"). Contraste
+ * medido lá: texto 15,69:1 · texto-suave 6,59:1 · marca como texto 6,62:1 · sobre-marca 7,43:1 ·
+ * foco 6,40:1; na faixa escura, texto 14,90:1 · suave 7,71:1 · rubrica 7,62:1 · foco 9,04:1.
+ */
+:root {
+  --cor-fundo: #f2f2ee;
+  --cor-superficie: #e5e6e1;
+  --cor-texto: #17191c;
+  --cor-texto-suave: #51565d;
+  --cor-linha: #c7c9c3;
+  --cor-marca: #a3241b;
+  --cor-sobre-marca: #ffffff;
+  --cor-foco: #1d4fbf;
+
+  /* A faixa dos escritórios e do contato. */
+  --cor-noite: #16181b;
+  --cor-noite-texto: #ecebe6;
+  --cor-noite-suave: #a7abb1;
+  --cor-noite-rubrica: #f0907f;
+  --cor-noite-foco: #9ab8ff;
+
+  --fonte-titulo: 'Source Serif 4 Variable', 'Iowan Old Style', 'Palatino Linotype', Georgia, serif;
+  --fonte-texto: 'Source Serif 4 Variable', 'Iowan Old Style', 'Palatino Linotype', Georgia, serif;
+  --fonte-interface: 'Public Sans Variable', 'Segoe UI', system-ui, sans-serif;
+
+  --raio-botao: 0;
+  --raio-etiqueta: 0;
+}

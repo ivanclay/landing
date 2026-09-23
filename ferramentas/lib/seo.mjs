@@ -1,7 +1,9 @@
 // O que só a construção escreve: endereço absoluto (canonical, og:url, og:image) e dados estruturados.
 // A página nunca digita a URL base — ela muda no dia em que houver domínio próprio (D-01, regra 8).
 import { escaparHtml } from './html.mjs';
-import { nomeDeExibicao, ehDemonstracao, ehNegocio, ehProposta, soPorLinkDireto } from './pagina.mjs';
+import {
+  nomeDeExibicao, assuntoDaPagina, ehAdvocacia, ehDemonstracao, ehNegocio, ehProposta, soPorLinkDireto,
+} from './pagina.mjs';
 
 export function urlDaPagina(config, slug) {
   return new URL(`${slug}/`, config.urlBase).href;
@@ -16,7 +18,9 @@ export function cabecalhoDaPagina(pagina, config, { rascunho = false, versaoImag
     `<meta property="og:type" content="website">`,
     `<meta property="og:locale" content="pt_BR">`,
   ];
-  if (config.indice?.titulo) linhas.push(`<meta property="og:site_name" content="${escaparHtml(config.indice.titulo)}">`);
+  // O título do índice ("Médicos", D-02) só nomeia página de médico; num escritório ou negócio, a prévia
+  // do link mostraria "Médicos" (B-07, ADR-006).
+  if (config.indice?.titulo && !ehNegocio(pagina) && !ehAdvocacia(pagina)) linhas.push(`<meta property="og:site_name" content="${escaparHtml(config.indice.titulo)}">`);
   if (pagina.imagemSocial) {
     // WhatsApp, Facebook, LinkedIn e X leem estas tags. A imagem social sai sempre em 1200 × 630 JPEG
     // (otimizar-imagens.mjs --social); declarar o tamanho deixa a prévia aparecer já no primeiro compartilhamento.
@@ -47,7 +51,9 @@ function enderecoDaImagemSocial(pagina, url, versaoImagem) {
 
 /** O alt da imagem social: quem, o quê, onde — e, na demonstração, que é demonstração (ADR-004). */
 function textoDaImagemSocial(pagina) {
-  const assunto = ehNegocio(pagina) ? pagina.organizacao.categoria : (pagina.medico.especialidades ?? [])[0]?.nome;
+  const assunto = ehNegocio(pagina) || ehAdvocacia(pagina)
+    ? assuntoDaPagina(pagina)
+    : (pagina.medico.especialidades ?? [])[0]?.nome;
   const lugar = [pagina.cidade, pagina.uf].filter(Boolean).join('/');
   const texto = [nomeDeExibicao(pagina), assunto, lugar].filter(Boolean).join(' — ');
   if (ehDemonstracao(pagina)) return `Demonstração: ${texto}`;
@@ -60,6 +66,7 @@ function textoDaImagemSocial(pagina) {
  */
 export function dadosEstruturados(pagina, url, versaoImagem = '') {
   if (ehNegocio(pagina)) return dadosDoNegocio(pagina, url, versaoImagem);
+  if (ehAdvocacia(pagina)) return dadosDaAdvocacia(pagina, url, versaoImagem);
   const { medico, contato = {}, locais = [], convenios = [] } = pagina;
   const principal = locais[0];
   const dados = {
@@ -117,6 +124,45 @@ function dadosDoNegocio(pagina, url, versaoImagem) {
     };
   }
   const perfis = [pagina.siteOficial, ...Object.values(pagina.redes ?? {})].filter((valor) => valor?.startsWith('https://'));
+  if (perfis.length) dados.sameAs = perfis;
+  return dados;
+}
+
+/**
+ * schema.org LegalService para sociedade de advogados (ADR-006). Só o que o pagina.json afirma: as áreas
+ * viram knowsAbout (não "especialidade" — Provimento 205/2021, art. 3º, III), cada escritório um endereço,
+ * cada advogado um Person com a inscrição na OAB.
+ */
+function dadosDaAdvocacia(pagina, url, versaoImagem) {
+  const { sociedade, contato = {}, advogados = [] } = pagina;
+  const dados = {
+    '@context': 'https://schema.org',
+    '@type': 'LegalService',
+    name: sociedade.nome,
+    legalName: sociedade.razaoSocial,
+    url,
+    description: pagina.resumo,
+    identifier: sociedade.registros.map((registro) => ({
+      '@type': 'PropertyValue', propertyID: `OAB/${registro.uf}`, value: registro.numero,
+    })),
+  };
+  if (contato.telefone || contato.whatsapp) dados.telephone = contato.telefone ?? contato.whatsapp;
+  if (contato.email) dados.email = contato.email;
+  if (pagina.imagemSocial) dados.image = enderecoDaImagemSocial(pagina, url, versaoImagem);
+  if (sociedade.areas?.length) dados.knowsAbout = sociedade.areas;
+  const escritorios = (sociedade.escritorios ?? []).map((escritorio) => endereco(escritorio));
+  if (escritorios.length) dados.address = escritorios.length === 1 ? escritorios[0] : escritorios;
+  if (advogados.length) {
+    dados.employee = advogados.map((advogado) => ({
+      '@type': 'Person',
+      name: advogado.nome,
+      ...(advogado.cargo ? { jobTitle: advogado.cargo } : {}),
+      identifier: advogado.oab.map((inscricao) => ({
+        '@type': 'PropertyValue', propertyID: `OAB/${inscricao.uf}`, value: inscricao.numero,
+      })),
+    }));
+  }
+  const perfis = Object.values(pagina.redes ?? {}).filter((valor) => valor.startsWith('https://'));
   if (perfis.length) dados.sameAs = perfis;
   return dados;
 }

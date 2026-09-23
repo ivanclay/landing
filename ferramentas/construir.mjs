@@ -10,7 +10,8 @@ import {
   readFile, writeFile, mkdir, cp, rm, existsSync, path,
 } from './lib/arquivos.mjs';
 import {
-  validarPagina, nomeDeExibicao, ehNegocio, ehDemonstracao, ehProposta, soPorLinkDireto, FORMATO_SLUG,
+  validarPagina, nomeDeExibicao, assuntoDaPagina, ehAdvocacia, ehDemonstracao, ehProposta, soPorLinkDireto,
+  FORMATO_SLUG,
 } from './lib/pagina.mjs';
 import { cabecalhoDaPagina, cabecalhoDoIndice, urlDaPagina } from './lib/seo.mjs';
 import { escaparHtml } from './lib/html.mjs';
@@ -99,7 +100,7 @@ async function gerarIndice(config, paginas, exemplos = []) {
   const secaoExemplos = exemplos.length ? `
       <section class="exemplos" aria-labelledby="titulo-exemplos">
         <h2 id="titulo-exemplos" class="exemplos__titulo">Demonstrações e propostas</h2>
-        <p class="exemplos__nota">Modelos do nosso trabalho, fora do Google. A demonstração apresenta um médico fictício; a proposta é o novo site de um negócio real, ainda em avaliação pelo dono.</p>
+        <p class="exemplos__nota">Modelos do nosso trabalho, fora do Google. A demonstração apresenta um médico ou um escritório fictício; a proposta é o novo site de um negócio real, ainda em avaliação pelo dono.</p>
         <ol class="indice" role="list">${emOrdem(exemplos).map((pagina) => itemDoIndice(pagina)).join('')}
         </ol>
       </section>` : '';
@@ -115,11 +116,10 @@ async function gerarIndice(config, paginas, exemplos = []) {
 
 /** Um item do índice; demonstração e proposta levam etiqueta. */
 function itemDoIndice(pagina) {
-  const assunto = ehNegocio(pagina)
-    ? (pagina.organizacao.categoria ?? '')
-    : (pagina.medico.especialidades ?? []).map((e) => e.nome).join(', ');
+  const assunto = assuntoDaPagina(pagina);
   const lugar = [pagina.cidade, pagina.uf].filter(Boolean).join(', ');
-  const etiqueta = ehDemonstracao(pagina) ? 'Demonstração · médico fictício' : ehProposta(pagina) ? 'Proposta · em avaliação' : '';
+  const ficticio = ehAdvocacia(pagina) ? 'escritório fictício' : 'médico fictício';
+  const etiqueta = ehDemonstracao(pagina) ? `Demonstração · ${ficticio}` : ehProposta(pagina) ? 'Proposta · em avaliação' : '';
   const busca = [nomeDeExibicao(pagina), assunto, lugar, etiqueta].join(' ');
   return `
         <li class="indice__item" data-busca="${escaparHtml(busca)}">
