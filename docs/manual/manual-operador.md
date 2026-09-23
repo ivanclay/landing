@@ -96,7 +96,8 @@ Uma demonstração é a página de um **médico fictício**, feita para mostrar 
 ([ADR-004](../decisoes/adr/ADR-004-modo-demonstracao.md)). Hoje existe uma:
 `https://ivanclay.github.io/landing/dr-paulo-de-tarso/`.
 
-- **Como mostrar:** mande o **link direto**. Ela não aparece no índice, no sitemap nem no Google
+- **Como mostrar:** mande o **link direto**, ou a raiz (`https://ivanclay.github.io/landing/`): o índice
+  "Soluções" da Fábrica lista as demonstrações numa coluna e os produtos dos clientes na outra. Ela não aparece no sitemap nem no Google
   (`noindex`), de propósito.
 - **O que ela sempre tem:** o aviso no topo ("Página de demonstração… médico fictício…"), "Demonstração"
   no título e na prévia do WhatsApp, e "Imagem ilustrativa" em cada foto. Não tire nada disso: a

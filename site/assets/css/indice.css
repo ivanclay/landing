@@ -1,118 +1,211 @@
 /*
  * indice.css — a identidade do índice, e só dele (regra 10).
  *
- * Direção: um índice remissivo de livro. Os nomes em serifa, a especialidade e a cidade alinhadas à
- * direita e ligadas ao nome por uma linha pontilhada — o gesto de "procurar e achar" de um sumário.
- * Papel de tom mineral e tinta de pinho: calmo, sem o azul-hospital e sem o creme com terracota.
+ * Quem assina o índice é a Fábrica de Apps e Soluções (D-02, ADR-007): as cores saem do logo — azul-marinho
+ * no texto, petróleo nos links, o laranja só como traço decorativo (não tem contraste para texto: 2,07:1).
+ * O cabeçalho é curto de propósito: o que importa é a lista de produtos, e ela começa na primeira tela.
+ * Contraste medido: texto 14,00:1 · suave 7,02:1 · marca 5,79:1 · sobre-marca 6,22:1 · foco 4,12:1.
  */
 :root {
-  --cor-fundo: #eef1ee;
-  --cor-superficie: #f7f8f6;
-  --cor-texto: #182a2c;
-  --cor-texto-suave: #4c5e60;
-  --cor-linha: #c3ccc8;
-  --cor-marca: #285f55;
-  --cor-sobre-marca: #f7f8f6;
-  --cor-foco: #b8551f;
+  --cor-fundo: #f6f7f8;
+  --cor-superficie: #ffffff;
+  --cor-texto: #10264a;
+  --cor-texto-suave: #4a5568;
+  --cor-linha: #dde2e8;
+  --cor-marca: #0b6b76;
+  --cor-sobre-marca: #ffffff;
+  --cor-foco: #c25a00;
+  --cor-laranja: #f39a2b;
 
-  --fonte-titulo: 'Newsreader Variable', 'Iowan Old Style', 'Palatino Linotype', Georgia, serif;
+  --fonte-titulo: 'Montserrat Variable', 'Segoe UI', system-ui, sans-serif;
   --fonte-texto: 'Atkinson Hyperlegible Next Variable', 'Segoe UI', system-ui, sans-serif;
 }
 
+/* ---------- Cabeçalho: a marca e o título numa faixa só ---------- */
 .indice-cabeca {
-  padding-block: var(--espaco-9) var(--espaco-7);
-  border-bottom: 1px solid var(--cor-texto);
-}
-.indice-cabeca__titulo {
-  font-size: var(--texto-vitrine);
-  font-weight: 380;
-  letter-spacing: -0.02em;
-}
-.indice-cabeca__descricao {
-  margin-top: var(--espaco-5);
-  max-width: 44ch;
-  font-size: var(--texto-destaque);
-  color: var(--cor-texto-suave);
-  line-height: 1.45;
-}
-
-.busca {
-  display: grid;
-  gap: var(--espaco-2);
-  margin-block: var(--espaco-6) var(--espaco-4);
-  max-width: 32rem;
-}
-.busca__rotulo { font-size: var(--texto-apoio); color: var(--cor-texto-suave); }
-.busca__campo {
-  min-height: var(--alvo-minimo);
-  padding: var(--espaco-3) 0;
-  border: 0;
-  border-bottom: 2px solid var(--cor-texto);
-  background: transparent;
-  width: 100%;
-  font-size: var(--texto-destaque);
-  font-family: var(--fonte-titulo);
-}
-.busca__campo::placeholder { color: var(--cor-texto-suave); opacity: 0.7; }
-.busca__campo:focus-visible { outline-offset: 2px; }
-.busca__contagem { font-size: var(--texto-meta); color: var(--cor-texto-suave); min-height: 1.5em; }
-
-/* margin, e não padding: o ol[role='list'] do base.css zera o padding com especificidade maior. */
-.indice { margin: 0 0 var(--espaco-9); }
-
-.indice__link {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--espaco-1);
-  padding-block: var(--espaco-4);
+  padding-block: var(--espaco-5);
+  background: var(--cor-superficie);
   border-bottom: 1px solid var(--cor-linha);
-  text-decoration: none;
 }
-.indice__nome {
-  font-family: var(--fonte-titulo);
-  font-size: var(--texto-secao);
-  font-weight: 420;
-  line-height: 1.15;
-  transition: color 150ms ease;
+.indice-cabeca__linha {
+  display: grid;
+  gap: var(--espaco-4);
+  align-items: center;
 }
-.indice__especialidade, .indice__cidade { font-size: var(--texto-apoio); color: var(--cor-texto-suave); }
-.indice__link:hover .indice__nome { color: var(--cor-marca); }
-
 @media (min-width: 52rem) {
-  .indice__link {
-    grid-template-columns: auto 1fr 15rem 12rem;
-    align-items: baseline;
-    column-gap: var(--espaco-4);
-    border-bottom: 0;
-    padding-block: var(--espaco-3);
+  .indice-cabeca__linha {
+    grid-template-columns: auto minmax(0, 1fr);
+    column-gap: var(--espaco-7);
   }
-  /* A linha pontilhada de sumário entre o nome e o resto. */
-  .indice__link::after {
-    content: '';
-    grid-column: 2;
-    grid-row: 1;
-    align-self: end;
-    margin-bottom: 0.45em;
-    border-bottom: 2px dotted var(--cor-linha);
+  .indice-cabeca__titulo-bloco {
+    padding-left: var(--espaco-7);
+    border-left: 1px solid var(--cor-linha);
   }
-  .indice__especialidade { grid-column: 3; }
-  .indice__cidade { grid-column: 4; }
 }
 
-.indice__vazio, .indice__nenhum {
-  padding-block: var(--espaco-6);
+.empresa {
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: auto auto;
+  column-gap: var(--espaco-3);
+  align-items: center;
+  justify-content: start;
+}
+.empresa picture { grid-row: 1 / 3; }
+.empresa__marca { width: 3.5rem; height: auto; }
+.empresa__nome {
+  align-self: end;
   font-family: var(--fonte-titulo);
   font-size: var(--texto-destaque);
-  color: var(--cor-texto-suave);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
 }
-
-.indice-rodape {
-  padding-block: var(--espaco-6);
-  border-top: 1px solid var(--cor-texto);
+.empresa__lema {
+  align-self: start;
   font-size: var(--texto-meta);
   color: var(--cor-texto-suave);
 }
 
+.indice-cabeca__titulo {
+  font-size: var(--texto-secao);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+.indice-cabeca__descricao {
+  margin-top: var(--espaco-1);
+  max-width: 60ch;
+  font-size: var(--texto-apoio);
+  color: var(--cor-texto-suave);
+  line-height: 1.45;
+}
+
+/* ---------- Busca: filtra as duas colunas ---------- */
+.busca {
+  display: grid;
+  gap: var(--espaco-1);
+  margin-block: var(--espaco-6) var(--espaco-5);
+  max-width: 34rem;
+}
+.busca__rotulo { font-size: var(--texto-apoio); color: var(--cor-texto-suave); }
+.busca__campo {
+  min-height: var(--alvo-minimo);
+  padding: var(--espaco-2) var(--espaco-3);
+  border: 1px solid var(--cor-linha);
+  border-bottom: 2px solid var(--cor-texto);
+  background: var(--cor-superficie);
+  width: 100%;
+  font-size: var(--texto-corpo);
+}
+.busca__campo::placeholder { color: var(--cor-texto-suave); opacity: 0.8; }
+.busca__campo:focus-visible { outline-offset: 2px; }
+.busca__contagem { font-size: var(--texto-meta); color: var(--cor-texto-suave); min-height: 1.5em; }
+
+/* ---------- As duas colunas ---------- */
+.colunas {
+  display: grid;
+  gap: var(--espaco-8);
+  margin-block: var(--espaco-4) var(--espaco-9);
+}
+@media (min-width: 64rem) {
+  .colunas {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: var(--espaco-8);
+    align-items: start;
+  }
+}
+.coluna__titulo {
+  font-size: var(--texto-destaque);
+  font-weight: 700;
+}
+/* O traço laranja do logo, só decorativo. */
+.coluna__titulo::before {
+  content: '';
+  display: block;
+  width: 2.5rem;
+  height: 3px;
+  margin-bottom: var(--espaco-3);
+  background: var(--cor-laranja);
+}
+.coluna__nota {
+  margin-block: var(--espaco-2) var(--espaco-4);
+  font-size: var(--texto-meta);
+  color: var(--cor-texto-suave);
+}
+
+/* ---------- Tabela suave: só fios horizontais, nenhuma borda lateral ---------- */
+.tabela {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--texto-apoio);
+}
+.tabela thead th {
+  padding: var(--espaco-2) var(--espaco-3);
+  border-bottom: 1px solid var(--cor-texto);
+  font-size: var(--texto-meta);
+  font-weight: 600;
+  color: var(--cor-texto-suave);
+  text-align: start;
+}
+.tabela tbody th,
+.tabela td {
+  padding: var(--espaco-3);
+  border-bottom: 1px solid var(--cor-linha);
+  text-align: start;
+  vertical-align: top;
+  font-weight: 400;
+}
+.tabela td { color: var(--cor-texto-suave); }
+/* A linha inteira é o alvo do clique (≥ 44 px): o link do nome se estica sobre ela. */
+.tabela__linha { position: relative; }
+.tabela__linha:hover { background: var(--cor-superficie); }
+.tabela__nome {
+  font-family: var(--fonte-titulo);
+  font-weight: 600;
+  line-height: 1.3;
+  text-decoration: none;
+}
+.tabela__nome::after { content: ''; position: absolute; inset: 0; }
+.tabela__linha:hover .tabela__nome { color: var(--cor-marca); text-decoration: underline; }
+.tabela__etiqueta {
+  display: table;
+  margin-top: var(--espaco-2);
+  padding: 0 var(--espaco-2);
+  border: 1px solid var(--cor-linha);
+  font-size: var(--texto-meta);
+  color: var(--cor-texto-suave);
+}
+.tabela__vazio td,
+.tabela__nenhum td {
+  padding-block: var(--espaco-5);
+  font-style: italic;
+}
+
+/* No celular a linha vira um bloco: o nome em cima, área e cidade embaixo, e o cabeçalho da tabela some. */
+@media (max-width: 39.99rem) {
+  .tabela thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+  }
+  .tabela tr { display: grid; grid-template-columns: minmax(0, 1fr) auto; border-bottom: 1px solid var(--cor-linha); }
+  /* O display: grid acima venceria o atributo hidden — sem isto, a busca não esconderia nada no celular. */
+  .tabela tr[hidden] { display: none; }
+  .tabela tbody th { grid-column: 1 / -1; border-bottom: 0; padding-bottom: 0; }
+  .tabela td { border-bottom: 0; padding-top: var(--espaco-1); }
+  .tabela__vazio td, .tabela__nenhum td { grid-column: 1 / -1; }
+}
+
+.indice-rodape {
+  padding-block: var(--espaco-6);
+  border-top: 1px solid var(--cor-linha);
+  font-size: var(--texto-meta);
+  color: var(--cor-texto-suave);
+}
+
+/* 404 e redirecionamento (modelos da construção) usam o mesmo arquivo. */
 .pagina-simples {
   display: grid;
   place-content: center;
@@ -121,16 +214,4 @@
   text-align: center;
   padding: var(--margem-lateral);
 }
-.pagina-simples h1 { font-size: var(--texto-titulo); font-weight: 380; }
-
-/* Demonstrações e propostas (ADR-004, ADR-005): à parte da lista, com etiqueta — nunca passam por página oficial. */
-.exemplos { margin-top: var(--espaco-8); }
-.exemplos__titulo { font-size: var(--texto-secao); font-weight: 400; }
-.exemplos__nota { max-width: var(--medida); margin-block: var(--espaco-3) var(--espaco-5); color: var(--cor-texto-suave); }
-.indice__etiqueta {
-  justify-self: start;
-  padding: 0 var(--espaco-2);
-  border: 1px solid var(--cor-texto-suave);
-  font-size: var(--texto-meta);
-  color: var(--cor-texto-suave);
-}
+.pagina-simples h1 { font-size: var(--texto-titulo); font-weight: 600; }

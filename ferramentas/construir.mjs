@@ -10,21 +10,22 @@ import {
   readFile, writeFile, mkdir, cp, rm, existsSync, path,
 } from './lib/arquivos.mjs';
 import {
-  validarPagina, nomeDeExibicao, assuntoDaPagina, ehAdvocacia, ehDemonstracao, ehProposta, soPorLinkDireto,
-  FORMATO_SLUG,
+  validarPagina, nomeDeExibicao, assuntoDaPagina, ehAdvocacia, ehNegocio, ehDemonstracao, ehProposta,
+  soPorLinkDireto, FORMATO_SLUG,
 } from './lib/pagina.mjs';
 import { cabecalhoDaPagina, cabecalhoDoIndice, urlDaPagina } from './lib/seo.mjs';
 import { escaparHtml } from './lib/html.mjs';
 import { createHash } from 'node:crypto';
 
 const MARCADOR_CABECALHO = '<!-- @gerado:cabecalho -->';
-const MARCADOR_LISTA = '<!-- @gerado:lista -->';
-const MARCADOR_EXEMPLOS = '<!-- @gerado:exemplos -->';
+const MARCADOR_DEMONSTRACOES = '<!-- @gerado:demonstracoes -->';
+const MARCADOR_CLIENTES = '<!-- @gerado:clientes -->';
 const incluirRascunhos = process.argv.includes('--rascunhos');
 
 async function construir() {
   const config = await lerJson(path.join(RAIZ, 'site.config.json'));
   if (!config.urlBase?.endsWith('/')) throw new Error('site.config.json: urlBase precisa terminar em "/"');
+  if (!config.indice?.empresa) throw new Error('site.config.json: indice.empresa ausente — quem assina o índice (D-02, ADR-007)');
 
   await rm(PASTA_SAIDA, { recursive: true, force: true });
   await mkdir(PASTA_SAIDA, { recursive: true });
@@ -40,11 +41,15 @@ async function construir() {
   erros.push(...(await gerarRedirecionamentos(config, publicadas)));
   if (erros.length) return falhar(erros);
 
-  // Demonstração e proposta ficam fora do sitemap e da lista principal (ADR-004, ADR-005). Com
-  // indice.mostrarDemonstracoes, o índice as mostra numa seção à parte, etiquetadas — continuam noindex.
+  // Demonstração e proposta ficam fora do sitemap (ADR-004, ADR-005). O índice tem duas colunas (ADR-007):
+  // demonstrações, e produtos dos clientes — onde a proposta entra etiquetada, porque o cliente é real. Com
+  // indice.mostrarDemonstracoes false, demonstração e proposta só abrem pelo link direto.
   const listaveis = publicadas.filter((p) => !soPorLinkDireto(p));
   const exemplos = config.indice.mostrarDemonstracoes ? publicadas.filter((p) => p.publicar && soPorLinkDireto(p)) : [];
-  await gerarIndice(config, listaveis, exemplos);
+  await gerarIndice(config, {
+    demonstracoes: exemplos.filter(ehDemonstracao),
+    clientes: [...listaveis, ...exemplos.filter(ehProposta)],
+  });
   await copiarModelo('404.html', '404.html', config);
   await writeFile(path.join(PASTA_SAIDA, 'sitemap.xml'), sitemap(config, listaveis.filter((p) => p.publicar)));
   await writeFile(path.join(PASTA_SAIDA, 'robots.txt'),
@@ -93,43 +98,38 @@ async function versaoDoArquivo(caminho) {
   return createHash('sha256').update(await readFile(caminho)).digest('hex').slice(0, 8);
 }
 
-async function gerarIndice(config, paginas, exemplos = []) {
+async function gerarIndice(config, { demonstracoes, clientes }) {
   const emOrdem = (lista) => [...lista].sort((a, b) => nomeDeExibicao(a).localeCompare(nomeDeExibicao(b), 'pt-BR'));
-  const lista = emOrdem(paginas).map((pagina) => itemDoIndice(pagina)).join('') || `
-        <li class="indice__vazio">Nenhuma página de cliente publicada ainda.</li>`;
-  const secaoExemplos = exemplos.length ? `
-      <section class="exemplos" aria-labelledby="titulo-exemplos">
-        <h2 id="titulo-exemplos" class="exemplos__titulo">Demonstrações e propostas</h2>
-        <p class="exemplos__nota">Modelos do nosso trabalho, fora do Google. A demonstração apresenta um médico ou um escritório fictício; a proposta é o novo site de um negócio real, ainda em avaliação pelo dono.</p>
-        <ol class="indice" role="list">${emOrdem(exemplos).map((pagina) => itemDoIndice(pagina)).join('')}
-        </ol>
-      </section>` : '';
+  const linhas = (lista, vazio) => emOrdem(lista).map(linhaDoIndice).join('') || `
+              <tr class="tabela__vazio"><td colspan="3">${vazio}</td></tr>`;
+  const { indice } = config;
   const modelo = await readFile(path.join(PASTA_MODELOS, 'indice.html'), 'utf8');
   await writeFile(path.join(PASTA_SAIDA, 'index.html'), modelo
-    .replace(MARCADOR_CABECALHO, cabecalhoDoIndice(config))
-    .replace(MARCADOR_LISTA, lista)
-    .replace(MARCADOR_EXEMPLOS, secaoExemplos)
-    .replaceAll('{{TITULO}}', escaparHtml(config.indice.titulo))
-    .replaceAll('{{DESCRICAO}}', escaparHtml(config.indice.descricao))
-    .replaceAll('{{QUANTIDADE}}', String(paginas.length)));
+    .replace(MARCADOR_CABECALHO, cabecalhoDoIndice(config, {
+      versaoImagem: await versaoDoArquivo(path.join(PASTA_SITE, indice.imagemSocial ?? '')),
+    }))
+    .replace(MARCADOR_DEMONSTRACOES, linhas(demonstracoes, 'Nenhuma demonstração publicada.'))
+    .replace(MARCADOR_CLIENTES, linhas(clientes, 'Nenhum produto de cliente publicado ainda.'))
+    .replaceAll('{{TITULO}}', escaparHtml(indice.titulo))
+    .replaceAll('{{DESCRICAO}}', escaparHtml(indice.descricao))
+    .replaceAll('{{EMPRESA}}', escaparHtml(indice.empresa))
+    .replaceAll('{{LEMA}}', escaparHtml(indice.lema ?? '')));
 }
 
-/** Um item do índice; demonstração e proposta levam etiqueta. */
-function itemDoIndice(pagina) {
+/** Uma linha de tabela do índice; demonstração e proposta levam etiqueta sob o nome. */
+function linhaDoIndice(pagina) {
   const assunto = assuntoDaPagina(pagina);
   const lugar = [pagina.cidade, pagina.uf].filter(Boolean).join(', ');
-  const ficticio = ehAdvocacia(pagina) ? 'escritório fictício' : 'médico fictício';
+  const ficticio = ehAdvocacia(pagina) ? 'escritório fictício' : ehNegocio(pagina) ? 'empresa fictícia' : 'médico fictício';
   const etiqueta = ehDemonstracao(pagina) ? `Demonstração · ${ficticio}` : ehProposta(pagina) ? 'Proposta · em avaliação' : '';
   const busca = [nomeDeExibicao(pagina), assunto, lugar, etiqueta].join(' ');
   return `
-        <li class="indice__item" data-busca="${escaparHtml(busca)}">
-          <a class="indice__link" href="${escaparHtml(pagina.slug)}/">
-            <span class="indice__nome">${escaparHtml(nomeDeExibicao(pagina))}</span>
-            <span class="indice__especialidade">${escaparHtml(assunto || 'Clínica')}</span>
-            <span class="indice__cidade">${escaparHtml(lugar)}</span>${etiqueta ? `
-            <span class="indice__etiqueta">${escaparHtml(etiqueta)}</span>` : ''}
-          </a>
-        </li>`;
+              <tr class="tabela__linha" data-busca="${escaparHtml(busca)}">
+                <th scope="row"><a class="tabela__nome" href="${escaparHtml(pagina.slug)}/">${escaparHtml(nomeDeExibicao(pagina))}</a>${etiqueta ? `
+                  <span class="tabela__etiqueta">${escaparHtml(etiqueta)}</span>` : ''}</th>
+                <td>${escaparHtml(assunto || '—')}</td>
+                <td>${escaparHtml(lugar || '—')}</td>
+              </tr>`;
 }
 
 /** Slug é permanente (regra 7): o antigo vira uma página que leva ao novo. */

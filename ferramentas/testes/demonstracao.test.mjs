@@ -71,11 +71,19 @@ test('passa: demonstração publicada sem CRM conferido nem aprovação, com avi
   assert.match(pagina, /<meta property="og:image" content="[^"]*imagens\/social\.jpg\?v=[0-9a-f]{8}">/);
   assert.match(pagina, /<meta property="og:image:alt" content="Demonstração: /);
   assert.doesNotMatch(await readFile(path.join(raiz, '_site', 'sitemap.xml'), 'utf8'), new RegExp(SLUG));
-  // No índice, só na seção "Demonstrações e propostas", etiquetada (ADR-005; o site.config.json liga a seção).
+  // No índice, só na coluna "Demonstrações", etiquetada — nunca em "Produtos dos clientes" (ADR-007).
   const indice = await readFile(path.join(raiz, '_site', 'index.html'), 'utf8');
-  const listaPrincipal = indice.slice(0, indice.indexOf('class="exemplos"'));
-  assert.doesNotMatch(listaPrincipal, new RegExp(SLUG));
-  assert.match(indice, /Demonstração · médico fictício/);
+  const [demonstracoes, clientes] = indice.split('id="titulo-clientes"');
+  assert.match(demonstracoes, new RegExp(`href="${SLUG}/"`));
+  assert.doesNotMatch(clientes, new RegExp(SLUG));
+  assert.match(demonstracoes, /Demonstração · médico fictício/);
+  // Quem assina o índice é a empresa; a página do cliente não leva o nome dela na prévia.
+  assert.match(indice, /<meta property="og:site_name" content="[^"]+">/);
+  // O índice tem prévia de link própria: imagem 1200 × 630 com versão, e a empresa nos dados estruturados.
+  assert.match(indice, /<meta property="og:image" content="[^"]*assets\/imagens\/social-indice\.jpg\?v=[0-9a-f]{8}">/);
+  assert.match(indice, /<meta name="twitter:card" content="summary_large_image">/);
+  assert.match(indice, /"@type":"Organization"/);
+  assert.doesNotMatch(pagina, /og:site_name/);
 }));
 
 test('reprova: demonstração sem o aviso no topo', () => comSite({ html: indexHtml({ comAviso: false }) }, (resultado) => {
@@ -156,6 +164,10 @@ test('passa: proposta de negócio sem CRM, com aviso — noindex e fora do sitem
     assert.match(pagina, /<meta name="robots" content="noindex, nofollow">/);
     assert.match(pagina, /"@type":"ProfessionalService"/);
     assert.doesNotMatch(await readFile(path.join(raiz, '_site', 'sitemap.xml'), 'utf8'), new RegExp(SLUG));
+    // A proposta é de um cliente real: entra na coluna "Produtos dos clientes", etiquetada (ADR-007).
+    const [demonstracoes, clientes] = (await readFile(path.join(raiz, '_site', 'index.html'), 'utf8')).split('id="titulo-clientes"');
+    assert.doesNotMatch(demonstracoes, new RegExp(`href="${SLUG}/"`));
+    assert.match(clientes, /Proposta · em avaliação/);
   },
 ));
 

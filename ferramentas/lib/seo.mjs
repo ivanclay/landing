@@ -18,23 +18,9 @@ export function cabecalhoDaPagina(pagina, config, { rascunho = false, versaoImag
     `<meta property="og:type" content="website">`,
     `<meta property="og:locale" content="pt_BR">`,
   ];
-  // O título do índice ("Médicos", D-02) só nomeia página de médico; num escritório ou negócio, a prévia
-  // do link mostraria "Médicos" (B-07, ADR-006).
-  if (config.indice?.titulo && !ehNegocio(pagina) && !ehAdvocacia(pagina)) linhas.push(`<meta property="og:site_name" content="${escaparHtml(config.indice.titulo)}">`);
+  // Sem og:site_name: a página é do cliente, não da empresa que assina o índice (B-07, ADR-007).
   if (pagina.imagemSocial) {
-    // WhatsApp, Facebook, LinkedIn e X leem estas tags. A imagem social sai sempre em 1200 × 630 JPEG
-    // (otimizar-imagens.mjs --social); declarar o tamanho deixa a prévia aparecer já no primeiro compartilhamento.
-    // A versão (hash do arquivo) muda o endereço quando a imagem muda: WhatsApp e Facebook guardam a prévia
-    // pelo endereço da imagem e não buscam de novo um endereço que já conhecem.
-    const imagem = escaparHtml(enderecoDaImagemSocial(pagina, url, versaoImagem));
-    linhas.push(`<meta property="og:image" content="${imagem}">`);
-    linhas.push(`<meta property="og:image:secure_url" content="${imagem}">`);
-    linhas.push('<meta property="og:image:type" content="image/jpeg">');
-    linhas.push('<meta property="og:image:width" content="1200">');
-    linhas.push('<meta property="og:image:height" content="630">');
-    linhas.push(`<meta property="og:image:alt" content="${escaparHtml(textoDaImagemSocial(pagina))}">`);
-    linhas.push('<meta name="twitter:card" content="summary_large_image">');
-    linhas.push(`<meta name="twitter:image" content="${imagem}">`);
+    linhas.push(...tagsDaImagemSocial(enderecoDaImagemSocial(pagina.imagemSocial, url, versaoImagem), textoDaImagemSocial(pagina)));
   }
   // Rascunho, demonstração e proposta nunca vão para o Google — as duas últimas nem publicadas (ADR-004, ADR-005).
   if (rascunho || soPorLinkDireto(pagina)) linhas.push('<meta name="robots" content="noindex, nofollow">');
@@ -42,9 +28,29 @@ export function cabecalhoDaPagina(pagina, config, { rascunho = false, versaoImag
   return linhas.join('\n    ');
 }
 
+/**
+ * As tags que WhatsApp, Facebook, LinkedIn e X leem para a prévia do link. A imagem social sai sempre em
+ * 1200 × 630 JPEG (otimizar-imagens.mjs --social); declarar o tamanho deixa a prévia aparecer já no primeiro
+ * compartilhamento. `endereco` já vem com a versão (hash do arquivo): WhatsApp e Facebook guardam a prévia
+ * pelo endereço da imagem e não buscam de novo um endereço que já conhecem.
+ */
+function tagsDaImagemSocial(endereco, alt) {
+  const imagem = escaparHtml(endereco);
+  return [
+    `<meta property="og:image" content="${imagem}">`,
+    `<meta property="og:image:secure_url" content="${imagem}">`,
+    '<meta property="og:image:type" content="image/jpeg">',
+    '<meta property="og:image:width" content="1200">',
+    '<meta property="og:image:height" content="630">',
+    `<meta property="og:image:alt" content="${escaparHtml(alt)}">`,
+    '<meta name="twitter:card" content="summary_large_image">',
+    `<meta name="twitter:image" content="${imagem}">`,
+  ];
+}
+
 /** URL absoluta da imagem social, com ?v=<hash> quando a construção sabe a versão do arquivo. */
-function enderecoDaImagemSocial(pagina, url, versaoImagem) {
-  const endereco = new URL(pagina.imagemSocial, url);
+function enderecoDaImagemSocial(caminho, url, versaoImagem) {
+  const endereco = new URL(caminho, url);
   if (versaoImagem) endereco.searchParams.set('v', versaoImagem);
   return endereco.href;
 }
@@ -81,7 +87,7 @@ export function dadosEstruturados(pagina, url, versaoImagem = '') {
     })),
   };
   if (contato.telefone || contato.whatsapp) dados.telephone = contato.telefone ?? contato.whatsapp;
-  if (pagina.imagemSocial) dados.image = enderecoDaImagemSocial(pagina, url, versaoImagem);
+  if (pagina.imagemSocial) dados.image = enderecoDaImagemSocial(pagina.imagemSocial, url, versaoImagem);
   if (principal?.endereco) dados.address = endereco(principal.endereco);
   const hospitais = locais.filter((local) => local.tipo === 'hospital');
   if (hospitais.length) {
@@ -107,7 +113,7 @@ function dadosDoNegocio(pagina, url, versaoImagem) {
   };
   if (organizacao.slogan) dados.slogan = organizacao.slogan;
   if (contato.telefone || contato.whatsapp) dados.telephone = contato.telefone ?? contato.whatsapp;
-  if (pagina.imagemSocial) dados.image = enderecoDaImagemSocial(pagina, url, versaoImagem);
+  if (pagina.imagemSocial) dados.image = enderecoDaImagemSocial(pagina.imagemSocial, url, versaoImagem);
   if (organizacao.logo) dados.logo = new URL(organizacao.logo, url).href;
   if (organizacao.areaAtendida) dados.areaServed = organizacao.areaAtendida;
   if (organizacao.temas?.length) dados.knowsAbout = organizacao.temas;
@@ -148,7 +154,7 @@ function dadosDaAdvocacia(pagina, url, versaoImagem) {
   };
   if (contato.telefone || contato.whatsapp) dados.telephone = contato.telefone ?? contato.whatsapp;
   if (contato.email) dados.email = contato.email;
-  if (pagina.imagemSocial) dados.image = enderecoDaImagemSocial(pagina, url, versaoImagem);
+  if (pagina.imagemSocial) dados.image = enderecoDaImagemSocial(pagina.imagemSocial, url, versaoImagem);
   if (sociedade.areas?.length) dados.knowsAbout = sociedade.areas;
   const escritorios = (sociedade.escritorios ?? []).map((escritorio) => endereco(escritorio));
   if (escritorios.length) dados.address = escritorios.length === 1 ? escritorios[0] : escritorios;
@@ -167,14 +173,24 @@ function dadosDaAdvocacia(pagina, url, versaoImagem) {
   return dados;
 }
 
-/** O bloco do índice. */
-export function cabecalhoDoIndice(config) {
+/** O bloco do índice: a prévia de link da empresa que assina o índice (ADR-007). */
+export function cabecalhoDoIndice(config, { versaoImagem = '' } = {}) {
+  const { indice, urlBase } = config;
   const linhas = [
     `<link rel="canonical" href="${escaparHtml(config.urlBase)}">`,
     `<meta property="og:url" content="${escaparHtml(config.urlBase)}">`,
     `<meta property="og:type" content="website">`,
     `<meta property="og:locale" content="pt_BR">`,
+    `<meta property="og:site_name" content="${escaparHtml(indice.empresa)}">`,
   ];
+  if (indice.imagemSocial) {
+    const imagem = enderecoDaImagemSocial(indice.imagemSocial, urlBase, versaoImagem);
+    linhas.push(...tagsDaImagemSocial(imagem, `${indice.empresa} — ${indice.titulo}`));
+  }
+  const empresa = { '@context': 'https://schema.org', '@type': 'Organization', name: indice.empresa, url: urlBase };
+  if (indice.lema) empresa.slogan = indice.lema;
+  if (indice.marca) empresa.logo = new URL(indice.marca, urlBase).href;
+  linhas.push(`<script type="application/ld+json">${JSON.stringify(empresa)}</script>`);
   if (!config.indice.indexavel) linhas.push('<meta name="robots" content="noindex, follow">');
   // Verificação do Search Console por meta tag na página inicial da propriedade (seo-local-landing).
   if (config.verificacaoGoogle) linhas.push(`<meta name="google-site-verification" content="${escaparHtml(config.verificacaoGoogle)}">`);

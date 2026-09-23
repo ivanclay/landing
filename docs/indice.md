@@ -10,6 +10,11 @@
 
 **Pausado em 2026-09-22.** Checkpoints: [dr-paulo-de-tarso](paginas/dr-paulo-de-tarso/checkpoint.md) · [hub-saude-negocios](paginas/hub-saude-negocios/checkpoint.md). Pendências do dono: trocar Settings › Pages › Source para "GitHub Actions"; respostas da Carla (B-06).
 
+## Índice na raiz
+
+"Soluções", da **Fábrica de Apps e Soluções** ([ADR-007](decisoes/adr/ADR-007-indice-da-fabrica.md)): duas colunas —
+demonstrações e produtos dos clientes — com busca nas duas e prévia de link própria.
+
 ## Páginas
 
 Estado: `rascunho` · `aguardando médico` · `publicada` · `redirecionada` · `fora do ar`.

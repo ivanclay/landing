@@ -1,7 +1,8 @@
 # Landing
 
-> Landing pages de médicos, uma por endereço (`/drjoao/`, `/drapaula/`), com um índice na raiz.
-> **Estáticas, sem terceiros, sem coleta de dado** — e nenhuma vai ao ar sem a aprovação do médico.
+> Páginas da **Fábrica de Apps e Soluções** — médicos, escritórios de advocacia, empresas —, uma por endereço
+> (`/drjoao/`, `/arruda-seixas/`), com o índice "Soluções" na raiz.
+> **Estáticas, sem terceiros, sem coleta de dado** — e nenhuma vai ao ar sem a aprovação do cliente.
 
 | Campo | Valor |
 |---|---|

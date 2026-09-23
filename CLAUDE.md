@@ -231,7 +231,7 @@ a **OAB** no lugar do CFM — inscrição na OAB em vez de CRM/RQE (`data-identi
 | ID | Decisão | Quando precisa estar fechada |
 |---|---|---|
 | D-01 | **Domínio.** Hoje `ivanclay.github.io/landing/<slug>/`. Para `/<slug>` na raiz (como no pedido: "/drjoao"), é preciso **domínio próprio** (`CNAME` no Pages) — ou mover para o repositório `ivanclay.github.io`, que é o site **de usuário** e já serve `/privacidade/`. ⚠️ Decidir **antes do primeiro QR impresso**: o endereço vira permanente (regra 7). Trocar depois exige redirecionar cada página | Antes da primeira página publicada |
-| D-02 | **Quem assina o índice** e se ele é público/indexável (`site.config.json › indice`). Hoje: "Médicos", indexável, sem marca | Antes da primeira página publicada |
+| ~~D-02~~ | **Fechada em 2026-09-23 (ADR-007):** o índice é a vitrine da **Fábrica de Apps e Soluções** — título "Soluções", indexável, duas colunas (demonstrações · produtos dos clientes) | — |
 | D-03 | **Aviso de privacidade**: basta a frase do rodapé ("não usa cookies nem coleta dados") enquanto `rastreamento = OFF`? Proposta: sim; página própria só se a regra 6 mudar | Com a D-01 |
 | D-04 | **Depoimentos de pacientes**: fora por padrão. Entrar exige autorização escrita do paciente, nenhum dado de saúde identificável, nenhuma promessa implícita e a conferência CFM da frase | Quando um médico pedir |
 | D-05 | **Valor da consulta** na página: permitido (art. 9º, VI); entra só se o médico pedir, com "valor vigente em <data>" | Quando um médico pedir |

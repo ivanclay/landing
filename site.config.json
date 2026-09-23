@@ -1,10 +1,14 @@
 {
   "urlBase": "https://ivanclay.github.io/landing/",
   "indice": {
-    "titulo": "Médicos",
-    "descricao": "As páginas dos médicos que atendemos: onde atendem, por quais convênios e como marcar a consulta.",
+    "titulo": "Soluções",
+    "empresa": "Fábrica de Apps e Soluções",
+    "lema": "Aplicativos · Sistemas · Integração IA",
+    "descricao": "Páginas, sites e sistemas feitos pela Fábrica de Apps e Soluções: as demonstrações e os produtos dos nossos clientes.",
     "indexavel": true,
-    "mostrarDemonstracoes": true
+    "mostrarDemonstracoes": true,
+    "imagemSocial": "assets/imagens/social-indice.jpg",
+    "marca": "assets/imagens/marca-fabrica.png"
   },
   "redirecionamentos": {},
   "verificacaoGoogle": ""

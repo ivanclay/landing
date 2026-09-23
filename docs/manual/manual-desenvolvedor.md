@@ -93,10 +93,15 @@ exige `sociedade.nome`, `sociedade.razaoSocial` (com "Advogados"), `sociedade.re
 `socioAdministrador: true`, `cidade` e `uf`. Opcionais: `sociedade.categoria`, `areas[]`, `escritorios[]`,
 `contato.email`. Publicar exige `revisao.oabConferidaEm`, `conferenciaOabEm` e `aprovadoPeloEscritorioEm`;
 com `"demonstracao": true`, só `conferenciaOabEm`, e o aviso tem texto próprio. JSON-LD `LegalService`;
-sem `og:site_name` (o título do índice é "Médicos"). O piso de termos é `termos-vedados-oab.json`.
+sem `og:site_name` (nenhuma página de cliente leva — ADR-007). O piso de termos é `termos-vedados-oab.json`.
 
-**Índice:** `site.config.json › indice.mostrarDemonstracoes` mostra demonstrações e propostas numa seção
-à parte da raiz, etiquetadas (continuam fora do Google e do sitemap).
+**Índice** ([ADR-007](../decisoes/adr/ADR-007-indice-da-fabrica.md)): `ferramentas/modelos/indice.html`, com os
+marcadores `<!-- @gerado:demonstracoes -->` e `<!-- @gerado:clientes -->` (uma linha de `<table>` por página,
+`linhaDoIndice()` em `construir.mjs`). `site.config.json › indice`: `titulo`, `descricao`, `empresa`
+(obrigatório), `lema`, `marca`, `imagemSocial` (1200×630, `npm run imagens … --social`), `indexavel`,
+`mostrarDemonstracoes` (false tira demonstrações e propostas do índice). A busca (`assets/js/indice.js`) filtra
+todo `[data-busca]` dentro de cada `[data-busca-grupo]`. O cabeçalho do índice (`cabecalhoDoIndice()`) tem
+`og:site_name`, a imagem social com versão, `twitter:card` e JSON-LD `Organization`.
 
 **Campos opcionais, usados pelo JSON-LD:** `locais[]` (`nome`, `tipo`, `endereco`), `convenios[]`,
 `redes{}`, `imagemSocial`.

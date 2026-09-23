@@ -3,13 +3,14 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{TITULO}}</title>
+    <title>{{TITULO}} — {{EMPRESA}}</title>
     <meta name="description" content="{{DESCRICAO}}">
-    <meta property="og:title" content="{{TITULO}}">
+    <meta property="og:title" content="{{TITULO}} — {{EMPRESA}}">
     <meta property="og:description" content="{{DESCRICAO}}">
+    <link rel="icon" href="assets/imagens/marca-fabrica.png" type="image/png">
     <!-- @gerado:cabecalho -->
-    <link rel="preload" href="assets/fontes/newsreader/newsreader-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="stylesheet" href="assets/fontes/newsreader/fonte.css">
+    <link rel="preload" href="assets/fontes/montserrat/montserrat-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="assets/fontes/montserrat/fonte.css">
     <link rel="stylesheet" href="assets/fontes/atkinson-hyperlegible-next/fonte.css">
     <link rel="stylesheet" href="assets/css/base.css">
     <link rel="stylesheet" href="assets/css/componentes.css">
@@ -19,26 +20,59 @@
   <body>
     <a class="pular-para-conteudo" href="#lista">Ir para a lista</a>
     <header class="indice-cabeca">
-      <div class="conteudo">
-        <h1 class="indice-cabeca__titulo">{{TITULO}}</h1>
-        <p class="indice-cabeca__descricao">{{DESCRICAO}}</p>
+      <div class="conteudo indice-cabeca__linha">
+        <p class="empresa">
+          <picture>
+            <source type="image/webp" srcset="assets/imagens/marca-fabrica.webp">
+            <img class="empresa__marca" src="assets/imagens/marca-fabrica.png" width="186" height="192" alt="">
+          </picture>
+          <span class="empresa__nome">{{EMPRESA}}</span>
+          <span class="empresa__lema">{{LEMA}}</span>
+        </p>
+        <div class="indice-cabeca__titulo-bloco">
+          <h1 class="indice-cabeca__titulo">{{TITULO}}</h1>
+          <p class="indice-cabeca__descricao">{{DESCRICAO}}</p>
+        </div>
       </div>
     </header>
     <main class="conteudo" id="lista">
       <div class="busca so-com-js">
-        <label class="busca__rotulo" for="busca">Procure por nome, especialidade ou cidade</label>
-        <input class="busca__campo" id="busca" type="search" autocomplete="off" spellcheck="false" placeholder="cardiologia, Salvador…" data-busca-campo>
+        <label class="busca__rotulo" for="busca">Procure por nome, área ou cidade</label>
+        <input class="busca__campo" id="busca" type="search" autocomplete="off" spellcheck="false" placeholder="advocacia, cardiologia, São Paulo…" data-busca-campo>
         <p class="busca__contagem" aria-live="polite" data-busca-contagem></p>
       </div>
-      <ol class="indice" role="list">
-        <!-- @gerado:lista -->
-        <li class="indice__nenhum" data-busca-nenhum hidden>Nenhuma página com esse nome, especialidade ou cidade.</li>
-      </ol>
-      <!-- @gerado:exemplos -->
+      <div class="colunas">
+        <section class="coluna" aria-labelledby="titulo-demonstracoes" data-busca-grupo>
+          <h2 class="coluna__titulo" id="titulo-demonstracoes">Demonstrações</h2>
+          <p class="coluna__nota">Modelos do nosso trabalho, com pessoas e empresas fictícias. Fora do Google.</p>
+          <table class="tabela">
+            <thead>
+              <tr><th scope="col">Nome</th><th scope="col">Área</th><th scope="col">Cidade</th></tr>
+            </thead>
+            <tbody>
+              <!-- @gerado:demonstracoes -->
+              <tr class="tabela__nenhum" data-busca-nenhum hidden><td colspan="3">Nenhuma demonstração com esse nome, área ou cidade.</td></tr>
+            </tbody>
+          </table>
+        </section>
+        <section class="coluna" aria-labelledby="titulo-clientes" data-busca-grupo>
+          <h2 class="coluna__titulo" id="titulo-clientes">Produtos dos clientes</h2>
+          <p class="coluna__nota">Páginas e sites de clientes reais. Proposta é o site ainda em avaliação pelo cliente.</p>
+          <table class="tabela">
+            <thead>
+              <tr><th scope="col">Nome</th><th scope="col">Área</th><th scope="col">Cidade</th></tr>
+            </thead>
+            <tbody>
+              <!-- @gerado:clientes -->
+              <tr class="tabela__nenhum" data-busca-nenhum hidden><td colspan="3">Nenhum produto com esse nome, área ou cidade.</td></tr>
+            </tbody>
+          </table>
+        </section>
+      </div>
     </main>
     <footer class="indice-rodape">
       <div class="conteudo">
-        <p>Cada página é mantida com o médico que ela apresenta e só vai ao ar com a aprovação dele.</p>
+        <p>Cada página de cliente é mantida com quem ela apresenta e só vai ao ar com a aprovação dele. © {{EMPRESA}}</p>
       </div>
     </footer>
   </body>
