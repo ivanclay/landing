@@ -476,19 +476,36 @@
 }
 .fecho__acoes { display: flex; flex-wrap: wrap; gap: var(--espaco-3); margin-top: var(--espaco-6); }
 
-/* ---------- Impressão: só a lista do que levar, com a identificação ---------- */
+/* ---------- Impressão: uma folha só com a lista do que levar ---------- */
+.levar__impresso { display: none; }
+
 @media print {
-  .aviso-demonstracao,
-  .cabeca,
-  .abertura,
-  .marcas,
-  .planos,
-  main > section:not(#o-que-levar),
-  .levar__acoes,
-  .barra-contato,
-  .rodape-legal p:not(.identificacao-cfm) { display: none !important; }
-  .secao--pedra { background: none; }
-  body { padding-bottom: 0; }
+  @page { size: A4; margin: 18mm 16mm; }
+  /* Some tudo o que é do site; fica a seção da lista, sem fundo nem grade. */
+  body > :not(main),
+  main > :not(#o-que-levar),
+  .levar__acoes { display: none !important; }
+  body { padding-bottom: 0; background: none; font-size: 11.5pt; }
+  #o-que-levar { padding: 0; background: none; }
+  #o-que-levar .conteudo { width: auto; margin: 0; display: block; }
+  #o-que-levar .secao__titulo { position: static; padding: 0; font-size: 24pt; }
+  .levar__impresso {
+    display: block;
+    margin: 4mm 0 8mm;
+    padding-bottom: 4mm;
+    border-bottom: 1px solid currentColor;
+    font-size: 10pt;
+    line-height: 1.5;
+  }
+  .levar__impresso small { font-size: 8.5pt; }
+  .secao__corpo { max-width: none; }
+  .levar__lista li {
+    padding-block: 3.2mm;
+    padding-inline-start: 11mm;
+    break-inside: avoid;
+  }
+  .levar__lista li:first-child { border-top: 0; }
+  .levar__lista li::before { width: 5mm; height: 5mm; top: 3.4mm; border-width: 1.2pt; }
 }
 
 /* O fecho abre com a cidade de ponta a ponta; o convite vem logo abaixo, na grade. */
