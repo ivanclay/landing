@@ -42,8 +42,8 @@
         <div class="conteudo folha">
           <p class="folha__margem abertura__paragrafo" aria-hidden="true">§</p>
           <div class="folha__corpo abertura__corpo">
-            <h1 id="titulo-principal" class="abertura__nome">Arruda Seixas <span class="abertura__advogados">Advogados</span></h1>
-            <div class="abertura__lado">
+            <div class="abertura__texto">
+              <h1 id="titulo-principal" class="abertura__nome">Arruda Seixas <span class="abertura__advogados">Advogados</span></h1>
               <p class="abertura__apoio">Advocacia empresarial, consultiva e contenciosa, em São Paulo, no Rio de Janeiro e em Brasília. Dez áreas de atuação, cada uma conduzida por um sócio que responde pelo trabalho.</p>
               <p class="abertura__acoes" data-contato-topo>
                 <a class="botao botao--principal" href="tel:+551130000000">Ligar (11) 3000-0000</a>
@@ -51,6 +51,14 @@
               </p>
               <p class="abertura__registro">Sociedade de advogados · OAB/SP 00.000 · OAB/RJ 00.000 · OAB/DF 00.000</p>
             </div>
+            <figure class="abertura__imagem ilustrativa">
+              <picture>
+                <source type="image/avif" srcset="imagens/predio-480.avif 480w, imagens/predio-800.avif 800w, imagens/predio-1000.avif 1000w" sizes="(min-width: 60rem) 32vw, 100vw">
+                <source type="image/webp" srcset="imagens/predio-480.webp 480w, imagens/predio-800.webp 800w, imagens/predio-1000.webp 1000w" sizes="(min-width: 60rem) 32vw, 100vw">
+                <img src="imagens/predio-800.jpg" srcset="imagens/predio-480.jpg 480w, imagens/predio-800.jpg 800w, imagens/predio-1000.jpg 1000w" sizes="(min-width: 60rem) 32vw, 100vw" width="1000" height="1250" alt="Prédio de escritórios visto de baixo, em preto e branco: lajes brancas em balanço, uma sobre a outra, com janelas de persiana" fetchpriority="high" decoding="async">
+              </picture>
+              <figcaption>Imagem ilustrativa</figcaption>
+            </figure>
             <nav class="sumario" aria-label="Áreas de atuação">
               <ul role="list">
                 <li><a href="#area-societario">Societário e Fusões e Aquisições</a></li>
@@ -284,59 +292,149 @@
         </div>
       </section>
 
-      <section class="secao" id="socios" aria-labelledby="titulo-socios">
+      <section class="secao secao--socios" id="socios" aria-labelledby="titulo-socios">
         <div class="conteudo folha">
           <h2 id="titulo-socios" class="folha__margem rubrica">Sócios</h2>
           <div class="folha__corpo">
             <ul class="socios" role="list">
               <li class="socio">
+                <figure class="socio__retrato ilustrativa">
+                  <picture>
+                    <source type="image/avif" srcset="imagens/socio-helena-320.avif 320w, imagens/socio-helena-640.avif 640w" sizes="(min-width: 76rem) 12rem, (min-width: 48rem) 30vw, 45vw">
+                    <source type="image/webp" srcset="imagens/socio-helena-320.webp 320w, imagens/socio-helena-640.webp 640w" sizes="(min-width: 76rem) 12rem, (min-width: 48rem) 30vw, 45vw">
+                    <img src="imagens/socio-helena-320.jpg" srcset="imagens/socio-helena-320.jpg 320w, imagens/socio-helena-640.jpg 640w" sizes="(min-width: 76rem) 12rem, (min-width: 48rem) 30vw, 45vw" width="640" height="800" alt="Mulher de cabelo claro na altura do queixo, blusa escura, olhando para a câmera" loading="lazy" decoding="async">
+                  </picture>
+                  <figcaption>Imagem ilustrativa</figcaption>
+                </figure>
                 <p class="socio__nome">Helena Arruda</p>
-                <p class="socio__cargo">Sócia fundadora e administradora · <a href="#area-societario">Societário e Fusões e Aquisições</a></p>
+                <p class="socio__cargo">Sócia fundadora e administradora</p>
+                <p class="socio__area"><a href="#area-societario">Societário e Fusões e Aquisições</a></p>
                 <p class="socio__oab">OAB/SP 000.001</p>
               </li>
               <li class="socio">
+                <figure class="socio__retrato ilustrativa">
+                  <picture>
+                    <source type="image/avif" srcset="imagens/socio-otavio-320.avif 320w, imagens/socio-otavio-640.avif 640w" sizes="(min-width: 76rem) 12rem, (min-width: 48rem) 30vw, 45vw">
+                    <source type="image/webp" srcset="imagens/socio-otavio-320.webp 320w, imagens/socio-otavio-640.webp 640w" sizes="(min-width: 76rem) 12rem, (min-width: 48rem) 30vw, 45vw">
+                    <img src="imagens/socio-otavio-320.jpg" srcset="imagens/socio-otavio-320.jpg 320w, imagens/socio-otavio-640.jpg 640w" sizes="(min-width: 76rem) 12rem, (min-width: 48rem) 30vw, 45vw" width="640" height="800" alt="Homem de barba grisalha, cabelo preso, terno escuro e gravata, olhando de lado" loading="lazy" decoding="async">
+                  </picture>
+                  <figcaption>Imagem ilustrativa</figcaption>
+                </figure>
                 <p class="socio__nome">Otávio Seixas</p>
-                <p class="socio__cargo">Sócio fundador e administrador · <a href="#area-contencioso">Contencioso e Arbitragem</a></p>
+                <p class="socio__cargo">Sócio fundador e administrador</p>
+                <p class="socio__area"><a href="#area-contencioso">Contencioso e Arbitragem</a></p>
                 <p class="socio__oab">OAB/SP 000.002 · OAB/RJ 000.002-S</p>
               </li>
               <li class="socio">
+                <figure class="socio__retrato ilustrativa">
+                  <picture>
+                    <source type="image/avif" srcset="imagens/socio-marina-320.avif 320w, imagens/socio-marina-640.avif 640w" sizes="(min-width: 76rem) 12rem, (min-width: 48rem) 30vw, 45vw">
+                    <source type="image/webp" srcset="imagens/socio-marina-320.webp 320w, imagens/socio-marina-640.webp 640w" sizes="(min-width: 76rem) 12rem, (min-width: 48rem) 30vw, 45vw">
+                    <img src="imagens/socio-marina-320.jpg" srcset="imagens/socio-marina-320.jpg 320w, imagens/socio-marina-640.jpg 640w" sizes="(min-width: 76rem) 12rem, (min-width: 48rem) 30vw, 45vw" width="640" height="800" alt="Mulher de cabelo escuro ondulado, blazer escuro, com o queixo apoiado na mão" loading="lazy" decoding="async">
+                  </picture>
+                  <figcaption>Imagem ilustrativa</figcaption>
+                </figure>
                 <p class="socio__nome">Marina Kfouri Lage</p>
-                <p class="socio__cargo">Sócia · <a href="#area-tributario">Tributário</a></p>
+                <p class="socio__cargo">Sócia</p>
+                <p class="socio__area"><a href="#area-tributario">Tributário</a></p>
                 <p class="socio__oab">OAB/SP 000.003</p>
               </li>
               <li class="socio">
+                <figure class="socio__retrato ilustrativa">
+                  <picture>
+                    <source type="image/avif" srcset="imagens/socio-caio-320.avif 320w, imagens/socio-caio-640.avif 640w" sizes="(min-width: 76rem) 12rem, (min-width: 48rem) 30vw, 45vw">
+                    <source type="image/webp" srcset="imagens/socio-caio-320.webp 320w, imagens/socio-caio-640.webp 640w" sizes="(min-width: 76rem) 12rem, (min-width: 48rem) 30vw, 45vw">
+                    <img src="imagens/socio-caio-320.jpg" srcset="imagens/socio-caio-320.jpg 320w, imagens/socio-caio-640.jpg 640w" sizes="(min-width: 76rem) 12rem, (min-width: 48rem) 30vw, 45vw" width="640" height="800" alt="Homem de barba e óculos de armação escura, paletó e gravata, com a mão no rosto" loading="lazy" decoding="async">
+                  </picture>
+                  <figcaption>Imagem ilustrativa</figcaption>
+                </figure>
                 <p class="socio__nome">Caio Bettencourt Nunes</p>
-                <p class="socio__cargo">Sócio · <a href="#area-trabalhista">Trabalhista</a></p>
+                <p class="socio__cargo">Sócio</p>
+                <p class="socio__area"><a href="#area-trabalhista">Trabalhista</a></p>
                 <p class="socio__oab">OAB/SP 000.004</p>
               </li>
               <li class="socio">
+                <figure class="socio__retrato ilustrativa">
+                  <picture>
+                    <source type="image/avif" srcset="imagens/socio-beatriz-320.avif 320w, imagens/socio-beatriz-640.avif 640w" sizes="(min-width: 76rem) 12rem, (min-width: 48rem) 30vw, 45vw">
+                    <source type="image/webp" srcset="imagens/socio-beatriz-320.webp 320w, imagens/socio-beatriz-640.webp 640w" sizes="(min-width: 76rem) 12rem, (min-width: 48rem) 30vw, 45vw">
+                    <img src="imagens/socio-beatriz-320.jpg" srcset="imagens/socio-beatriz-320.jpg 320w, imagens/socio-beatriz-640.jpg 640w" sizes="(min-width: 76rem) 12rem, (min-width: 48rem) 30vw, 45vw" width="640" height="800" alt="Mulher de cabelo escuro e longo, blazer escuro, sobre fundo escuro" loading="lazy" decoding="async">
+                  </picture>
+                  <figcaption>Imagem ilustrativa</figcaption>
+                </figure>
                 <p class="socio__nome">Beatriz Farah Ondina</p>
-                <p class="socio__cargo">Sócia · <a href="#area-regulatorio">Regulatório e Concorrencial</a></p>
+                <p class="socio__cargo">Sócia</p>
+                <p class="socio__area"><a href="#area-regulatorio">Regulatório e Concorrencial</a></p>
                 <p class="socio__oab">OAB/DF 000.005</p>
               </li>
               <li class="socio">
+                <figure class="socio__retrato ilustrativa">
+                  <picture>
+                    <source type="image/avif" srcset="imagens/socio-rafael-320.avif 320w, imagens/socio-rafael-640.avif 640w" sizes="(min-width: 76rem) 12rem, (min-width: 48rem) 30vw, 45vw">
+                    <source type="image/webp" srcset="imagens/socio-rafael-320.webp 320w, imagens/socio-rafael-640.webp 640w" sizes="(min-width: 76rem) 12rem, (min-width: 48rem) 30vw, 45vw">
+                    <img src="imagens/socio-rafael-320.jpg" srcset="imagens/socio-rafael-320.jpg 320w, imagens/socio-rafael-640.jpg 640w" sizes="(min-width: 76rem) 12rem, (min-width: 48rem) 30vw, 45vw" width="640" height="800" alt="Homem de barba e cabelo grisalho, terno e gravata escuros, sorrindo num escritório" loading="lazy" decoding="async">
+                  </picture>
+                  <figcaption>Imagem ilustrativa</figcaption>
+                </figure>
                 <p class="socio__nome">Rafael Tessitore</p>
-                <p class="socio__cargo">Sócio · <a href="#area-capitais">Mercado de Capitais e Bancário</a></p>
+                <p class="socio__cargo">Sócio</p>
+                <p class="socio__area"><a href="#area-capitais">Mercado de Capitais e Bancário</a></p>
                 <p class="socio__oab">OAB/SP 000.006</p>
               </li>
               <li class="socio">
+                <figure class="socio__retrato ilustrativa">
+                  <picture>
+                    <source type="image/avif" srcset="imagens/socio-livia-320.avif 320w, imagens/socio-livia-640.avif 640w" sizes="(min-width: 76rem) 12rem, (min-width: 48rem) 30vw, 45vw">
+                    <source type="image/webp" srcset="imagens/socio-livia-320.webp 320w, imagens/socio-livia-640.webp 640w" sizes="(min-width: 76rem) 12rem, (min-width: 48rem) 30vw, 45vw">
+                    <img src="imagens/socio-livia-320.jpg" srcset="imagens/socio-livia-320.jpg 320w, imagens/socio-livia-640.jpg 640w" sizes="(min-width: 76rem) 12rem, (min-width: 48rem) 30vw, 45vw" width="640" height="800" alt="Mulher negra de tranças longas, blazer sobre gola alta clara, sorrindo" loading="lazy" decoding="async">
+                  </picture>
+                  <figcaption>Imagem ilustrativa</figcaption>
+                </figure>
                 <p class="socio__nome">Lívia Guaraciaba Mendes</p>
-                <p class="socio__cargo">Sócia · <a href="#area-reestruturacao">Reestruturação e Insolvência</a></p>
+                <p class="socio__cargo">Sócia</p>
+                <p class="socio__area"><a href="#area-reestruturacao">Reestruturação e Insolvência</a></p>
                 <p class="socio__oab">OAB/RJ 000.007</p>
               </li>
               <li class="socio">
+                <figure class="socio__retrato ilustrativa">
+                  <picture>
+                    <source type="image/avif" srcset="imagens/socio-tomas-320.avif 320w, imagens/socio-tomas-640.avif 640w" sizes="(min-width: 76rem) 12rem, (min-width: 48rem) 30vw, 45vw">
+                    <source type="image/webp" srcset="imagens/socio-tomas-320.webp 320w, imagens/socio-tomas-640.webp 640w" sizes="(min-width: 76rem) 12rem, (min-width: 48rem) 30vw, 45vw">
+                    <img src="imagens/socio-tomas-320.jpg" srcset="imagens/socio-tomas-320.jpg 320w, imagens/socio-tomas-640.jpg 640w" sizes="(min-width: 76rem) 12rem, (min-width: 48rem) 30vw, 45vw" width="640" height="800" alt="Homem de barba grisalha e óculos redondos, terno escuro e gravata clara" loading="lazy" decoding="async">
+                  </picture>
+                  <figcaption>Imagem ilustrativa</figcaption>
+                </figure>
                 <p class="socio__nome">Tomás Albernaz Vieira</p>
-                <p class="socio__cargo">Sócio · <a href="#area-imobiliario">Imobiliário e Infraestrutura</a></p>
+                <p class="socio__cargo">Sócio</p>
+                <p class="socio__area"><a href="#area-imobiliario">Imobiliário e Infraestrutura</a></p>
                 <p class="socio__oab">OAB/SP 000.008</p>
               </li>
               <li class="socio">
+                <figure class="socio__retrato ilustrativa">
+                  <picture>
+                    <source type="image/avif" srcset="imagens/socio-juliana-320.avif 320w, imagens/socio-juliana-640.avif 640w" sizes="(min-width: 76rem) 12rem, (min-width: 48rem) 30vw, 45vw">
+                    <source type="image/webp" srcset="imagens/socio-juliana-320.webp 320w, imagens/socio-juliana-640.webp 640w" sizes="(min-width: 76rem) 12rem, (min-width: 48rem) 30vw, 45vw">
+                    <img src="imagens/socio-juliana-320.jpg" srcset="imagens/socio-juliana-320.jpg 320w, imagens/socio-juliana-640.jpg 640w" sizes="(min-width: 76rem) 12rem, (min-width: 48rem) 30vw, 45vw" width="640" height="800" alt="Mulher de cabelo claro na altura dos ombros, blazer escuro, sorrindo" loading="lazy" decoding="async">
+                  </picture>
+                  <figcaption>Imagem ilustrativa</figcaption>
+                </figure>
                 <p class="socio__nome">Juliana Pacheco Sá</p>
-                <p class="socio__cargo">Sócia · <a href="#area-dados">Proteção de Dados e Tecnologia</a></p>
+                <p class="socio__cargo">Sócia</p>
+                <p class="socio__area"><a href="#area-dados">Proteção de Dados e Tecnologia</a></p>
                 <p class="socio__oab">OAB/SP 000.009</p>
               </li>
               <li class="socio">
+                <figure class="socio__retrato ilustrativa">
+                  <picture>
+                    <source type="image/avif" srcset="imagens/socio-eduardo-320.avif 320w, imagens/socio-eduardo-640.avif 640w" sizes="(min-width: 76rem) 12rem, (min-width: 48rem) 30vw, 45vw">
+                    <source type="image/webp" srcset="imagens/socio-eduardo-320.webp 320w, imagens/socio-eduardo-640.webp 640w" sizes="(min-width: 76rem) 12rem, (min-width: 48rem) 30vw, 45vw">
+                    <img src="imagens/socio-eduardo-320.jpg" srcset="imagens/socio-eduardo-320.jpg 320w, imagens/socio-eduardo-640.jpg 640w" sizes="(min-width: 76rem) 12rem, (min-width: 48rem) 30vw, 45vw" width="640" height="800" alt="Homem de cabelo escuro, terno e gravata, sorrindo à mesa de trabalho" loading="lazy" decoding="async">
+                  </picture>
+                  <figcaption>Imagem ilustrativa</figcaption>
+                </figure>
                 <p class="socio__nome">Eduardo Mafra Lins</p>
-                <p class="socio__cargo">Sócio · <a href="#area-ambiental">Ambiental</a></p>
+                <p class="socio__cargo">Sócio</p>
+                <p class="socio__area"><a href="#area-ambiental">Ambiental</a></p>
                 <p class="socio__oab">OAB/DF 000.010</p>
               </li>
             </ul>
@@ -374,13 +472,42 @@
       </section>
     </main>
 
-    <footer class="rodape-legal">
-      <div class="conteudo folha">
-        <p class="folha__margem rodape__marca" aria-hidden="true">§</p>
-        <div class="folha__corpo rodape__corpo">
-          <p class="identificacao-oab" data-identificacao-oab><strong>Arruda Seixas Sociedade de Advogados</strong> · OAB/SP 00.000 · OAB/RJ 00.000 · OAB/DF 00.000. Sócios administradores, responsáveis por esta página: Helena Arruda, OAB/SP 000.001; Otávio Seixas, OAB/SP 000.002 · OAB/RJ 000.002-S.</p>
+    <footer class="rodape">
+      <div class="conteudo">
+        <div class="rodape__grade" data-identificacao-oab>
+          <div class="rodape__marca">
+            <p class="rodape__nome">Arruda Seixas <span>Advogados</span></p>
+            <p class="rodape__razao">Arruda Seixas Sociedade de Advogados</p>
+          </div>
+          <div class="rodape__coluna">
+            <h2 class="rodape__titulo">Registro na OAB</h2>
+            <ul class="rodape__lista" role="list">
+              <li>OAB/SP 00.000 <span>São Paulo · sede</span></li>
+              <li>OAB/RJ 00.000 <span>Rio de Janeiro</span></li>
+              <li>OAB/DF 00.000 <span>Brasília</span></li>
+            </ul>
+          </div>
+          <div class="rodape__coluna">
+            <h2 class="rodape__titulo">Sócios administradores</h2>
+            <ul class="rodape__lista" role="list">
+              <li>Helena Arruda <span>OAB/SP 000.001</span></li>
+              <li>Otávio Seixas <span>OAB/SP 000.002 · OAB/RJ 000.002-S</span></li>
+            </ul>
+            <p class="rodape__nota">Responsáveis por esta página (Provimento 205/2021, art. 1º, § 1º).</p>
+          </div>
+          <div class="rodape__coluna">
+            <h2 class="rodape__titulo">Escritórios</h2>
+            <ul class="rodape__lista" role="list">
+              <li><a href="tel:+551130000000">(11) 3000-0000</a> <span>São Paulo · Itaim Bibi</span></li>
+              <li><a href="tel:+552130000000">(21) 3000-0000</a> <span>Rio de Janeiro · Centro</span></li>
+              <li><a href="tel:+556130000000">(61) 3000-0000</a> <span>Brasília · Asa Sul</span></li>
+            </ul>
+          </div>
+        </div>
+        <div class="rodape__base">
           <p>Página de caráter informativo, nos termos do Provimento 205/2021 do Conselho Federal da OAB. Não usa cookies nem coleta dados.</p>
-          <p>Página de demonstração: o escritório, os advogados, as inscrições e os contatos são fictícios. <a href="../">Outras páginas</a></p>
+          <p>Demonstração: escritório, advogados, inscrições e contatos fictícios. Imagens ilustrativas do Pexels.</p>
+          <p><a href="../">Outras páginas</a></p>
         </div>
       </div>
     </footer>

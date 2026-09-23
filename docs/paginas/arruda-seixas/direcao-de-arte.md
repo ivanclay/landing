@@ -86,7 +86,7 @@ Nenhum. Rolagem suave só por âncora, e `prefers-reduced-motion` a desliga (bas
 |---|---|---|
 | Azul-marinho e dourado | é a paleta de nove em cada dez escritórios; lê "banco" | grafite e papel com **uma** cor, a da rubrica, justificada pela história do livro jurídico |
 | Balança, martelo, coluna grega, estante de livros de couro | clichê do tema, como o estetoscópio da clínica | nenhum ícone; o único símbolo é o **§**, que é tipografia, não ilustração |
-| Foto de banco de "advogados de terno na sala de reunião" | regra 12 e cara de template | página tipográfica; sem foto não há pessoa inventada com rosto |
+| Foto de banco de "advogados de terno na sala de reunião" | regra 12 e cara de template | 1ª versão tipográfica; na 2ª (pedido do dono), **retratos individuais em P&B**, mesmo recorte de busto, e o prédio em P&B — nada de grupo posado, estátua da justiça ou sala com livros de couro |
 | Números grandes ("200 advogados, 30 anos, 5.000 casos") | é o padrão do setor e, aqui, fere o Provimento 205/2021 (arts. 3º, IV, e 6º) | o porte aparece pela amplitude (áreas, cidades, sócios), sem número de vaidade |
 | Cartões de "Nossas áreas" com ícone | kit SaaS | lista corrida com fio, o sócio responsável ao lado — a informação que o cliente quer |
 | Rótulo em CAIXA ALTA espaçada acima de cada título | clichê de página gerada | título na margem, em itálico e na cor da rubrica |
@@ -103,3 +103,22 @@ não aparecem em nenhuma das outras duas páginas, nem no padrão do setor.
 - **360 px:** nome, apoio e os dois contatos na primeira tela; barra de contato fixa depois disso.
 - Teste de Chanel: o § aparece em três lugares (margem da abertura, sumário, rodapé) — é a assinatura, e
   fica; nenhum outro enfeite.
+
+## 9. Segunda versão — imagens e rodapé (pedido do dono, 2026-09-23)
+
+O dono aprovou a direção ("ficou bom, mas precisa melhorar") e pediu: imagens (abertura e sócios, "de forma
+sofisticada") e um rodapé que não pareça "um montão de texto jogado à toa".
+
+- **Imagens de banco** (Pexels), permitidas só porque é demonstração (ADR-004), com a legenda "Imagem
+  ilustrativa" num canto da foto, sobre fundo sólido. Créditos e recortes em `creditos-imagens.md`.
+- **Preto e branco em tudo.** Dez fotógrafos diferentes só viram um escritório com a mesma luz; o P&B
+  também deixa o vermelho da rubrica como a única cor da página, o que mantém o plano.
+- **Abertura:** o prédio de lajes escalonadas em pé ao lado do nome (4:5); no celular, faixa 3:2 depois
+  dos contatos, para o nome e o botão continuarem na primeira tela.
+- **Sócios:** grade de retratos 4:5 — 5 por linha no desktop (a grade sai da coluna de texto e toma a folha
+  inteira), 3 no tablet, 2 no celular; nome, cargo, área (link) e inscrição em linhas próprias.
+- **Rodapé:** marca à esquerda; três colunas com título em itálico vermelho sobre fio — *Registro na OAB*,
+  *Sócios administradores*, *Escritórios* —; embaixo, uma linha legal curta. A identificação exigida pela OAB
+  continua inteira (o `data-identificacao-oab` envolve as colunas), só que organizada.
+- Descartado na escolha: pose de moda, símbolos de justiça, placa "Law Offices", fachada azul de vidro, e um
+  retrato com relógio em primeiro plano (ostentação, Provimento 205/2021, art. 6º, parágrafo único).

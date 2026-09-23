@@ -30,6 +30,7 @@
 | "Documentos e detalhes do caso ficam para a reunião com o sócio da área, sob sigilo profissional." | Escritórios | LGPD (regra 5); sigilo profissional | Mantido: protege o cliente e o escritório |
 | Botões "Ligar (11) 3000-0000", "Escrever pelo WhatsApp" | abertura, barra, faixa | art. 4º, § 3º | Permitido — mantido |
 | "Página de caráter informativo, nos termos do Provimento 205/2021… Não usa cookies nem coleta dados." | rodapé | art. 3º (caráter informativo); regra 6 | Mantido |
+| Retratos dos sócios e foto do prédio (2ª versão) | abertura, Sócios | art. 5º, § 2º (fotos dos advogados e do escritório permitidas); art. 6º, parágrafo único (sem ostentação) | Permitido. Na demonstração são **de banco**, com "Imagem ilustrativa" (ADR-004); numa página real, só fotos dos próprios sócios, com autorização (regra 12). O prédio não é apresentado como sede — não afirma dimensão nem estrutura |
 
 ## O que ficou fora, e por quê
 
@@ -40,5 +41,5 @@
 | Rankings (Chambers, Legal 500, Análise) e prêmios | art. 5º, § 1º | fora (numa página real, só o verificável e sóbrio, se o escritório pedir) |
 | Clientes atendidos, logotipos de clientes, operações ("assessoramos a aquisição da X") | CED, art. 42, IV; art. 6º | fora |
 | Honorários, "primeira reunião sem custo" | art. 3º, I | fora |
-| Foto do escritório "de alto padrão" ou dos sócios de banco de imagem | art. 6º, parágrafo único (ostentação); regra 12 | página tipográfica |
+| Foto que ostente bens (carro, relógio, viagem) | art. 6º, parágrafo único | fora — um retrato candidato com relógio em destaque foi descartado |
 | Símbolo ou logotipo da OAB | art. 5º, § 2º | fora (o § não é símbolo da OAB) |

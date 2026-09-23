@@ -116,20 +116,21 @@
 }
 .abertura__corpo {
   display: grid;
-  gap: 0 var(--espaco-8);
+  gap: var(--espaco-7) var(--espaco-8);
 }
+/* No celular o prédio vem depois dos contatos, numa faixa baixa; no desktop, em pé ao lado do nome. */
+.abertura__imagem img { aspect-ratio: 3 / 2; }
 @media (min-width: 60rem) {
   .abertura__corpo {
-    grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
-    align-items: end;
+    grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+    align-items: center;
   }
-  .abertura__corpo .abertura__apoio { margin-top: 0; }
+  .abertura__imagem img { aspect-ratio: 4 / 5; }
   .sumario { grid-column: 1 / -1; }
 }
 
 /* O sumário: as dez áreas logo na abertura — o porte do escritório dito pela amplitude, não por número. */
 .sumario {
-  margin-top: var(--espaco-8);
   border-top: 1px solid var(--cor-texto);
 }
 .sumario ul {
@@ -308,29 +309,40 @@
 .entrada:hover .entrada__materia { text-decoration: underline; }
 .entrada:hover .entrada__area { color: var(--cor-marca); }
 
-/* ---------- Sócios ---------- */
+/* ---------- Sócios: retratos em preto e branco, o mesmo recorte para todos ---------- */
 .socios {
   display: grid;
-  gap: 0 var(--espaco-7);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--espaco-7) var(--espaco-5);
 }
-@media (min-width: 48rem) {
-  .socios { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+@media (min-width: 48rem) { .socios { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+/* Com cinco retratos por linha, a grade sai da coluna de texto e toma a folha inteira; o título fica acima. */
+@media (min-width: 76rem) {
+  .secao--socios .folha__corpo { grid-column: 1 / -1; }
+  .socios { grid-template-columns: repeat(5, minmax(0, 1fr)); column-gap: var(--espaco-6); }
 }
 .socio {
   display: grid;
+  align-content: start;
   gap: var(--espaco-1);
-  padding-block: var(--espaco-4);
-  border-top: 1px solid var(--cor-linha);
 }
+.socio__retrato { margin-bottom: var(--espaco-3); }
 .socio__nome {
   font-family: var(--fonte-titulo);
   font-size: var(--texto-destaque);
   font-weight: 600;
+  line-height: 1.15;
 }
 .socio__cargo {
-  font-size: var(--texto-apoio);
+  font-size: var(--texto-meta);
+  line-height: 1.4;
 }
-.socio__cargo a {
+.socio__cargo { color: var(--cor-texto-suave); }
+.socio__area {
+  font-family: var(--fonte-interface);
+  font-size: var(--texto-meta);
+}
+.socio__area a {
   display: inline-flex;
   align-items: center;
   min-height: var(--alvo-minimo);
@@ -339,6 +351,29 @@
   font-size: var(--texto-meta);
   color: var(--cor-texto-suave);
   font-variant-numeric: tabular-nums;
+}
+
+/* Imagem de banco na demonstração (ADR-004): a foto com a legenda "Imagem ilustrativa" num canto,
+   pequena e legível — sobre um fundo sólido, nunca texto solto em cima da foto. */
+.ilustrativa {
+  position: relative;
+  background: var(--cor-superficie);
+}
+.ilustrativa img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+.socio__retrato img { aspect-ratio: 4 / 5; }
+.ilustrativa figcaption {
+  position: absolute;
+  inset: auto auto 0 0;
+  padding: 0.15rem 0.45rem;
+  background: var(--cor-fundo);
+  color: var(--cor-texto-suave);
+  font-family: var(--fonte-interface);
+  font-size: 0.6875rem;
+  line-height: 1.4;
 }
 
 /* ---------- Escritórios e contato: a faixa escura ---------- */
@@ -389,31 +424,81 @@
   margin-top: var(--espaco-7);
 }
 
-/* ---------- Rodapé ---------- */
-.rodape-legal {
-  border-top: 0;
+/* ---------- Rodapé: a identificação da OAB em colunas, com título ---------- */
+.rodape {
+  padding-block: var(--espaco-8) var(--espaco-6);
+  font-family: var(--fonte-interface);
+  font-size: var(--texto-apoio);
 }
-.rodape__marca {
+.rodape__grade {
+  display: grid;
+  gap: var(--espaco-6);
+  padding-bottom: var(--espaco-7);
+  border-bottom: 1px solid var(--cor-linha);
+}
+@media (min-width: 48rem) {
+  .rodape__grade { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (min-width: 64rem) {
+  .rodape__grade { grid-template-columns: 1.4fr repeat(3, minmax(0, 1fr)); column-gap: var(--espaco-7); }
+}
+.rodape__nome {
   font-family: var(--fonte-titulo);
   font-size: var(--texto-secao);
-  color: var(--cor-marca);
+  font-weight: 600;
   line-height: 1;
 }
-@media (min-width: 60rem) {
-  .rodape__marca { text-align: end; }
+.rodape__nome span {
+  display: block;
+  font-weight: 300;
+  font-style: italic;
 }
-.rodape__corpo {
+.rodape__razao {
+  margin-top: var(--espaco-4);
+  color: var(--cor-texto-suave);
+  font-size: var(--texto-meta);
+}
+.rodape__titulo {
+  margin-bottom: var(--espaco-3);
+  padding-bottom: var(--espaco-2);
+  border-bottom: 1px solid var(--cor-texto);
+  font-family: var(--fonte-titulo);
+  font-size: var(--texto-apoio);
+  font-style: italic;
+  font-weight: 450;
+  color: var(--cor-marca);
+}
+.rodape__lista {
   display: grid;
   gap: var(--espaco-3);
-  max-width: var(--medida);
 }
-.identificacao-oab {
-  font-size: var(--texto-apoio);
-  line-height: 1.5;
+.rodape__lista li {
+  display: grid;
+  font-variant-numeric: tabular-nums;
 }
-.identificacao-oab strong { color: var(--cor-texto); font-weight: 600; }
-.rodape__corpo a {
+.rodape__lista span {
+  font-size: var(--texto-meta);
+  color: var(--cor-texto-suave);
+}
+.rodape__lista a,
+.rodape__base a {
+  justify-self: start;
   display: inline-flex;
   align-items: center;
   min-height: var(--alvo-minimo);
 }
+.rodape__nota {
+  margin-top: var(--espaco-3);
+  font-size: var(--texto-meta);
+  color: var(--cor-texto-suave);
+}
+.rodape__base {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--espaco-2) var(--espaco-6);
+  padding-top: var(--espaco-4);
+  font-size: var(--texto-meta);
+  color: var(--cor-texto-suave);
+}
+.rodape__base p { max-width: 60ch; }

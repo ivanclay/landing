@@ -1,5 +1,22 @@
 # QA — Arruda Seixas Advogados (`arruda-seixas`) · DEMONSTRAÇÃO
 
+## 2ª versão (imagens e rodapé) — 2026-09-23
+
+| Execução | Performance | Acessibilidade | Boas práticas | SEO | LCP | CLS | Peso |
+|---|---|---|---|---|---|---|---|
+| 1 | 98 | 100 | 100 | 69 | 2,3 s | 0,001 | 207 KB |
+| 2 | 98 | 100 | 100 | 69 | 2,3 s | 0,001 | 207 KB |
+| 3 | 98 | 100 | 100 | 69 | 2,3 s | 0,001 | 207 KB |
+| **Mediana** | **98** | **100** | **100** | **69** | **2,3 s** | **0,001** | **207 KB** |
+
+Mesmo comando (Lighthouse 12.8.2, celular). SEO 69: só `is-crawlable` (noindex). Os retratos têm
+`loading="lazy"`; o prédio, `fetchpriority="high"`. Sem rolagem lateral de 320 a 1920 px, com e sem JS;
+alvos ≥ 44 px em 360. Verificação aprovada; o aviso novo "2029 KB na pasta" é a soma de todas as variações
+AVIF/WebP/JPEG (o navegador baixa uma de cada) — decidido: a primeira carga medida é 207 KB.
+Capturas refeitas: `capturas/360.png`, `capturas/1440.png`.
+
+## 1ª versão (tipográfica)
+
 - Data: 2026-09-23 · O construído (`npm run verificar` → `_site/`), servido em `http://localhost:4173`
   (`npx serve@14 _site -l 4173`).
 
