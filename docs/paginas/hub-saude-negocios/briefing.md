@@ -18,6 +18,7 @@ Página antiga (id 13): `https://hubsaudenegocios.com.br/landing-page-hubsaudene
 | Campo | Valor na página | Fonte |
 |---|---|---|
 | Nome | Hub Saúde Negócios | [H] (título e rodapé) |
+| Sede | São Paulo, SP (só no índice) | dono, 2026-09-23: "A consultoria, a sede é em SP" |
 | Slogan | Soluções especializadas em saúde | [H] |
 | Título | "Elevamos o padrão do seu negócio em saúde." (sem "com melhores resultados": comparativo vago) | [H], editado |
 | Proposta | concepção à escalabilidade de soluções em saúde | [H] |
