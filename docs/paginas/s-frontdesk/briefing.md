@@ -154,3 +154,9 @@ nenhum resultado ("menos faltas", "mais produtividade"); uma ideia por seção; 
 ## Publicação (2026-09-23, repositório ivanclay/landing)
 
 O dono decidiu publicar sem número real: o WhatsApp passou a ser `+5520999999999`, com o **DDD 20, que não é atribuído no Brasil** (Anatel), para que o número não possa ter dono. O botão não leva a ninguém até o número real entrar. Aprovação do dono: `revisao.aprovadoPeloClienteEm = 2026-09-23`, `publicar: true`. A15 continua **provisório** até o número real.
+
+
+## Sede e etiqueta (2026-09-23, pedido do dono)
+
+- **Sede: São Paulo, SP** (`cidade`/`uf` no `pagina.json`; entra no índice e no endereço do JSON-LD). Fonte: o dono, nesta data.
+- **Em avaliação:** `preLancamento: true` põe a etiqueta "Pré-lançamento · em avaliação" no índice.

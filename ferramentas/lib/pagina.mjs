@@ -132,6 +132,11 @@ function validarNegocio(pagina, exigir) {
     exigir(texto(pagina.siteOficial) && pagina.siteOficial.startsWith('https://'),
       'siteOficial (https://) é obrigatório na proposta: o aviso diz qual é o site oficial — ADR-005');
   }
+  // Produto próprio ainda em avaliação: só muda a etiqueta do índice. Não é modo de publicação.
+  if (pagina.preLancamento !== undefined) {
+    exigir(pagina.preLancamento === true && !ehProposta(pagina),
+      'preLancamento só aceita true, e não se soma a proposta: é a etiqueta do produto em pré-lançamento no índice');
+  }
 }
 
 function exigirRevisaoDeMedico(pagina, exigir) {

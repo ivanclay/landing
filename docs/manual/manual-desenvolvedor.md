@@ -86,7 +86,9 @@ ela só abre pelo link direto.
 exige `organizacao.nome` em vez de `medico`; sem CRM, sem identificação CFM; publicar exige
 `revisao.aprovadoPeloClienteEm`. Com `"proposta": true`, publica sem aprovação, com `noindex`, fora do
 sitemap, exigindo `siteOficial` e o `data-aviso-proposta` (texto de `avisoDeProposta()`). JSON-LD
-`ProfessionalService`.
+`ProfessionalService`. `"preLancamento": true` (produto próprio em avaliação, como o `s-frontdesk`) só põe a
+etiqueta "Pré-lançamento · em avaliação" no índice: não muda publicação, sitemap nem `noindex`, e não se soma a
+`proposta`.
 
 **Página de advocacia** (`"tipo": "advocacia"`, [ADR-006](../decisoes/adr/ADR-006-pagina-de-advocacia.md)):
 exige `sociedade.nome`, `sociedade.razaoSocial` (com "Advogados"), `sociedade.registros[]` (`uf`,
@@ -101,7 +103,10 @@ marcadores `<!-- @gerado:demonstracoes -->` e `<!-- @gerado:clientes -->` (uma l
 `linhaDoIndice()` em `construir.mjs`). `site.config.json › indice`: `titulo`, `descricao`, `empresa`
 (obrigatório), `lema`, `marca`, `imagemSocial` (1200×630, `npm run imagens … --social`), `indexavel`,
 `mostrarDemonstracoes` (false tira demonstrações e propostas do índice). A busca (`assets/js/indice.js`) filtra
-todo `[data-busca]` dentro de cada `[data-busca-grupo]`. O cabeçalho do índice (`cabecalhoDoIndice()`) tem
+todo `[data-busca]` dentro de cada `[data-busca-grupo]`. Lado a lado, os dois painéis são `subgrid` da
+`.colunas` (cabeçalhos com a mesma altura) e as linhas têm altura fixa (6,5rem) e as mesmas larguras de coluna:
+só desalinham se o número de itens for diferente. O container da consulta `@container` é o `.painel__lista`,
+não o `.painel`: um container isola o layout, e o `subgrid` deixaria de valer. O cabeçalho do índice (`cabecalhoDoIndice()`) tem
 `og:site_name`, a imagem social com versão, `twitter:card` e JSON-LD `Organization`.
 
 **Campos opcionais, usados pelo JSON-LD:** `locais[]` (`nome`, `tipo`, `endereco`), `convenios[]`,

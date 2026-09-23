@@ -141,11 +141,13 @@
   align-items: start;
   padding-bottom: var(--espaco-8);
 }
+/* Lado a lado, os painéis dividem as linhas da grade (subgrid): o cabeçalho de um tem a altura do outro, e as
+   tabelas começam na mesma linha. Com a altura fixa das linhas, só desalinham se o número de itens for outro. */
 @media (min-width: 60rem) {
-  .colunas { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .colunas { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: auto auto; row-gap: 0; }
+  .painel { display: grid; grid-row: span 2; grid-template-rows: subgrid; align-self: start; }
 }
 .painel {
-  container-type: inline-size;
   overflow: hidden;
   border: 1px solid var(--cor-linha);
   border-top: 3px solid var(--cor-laranja);
@@ -154,6 +156,8 @@
   box-shadow: var(--sombra-painel);
 }
 .painel + .painel { border-top-color: var(--cor-marca); }
+/* A lista é o container da consulta abaixo; o painel não pode ser, senão deixa de ser subgrid. */
+.painel__lista { container-type: inline-size; }
 .painel__cabeca {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
@@ -174,7 +178,10 @@
 .painel__nota { grid-column: 1 / -1; font-size: var(--texto-meta); line-height: 1.45; color: var(--cor-texto-suave); }
 
 /* ---------- Tabela suave: fios horizontais, nenhuma borda lateral ---------- */
-.tabela { width: 100%; border-collapse: collapse; font-size: var(--texto-apoio); }
+.tabela { width: 100%; table-layout: fixed; border-collapse: collapse; font-size: var(--texto-apoio); }
+/* As mesmas larguras nos dois painéis: nome, área, cidade. */
+.tabela thead th:nth-child(1) { width: 46%; }
+.tabela thead th:nth-child(2) { width: 32%; }
 .tabela thead th {
   padding: var(--espaco-2) var(--espaco-3);
   background: var(--cor-cabeca-tabela);
@@ -199,6 +206,8 @@
 .tabela tbody tr:last-child > * { border-bottom: 0; }
 .tabela td { font-size: var(--texto-meta); line-height: 1.4; color: var(--cor-texto-suave); }
 .tabela__linha td:last-child { white-space: nowrap; }
+/* Altura padrão da linha (célula de tabela trata height como mínimo): cabe um nome em duas linhas e a etiqueta. */
+.tabela__linha > * { height: 6.5rem; }
 
 .tabela__celula-nome { display: flex; align-items: center; gap: var(--espaco-3); }
 .tabela__monograma {
@@ -230,15 +239,19 @@
 .tabela__linha:hover .tabela__nome { color: var(--cor-marca); text-decoration: underline; }
 .tabela__linha:hover .tabela__monograma { background: var(--cor-marca); color: var(--cor-sobre-marca); }
 .tabela__etiqueta {
-  padding: 0.0625rem var(--espaco-2);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.1875rem 0.625rem;
   border-radius: 999px;
+  white-space: nowrap;
   background: var(--cor-laranja-clara);
   font-size: 0.75rem;
   font-weight: 600;
-  line-height: 1.5;
+  line-height: 1.2;
   color: var(--cor-sobre-laranja-clara);
 }
-.tabela__etiqueta--proposta { background: var(--cor-marca-clara); color: var(--cor-sobre-marca-clara); }
+.tabela__etiqueta--avaliacao { background: var(--cor-marca-clara); color: var(--cor-sobre-marca-clara); }
 .tabela__vazio td,
 .tabela__nenhum td {
   padding: var(--espaco-5);
@@ -266,7 +279,7 @@
   /* O display: grid acima venceria o atributo hidden — sem isto, a busca não esconderia nada. */
   .tabela tr[hidden] { display: none; }
   /* :nth-child(n) só sobe a especificidade acima de ".tabela tr > :first-child", que é da tabela larga. */
-  .tabela tbody tr > :nth-child(n) { padding: 0; border-bottom: 0; }
+  .tabela tbody tr > :nth-child(n) { height: auto; padding: 0; border-bottom: 0; }
   .tabela tbody th { grid-column: 1 / -1; }
   .tabela tbody tr > td:nth-child(n) { padding-top: var(--espaco-2); padding-left: calc(var(--monograma) + var(--espaco-3)); }
   .tabela tbody tr > td + td:nth-child(n) { padding-left: 0; text-align: end; }
