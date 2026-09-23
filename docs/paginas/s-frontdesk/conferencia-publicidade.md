@@ -57,3 +57,12 @@ lembrete ou de automação, automação de atendimento (P4), preço, outras prof
 ## Publicação (2026-09-23, repositório ivanclay/landing)
 
 O dono decidiu publicar sem número real: o WhatsApp passou a ser `+5520999999999`, com o **DDD 20, que não é atribuído no Brasil** (Anatel), para que o número não possa ter dono. O botão não leva a ninguém até o número real entrar. Aprovação do dono: `revisao.aprovadoPeloClienteEm = 2026-09-23`, `publicar: true`. O texto não mudou. O rodapé foi reorganizado em colunas (marca · o produto · nesta página · contato; avisos na base), pedido do dono para seguir o modelo das outras páginas; as frases do rodapé original ficaram iguais, e os itens novos ("Agenda da recepção", "Agendamento pelo paciente", "Em pré-lançamento") saem do `resumo`. Agora são **6** links de WhatsApp (o 6º está no rodapé).
+
+
+## Revisão do app do paciente (2026-09-23, pedido do dono)
+
+- **Tela "Como o paciente vê" refeita:** celular desenhado em CSS na proporção 9 × 19,5 (a tela rola por dentro), app com a identidade da clínica, "Suas consultas" com **Próximas** (linhas compactas com data, hora, atendimento, médico, especialidade e a situação escrita, "Confirmada" ou "Agendada") e **Anteriores** (mesma linha, apagada, "Compareceu"). Tocar numa próxima abre o detalhe: médico com CRM e RQE, clínica e endereço, lembrete, Remarcar e Cancelar. "+ Agendar" fica ao lado do título.
+- **Nomes fictícios trocados** (o dono achou "Exemplo" artificial): clínica **Clínica Solar da Barra** (Rua das Gaivotas, 45 · Barra, Salvador, BA; endereço fictício), **Dra. Helena Andrade** e **Dr. Caio Menezes** (CRM-BA e RQE continuam 000000), pacientes com nomes de gente (a do app é **Mariana Costa**). Trocados no `demo.js` e na fotografia sem JS do `index.html`, que continua batendo com os dados.
+- ⚠️ **Divergência com o repositório de origem:** `demo.js` ganhou `clinica.sigla/local/endereco` e `consultasDoPaciente`, e os nomes mudaram aqui. O `foto-da-demo.mjs` do `sfrontdesk-landing` ainda tem os nomes antigos: quem regenerar a fotografia lá precisa trazer esta versão antes.
+- **Imagem social refeita:** a composição anterior (marca, régua, linha do agora) com o celular do app à direita, 1200 × 630, JPEG de ~90 KB, gerada com Playwright a partir da própria página.
+- Texto das seções: só a troca "Clínica Exemplo" → "Clínica Solar da Barra" no exemplo de lembrete (compromissos) e na fotografia; nenhuma frase nova de publicidade.

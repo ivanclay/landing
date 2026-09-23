@@ -8,7 +8,7 @@
 
 // @dados:inicio
 const DADOS = {
-  "clinica": { "nome": "Clínica Exemplo", "endereco": "Rua Exemplo, 100 · Salvador, BA", "fuso": "America/Bahia" },
+  "clinica": { "nome": "Clínica Solar da Barra", "sigla": "SB", "local": "Barra · Salvador, BA", "endereco": "Rua das Gaivotas, 45 · Barra, Salvador, BA", "fuso": "America/Bahia" },
   "relogio": "09:40",
   "grade": ["08:00", "08:30", "09:00", "09:30", "10:00", "10:30", "11:00", "11:30"],
   "servicos": [
@@ -16,31 +16,37 @@ const DADOS = {
     { "id": "retorno", "nome": "Retorno", "minutos": 30 }
   ],
   "profissionais": [
-    { "id": "helena", "nome": "Dra. Helena Exemplo", "palavra": "Médica", "crm": "CRM-BA 000000", "especialidade": "Clínica médica", "rqe": "RQE 000000" },
-    { "id": "caio", "nome": "Dr. Caio Exemplo", "palavra": "Médico", "crm": "CRM-BA 000000", "especialidade": "Cardiologia", "rqe": "RQE 000000" }
+    { "id": "helena", "nome": "Dra. Helena Andrade", "palavra": "Médica", "crm": "CRM-BA 000000", "especialidade": "Clínica médica", "rqe": "RQE 000000" },
+    { "id": "caio", "nome": "Dr. Caio Menezes", "palavra": "Médico", "crm": "CRM-BA 000000", "especialidade": "Cardiologia", "rqe": "RQE 000000" }
   ],
-  "pacientesParaAgendar": ["Paciente Exemplo 11", "Paciente Exemplo 12", "Paciente Exemplo 13"],
-  "voceNoApp": "Paciente Exemplo 14",
+  "pacientesParaAgendar": ["Camila Teixeira", "Rafael Moreira", "Beatriz Cardoso"],
+  "voceNoApp": "Mariana Costa",
   "consultasDoPaciente": {
-    "proxima": { "servico": "retorno", "profissional": "caio", "diaUtil": 2, "hora": "10:00" },
-    "anterior": { "servico": "consulta", "profissional": "caio", "diasAtras": 21 }
+    "proximas": [
+      { "servico": "retorno", "profissional": "caio", "diaUtil": 2, "hora": "10:00", "estado": "Confirmada" },
+      { "servico": "consulta", "profissional": "helena", "diaUtil": 4, "hora": "08:30", "estado": "Agendada" }
+    ],
+    "anteriores": [
+      { "servico": "consulta", "profissional": "caio", "diasAtras": 21 },
+      { "servico": "consulta", "profissional": "helena", "diasAtras": 64 }
+    ]
   },
   "agendaDeHoje": {
     "helena": {
-      "08:00": { "estado": "Compareceu", "paciente": "Paciente Exemplo 1", "servico": "consulta", "canal": "Telefone" },
-      "08:30": { "estado": "Compareceu", "paciente": "Paciente Exemplo 2", "servico": "retorno", "canal": "App" },
-      "09:00": { "estado": "Faltou", "paciente": "Paciente Exemplo 3", "servico": "consulta", "canal": "Telefone" },
-      "09:30": { "estado": "Compareceu", "paciente": "Paciente Exemplo 4", "servico": "consulta", "canal": "Balcão" },
-      "10:00": { "estado": "Confirmado", "paciente": "Paciente Exemplo 5", "servico": "retorno", "canal": "App" },
-      "11:00": { "estado": "Agendado", "paciente": "Paciente Exemplo 6", "servico": "consulta", "canal": "Telefone" }
+      "08:00": { "estado": "Compareceu", "paciente": "Ana Beatriz Souza", "servico": "consulta", "canal": "Telefone" },
+      "08:30": { "estado": "Compareceu", "paciente": "Carlos Eduardo Lima", "servico": "retorno", "canal": "App" },
+      "09:00": { "estado": "Faltou", "paciente": "Juliana Rocha", "servico": "consulta", "canal": "Telefone" },
+      "09:30": { "estado": "Compareceu", "paciente": "Roberto Almeida", "servico": "consulta", "canal": "Balcão" },
+      "10:00": { "estado": "Confirmado", "paciente": "Fernanda Oliveira", "servico": "retorno", "canal": "App" },
+      "11:00": { "estado": "Agendado", "paciente": "Marcos Vinícius Santos", "servico": "consulta", "canal": "Telefone" }
     },
     "caio": {
       "08:00": { "estado": "Bloqueio", "motivo": "Reunião da equipe" },
       "08:30": { "estado": "Bloqueio", "motivo": "Reunião da equipe" },
-      "09:00": { "estado": "Compareceu", "paciente": "Paciente Exemplo 7", "servico": "consulta", "canal": "App" },
-      "09:30": { "estado": "Faltou", "paciente": "Paciente Exemplo 8", "servico": "retorno", "canal": "Telefone" },
-      "10:30": { "estado": "Confirmado", "paciente": "Paciente Exemplo 9", "servico": "consulta", "canal": "App" },
-      "11:30": { "estado": "Agendado", "paciente": "Paciente Exemplo 10", "servico": "retorno", "canal": "Telefone" }
+      "09:00": { "estado": "Compareceu", "paciente": "Patrícia Nunes", "servico": "consulta", "canal": "App" },
+      "09:30": { "estado": "Faltou", "paciente": "José Carlos Ferreira", "servico": "retorno", "canal": "Telefone" },
+      "10:30": { "estado": "Confirmado", "paciente": "Luana Barbosa", "servico": "consulta", "canal": "App" },
+      "11:30": { "estado": "Agendado", "paciente": "Antônio Ribeiro", "servico": "retorno", "canal": "Telefone" }
     }
   }
 };
@@ -53,11 +59,14 @@ function iniciarDemonstracao(raiz) {
   const app = raiz.querySelector('[data-demo-app]');
   const hoje = dataNoFuso(DADOS.clinica.fuso);
   const dias = proximosDiasUteis(hoje, 5);
-  // O paciente abre o app com uma consulta já marcada e uma anterior (dados fictícios).
-  const proxima = DADOS.consultasDoPaciente.proxima;
-  const consultaInicial = { servico: proxima.servico, profissional: proxima.profissional, dia: dias[proxima.diaUtil].chave, hora: proxima.hora };
-  const anterior = DADOS.consultasDoPaciente.anterior;
-  const dataAnterior = diaDe(new Date(hoje.data.getTime() - anterior.diasAtras * 86400000), -anterior.diasAtras);
+  // O paciente abre o app com duas consultas marcadas e duas anteriores (dados fictícios).
+  const consultasIniciais = DADOS.consultasDoPaciente.proximas.map((c) => ({
+    servico: c.servico, profissional: c.profissional, dia: dias[c.diaUtil].chave, hora: c.hora, estado: c.estado,
+  }));
+  const anteriores = DADOS.consultasDoPaciente.anteriores.map((c) => ({
+    servico: c.servico, profissional: c.profissional, passada: true, estado: 'Compareceu',
+    data: diaDe(new Date(hoje.data.getTime() - c.diasAtras * 86400000), -c.diasAtras),
+  }));
   let estado = estadoInicial();
 
   function estadoInicial() {
@@ -67,8 +76,8 @@ function iniciarDemonstracao(raiz) {
       selecionado: null,
       rascunho: { servico: null, paciente: null },
       novo: null,
-      outrosDias: { [chaveDe(consultaInicial)]: true },
-      paciente: { passo: 'inicio', servico: null, profissional: null, dia: null, hora: null, consultas: [consultaInicial], ultima: null, remarcando: null },
+      outrosDias: Object.fromEntries(consultasIniciais.map((c) => [chaveDe(c), true])),
+      paciente: { passo: 'inicio', servico: null, profissional: null, dia: null, hora: null, consultas: [...consultasIniciais], aberta: null, remarcando: null, voltarDoLembrete: 'detalhe' },
     };
   }
   // A chave de uma consulta: "hoje|profissional|hora" na agenda do dia, "AAAA-MM-DD|profissional|hora" nos outros.
@@ -255,8 +264,8 @@ function iniciarDemonstracao(raiz) {
       const chave = `hoje|${selecao.profissional}|${selecao.hora}`;
       const consultas = estado.paciente.consultas.filter((c) => chaveDe(c) !== chave);
       if (consultas.length !== estado.paciente.consultas.length) {
-        const eraAUltima = estado.paciente.ultima && chaveDe(estado.paciente.ultima) === chave;
-        estado.paciente = { ...estado.paciente, consultas, ...(eraAUltima ? { passo: 'cancelado', ultima: null } : {}) };
+        const eraAAberta = estado.paciente.aberta && chaveDe(estado.paciente.aberta) === chave;
+        estado.paciente = { ...estado.paciente, consultas, ...(eraAAberta ? { passo: 'cancelado', aberta: null } : {}) };
       }
       anunciar(`Consulta das ${hhmm(selecao.hora)} cancelada. O horário voltou a ficar livre.`);
       voltarAoHorario();
@@ -285,55 +294,66 @@ function iniciarDemonstracao(raiz) {
   function desenharPaciente(painel) {
     const p = estado.paciente;
     const profissional = DADOS.profissionais.find((x) => x.id === p.profissional);
-    const voltar = (passo) => `<button type="button" class="celular__voltar" data-ir="${passo}">Voltar</button>`;
+    const voltar = (passo) => `<button type="button" class="celular__voltar" data-ir="${passo}">‹ Voltar</button>`;
     const etapa = (n) => `<p class="celular__etapa">Passo ${n} de 5</p>`;
     let tela = '';
     if (p.passo === 'inicio') {
-      const consultas = [...p.consultas].sort((a, b) => `${a.dia}${a.hora}`.localeCompare(`${b.dia}${b.hora}`));
-      tela = `<h3 tabindex="-1" class="celular__titulo">Suas consultas</h3>
-        ${consultas.length
-          ? `<ul class="consultas" role="list">${consultas.map((c) => `<li>${cartaoDeConsulta(c, true)}</li>`).join('')}</ul>`
+      const proximas = [...p.consultas].sort((a, b) => `${a.dia}${a.hora}`.localeCompare(`${b.dia}${b.hora}`));
+      tela = `<div class="celular__topo">
+          <h3 tabindex="-1" class="celular__titulo">Suas consultas</h3>
+          <button type="button" class="acao acao--principal acao--pequena" data-ir="servico">+ Agendar</button>
+        </div>
+        <h4 class="celular__subtitulo">Próximas · ${proximas.length}</h4>
+        ${proximas.length
+          ? `<ul class="consultas" role="list">${proximas.map((c) => `<li>${linhaDeConsulta(c)}</li>`).join('')}</ul>`
           : '<p class="celular__apoio">Nenhuma consulta marcada.</p>'}
-        <button type="button" class="acao acao--principal acao--larga" data-ir="servico">Agendar consulta</button>
         <h4 class="celular__subtitulo">Anteriores</h4>
-        <p class="anterior"><span class="anterior__data">${esc(formatarDia(dataAnterior, false))}</span>
-          ${nomeDoServico(anterior.servico)} com ${esc(DADOS.profissionais.find((x) => x.id === anterior.profissional).nome)} · Compareceu</p>`;
+        <ul class="consultas" role="list">${anteriores.map((c) => `<li>${linhaDeConsulta(c)}</li>`).join('')}</ul>`;
+    } else if (p.passo === 'detalhe') {
+      const c = p.aberta;
+      tela = `${voltar('inicio')}<h3 tabindex="-1" class="celular__titulo">Sua consulta</h3>
+        ${cartaoDeConsulta(c)}
+        <button type="button" class="acao acao--larga" data-ver-lembrete>Ver o lembrete</button>
+        <div class="celular__par">
+          <button type="button" class="acao" data-remarcar>Remarcar</button>
+          <button type="button" class="acao" data-cancelar-app>Cancelar</button>
+        </div>`;
     } else if (p.passo === 'servico') {
-      tela = `${voltar('inicio')}${etapa(1)}<h3 tabindex="-1" class="celular__titulo">${p.remarcando ? 'Remarcar consulta' : 'Qual atendimento?'}</h3>
+      tela = `${voltar('inicio')}${etapa(1)}<h3 tabindex="-1" class="celular__titulo">Qual atendimento?</h3>
         ${DADOS.servicos.map((s) => `<button type="button" class="escolha" data-escolher-servico="${s.id}">${esc(s.nome)}<span>${s.minutos} min</span></button>`).join('')}`;
     } else if (p.passo === 'profissional') {
       tela = `${voltar('servico')}${etapa(2)}<h3 tabindex="-1" class="celular__titulo">Com quem?</h3>
         ${DADOS.profissionais.map((x) => `<button type="button" class="escolha escolha--profissional" data-escolher-profissional="${x.id}">${monograma(x)}${identificacao(x)}</button>`).join('')}`;
     } else if (p.passo === 'dia') {
-      tela = `${voltar(p.remarcando ? 'inicio' : 'profissional')}${etapa(3)}<h3 tabindex="-1" class="celular__titulo">Qual dia?</h3>
+      tela = `${voltar(p.remarcando ? 'detalhe' : 'profissional')}${p.remarcando ? '<p class="celular__etapa">Remarcar</p>' : etapa(3)}<h3 tabindex="-1" class="celular__titulo">Qual dia?</h3>
         <p class="celular__apoio">${esc(profissional.nome)} · ${esc(profissional.especialidade)}</p>
         <div class="celular__grade celular__grade--dias">${dias.map((d) => `<button type="button" class="escolha escolha--dia" data-escolher-dia="${d.chave}">${blocoDoDia(d)}</button>`).join('')}</div>`;
     } else if (p.passo === 'horario') {
       const livres = horariosLivres(p.profissional, p.dia);
       const dia = dias.find((d) => d.chave === p.dia);
-      tela = `${voltar('dia')}${etapa(4)}<h3 tabindex="-1" class="celular__titulo">Qual horário?</h3>
+      tela = `${voltar('dia')}${p.remarcando ? '<p class="celular__etapa">Remarcar</p>' : etapa(4)}<h3 tabindex="-1" class="celular__titulo">Qual horário?</h3>
         <p class="celular__apoio">${esc(formatarDia(dia, false))} · ${esc(profissional.nome)}</p>
         ${livres.length
           ? `<div class="celular__grade celular__grade--horas">${livres.map((h) => `<button type="button" class="escolha escolha--hora" data-escolher-hora="${h}">${hhmm(h)}</button>`).join('')}</div>`
           : '<p>Nenhum horário livre neste dia.</p>'}
         <p class="celular__nota">Só aparecem horários livres, no fuso da clínica.</p>`;
     } else if (p.passo === 'confirmar') {
-      tela = `${voltar('horario')}${etapa(5)}<h3 tabindex="-1" class="celular__titulo">Confira e confirme</h3>
-        ${cartaoDeConsulta({ servico: p.servico, profissional: p.profissional, dia: p.dia, hora: p.hora }, false)}
+      tela = `${voltar('horario')}${p.remarcando ? '<p class="celular__etapa">Remarcar</p>' : etapa(5)}<h3 tabindex="-1" class="celular__titulo">Confira e confirme</h3>
+        ${cartaoDeConsulta({ servico: p.servico, profissional: p.profissional, dia: p.dia, hora: p.hora })}
         <button type="button" class="acao acao--principal acao--larga" data-confirmar>Confirmar agendamento</button>`;
     } else if (p.passo === 'agendado') {
-      const m = p.ultima;
+      const m = p.aberta;
       tela = `<p class="celular__selo" aria-hidden="true">✓</p>
-        <h3 tabindex="-1" class="celular__titulo">Consulta agendada</h3>
-        ${cartaoDeConsulta(m, false)}
+        <h3 tabindex="-1" class="celular__titulo celular__titulo--centro">Consulta agendada</h3>
+        ${cartaoDeConsulta(m)}
         <p class="celular__nota">${m.dia === hoje.chave
           ? 'Ela já aparece na agenda da recepção: veja na aba “Como a recepção vê”, com o canal App.'
           : 'Ela entra na agenda da recepção desse dia, com o canal App.'}</p>
-        <button type="button" class="acao acao--larga" data-ver-lembrete>Ver o lembrete</button>
-        <button type="button" class="acao acao--leve acao--larga" data-ir="inicio">Voltar às suas consultas</button>`;
+        <button type="button" class="acao acao--principal acao--larga" data-ir="inicio">Ver suas consultas</button>
+        <button type="button" class="acao acao--leve acao--larga" data-ver-lembrete>Ver o lembrete</button>`;
     } else if (p.passo === 'lembrete') {
-      const m = p.ultima;
-      tela = `${voltar('agendado')}<div class="bloqueio">
+      const m = p.aberta;
+      tela = `${voltar(p.voltarDoLembrete)}<div class="bloqueio">
           <p class="bloqueio__hora" aria-hidden="true">${esc(horaDoLembrete(m))}</p>
           <p class="bloqueio__notificacao"><strong>S-FrontDesk</strong> Você tem uma consulta ${esc(quandoNoLembrete(m))} na ${esc(DADOS.clinica.nome)}.</p>
         </div>
@@ -341,7 +361,7 @@ function iniciarDemonstracao(raiz) {
     } else if (p.passo === 'cancelado') {
       tela = `<h3 tabindex="-1" class="celular__titulo">Consulta cancelada</h3>
         <p class="celular__apoio">O horário voltou para a agenda da clínica.</p>
-        <button type="button" class="acao acao--principal acao--larga" data-ir="inicio">Voltar às suas consultas</button>`;
+        <button type="button" class="acao acao--principal acao--larga" data-ir="inicio">Ver suas consultas</button>`;
     }
     painel.innerHTML = `
       <div class="paciente">
@@ -350,10 +370,10 @@ function iniciarDemonstracao(raiz) {
         <div class="celular__app">
           <p class="celular__status" aria-hidden="true"><span>${hhmm(DADOS.relogio).replace('h', ':')}</span><span class="celular__icones"><i></i><i></i><i></i></span></p>
           <div class="app__cabeca">
-            <span class="app__marca" aria-hidden="true">CE</span>
-            <p class="app__clinica"><strong>${esc(DADOS.clinica.nome)}</strong><span>${esc(DADOS.clinica.endereco)}</span></p>
+            <span class="app__marca" aria-hidden="true">${esc(DADOS.clinica.sigla)}</span>
+            <p class="app__clinica"><strong>${esc(DADOS.clinica.nome)}</strong><span>${esc(DADOS.clinica.local)}</span></p>
           </div>
-          <p class="app__ola">Olá, ${esc(DADOS.voceNoApp)} <span>(você)</span></p>
+          <p class="app__ola">Olá, ${esc(DADOS.voceNoApp)}</p>
           <div class="celular__tela" data-tela>${tela}</div>
         </div>
       </div>
@@ -361,21 +381,38 @@ function iniciarDemonstracao(raiz) {
     ligarPaciente(painel);
   }
 
-  // O cartão de uma consulta: data, horário, atendimento, quem atende (com CRM e RQE) e onde.
-  function cartaoDeConsulta(c, comAcoes) {
+  // Na lista, uma linha por consulta: a data, a hora e o atendimento, quem atende e a situação. As próximas
+  // abrem o detalhe; as anteriores só informam.
+  function linhaDeConsulta(c) {
+    const x = DADOS.profissionais.find((y) => y.id === c.profissional);
+    const dia = c.passada ? c.data : dias.find((d) => d.chave === c.dia);
+    const conteudo = `<span class="consulta__data">${blocoDoDia(dia)}</span>
+      <span class="consulta__corpo">
+        <span class="consulta__quando"><strong>${c.passada ? '' : `${hhmm(c.hora)} · `}${nomeDoServico(c.servico)}</strong></span>
+        <span class="consulta__quem">${esc(x.nome)}</span><span class="consulta__quem">${esc(x.especialidade)}</span>
+        <span class="situacao situacao--${classe(c.estado)}">${esc(c.estado)}</span>
+      </span>`;
+    return c.passada
+      ? `<div class="consulta consulta--linha consulta--passada">${conteudo}</div>`
+      : `<button type="button" class="consulta consulta--linha" data-abrir="${chaveDe(c)}">${conteudo}<span class="consulta__seta" aria-hidden="true">›</span></button>`;
+  }
+
+  // O detalhe: tudo o que o paciente precisa para ir à consulta, com o médico identificado (CRM e RQE).
+  function cartaoDeConsulta(c) {
     const x = DADOS.profissionais.find((y) => y.id === c.profissional);
     const dia = dias.find((d) => d.chave === c.dia);
-    const chave = chaveDe(c);
-    return `<article class="consulta">
-        <p class="consulta__data">${blocoDoDia(dia)}</p>
+    return `<article class="consulta consulta--cartao">
+        <div class="consulta__cabeca">
+          <p class="consulta__data">${blocoDoDia(dia)}</p>
+          <div class="consulta__corpo">
+            <p class="consulta__quando"><strong>${hhmm(c.hora)}</strong> · ${nomeDoServico(c.servico)}</p>
+            ${c.estado ? `<p><span class="situacao situacao--${classe(c.estado)}">${esc(c.estado)}</span></p>` : ''}
+          </div>
+        </div>
         <div class="consulta__corpo">
-          <p class="consulta__quando"><strong>${hhmm(c.hora)}</strong> · ${nomeDoServico(c.servico)}</p>
-          <p class="consulta__quem">${esc(x.nome)}</p>
+          <p class="consulta__medico">${esc(x.nome)}</p>
           <p class="consulta__registro">${esc(x.especialidade)} · ${esc(x.rqe)}<br>${esc(x.palavra)} · ${esc(x.crm)}</p>
           <p class="consulta__onde"><strong>${esc(DADOS.clinica.nome)}</strong><br>${esc(DADOS.clinica.endereco)}</p>
-          ${comAcoes ? `<p class="consulta__acoes">
-            <button type="button" class="acao acao--pequena" data-remarcar="${chave}">Remarcar</button>
-            <button type="button" class="acao acao--pequena acao--leve" data-cancelar-app="${chave}">Cancelar</button></p>` : ''}
         </div>
       </article>`;
   }
@@ -392,11 +429,13 @@ function iniciarDemonstracao(raiz) {
     const ir = (passo, mudancas = {}) => {
       estado.paciente = { ...estado.paciente, ...mudancas, passo };
       desenhar();
-      painel.querySelector('[data-tela] h3')?.focus();
+      const tela = painel.querySelector('[data-tela]');
+      tela.scrollTop = 0;
+      tela.querySelector('h3')?.focus();
     };
-    const acharConsulta = (chave) => p.consultas.find((c) => chaveDe(c) === chave);
     const em = (seletor, acao) => painel.querySelectorAll(seletor).forEach((b) => b.addEventListener('click', () => acao(b)));
-    em('[data-ir]', (b) => ir(b.dataset.ir, b.dataset.ir === 'inicio' ? { remarcando: null } : {}));
+    em('[data-ir]', (b) => ir(b.dataset.ir, b.dataset.ir === 'inicio' ? { remarcando: null, aberta: null } : {}));
+    em('[data-abrir]', (b) => ir('detalhe', { aberta: p.consultas.find((c) => chaveDe(c) === b.dataset.abrir) }));
     em('[data-escolher-servico]', (b) => ir('profissional', { servico: b.dataset.escolherServico }));
     em('[data-escolher-profissional]', (b) => ir('dia', { profissional: b.dataset.escolherProfissional }));
     em('[data-escolher-dia]', (b) => ir('horario', { dia: b.dataset.escolherDia }));
@@ -405,8 +444,8 @@ function iniciarDemonstracao(raiz) {
       const livres = horariosLivres(p.profissional, p.dia);
       if (!livres.includes(p.hora)) { anunciar('Esse horário acabou de ser ocupado. Escolha outro.'); ir('horario'); return; }
       let consultas = p.consultas;
-      if (p.remarcando) { liberar(p.remarcando); consultas = consultas.filter((c) => chaveDe(c) !== chaveDe(p.remarcando)); }
-      const nova = { servico: p.servico, profissional: p.profissional, dia: p.dia, hora: p.hora };
+      if (p.remarcando) { liberar(p.remarcando); consultas = consultas.filter((c) => c !== p.remarcando); }
+      const nova = { servico: p.servico, profissional: p.profissional, dia: p.dia, hora: p.hora, estado: 'Agendada' };
       if (p.dia === hoje.chave) {
         estado.agenda[p.profissional][p.hora] = { estado: 'Agendado', paciente: DADOS.voceNoApp, servico: p.servico, canal: 'App' };
         estado.novo = `${p.profissional}|${p.hora}`;
@@ -414,18 +453,14 @@ function iniciarDemonstracao(raiz) {
         estado.outrosDias[chaveDe(nova)] = true;
       }
       anunciar(p.remarcando ? 'Consulta remarcada.' : 'Consulta agendada.');
-      ir('agendado', { consultas: [...consultas, nova], ultima: nova, remarcando: null });
+      ir('agendado', { consultas: [...consultas, nova], aberta: nova, remarcando: null });
     });
-    em('[data-ver-lembrete]', () => ir('lembrete'));
-    em('[data-remarcar]', (b) => {
-      const c = acharConsulta(b.dataset.remarcar);
-      ir('dia', { remarcando: c, servico: c.servico, profissional: c.profissional });
-    });
-    em('[data-cancelar-app]', (b) => {
-      const c = acharConsulta(b.dataset.cancelarApp);
-      liberar(c);
+    em('[data-ver-lembrete]', () => ir('lembrete', { voltarDoLembrete: p.passo }));
+    em('[data-remarcar]', () => ir('dia', { remarcando: p.aberta, servico: p.aberta.servico, profissional: p.aberta.profissional }));
+    em('[data-cancelar-app]', () => {
+      liberar(p.aberta);
       anunciar('Consulta cancelada. O horário voltou para a agenda.');
-      ir('cancelado', { consultas: p.consultas.filter((x) => x !== c), ultima: null });
+      ir('cancelado', { consultas: p.consultas.filter((x) => x !== p.aberta), aberta: null });
     });
   }
 

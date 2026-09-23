@@ -56,3 +56,8 @@
 ## Publicação (2026-09-23, repositório ivanclay/landing)
 
 O dono decidiu publicar sem número real: o WhatsApp passou a ser `+5520999999999`, com o **DDD 20, que não é atribuído no Brasil** (Anatel), para que o número não possa ter dono. O botão não leva a ninguém até o número real entrar. Aprovação do dono: `revisao.aprovadoPeloClienteEm = 2026-09-23`, `publicar: true`. O JSON-LD pega esse número. Trocar pelo real no `pagina.json` e nos 6 links do `index.html`.
+
+
+## Imagem social (2026-09-23)
+
+Refeita com o celular do app do paciente à direita. Depois do deploy: Facebook Sharing Debugger → "Extrair novamente" e LinkedIn Post Inspector, para o WhatsApp e o LinkedIn trocarem a prévia.

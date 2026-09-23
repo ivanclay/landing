@@ -147,16 +147,18 @@
 
 /* ── Paciente: o aplicativo num celular desenhado em CSS (ilha, barra de status, app da clínica) ── */
 .paciente { display: grid; gap: var(--espaco-6); align-items: center; }
-@media (min-width: 60rem) { .paciente { grid-template-columns: minmax(0, 1fr) 24rem minmax(0, 1fr); } .paciente__nota { grid-column: 3; grid-row: 1; } .celular { grid-column: 2; grid-row: 1; } }
+@media (min-width: 60rem) { .paciente { grid-template-columns: minmax(0, 1fr) 21rem minmax(0, 1fr); } .paciente__nota { grid-column: 3; grid-row: 1; } .celular { grid-column: 2; grid-row: 1; } }
 .paciente__nota { font-size: var(--texto-apoio); color: var(--cor-texto-suave); max-width: 32ch; }
 .paciente__nota strong { color: var(--cor-texto); }
 
 .celular {
   position: relative;
   width: 100%;
-  max-width: 24rem;
+  max-width: 21rem;
   margin-inline: auto;
   padding: 0.625rem;
+  aspect-ratio: 9 / 19.5;
+  display: flex;
   border-radius: 2.75rem;
   background: var(--cor-noite);
   box-shadow: 0 0 0 2px var(--cor-noite-suave), 0 1.5rem 3rem -1.5rem var(--cor-noite);
@@ -175,8 +177,9 @@
   z-index: 1;
 }
 .celular__app {
+  flex: 1;
+  min-height: 0;
   overflow: hidden;
-  min-height: 40rem;
   border-radius: 2.25rem;
   background: var(--cor-fundo);
   display: flex;
@@ -239,6 +242,10 @@
 
 .celular__tela {
   flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
   padding: var(--espaco-4) var(--espaco-5) var(--espaco-6);
   display: grid;
   gap: var(--espaco-3);
@@ -256,7 +263,10 @@
   opacity: 0.8;
 }
 .celular__titulo { font-size: var(--texto-destaque); }
-.celular__subtitulo { margin-top: var(--espaco-3); font-size: var(--texto-meta); text-transform: uppercase; letter-spacing: 0.06em; color: var(--cor-texto-suave); }
+.celular__titulo--centro { text-align: center; }
+.celular__topo { display: flex; justify-content: space-between; align-items: center; gap: var(--espaco-2); }
+.celular__par { display: grid; grid-template-columns: 1fr 1fr; gap: var(--espaco-2); }
+.celular__subtitulo { margin-top: var(--espaco-2); font-size: var(--texto-meta); text-transform: uppercase; letter-spacing: 0.06em; color: var(--cor-texto-suave); }
 .celular__etapa { font-size: var(--texto-meta); font-weight: 650; color: var(--cor-marca); }
 .celular__apoio { color: var(--cor-texto-suave); font-size: var(--texto-apoio); }
 .celular__nota { color: var(--cor-texto-suave); font-size: var(--texto-meta); }
@@ -277,39 +287,63 @@
 .celular__grade--dias { grid-template-columns: repeat(auto-fill, minmax(4.5rem, 1fr)); }
 .celular__grade--horas { grid-template-columns: repeat(3, 1fr); }
 
-/* A consulta: bloco da data à esquerda, o resto em linhas curtas. */
-.consultas { margin: 0; padding: 0; list-style: none; display: grid; gap: var(--espaco-3); }
+/* A consulta. Na lista, uma linha compacta que abre o detalhe; no detalhe, o cartão com tudo. */
+.consultas { margin: 0; padding: 0; list-style: none; display: grid; gap: var(--espaco-2); }
 .consulta {
   display: grid;
-  grid-template-columns: 3.75rem minmax(0, 1fr);
+  grid-template-columns: 3.25rem minmax(0, 1fr);
   gap: var(--espaco-3);
-  padding: var(--espaco-3);
+  width: 100%;
+  padding: var(--espaco-2) var(--espaco-3) var(--espaco-2) var(--espaco-2);
   border: 1px solid var(--cor-linha);
   border-left: 4px solid var(--cor-marca);
   border-radius: 0.75rem;
   background: var(--cor-superficie);
+  color: var(--cor-texto);
+  text-align: left;
+  font: inherit;
 }
+.consulta--linha { grid-template-columns: 3.25rem minmax(0, 1fr) auto; align-items: center; cursor: pointer; }
+button.consulta--linha:hover { border-color: var(--cor-marca); }
+.consulta--passada { grid-template-columns: 3.25rem minmax(0, 1fr); border-left-color: var(--cor-linha); background: transparent; cursor: default; }
+.consulta--passada .consulta__quando, .consulta--passada .dia__numero { color: var(--cor-texto-suave); }
+.consulta--cartao { grid-template-columns: minmax(0, 1fr); gap: var(--espaco-2); padding: var(--espaco-3); }
+.consulta__cabeca { display: grid; grid-template-columns: 3.5rem minmax(0, 1fr); gap: var(--espaco-3); align-items: center; padding-bottom: var(--espaco-2); border-bottom: 1px solid var(--cor-linha); }
 .consulta__data {
-  display: grid;
-  align-content: start;
-  justify-items: center;
-  padding-block: var(--espaco-2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-block: var(--espaco-1);
   border-radius: 0.5rem;
   background: var(--cor-fundo);
   line-height: 1.1;
 }
+.consulta--cartao .consulta__data { padding-block: var(--espaco-2); }
 .dia__semana, .dia__mes { font-size: var(--texto-meta); color: var(--cor-texto-suave); text-transform: lowercase; }
 .dia__numero { font-size: var(--texto-destaque); font-weight: 750; font-variant-numeric: tabular-nums; }
-.consulta__corpo { display: grid; gap: 0.15rem; align-content: start; }
+.consulta__corpo { display: grid; gap: 0.15rem; align-content: start; justify-items: start; }
 .consulta__quando { font-size: var(--texto-apoio); }
-.consulta__quem { font-weight: 650; }
+.consulta__quem { max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: var(--texto-meta); color: var(--cor-texto-suave); line-height: 1.35; }
+.consulta__medico { font-weight: 650; }
 .consulta__registro, .consulta__onde { font-size: var(--texto-meta); color: var(--cor-texto-suave); }
 .consulta__onde { margin-top: var(--espaco-1); }
 .consulta__onde strong { color: var(--cor-texto); font-weight: 600; }
-.consulta__acoes { display: flex; flex-wrap: wrap; gap: var(--espaco-2); margin-top: var(--espaco-2); }
-.acao--pequena { padding-inline: var(--espaco-3); font-size: var(--texto-meta); }
-.anterior { display: flex; gap: var(--espaco-3); align-items: baseline; font-size: var(--texto-meta); color: var(--cor-texto-suave); }
-.anterior__data { flex: none; font-weight: 650; color: var(--cor-texto); }
+.consulta__seta { font-size: 1.5rem; line-height: 1; color: var(--cor-texto-suave); }
+
+/* A situação da consulta: palavra escrita, e a cor só reforça. */
+.situacao {
+  display: inline-block;
+  margin-top: 0.2rem;
+  padding: 0.05rem var(--espaco-2);
+  border: 1px solid currentColor;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 650;
+  line-height: 1.5;
+}
+.situacao--confirmada { background: var(--cor-marca); border-color: var(--cor-marca); color: var(--cor-sobre-marca); }
+.situacao--agendada { color: var(--cor-marca); }
+.situacao--compareceu { color: var(--cor-texto-suave); }
 
 .escolha { display: flex; justify-content: space-between; align-items: center; gap: var(--espaco-2); text-align: left; width: 100%; }
 .escolha span { font-weight: 400; color: var(--cor-texto-suave); }
@@ -329,6 +363,7 @@
 }
 .escolha .monograma { color: var(--cor-sobre-marca); }
 .escolha--dia .dia__numero { color: var(--cor-texto); font-weight: 750; }
+.acao--pequena { min-height: var(--alvo-minimo); padding: var(--espaco-1) var(--espaco-3); font-size: var(--texto-meta); }
 .escolha:hover, .opcao:hover, .acao:not(:disabled):hover { background: var(--cor-superficie); }
 .acao--principal:not(:disabled):hover { background: color-mix(in oklab, var(--cor-marca) 86%, var(--cor-texto)); }
 
@@ -340,7 +375,7 @@
   .celular::before { top: 0.8rem; width: 4.5rem; height: 1.25rem; }
   .celular__status { padding-inline: 1.25rem; }
   .app__cabeca, .app__ola, .celular__tela { padding-inline: var(--espaco-3); }
-  .consulta { grid-template-columns: 3rem minmax(0, 1fr); gap: var(--espaco-2); padding: var(--espaco-2); }
+  .consulta--cartao { padding: var(--espaco-2); }
 }
 
 /* A tela bloqueada com o lembrete: o teto da E-04. */
