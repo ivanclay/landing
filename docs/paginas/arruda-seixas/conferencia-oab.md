@@ -30,7 +30,7 @@
 | "Documentos e detalhes do caso ficam para a reunião com o sócio da área, sob sigilo profissional." | Escritórios | LGPD (regra 5); sigilo profissional | Mantido: protege o cliente e o escritório |
 | Botões "Ligar (11) 3000-0000", "Escrever pelo WhatsApp" | abertura, barra, faixa | art. 4º, § 3º | Permitido — mantido |
 | "Página de caráter informativo, nos termos do Provimento 205/2021… Não usa cookies nem coleta dados." | rodapé | art. 3º (caráter informativo); regra 6 | Mantido |
-| Retratos dos sócios e foto do prédio (2ª versão) | abertura, Sócios | art. 5º, § 2º (fotos dos advogados e do escritório permitidas); art. 6º, parágrafo único (sem ostentação) | Permitido. Na demonstração são **de banco**, com "Imagem ilustrativa" (ADR-004); numa página real, só fotos dos próprios sócios, com autorização (regra 12). O prédio não é apresentado como sede — não afirma dimensão nem estrutura |
+| Retratos dos sócios e a cena de reunião da abertura (2ª versão) | abertura, Sócios | art. 5º, § 2º (fotos dos advogados e do escritório permitidas); art. 6º, parágrafo único (sem ostentação) | Permitido. Na demonstração são **de banco**, com "Imagem ilustrativa" (ADR-004); numa página real, só fotos dos próprios sócios, com autorização (regra 12). A reunião não mostra cliente, documento legível nem estrutura do escritório (art. 6º) |
 
 ## O que ficou fora, e por quê
 

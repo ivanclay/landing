@@ -118,7 +118,7 @@
   display: grid;
   gap: var(--espaco-7) var(--espaco-8);
 }
-/* No celular o prédio vem depois dos contatos, numa faixa baixa; no desktop, em pé ao lado do nome. */
+/* No celular a reunião vem depois dos contatos, numa faixa baixa; no desktop, em pé ao lado do nome. */
 .abertura__imagem img { aspect-ratio: 3 / 2; }
 @media (min-width: 60rem) {
   .abertura__corpo {

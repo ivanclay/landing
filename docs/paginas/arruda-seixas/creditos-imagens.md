@@ -8,7 +8,7 @@ legenda "Imagem ilustrativa". Licença conferida na página de cada imagem em 20
 
 | Imagem | Arquivos | Página da imagem | Autor | Onde foi usada |
 |---|---|---|---|---|
-| `predio` | `predio-480/800/1000` (.avif, .webp, .jpg) | https://www.pexels.com/photo/low-angle-shot-of-a-building-perspective-with-white-and-black-exterior-3137040/ | Adrien Olichon | Abertura (4:5 no desktop, 3:2 no celular) |
+| `reuniao` | `reuniao-480/800/1000` (.avif, .webp, .jpg) | https://www.pexels.com/photo/elderly-man-and-woman-discussing-business-in-a-meeting-7433853/ | Vlada Karpovich | Abertura (4:5 no desktop, 3:2 no celular) — escolhida pelo dono (opção D) entre 4 aplicadas na página |
 | `socio-helena` | `socio-helena-320/640` | https://www.pexels.com/photo/woman-in-black-dress-shirt-8871934/ | Mikhail Nilov | Sócios — Helena Arruda |
 | `socio-otavio` | `socio-otavio-320/640` | https://www.pexels.com/photo/professional-portrait-of-mature-businessman-29598497/ | Alican | Sócios — Otávio Seixas |
 | `socio-marina` | `socio-marina-320/640` | https://www.pexels.com/photo/professional-woman-in-black-suit-portrait-34381971/ | Zoe Galarza | Sócios — Marina Kfouri Lage |
@@ -26,12 +26,16 @@ A imagem social (`social.jpg`) é tipográfica, sem foto.
 
 Recorte 4:5 no busto (parâmetros `cx`, `top`, `wf` por foto: centro horizontal, topo e largura, em fração
 do original), 800×1000, **preto e branco** (`grayscale()`), contraste `linear(1.08, -8)`; o prédio, 1440×1800
-com `linear(1.1, -10)`.
+com `linear(1.1, -10)`; a reunião, recorte 4:5 de x = 513 px (largura 1174 de 2200), 1000×1250, `linear(1.08, -8)`.
 Recortes usados (`cx`/`top`/`wf`): helena .50/.05/.80 · otavio .55/.10/.85 · marina .50/.05/.80 · caio .50/.03/.85 ·
 beatriz .55/.05/.80 · rafael .52/.00/.45 · livia .45/.10/.60 · tomas .50/.00/.52 · juliana .45/.12/.70 · eduardo .50/.04/.80. O P&B põe dez fotógrafos diferentes na mesma luz — é o que faz a grade ler como um
 escritório só. Depois, `npm run imagens` (sem EXIF).
 
 ## Descartadas
+
+- **Prédio** (Adrien Olichon, Pexels 3137040), na abertura da 2ª versão: recusado pelo dono — "o prédio não faz
+  sentido". Trocado pela reunião (opção D) entre: A retrato da Helena, B os dois fundadores, C a reunião em faixa
+  larga, D a reunião em pé (`entrada/arruda-seixas/opcoes-abertura.jpg`).
 
 - Tomás, 1ª escolha (Pavel Danilyuk, 7519019): relógio grande em primeiro plano — **ostentação de bem**
   (Provimento 205/2021, art. 6º, parágrafo único).

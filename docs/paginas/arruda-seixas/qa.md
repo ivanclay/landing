@@ -1,5 +1,10 @@
 # QA — Arruda Seixas Advogados (`arruda-seixas`) · DEMONSTRAÇÃO
 
+## 2ª versão, abertura trocada (prédio → reunião, opção D) — 2026-09-23
+
+Lighthouse 12.8.2, celular, 3 execuções: **99 / 100 / 100 / 69** nas três; **LCP 2,0 s**, CLS 0,001, **171 KB**
+(a reunião pesa menos que o prédio). Sem rolagem lateral de 320 a 1920 px, com e sem JS. Verificação aprovada.
+
 ## 2ª versão (imagens e rodapé) — 2026-09-23
 
 | Execução | Performance | Acessibilidade | Boas práticas | SEO | LCP | CLS | Peso |

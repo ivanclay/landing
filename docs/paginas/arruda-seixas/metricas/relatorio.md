@@ -18,3 +18,9 @@
 - Tokens — entrada: 90 · saída: 40.209 · cache: 14.725.846 (criação 101.317 + leitura 14.624.529)
 - Custo estimado: US$ 4,54 · Origem: ccusage, diferença entre duas leituras na mesma sessão (exata)
 - **Total da página até aqui:** 34 min · US$ 11,89
+
+## Abertura trocada — prédio → reunião (ajuste)
+
+- 2026-09-23, das 07:00 às 07:11 — 11 min, incluindo a espera pela escolha do dono
+- Tokens — entrada: 48 · saída: 16.540 · cache: 9.449.929 · Custo: US$ 2,47 · Origem: ccusage (mesma sessão, exata)
+- **Total da página até aqui:** 45 min · US$ 14,36

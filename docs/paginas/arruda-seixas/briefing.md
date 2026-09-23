@@ -28,7 +28,7 @@
 | Especialidade (título) | **nenhuma anunciada** — sem título certificado não há "especialista" (Provimento 205/2021, art. 3º, III); a página diz "atua em" | — | conferência OAB | 2026-09-23 |
 | Sócios | ver tabela abaixo | **sim** | redação | 2026-09-23 |
 | Formação dos sócios | **fora da página** (instituição real com pessoa inventada) | — | critério do Dr. Paulo | 2026-09-23 |
-| Imagens | Retratos dos sócios e foto de prédio **de banco** (Pexels), P&B, com "Imagem ilustrativa" — pedido do dono na 2ª versão; créditos em `creditos-imagens.md` | — | mensagem do dono | 2026-09-23 |
+| Imagens | Retratos dos sócios e cena de reunião **de banco** (Pexels), P&B, com "Imagem ilustrativa" — pedido do dono na 2ª versão; créditos em `creditos-imagens.md` | — | mensagem do dono | 2026-09-23 |
 | Clientes, casos, rankings, prêmios | **fora** (CED art. 42, IV; Provimento 205/2021, arts. 5º, § 1º, e 6º) | — | conferência OAB | 2026-09-23 |
 | Honorários | **fora** (Provimento 205/2021, art. 3º, I) | — | conferência OAB | 2026-09-23 |
 | Telefone SP | +551130000000 | **sim** | padrão das demonstrações (Dr. Paulo) | 2026-09-23 |

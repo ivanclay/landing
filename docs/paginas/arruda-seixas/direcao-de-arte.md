@@ -113,8 +113,10 @@ sofisticada") e um rodapé que não pareça "um montão de texto jogado à toa".
   ilustrativa" num canto da foto, sobre fundo sólido. Créditos e recortes em `creditos-imagens.md`.
 - **Preto e branco em tudo.** Dez fotógrafos diferentes só viram um escritório com a mesma luz; o P&B
   também deixa o vermelho da rubrica como a única cor da página, o que mantém o plano.
-- **Abertura:** o prédio de lajes escalonadas em pé ao lado do nome (4:5); no celular, faixa 3:2 depois
-  dos contatos, para o nome e o botão continuarem na primeira tela.
+- **Abertura:** primeiro o prédio de lajes escalonadas — **recusado** ("não faz sentido": fachada genérica
+  não diz quem é o escritório). Quatro opções aplicadas na página; o dono escolheu **D, uma reunião** (dois
+  advogados maduros à mesa, janelas altas), em pé ao lado do nome (4:5); no celular, faixa 3:2 depois dos
+  contatos, para o nome e o botão continuarem na primeira tela.
 - **Sócios:** grade de retratos 4:5 — 5 por linha no desktop (a grade sai da coluna de texto e toma a folha
   inteira), 3 no tablet, 2 no celular; nome, cargo, área (link) e inscrição em linhas próprias.
 - **Rodapé:** marca à esquerda; três colunas com título em itálico vermelho sobre fio — *Registro na OAB*,
