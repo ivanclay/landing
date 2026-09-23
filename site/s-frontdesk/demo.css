@@ -145,50 +145,203 @@
 .acao--leve { border-color: transparent; text-decoration: underline; font-weight: 500; }
 .acao--larga { width: 100%; }
 
-/* ── Paciente: o aplicativo, numa moldura reta e sem sombra ── */
+/* ── Paciente: o aplicativo num celular desenhado em CSS (ilha, barra de status, app da clínica) ── */
 .paciente { display: grid; gap: var(--espaco-6); align-items: center; }
-@media (min-width: 60rem) { .paciente { grid-template-columns: minmax(0, 1fr) 23rem minmax(0, 1fr); } .paciente__nota { grid-column: 3; grid-row: 1; } .celular { grid-column: 2; grid-row: 1; } }
+@media (min-width: 60rem) { .paciente { grid-template-columns: minmax(0, 1fr) 24rem minmax(0, 1fr); } .paciente__nota { grid-column: 3; grid-row: 1; } .celular { grid-column: 2; grid-row: 1; } }
 .paciente__nota { font-size: var(--texto-apoio); color: var(--cor-texto-suave); max-width: 32ch; }
 .paciente__nota strong { color: var(--cor-texto); }
+
 .celular {
-  max-width: 23rem;
+  position: relative;
+  width: 100%;
+  max-width: 24rem;
   margin-inline: auto;
-  border: 2px solid var(--cor-texto);
-  border-radius: 1.75rem;
-  padding: var(--espaco-3);
-  background: var(--cor-texto);
+  padding: 0.625rem;
+  border-radius: 2.75rem;
+  background: var(--cor-noite);
+  box-shadow: 0 0 0 2px var(--cor-noite-suave), 0 1.5rem 3rem -1.5rem var(--cor-noite);
 }
-.celular__barra {
+/* A ilha, no alto da tela. */
+.celular::before {
+  content: '';
+  position: absolute;
+  top: 1.1rem;
+  left: 50%;
+  width: 5.5rem;
+  height: 1.5rem;
+  transform: translateX(-50%);
+  border-radius: 999px;
+  background: var(--cor-noite);
+  z-index: 1;
+}
+.celular__app {
+  overflow: hidden;
+  min-height: 40rem;
+  border-radius: 2.25rem;
+  background: var(--cor-fundo);
+  display: flex;
+  flex-direction: column;
+}
+.celular__status {
   display: flex;
   justify-content: space-between;
-  gap: var(--espaco-2);
-  padding: var(--espaco-1) var(--espaco-3) var(--espaco-2);
-  color: var(--cor-fundo);
+  align-items: center;
+  padding: 0.85rem 1.6rem 0.4rem;
+  background: var(--cor-marca);
+  color: var(--cor-sobre-marca);
   font-size: var(--texto-meta);
+  font-weight: 650;
+  font-variant-numeric: tabular-nums;
 }
+.celular__icones { display: flex; align-items: flex-end; gap: 2px; }
+.celular__icones i { display: block; width: 3px; background: currentColor; border-radius: 1px; }
+.celular__icones i:nth-child(1) { height: 5px; }
+.celular__icones i:nth-child(2) { height: 8px; }
+.celular__icones i:nth-child(3) { height: 11px; margin-right: 6px; }
+.celular__icones::after {
+  content: '';
+  width: 1.3rem;
+  height: 0.65rem;
+  border: 1.5px solid currentColor;
+  border-radius: 3px;
+  background: linear-gradient(currentColor, currentColor) 1px 1px / 70% calc(100% - 2px) no-repeat;
+}
+
+.app__cabeca {
+  display: flex;
+  align-items: center;
+  gap: var(--espaco-3);
+  padding: var(--espaco-3) var(--espaco-5) var(--espaco-4);
+  background: var(--cor-marca);
+  color: var(--cor-sobre-marca);
+}
+.app__marca {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 0.75rem;
+  background: var(--cor-sobre-marca);
+  color: var(--cor-marca);
+  font-weight: 750;
+  font-size: var(--texto-apoio);
+}
+.app__clinica { display: grid; line-height: 1.25; }
+.app__clinica strong { font-size: var(--texto-apoio); }
+.app__clinica span { font-size: var(--texto-meta); opacity: 0.9; }
+.app__ola {
+  padding: var(--espaco-3) var(--espaco-5);
+  border-bottom: 1px solid var(--cor-linha);
+  font-size: var(--texto-meta);
+  color: var(--cor-texto-suave);
+}
+
 .celular__tela {
-  background: var(--cor-fundo);
-  border-radius: 1.25rem;
-  padding: var(--espaco-5);
-  min-height: 26rem;
+  flex: 1;
+  padding: var(--espaco-4) var(--espaco-5) var(--espaco-6);
   display: grid;
   gap: var(--espaco-3);
   align-content: start;
 }
+/* A barrinha de gesto no pé da tela. */
+.celular__app::after {
+  content: '';
+  align-self: center;
+  width: 7rem;
+  height: 0.3rem;
+  margin-block: var(--espaco-2) var(--espaco-3);
+  border-radius: 999px;
+  background: var(--cor-texto);
+  opacity: 0.8;
+}
 .celular__titulo { font-size: var(--texto-destaque); }
+.celular__subtitulo { margin-top: var(--espaco-3); font-size: var(--texto-meta); text-transform: uppercase; letter-spacing: 0.06em; color: var(--cor-texto-suave); }
+.celular__etapa { font-size: var(--texto-meta); font-weight: 650; color: var(--cor-marca); }
 .celular__apoio { color: var(--cor-texto-suave); font-size: var(--texto-apoio); }
 .celular__nota { color: var(--cor-texto-suave); font-size: var(--texto-meta); }
 .celular__voltar { justify-self: start; border-color: transparent; padding-inline: 0; text-decoration: underline; font-weight: 500; }
+.celular__selo {
+  justify-self: center;
+  display: grid;
+  place-items: center;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  background: var(--cor-marcatexto);
+  color: var(--cor-texto);
+  font-size: 1.5rem;
+  font-weight: 700;
+}
 .celular__grade { display: grid; grid-template-columns: 1fr 1fr; gap: var(--espaco-2); }
+.celular__grade--dias { grid-template-columns: repeat(auto-fill, minmax(4.5rem, 1fr)); }
 .celular__grade--horas { grid-template-columns: repeat(3, 1fr); }
+
+/* A consulta: bloco da data à esquerda, o resto em linhas curtas. */
+.consultas { margin: 0; padding: 0; list-style: none; display: grid; gap: var(--espaco-3); }
+.consulta {
+  display: grid;
+  grid-template-columns: 3.75rem minmax(0, 1fr);
+  gap: var(--espaco-3);
+  padding: var(--espaco-3);
+  border: 1px solid var(--cor-linha);
+  border-left: 4px solid var(--cor-marca);
+  border-radius: 0.75rem;
+  background: var(--cor-superficie);
+}
+.consulta__data {
+  display: grid;
+  align-content: start;
+  justify-items: center;
+  padding-block: var(--espaco-2);
+  border-radius: 0.5rem;
+  background: var(--cor-fundo);
+  line-height: 1.1;
+}
+.dia__semana, .dia__mes { font-size: var(--texto-meta); color: var(--cor-texto-suave); text-transform: lowercase; }
+.dia__numero { font-size: var(--texto-destaque); font-weight: 750; font-variant-numeric: tabular-nums; }
+.consulta__corpo { display: grid; gap: 0.15rem; align-content: start; }
+.consulta__quando { font-size: var(--texto-apoio); }
+.consulta__quem { font-weight: 650; }
+.consulta__registro, .consulta__onde { font-size: var(--texto-meta); color: var(--cor-texto-suave); }
+.consulta__onde { margin-top: var(--espaco-1); }
+.consulta__onde strong { color: var(--cor-texto); font-weight: 600; }
+.consulta__acoes { display: flex; flex-wrap: wrap; gap: var(--espaco-2); margin-top: var(--espaco-2); }
+.acao--pequena { padding-inline: var(--espaco-3); font-size: var(--texto-meta); }
+.anterior { display: flex; gap: var(--espaco-3); align-items: baseline; font-size: var(--texto-meta); color: var(--cor-texto-suave); }
+.anterior__data { flex: none; font-weight: 650; color: var(--cor-texto); }
+
 .escolha { display: flex; justify-content: space-between; align-items: center; gap: var(--espaco-2); text-align: left; width: 100%; }
 .escolha span { font-weight: 400; color: var(--cor-texto-suave); }
-.escolha--profissional { display: block; padding-block: var(--espaco-3); }
+.escolha--profissional { justify-content: start; gap: var(--espaco-3); padding-block: var(--espaco-3); }
+.escolha--profissional .id-profissional__nome { color: var(--cor-texto); }
+.escolha--dia { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0; padding: var(--espaco-2); line-height: 1.1; }
 .escolha--hora { justify-content: center; font-variant-numeric: tabular-nums; }
+.monograma {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 50%;
+  background: var(--cor-marca);
+  font-weight: 700;
+}
+.escolha .monograma { color: var(--cor-sobre-marca); }
+.escolha--dia .dia__numero { color: var(--cor-texto); font-weight: 750; }
 .escolha:hover, .opcao:hover, .acao:not(:disabled):hover { background: var(--cor-superficie); }
 .acao--principal:not(:disabled):hover { background: color-mix(in oklab, var(--cor-marca) 86%, var(--cor-texto)); }
-.celular__resumo { display: grid; gap: var(--espaco-3); font-size: var(--texto-apoio); }
-.celular__resumo dt { font-size: var(--texto-meta); color: var(--cor-texto-suave); }
+
+/* Em tela estreita, o celular desenhado ocupa a largura toda: moldura e margens mais finas. */
+@media (max-width: 30rem) {
+  .demo__app { padding-inline: var(--espaco-3); }
+  .celular { padding: 0.375rem; border-radius: 2rem; }
+  .celular__app { border-radius: 1.65rem; }
+  .celular::before { top: 0.8rem; width: 4.5rem; height: 1.25rem; }
+  .celular__status { padding-inline: 1.25rem; }
+  .app__cabeca, .app__ola, .celular__tela { padding-inline: var(--espaco-3); }
+  .consulta { grid-template-columns: 3rem minmax(0, 1fr); gap: var(--espaco-2); padding: var(--espaco-2); }
+}
 
 /* A tela bloqueada com o lembrete: o teto da E-04. */
 .bloqueio {
