@@ -105,7 +105,11 @@ test('passa: demonstração publicada sem CRM conferido nem aprovação, com avi
   assert.match(pagina, /<meta property="og:image:width" content="1200">/);
   assert.match(pagina, /<meta property="og:image:alt" content="Demonstração: /);
   assert.doesNotMatch(await readFile(path.join(raiz, '_site', 'sitemap.xml'), 'utf8'), new RegExp(SLUG));
-  assert.doesNotMatch(await readFile(path.join(raiz, '_site', 'index.html'), 'utf8'), new RegExp(SLUG));
+  // No índice, só na seção "Demonstrações e propostas", etiquetada (ADR-005; o site.config.json liga a seção).
+  const indice = await readFile(path.join(raiz, '_site', 'index.html'), 'utf8');
+  const listaPrincipal = indice.slice(0, indice.indexOf('class="exemplos"'));
+  assert.doesNotMatch(listaPrincipal, new RegExp(SLUG));
+  assert.match(indice, /Demonstração · médico fictício/);
 }));
 
 test('reprova: demonstração sem o aviso no topo', () => comSite({ html: indexHtml({ comAviso: false }) }, (resultado) => {
@@ -141,5 +145,66 @@ test('reprova: página real com créditos de banco de imagem', () => comSite(
   (resultado) => {
     assert.notEqual(resultado.status, 0);
     assert.match(resultado.stderr, /creditos-imagens\.md numa página real/);
+  },
+));
+
+// ---------- ADR-005: página de negócio e modo proposta ----------
+
+const AVISO_PROPOSTA = 'Proposta de novo site para Consultoria de Teste, em avaliação. Este não é o site oficial: '
+  + 'o site oficial é consultoriadeteste.com.br.';
+
+const paginaNegocio = (extra = {}) => ({
+  slug: SLUG,
+  tipo: 'negocio',
+  proposta: true,
+  publicar: true,
+  atualizadoEm: '2026-09-22',
+  organizacao: { nome: 'Consultoria de Teste', categoria: 'Consultoria em saúde' },
+  siteOficial: 'https://www.consultoriadeteste.com.br/',
+  resumo: 'Consultoria de teste em gestão de saúde, para provar o contrato de página de negócio.',
+  contato: { whatsapp: '+5511900000000' },
+  ...extra,
+});
+
+const htmlNegocio = ({ comAviso = true } = {}) => `<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Consultoria de Teste</title>
+    <meta name="description" content="Consultoria de teste em gestão de saúde, para provar o contrato de página de negócio.">
+    <!-- @gerado:cabecalho -->
+  </head>
+  <body>
+    ${comAviso ? `<p data-aviso-proposta>${AVISO_PROPOSTA}</p>` : ''}
+    <main><h1>Consultoria de Teste</h1></main>
+  </body>
+</html>
+`;
+
+test('passa: proposta de negócio sem CRM, com aviso — noindex e fora do sitemap', () => comSite(
+  { pagina: paginaNegocio(), html: htmlNegocio(), creditos: null },
+  async (resultado, raiz) => {
+    assert.equal(resultado.status, 0, resultado.stderr);
+    const pagina = await readFile(path.join(raiz, '_site', SLUG, 'index.html'), 'utf8');
+    assert.match(pagina, /<meta name="robots" content="noindex, nofollow">/);
+    assert.match(pagina, /"@type":"ProfessionalService"/);
+    assert.doesNotMatch(await readFile(path.join(raiz, '_site', 'sitemap.xml'), 'utf8'), new RegExp(SLUG));
+  },
+));
+
+test('reprova: proposta sem o aviso de que não é o site oficial', () => comSite(
+  { pagina: paginaNegocio(), html: htmlNegocio({ comAviso: false }), creditos: null },
+  (resultado) => {
+    assert.notEqual(resultado.status, 0);
+    assert.match(resultado.stderr, /sem o elemento data-aviso-proposta/);
+  },
+));
+
+test('reprova: negócio publicado fora de proposta sem a aprovação do cliente', () => comSite(
+  { pagina: paginaNegocio({ proposta: false }), html: htmlNegocio({ comAviso: false }), creditos: null },
+  (resultado) => {
+    assert.notEqual(resultado.status, 0);
+    assert.match(resultado.stderr, /revisao\.aprovadoPeloClienteEm ausente/);
   },
 ));

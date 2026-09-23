@@ -1,7 +1,7 @@
 // O que só a construção escreve: endereço absoluto (canonical, og:url, og:image) e dados estruturados.
 // A página nunca digita a URL base — ela muda no dia em que houver domínio próprio (D-01, regra 8).
 import { escaparHtml } from './html.mjs';
-import { nomeDeExibicao, ehDemonstracao } from './pagina.mjs';
+import { nomeDeExibicao, ehDemonstracao, ehNegocio, ehProposta, soPorLinkDireto } from './pagina.mjs';
 
 export function urlDaPagina(config, slug) {
   return new URL(`${slug}/`, config.urlBase).href;
@@ -30,17 +30,19 @@ export function cabecalhoDaPagina(pagina, config, { rascunho = false } = {}) {
     linhas.push('<meta name="twitter:card" content="summary_large_image">');
     linhas.push(`<meta name="twitter:image" content="${imagem}">`);
   }
-  // Rascunho e demonstração nunca vão para o Google; a demonstração, nem publicada (ADR-004).
-  if (rascunho || ehDemonstracao(pagina)) linhas.push('<meta name="robots" content="noindex, nofollow">');
+  // Rascunho, demonstração e proposta nunca vão para o Google — as duas últimas nem publicadas (ADR-004, ADR-005).
+  if (rascunho || soPorLinkDireto(pagina)) linhas.push('<meta name="robots" content="noindex, nofollow">');
   linhas.push(`<script type="application/ld+json">${JSON.stringify(dadosEstruturados(pagina, url))}</script>`);
   return linhas.join('\n    ');
 }
 
 /** O alt da imagem social: quem, o quê, onde — e, na demonstração, que é demonstração (ADR-004). */
 function textoDaImagemSocial(pagina) {
-  const especialidade = (pagina.medico.especialidades ?? [])[0]?.nome;
-  const texto = [nomeDeExibicao(pagina), especialidade, `${pagina.cidade}/${pagina.uf}`].filter(Boolean).join(' — ');
-  return ehDemonstracao(pagina) ? `Demonstração: ${texto}` : texto;
+  const assunto = ehNegocio(pagina) ? pagina.organizacao.categoria : (pagina.medico.especialidades ?? [])[0]?.nome;
+  const lugar = [pagina.cidade, pagina.uf].filter(Boolean).join('/');
+  const texto = [nomeDeExibicao(pagina), assunto, lugar].filter(Boolean).join(' — ');
+  if (ehDemonstracao(pagina)) return `Demonstração: ${texto}`;
+  return ehProposta(pagina) ? `Proposta de site: ${texto}` : texto;
 }
 
 /**
@@ -48,6 +50,7 @@ function textoDaImagemSocial(pagina) {
  * Conferir o resultado em https://validator.schema.org (seo-local-landing).
  */
 export function dadosEstruturados(pagina, url) {
+  if (ehNegocio(pagina)) return dadosDoNegocio(pagina, url);
   const { medico, contato = {}, locais = [], convenios = [] } = pagina;
   const principal = locais[0];
   const dados = {
@@ -72,6 +75,39 @@ export function dadosEstruturados(pagina, url) {
   }
   if (convenios.length) dados.paymentAccepted = convenios.join(', ');
   const perfis = Object.values(pagina.redes ?? {}).filter((valor) => valor.startsWith('https://'));
+  if (perfis.length) dados.sameAs = perfis;
+  return dados;
+}
+
+/** schema.org ProfessionalService para página de negócio (ADR-005). Só o que o pagina.json afirma. */
+function dadosDoNegocio(pagina, url) {
+  const { organizacao, contato = {} } = pagina;
+  const dados = {
+    '@context': 'https://schema.org',
+    '@type': 'ProfessionalService',
+    name: organizacao.nome,
+    url,
+    description: pagina.resumo,
+  };
+  if (organizacao.slogan) dados.slogan = organizacao.slogan;
+  if (contato.telefone || contato.whatsapp) dados.telephone = contato.telefone ?? contato.whatsapp;
+  if (pagina.imagemSocial) dados.image = new URL(pagina.imagemSocial, url).href;
+  if (organizacao.logo) dados.logo = new URL(organizacao.logo, url).href;
+  if (organizacao.areaAtendida) dados.areaServed = organizacao.areaAtendida;
+  if (organizacao.temas?.length) dados.knowsAbout = organizacao.temas;
+  if (organizacao.responsavel) {
+    dados.founder = { '@type': 'Person', name: organizacao.responsavel.nome, ...(organizacao.responsavel.cargo ? { jobTitle: organizacao.responsavel.cargo } : {}) };
+  }
+  if (organizacao.servicos?.length) {
+    dados.hasOfferCatalog = {
+      '@type': 'OfferCatalog',
+      name: 'Serviços',
+      itemListElement: organizacao.servicos.map((servico) => ({
+        '@type': 'Offer', itemOffered: { '@type': 'Service', name: servico.nome, description: servico.descricao },
+      })),
+    };
+  }
+  const perfis = [pagina.siteOficial, ...Object.values(pagina.redes ?? {})].filter((valor) => valor?.startsWith('https://'));
   if (perfis.length) dados.sameAs = perfis;
   return dados;
 }

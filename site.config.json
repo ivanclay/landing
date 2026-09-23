@@ -3,7 +3,8 @@
   "indice": {
     "titulo": "Médicos",
     "descricao": "As páginas dos médicos que atendemos: onde atendem, por quais convênios e como marcar a consulta.",
-    "indexavel": true
+    "indexavel": true,
+    "mostrarDemonstracoes": true
   },
   "redirecionamentos": {},
   "verificacaoGoogle": ""

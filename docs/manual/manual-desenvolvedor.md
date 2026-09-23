@@ -79,6 +79,15 @@ O código é o contrato: `ferramentas/lib/pagina.mjs`. O modelo está em
 conter "demonstração". A construção põe `noindex, nofollow` e deixa a página fora do índice e do sitemap:
 ela só abre pelo link direto.
 
+**Página de negócio** (`"tipo": "negocio"`, [ADR-005](../decisoes/adr/ADR-005-pagina-de-negocio-e-proposta.md)):
+exige `organizacao.nome` em vez de `medico`; sem CRM, sem identificação CFM; publicar exige
+`revisao.aprovadoPeloClienteEm`. Com `"proposta": true`, publica sem aprovação, com `noindex`, fora do
+sitemap, exigindo `siteOficial` e o `data-aviso-proposta` (texto de `avisoDeProposta()`). JSON-LD
+`ProfessionalService`.
+
+**Índice:** `site.config.json › indice.mostrarDemonstracoes` mostra demonstrações e propostas numa seção
+à parte da raiz, etiquetadas (continuam fora do Google e do sitemap).
+
 **Campos opcionais, usados pelo JSON-LD:** `locais[]` (`nome`, `tipo`, `endereco`), `convenios[]`,
 `redes{}`, `imagemSocial`.
 

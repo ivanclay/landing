@@ -122,3 +122,15 @@
   padding: var(--margem-lateral);
 }
 .pagina-simples h1 { font-size: var(--texto-titulo); font-weight: 380; }
+
+/* Demonstrações e propostas (ADR-004, ADR-005): à parte da lista, com etiqueta — nunca passam por página oficial. */
+.exemplos { margin-top: var(--espaco-8); }
+.exemplos__titulo { font-size: var(--texto-secao); font-weight: 400; }
+.exemplos__nota { max-width: var(--medida); margin-block: var(--espaco-3) var(--espaco-5); color: var(--cor-texto-suave); }
+.indice__etiqueta {
+  justify-self: start;
+  padding: 0 var(--espaco-2);
+  border: 1px solid var(--cor-texto-suave);
+  font-size: var(--texto-meta);
+  color: var(--cor-texto-suave);
+}

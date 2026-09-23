@@ -1,6 +1,6 @@
 # ADR-004 — Modo demonstração: página de médico fictício que nunca passa por real
 
-- **Data:** 2026-09-22 · **Estado:** aceito (o dono delegou a decisão em 2026-09-22: "siga até o final")
+- **Data:** 2026-09-22 · **Estado:** aceito · emendado pelo ADR-005 (a demonstração aparece etiquetada no índice) (o dono delegou a decisão em 2026-09-22: "siga até o final")
 
 ## Contexto
 O dono precisa mostrar a médicos o que o repositório entrega. A página de demonstração usa um médico

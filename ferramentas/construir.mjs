@@ -9,12 +9,15 @@ import {
   RAIZ, PASTA_SITE, PASTA_SAIDA, PASTA_MODELOS, ehPastaDePagina, lerJson, listarPastas,
   readFile, writeFile, mkdir, cp, rm, existsSync, path,
 } from './lib/arquivos.mjs';
-import { validarPagina, nomeDeExibicao, ehDemonstracao, FORMATO_SLUG } from './lib/pagina.mjs';
+import {
+  validarPagina, nomeDeExibicao, ehNegocio, ehDemonstracao, ehProposta, soPorLinkDireto, FORMATO_SLUG,
+} from './lib/pagina.mjs';
 import { cabecalhoDaPagina, cabecalhoDoIndice, urlDaPagina } from './lib/seo.mjs';
 import { escaparHtml } from './lib/html.mjs';
 
 const MARCADOR_CABECALHO = '<!-- @gerado:cabecalho -->';
 const MARCADOR_LISTA = '<!-- @gerado:lista -->';
+const MARCADOR_EXEMPLOS = '<!-- @gerado:exemplos -->';
 const incluirRascunhos = process.argv.includes('--rascunhos');
 
 async function construir() {
@@ -35,18 +38,20 @@ async function construir() {
   erros.push(...(await gerarRedirecionamentos(config, publicadas)));
   if (erros.length) return falhar(erros);
 
-  // A demonstração só abre pelo link direto: fica fora do índice e do sitemap (ADR-004).
-  const listaveis = publicadas.filter((p) => !ehDemonstracao(p));
-  await gerarIndice(config, listaveis);
+  // Demonstração e proposta ficam fora do sitemap e da lista principal (ADR-004, ADR-005). Com
+  // indice.mostrarDemonstracoes, o índice as mostra numa seção à parte, etiquetadas — continuam noindex.
+  const listaveis = publicadas.filter((p) => !soPorLinkDireto(p));
+  const exemplos = config.indice.mostrarDemonstracoes ? publicadas.filter((p) => p.publicar && soPorLinkDireto(p)) : [];
+  await gerarIndice(config, listaveis, exemplos);
   await copiarModelo('404.html', '404.html', config);
   await writeFile(path.join(PASTA_SAIDA, 'sitemap.xml'), sitemap(config, listaveis.filter((p) => p.publicar)));
   await writeFile(path.join(PASTA_SAIDA, 'robots.txt'),
     `User-agent: *\nAllow: /\n\nSitemap: ${new URL('sitemap.xml', config.urlBase).href}\n`);
 
   const rascunhos = publicadas.filter((p) => !p.publicar).length;
-  const demonstracoes = publicadas.filter((p) => p.publicar && ehDemonstracao(p)).length;
+  const soPorLink = publicadas.filter((p) => p.publicar && soPorLinkDireto(p)).length;
   console.log(`_site/ pronto: ${publicadas.length - rascunhos} página(s) publicada(s)`
-    + (demonstracoes ? ` (${demonstracoes} de demonstração, só por link direto)` : '')
+    + (soPorLink ? ` (${soPorLink} de demonstração ou proposta, com noindex)` : '')
     + (rascunhos ? ` e ${rascunhos} rascunho(s) com noindex — NÃO publique esta construção` : '') + '.');
 }
 
@@ -80,30 +85,44 @@ async function construirPagina(pasta, config) {
   return { erros: [], pagina };
 }
 
-async function gerarIndice(config, paginas) {
-  const itens = [...paginas]
-    .sort((a, b) => a.medico.nome.localeCompare(b.medico.nome, 'pt-BR'))
-    .map((pagina) => {
-      const especialidades = (pagina.medico.especialidades ?? []).map((e) => e.nome).join(', ');
-      const busca = [nomeDeExibicao(pagina), especialidades, pagina.cidade, pagina.uf].join(' ');
-      return `
-        <li class="indice__item" data-busca="${escaparHtml(busca)}">
-          <a class="indice__link" href="${escaparHtml(pagina.slug)}/">
-            <span class="indice__nome">${escaparHtml(nomeDeExibicao(pagina))}</span>
-            <span class="indice__especialidade">${escaparHtml(especialidades || 'Clínica')}</span>
-            <span class="indice__cidade">${escaparHtml(`${pagina.cidade}, ${pagina.uf}`)}</span>
-          </a>
-        </li>`;
-    }).join('');
-  const lista = itens || `
-        <li class="indice__vazio">Nenhuma página publicada ainda.</li>`;
+async function gerarIndice(config, paginas, exemplos = []) {
+  const emOrdem = (lista) => [...lista].sort((a, b) => nomeDeExibicao(a).localeCompare(nomeDeExibicao(b), 'pt-BR'));
+  const lista = emOrdem(paginas).map((pagina) => itemDoIndice(pagina)).join('') || `
+        <li class="indice__vazio">Nenhuma página de cliente publicada ainda.</li>`;
+  const secaoExemplos = exemplos.length ? `
+      <section class="exemplos" aria-labelledby="titulo-exemplos">
+        <h2 id="titulo-exemplos" class="exemplos__titulo">Demonstrações e propostas</h2>
+        <p class="exemplos__nota">Modelos do nosso trabalho, fora do Google. A demonstração apresenta um médico fictício; a proposta é o novo site de um negócio real, ainda em avaliação pelo dono.</p>
+        <ol class="indice" role="list">${emOrdem(exemplos).map((pagina) => itemDoIndice(pagina)).join('')}
+        </ol>
+      </section>` : '';
   const modelo = await readFile(path.join(PASTA_MODELOS, 'indice.html'), 'utf8');
   await writeFile(path.join(PASTA_SAIDA, 'index.html'), modelo
     .replace(MARCADOR_CABECALHO, cabecalhoDoIndice(config))
     .replace(MARCADOR_LISTA, lista)
+    .replace(MARCADOR_EXEMPLOS, secaoExemplos)
     .replaceAll('{{TITULO}}', escaparHtml(config.indice.titulo))
     .replaceAll('{{DESCRICAO}}', escaparHtml(config.indice.descricao))
     .replaceAll('{{QUANTIDADE}}', String(paginas.length)));
+}
+
+/** Um item do índice; demonstração e proposta levam etiqueta. */
+function itemDoIndice(pagina) {
+  const assunto = ehNegocio(pagina)
+    ? (pagina.organizacao.categoria ?? '')
+    : (pagina.medico.especialidades ?? []).map((e) => e.nome).join(', ');
+  const lugar = [pagina.cidade, pagina.uf].filter(Boolean).join(', ');
+  const etiqueta = ehDemonstracao(pagina) ? 'Demonstração · médico fictício' : ehProposta(pagina) ? 'Proposta · em avaliação' : '';
+  const busca = [nomeDeExibicao(pagina), assunto, lugar, etiqueta].join(' ');
+  return `
+        <li class="indice__item" data-busca="${escaparHtml(busca)}">
+          <a class="indice__link" href="${escaparHtml(pagina.slug)}/">
+            <span class="indice__nome">${escaparHtml(nomeDeExibicao(pagina))}</span>
+            <span class="indice__especialidade">${escaparHtml(assunto || 'Clínica')}</span>
+            <span class="indice__cidade">${escaparHtml(lugar)}</span>${etiqueta ? `
+            <span class="indice__etiqueta">${escaparHtml(etiqueta)}</span>` : ''}
+          </a>
+        </li>`;
 }
 
 /** Slug é permanente (regra 7): o antigo vira uma página que leva ao novo. */

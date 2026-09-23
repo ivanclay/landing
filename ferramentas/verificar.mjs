@@ -11,7 +11,9 @@ import { readdir } from 'node:fs/promises';
 import {
   tags, aberturaDoElementoCom, conteudoDoElementoCom, textoVisivel, normalizar, semComentarios,
 } from './lib/html.mjs';
-import { palavraMedico, ehDemonstracao, avisoDeDemonstracao } from './lib/pagina.mjs';
+import {
+  palavraMedico, ehDemonstracao, ehNegocio, ehProposta, avisoDeDemonstracao, avisoDeProposta,
+} from './lib/pagina.mjs';
 
 const LIMITE_IMAGEM_BYTES = 250 * 1024;
 const LIMITE_PAGINA_BYTES = 900 * 1024;
@@ -44,7 +46,12 @@ async function verificar() {
     if (!existsSync(fonte)) continue; // redirecionamento
     const pagina = await lerJson(fonte);
     const html = await readFile(path.join(PASTA_SAIDA, pasta, 'index.html'), 'utf8');
-    verificarIdentificacaoCfm(html, pagina, `${pasta}/index.html`);
+    // Identificação do CFM é de página de médico; negócio não tem CRM (ADR-005).
+    if (!ehNegocio(pagina)) verificarIdentificacaoCfm(html, pagina, `${pasta}/index.html`);
+    if (ehProposta(pagina)) {
+      verificarAvisoNoTopo(html, `${pasta}/index.html`, 'data-aviso-proposta', avisoDeProposta(pagina),
+        'a proposta avisa no topo que não é o site oficial (ADR-005)');
+    }
     if (ehDemonstracao(pagina)) await verificarDemonstracao(html, pagina, pasta);
     else verificarSemBancoDeImagem(html, pasta);
     if (pagina.publicar && !existsSync(path.join(PASTA_DOCS_PAGINAS, pasta, 'briefing.md'))) {
@@ -175,24 +182,29 @@ function verificarIdentificacaoCfm(html, pagina, relativo) {
   }
 }
 
+/** O aviso que impede a página de passar pelo que não é: existe, diz o texto exato, vem antes do h1, não se esconde. */
+function verificarAvisoNoTopo(html, relativo, atributo, esperado, porque) {
+  const aviso = aberturaDoElementoCom(html, atributo);
+  const texto = conteudoDoElementoCom(html, atributo);
+  if (!aviso || texto === null) {
+    erros.push(`${relativo}: sem o elemento ${atributo} — ${porque}`);
+    return;
+  }
+  if (normalizar(textoVisivel(texto)) !== normalizar(esperado)) {
+    erros.push(`${relativo}: o ${atributo} precisa dizer exatamente: "${esperado}"`);
+  }
+  const h1 = /<h1/i.exec(semComentarios(html));
+  if (h1 && aviso.indice > h1.index) erros.push(`${relativo}: o ${atributo} vem depois do <h1> — ele fica no topo`);
+  if ('hidden' in aviso.atributos || aviso.atributos['aria-hidden'] === 'true') {
+    erros.push(`${relativo}: o ${atributo} está escondido (hidden/aria-hidden)`);
+  }
+}
+
 /** ADR-004: a demonstração não pode passar por página real — nem no topo, nem na aba, nem nas imagens. */
 async function verificarDemonstracao(html, pagina, pasta) {
   const relativo = `${pasta}/index.html`;
-  const aviso = aberturaDoElementoCom(html, 'data-aviso-demonstracao');
-  const textoAviso = conteudoDoElementoCom(html, 'data-aviso-demonstracao');
-  if (!aviso || textoAviso === null) {
-    erros.push(`${relativo}: sem o elemento data-aviso-demonstracao — página de demonstração avisa no topo que o médico é fictício (ADR-004)`);
-  } else {
-    const esperado = avisoDeDemonstracao(pagina);
-    if (normalizar(textoVisivel(textoAviso)) !== normalizar(esperado)) {
-      erros.push(`${relativo}: o data-aviso-demonstracao precisa dizer exatamente: "${esperado}" (ADR-004)`);
-    }
-    const h1 = /<h1\b/i.exec(semComentarios(html));
-    if (h1 && aviso.indice > h1.index) erros.push(`${relativo}: o data-aviso-demonstracao vem depois do <h1> — ele fica no topo (ADR-004)`);
-    if ('hidden' in aviso.atributos || aviso.atributos['aria-hidden'] === 'true') {
-      erros.push(`${relativo}: o data-aviso-demonstracao está escondido (hidden/aria-hidden) — ADR-004`);
-    }
-  }
+  verificarAvisoNoTopo(html, relativo, 'data-aviso-demonstracao', avisoDeDemonstracao(pagina),
+    'página de demonstração avisa no topo que o médico é fictício (ADR-004)');
   const titulo = /<title>([^<]*)<\/title>/i.exec(html)?.[1] ?? '';
   if (!normalizar(titulo).includes('demonstracao')) erros.push(`${relativo}: o <title> precisa dizer "Demonstração" — é o que aparece na aba e na prévia do link (ADR-004)`);
 
