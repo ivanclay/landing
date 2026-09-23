@@ -1,164 +1,225 @@
 /*
  * indice.css — a identidade do índice, e só dele (regra 10).
  *
- * Quem assina o índice é a Fábrica de Apps e Soluções (D-02, ADR-007): as cores saem do logo — azul-marinho
- * no texto, petróleo nos links, o laranja só como traço decorativo (não tem contraste para texto: 2,07:1).
- * O cabeçalho é curto de propósito: o que importa é a lista de produtos, e ela começa na primeira tela.
- * Contraste medido: texto 14,00:1 · suave 7,02:1 · marca 5,79:1 · sobre-marca 6,22:1 · foco 4,12:1.
+ * Quem assina o índice é a Fábrica de Apps e Soluções (D-02, ADR-007). A hierarquia é a do pedido do dono:
+ * a marca é assinatura (barra fina no topo, logo pequeno à esquerda), o título é curto, e quem ocupa a
+ * tela são os dois painéis — demonstrações e produtos dos clientes, lado a lado.
+ * Cores do logo: azul-marinho no texto, petróleo nos links, laranja só em traço e fundo de etiqueta
+ * (sozinho não tem contraste para texto: 2,07:1).
+ * Contraste medido: texto 14,00:1 · suave 7,02:1 · marca 5,79:1 · foco 4,12:1.
  */
 :root {
-  --cor-fundo: #f6f7f8;
+  --cor-fundo: #f1f4f6;
   --cor-superficie: #ffffff;
   --cor-texto: #10264a;
   --cor-texto-suave: #4a5568;
-  --cor-linha: #dde2e8;
+  --cor-linha: #e2e7ec;
   --cor-marca: #0b6b76;
+  --cor-marca-clara: #e2f1f2;
+  --cor-sobre-marca-clara: #0a5a63;
   --cor-sobre-marca: #ffffff;
   --cor-foco: #c25a00;
   --cor-laranja: #f39a2b;
+  --cor-laranja-clara: #fdf0de;
+  --cor-sobre-laranja-clara: #8a4700;
+  --cor-cabeca-tabela: #f7f9fa;
+  --sombra-painel: 0 1px 2px rgb(16 38 74 / 0.06), 0 12px 32px -12px rgb(16 38 74 / 0.14);
 
   --fonte-titulo: 'Montserrat Variable', 'Segoe UI', system-ui, sans-serif;
   --fonte-texto: 'Atkinson Hyperlegible Next Variable', 'Segoe UI', system-ui, sans-serif;
+
+  --monograma: 2.5rem;
 }
 
-/* ---------- Cabeçalho: a marca e o título numa faixa só ---------- */
-.indice-cabeca {
-  padding-block: var(--espaco-5);
+/* O rodapé fica no pé da tela mesmo com poucas linhas nas listas. */
+.indice { display: flex; flex-direction: column; }
+.indice .colunas { flex: 1; align-content: start; }
+
+/* ---------- Barra: a assinatura, pequena e à esquerda ---------- */
+.barra {
   background: var(--cor-superficie);
   border-bottom: 1px solid var(--cor-linha);
 }
-.indice-cabeca__linha {
-  display: grid;
-  gap: var(--espaco-4);
+.barra__linha {
+  display: flex;
   align-items: center;
+  min-height: 4rem;
+  padding-block: var(--espaco-2);
 }
-@media (min-width: 52rem) {
-  .indice-cabeca__linha {
-    grid-template-columns: auto minmax(0, 1fr);
-    column-gap: var(--espaco-7);
-  }
-  .indice-cabeca__titulo-bloco {
-    padding-left: var(--espaco-7);
-    border-left: 1px solid var(--cor-linha);
-  }
-}
-
 .empresa {
-  display: grid;
-  grid-template-columns: auto auto;
-  grid-template-rows: auto auto;
-  column-gap: var(--espaco-3);
+  display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  justify-content: start;
+  column-gap: var(--espaco-3);
 }
-.empresa picture { grid-row: 1 / 3; }
-.empresa__marca { width: 3.5rem; height: auto; }
+.empresa__marca { width: 2.5rem; height: auto; }
 .empresa__nome {
-  align-self: end;
   font-family: var(--fonte-titulo);
-  font-size: var(--texto-destaque);
+  font-size: var(--texto-apoio);
   font-weight: 700;
-  line-height: 1.1;
   letter-spacing: -0.01em;
 }
 .empresa__lema {
-  align-self: start;
+  padding-left: var(--espaco-3);
+  border-left: 1px solid var(--cor-linha);
   font-size: var(--texto-meta);
   color: var(--cor-texto-suave);
 }
+/* No celular o lema desce para baixo do nome, sem o fio, alinhado ao texto e não ao logo. */
+@media (max-width: 39.99rem) {
+  .empresa { display: grid; grid-template-columns: auto 1fr; }
+  .empresa picture { grid-row: 1 / 3; }
+  .empresa__nome { align-self: end; line-height: 1.25; }
+  .empresa__lema { align-self: start; padding-left: 0; border-left: 0; line-height: 1.3; }
+}
 
-.indice-cabeca__titulo {
+/* ---------- Abertura: título curto à esquerda, busca à direita ---------- */
+.abertura { padding-block: var(--espaco-6) var(--espaco-5); }
+.abertura__linha {
+  display: grid;
+  gap: var(--espaco-5);
+  align-items: end;
+}
+@media (min-width: 52rem) {
+  .abertura__linha { grid-template-columns: minmax(0, 1fr) minmax(18rem, 24rem); column-gap: var(--espaco-7); }
+}
+.abertura__titulo {
   font-size: var(--texto-secao);
-  font-weight: 700;
-  letter-spacing: -0.01em;
+  font-weight: 800;
+  letter-spacing: -0.02em;
 }
-.indice-cabeca__descricao {
-  margin-top: var(--espaco-1);
-  max-width: 60ch;
-  font-size: var(--texto-apoio);
-  color: var(--cor-texto-suave);
-  line-height: 1.45;
-}
-
-/* ---------- Busca: filtra as duas colunas ---------- */
-.busca {
-  display: grid;
-  gap: var(--espaco-1);
-  margin-block: var(--espaco-6) var(--espaco-5);
-  max-width: 34rem;
-}
-.busca__rotulo { font-size: var(--texto-apoio); color: var(--cor-texto-suave); }
-.busca__campo {
-  min-height: var(--alvo-minimo);
-  padding: var(--espaco-2) var(--espaco-3);
-  border: 1px solid var(--cor-linha);
-  border-bottom: 2px solid var(--cor-texto);
-  background: var(--cor-superficie);
-  width: 100%;
-  font-size: var(--texto-corpo);
-}
-.busca__campo::placeholder { color: var(--cor-texto-suave); opacity: 0.8; }
-.busca__campo:focus-visible { outline-offset: 2px; }
-.busca__contagem { font-size: var(--texto-meta); color: var(--cor-texto-suave); min-height: 1.5em; }
-
-/* ---------- As duas colunas ---------- */
-.colunas {
-  display: grid;
-  gap: var(--espaco-8);
-  margin-block: var(--espaco-4) var(--espaco-9);
-}
-@media (min-width: 64rem) {
-  .colunas {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    column-gap: var(--espaco-8);
-    align-items: start;
-  }
-}
-.coluna__titulo {
-  font-size: var(--texto-destaque);
-  font-weight: 700;
-}
-/* O traço laranja do logo, só decorativo. */
-.coluna__titulo::before {
+/* O traço laranja do logo, sob o título. */
+.abertura__titulo::after {
   content: '';
   display: block;
   width: 2.5rem;
   height: 3px;
-  margin-bottom: var(--espaco-3);
+  margin-top: var(--espaco-2);
+  border-radius: 2px;
   background: var(--cor-laranja);
 }
-.coluna__nota {
-  margin-block: var(--espaco-2) var(--espaco-4);
-  font-size: var(--texto-meta);
+.abertura__descricao {
+  margin-top: var(--espaco-3);
+  max-width: 56ch;
+  font-size: var(--texto-apoio);
+  line-height: 1.5;
   color: var(--cor-texto-suave);
 }
 
-/* ---------- Tabela suave: só fios horizontais, nenhuma borda lateral ---------- */
-.tabela {
+.busca { display: grid; gap: var(--espaco-1); }
+.busca__rotulo { font-size: var(--texto-meta); font-weight: 600; color: var(--cor-texto-suave); }
+.busca__caixa { position: relative; display: block; }
+.busca__lupa {
+  position: absolute;
+  top: 50%;
+  left: var(--espaco-3);
+  translate: 0 -50%;
+  fill: none;
+  stroke: var(--cor-texto-suave);
+  stroke-width: 2;
+  stroke-linecap: round;
+  pointer-events: none;
+}
+.busca__campo {
   width: 100%;
-  border-collapse: collapse;
+  min-height: 3rem;
+  padding: var(--espaco-2) var(--espaco-3) var(--espaco-2) 2.75rem;
+  border: 1px solid var(--cor-linha);
+  border-radius: 0.75rem;
+  background: var(--cor-superficie);
+  box-shadow: 0 1px 2px rgb(16 38 74 / 0.05);
   font-size: var(--texto-apoio);
 }
-.tabela thead th {
-  padding: var(--espaco-2) var(--espaco-3);
-  border-bottom: 1px solid var(--cor-texto);
+.busca__campo::placeholder { color: var(--cor-texto-suave); opacity: 1; }
+.busca__campo:focus-visible { outline-offset: 1px; border-color: var(--cor-marca); }
+.busca__contagem { min-height: 1.4em; font-size: var(--texto-meta); color: var(--cor-texto-suave); }
+
+/* ---------- Os dois painéis, lado a lado ---------- */
+.colunas {
+  display: grid;
+  gap: var(--espaco-5);
+  align-items: start;
+  padding-bottom: var(--espaco-8);
+}
+@media (min-width: 60rem) {
+  .colunas { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+.painel {
+  container-type: inline-size;
+  overflow: hidden;
+  border: 1px solid var(--cor-linha);
+  border-top: 3px solid var(--cor-laranja);
+  border-radius: 1rem;
+  background: var(--cor-superficie);
+  box-shadow: var(--sombra-painel);
+}
+.painel + .painel { border-top-color: var(--cor-marca); }
+.painel__cabeca {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: baseline;
+  gap: var(--espaco-1) var(--espaco-3);
+  padding: var(--espaco-5) var(--espaco-5) var(--espaco-4);
+}
+.painel__titulo { font-size: var(--texto-destaque); font-weight: 700; letter-spacing: -0.01em; }
+.painel__total {
+  padding: 0.125rem var(--espaco-3);
+  border-radius: 999px;
+  background: var(--cor-fundo);
   font-size: var(--texto-meta);
   font-weight: 600;
+  color: var(--cor-texto-suave);
+  white-space: nowrap;
+}
+.painel__nota { grid-column: 1 / -1; font-size: var(--texto-meta); line-height: 1.45; color: var(--cor-texto-suave); }
+
+/* ---------- Tabela suave: fios horizontais, nenhuma borda lateral ---------- */
+.tabela { width: 100%; border-collapse: collapse; font-size: var(--texto-apoio); }
+.tabela thead th {
+  padding: var(--espaco-2) var(--espaco-3);
+  background: var(--cor-cabeca-tabela);
+  border-block: 1px solid var(--cor-linha);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
   color: var(--cor-texto-suave);
   text-align: start;
 }
 .tabela tbody th,
 .tabela td {
-  padding: var(--espaco-3);
+  padding: var(--espaco-4) var(--espaco-3);
   border-bottom: 1px solid var(--cor-linha);
   text-align: start;
-  vertical-align: top;
+  vertical-align: middle;
   font-weight: 400;
 }
-.tabela td { color: var(--cor-texto-suave); }
+.tabela tr > :first-child { padding-left: var(--espaco-5); }
+.tabela tr > :last-child { padding-right: var(--espaco-5); }
+.tabela tbody tr:last-child > * { border-bottom: 0; }
+.tabela td { font-size: var(--texto-meta); line-height: 1.4; color: var(--cor-texto-suave); }
+.tabela__linha td:last-child { white-space: nowrap; }
+
+.tabela__celula-nome { display: flex; align-items: center; gap: var(--espaco-3); }
+.tabela__monograma {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: var(--monograma);
+  height: var(--monograma);
+  border-radius: 0.75rem;
+  background: var(--cor-marca-clara);
+  font-family: var(--fonte-titulo);
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--cor-sobre-marca-clara);
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+.tabela__identidade { display: grid; justify-items: start; gap: var(--espaco-1); min-width: 0; }
+
 /* A linha inteira é o alvo do clique (≥ 44 px): o link do nome se estica sobre ela. */
-.tabela__linha { position: relative; }
-.tabela__linha:hover { background: var(--cor-superficie); }
+.tabela__linha { position: relative; transition: background-color 0.15s ease; }
+.tabela__linha:hover { background: var(--cor-cabeca-tabela); }
 .tabela__nome {
   font-family: var(--fonte-titulo);
   font-weight: 600;
@@ -167,22 +228,26 @@
 }
 .tabela__nome::after { content: ''; position: absolute; inset: 0; }
 .tabela__linha:hover .tabela__nome { color: var(--cor-marca); text-decoration: underline; }
+.tabela__linha:hover .tabela__monograma { background: var(--cor-marca); color: var(--cor-sobre-marca); }
 .tabela__etiqueta {
-  display: table;
-  margin-top: var(--espaco-2);
-  padding: 0 var(--espaco-2);
-  border: 1px solid var(--cor-linha);
-  font-size: var(--texto-meta);
-  color: var(--cor-texto-suave);
+  padding: 0.0625rem var(--espaco-2);
+  border-radius: 999px;
+  background: var(--cor-laranja-clara);
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1.5;
+  color: var(--cor-sobre-laranja-clara);
 }
+.tabela__etiqueta--proposta { background: var(--cor-marca-clara); color: var(--cor-sobre-marca-clara); }
 .tabela__vazio td,
 .tabela__nenhum td {
-  padding-block: var(--espaco-5);
+  padding: var(--espaco-5);
   font-style: italic;
 }
 
-/* No celular a linha vira um bloco: o nome em cima, área e cidade embaixo, e o cabeçalho da tabela some. */
-@media (max-width: 39.99rem) {
+/* Painel estreito (celular, ou dois painéis numa tela média): a linha vira bloco — nome em cima, área e
+   cidade embaixo, alinhadas ao nome. Pergunta ao painel, não à tela. */
+@container (max-width: 32rem) {
   .tabela thead {
     position: absolute;
     width: 1px;
@@ -190,19 +255,39 @@
     overflow: hidden;
     clip: rect(0 0 0 0);
   }
-  .tabela tr { display: grid; grid-template-columns: minmax(0, 1fr) auto; border-bottom: 1px solid var(--cor-linha); }
-  /* O display: grid acima venceria o atributo hidden — sem isto, a busca não esconderia nada no celular. */
+  .tabela tr {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    column-gap: var(--espaco-3);
+    padding: var(--espaco-4) var(--espaco-5);
+    border-bottom: 1px solid var(--cor-linha);
+  }
+  .tabela tbody tr:last-child { border-bottom: 0; }
+  /* O display: grid acima venceria o atributo hidden — sem isto, a busca não esconderia nada. */
   .tabela tr[hidden] { display: none; }
-  .tabela tbody th { grid-column: 1 / -1; border-bottom: 0; padding-bottom: 0; }
-  .tabela td { border-bottom: 0; padding-top: var(--espaco-1); }
-  .tabela__vazio td, .tabela__nenhum td { grid-column: 1 / -1; }
+  /* :nth-child(n) só sobe a especificidade acima de ".tabela tr > :first-child", que é da tabela larga. */
+  .tabela tbody tr > :nth-child(n) { padding: 0; border-bottom: 0; }
+  .tabela tbody th { grid-column: 1 / -1; }
+  .tabela tbody tr > td:nth-child(n) { padding-top: var(--espaco-2); padding-left: calc(var(--monograma) + var(--espaco-3)); }
+  .tabela tbody tr > td + td:nth-child(n) { padding-left: 0; text-align: end; }
+  .tabela tbody .tabela__vazio > td:nth-child(n),
+  .tabela tbody .tabela__nenhum > td:nth-child(n) { grid-column: 1 / -1; padding: 0; }
 }
 
-.indice-rodape {
-  padding-block: var(--espaco-6);
+/* ---------- Rodapé ---------- */
+.rodape {
+  padding-block: var(--espaco-5);
   border-top: 1px solid var(--cor-linha);
+  background: var(--cor-superficie);
   font-size: var(--texto-meta);
   color: var(--cor-texto-suave);
+}
+.rodape__linha { display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--espaco-2) var(--espaco-5); }
+.rodape__assinatura { font-weight: 600; color: var(--cor-texto); }
+
+@media (prefers-reduced-motion: reduce) {
+  .tabela__linha,
+  .tabela__monograma { transition: none; }
 }
 
 /* 404 e redirecionamento (modelos da construção) usam o mesmo arquivo. */

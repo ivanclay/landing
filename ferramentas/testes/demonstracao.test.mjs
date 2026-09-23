@@ -76,7 +76,7 @@ test('passa: demonstração publicada sem CRM conferido nem aprovação, com avi
   const [demonstracoes, clientes] = indice.split('id="titulo-clientes"');
   assert.match(demonstracoes, new RegExp(`href="${SLUG}/"`));
   assert.doesNotMatch(clientes, new RegExp(SLUG));
-  assert.match(demonstracoes, /Demonstração · médico fictício/);
+  assert.match(demonstracoes, /Médico fictício/);
   // Quem assina o índice é a empresa; a página do cliente não leva o nome dela na prévia.
   assert.match(indice, /<meta property="og:site_name" content="[^"]+">/);
   // O índice tem prévia de link própria: imagem 1200 × 630 com versão, e a empresa nos dados estruturados.

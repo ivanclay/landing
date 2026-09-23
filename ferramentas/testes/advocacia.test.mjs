@@ -76,7 +76,7 @@ test('passa: demonstração de escritório — LegalService, noindex, etiqueta n
     assert.match(pagina, /"propertyID":"OAB\/SP","value":"00.000"/);
     // O título do índice ("Médicos") não vira o nome do site na prévia do link de um escritório (B-07).
     assert.doesNotMatch(pagina, /og:site_name/);
-    assert.match(await readFile(path.join(raiz, '_site', 'index.html'), 'utf8'), /Demonstração · escritório fictício/);
+    assert.match(await readFile(path.join(raiz, '_site', 'index.html'), 'utf8'), /Escritório fictício/);
   },
 ));
 

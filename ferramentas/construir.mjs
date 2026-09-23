@@ -88,8 +88,21 @@ async function construirPagina(pasta, config) {
   const html = await readFile(arquivoHtml, 'utf8');
   if (!html.includes(MARCADOR_CABECALHO)) return { erros: [`index.html sem o marcador ${MARCADOR_CABECALHO} no <head>`] };
   const cabecalho = cabecalhoDaPagina(pagina, config, { rascunho: !pagina.publicar, versaoImagem: await versaoDoArquivo(path.join(origem, pagina.imagemSocial ?? '')) });
-  await writeFile(arquivoHtml, html.replace(MARCADOR_CABECALHO, cabecalho));
+  await writeFile(arquivoHtml, await versionarRecursos(html.replace(MARCADOR_CABECALHO, cabecalho), origem));
   return { erros: [], pagina };
+}
+
+/**
+ * Põe ?v=<hash> em cada CSS e JS local. O Pages manda o navegador guardar o arquivo por 10 min: sem a
+ * versão, quem abre logo depois de um push vê o HTML novo com o CSS velho — a página parece quebrada.
+ */
+async function versionarRecursos(html, pastaDeOrigem) {
+  const trocas = [];
+  for (const [, atributo, caminho] of html.matchAll(/\b(href|src)="((?![a-z]+:|\/|#)[^"?#]+\.(?:css|js))"/gi)) {
+    const versao = await versaoDoArquivo(path.join(pastaDeOrigem, caminho));
+    if (versao) trocas.push([`${atributo}="${caminho}"`, `${atributo}="${caminho}?v=${versao}"`]);
+  }
+  return trocas.reduce((texto, [de, para]) => texto.replaceAll(de, para), html);
 }
 
 /** 8 caracteres do SHA-256 do arquivo; vazio se não houver arquivo. Muda sempre que o conteúdo muda. */
@@ -104,7 +117,7 @@ async function gerarIndice(config, { demonstracoes, clientes }) {
               <tr class="tabela__vazio"><td colspan="3">${vazio}</td></tr>`;
   const { indice } = config;
   const modelo = await readFile(path.join(PASTA_MODELOS, 'indice.html'), 'utf8');
-  await writeFile(path.join(PASTA_SAIDA, 'index.html'), modelo
+  await writeFile(path.join(PASTA_SAIDA, 'index.html'), await versionarRecursos(modelo
     .replace(MARCADOR_CABECALHO, cabecalhoDoIndice(config, {
       versaoImagem: await versaoDoArquivo(path.join(PASTA_SITE, indice.imagemSocial ?? '')),
     }))
@@ -113,20 +126,31 @@ async function gerarIndice(config, { demonstracoes, clientes }) {
     .replaceAll('{{TITULO}}', escaparHtml(indice.titulo))
     .replaceAll('{{DESCRICAO}}', escaparHtml(indice.descricao))
     .replaceAll('{{EMPRESA}}', escaparHtml(indice.empresa))
-    .replaceAll('{{LEMA}}', escaparHtml(indice.lema ?? '')));
+    .replaceAll('{{LEMA}}', escaparHtml(indice.lema ?? ''))
+    .replaceAll('{{TOTAL_DEMONSTRACOES}}', contagem(demonstracoes.length, 'página', 'páginas'))
+    .replaceAll('{{TOTAL_CLIENTES}}', contagem(clientes.length, 'produto', 'produtos')), PASTA_SITE));
+}
+
+const contagem = (numero, um, varios) => `${numero} ${numero === 1 ? um : varios}`;
+
+/** Monograma da linha: as iniciais do nome, sem o "Dr."/"Dra." (decorativo, aria-hidden). */
+function iniciais(nome) {
+  const palavras = nome.replace(/^Dra?\.\s+/, '').split(/\s+/).filter((p) => /^\p{Lu}/u.test(p));
+  return (palavras[0]?.[0] ?? '') + (palavras.length > 1 ? palavras[1][0] : '');
 }
 
 /** Uma linha de tabela do índice; demonstração e proposta levam etiqueta sob o nome. */
 function linhaDoIndice(pagina) {
   const assunto = assuntoDaPagina(pagina);
   const lugar = [pagina.cidade, pagina.uf].filter(Boolean).join(', ');
-  const ficticio = ehAdvocacia(pagina) ? 'escritório fictício' : ehNegocio(pagina) ? 'empresa fictícia' : 'médico fictício';
-  const etiqueta = ehDemonstracao(pagina) ? `Demonstração · ${ficticio}` : ehProposta(pagina) ? 'Proposta · em avaliação' : '';
-  const busca = [nomeDeExibicao(pagina), assunto, lugar, etiqueta].join(' ');
+  // No painel de demonstrações a etiqueta só diz o que é fictício; a palavra "demonstração" já está no título.
+  const ficticio = ehAdvocacia(pagina) ? 'Escritório fictício' : ehNegocio(pagina) ? 'Empresa fictícia' : 'Médico fictício';
+  const etiqueta = ehDemonstracao(pagina) ? ficticio : ehProposta(pagina) ? 'Proposta · em avaliação' : '';
+  const busca = [nomeDeExibicao(pagina), assunto, lugar, etiqueta, ehDemonstracao(pagina) ? 'demonstração' : ''].join(' ');
   return `
               <tr class="tabela__linha" data-busca="${escaparHtml(busca)}">
-                <th scope="row"><a class="tabela__nome" href="${escaparHtml(pagina.slug)}/">${escaparHtml(nomeDeExibicao(pagina))}</a>${etiqueta ? `
-                  <span class="tabela__etiqueta">${escaparHtml(etiqueta)}</span>` : ''}</th>
+                <th scope="row"><span class="tabela__celula-nome"><span class="tabela__monograma" aria-hidden="true">${escaparHtml(iniciais(nomeDeExibicao(pagina)))}</span><span class="tabela__identidade"><a class="tabela__nome" href="${escaparHtml(pagina.slug)}/">${escaparHtml(nomeDeExibicao(pagina))}</a>${etiqueta ? `
+                  <span class="tabela__etiqueta${ehProposta(pagina) ? ' tabela__etiqueta--proposta' : ''}">${escaparHtml(etiqueta)}</span>` : ''}</span></span></th>
                 <td>${escaparHtml(assunto || '—')}</td>
                 <td>${escaparHtml(lugar || '—')}</td>
               </tr>`;

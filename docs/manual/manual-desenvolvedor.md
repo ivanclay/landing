@@ -18,6 +18,7 @@ Node 22+. Para construir e verificar, não precisa de `npm install`. Para fontes
    - copia a pasta sem o `pagina.json` e sem arquivos que começam com `_`;
    - troca `<!-- @gerado:cabecalho -->` por canonical, Open Graph e JSON-LD (`ferramentas/lib/seo.mjs`).
    - a imagem social sai com `?v=<8 caracteres do SHA-256 do arquivo>` no `og:image`, `twitter:image` e no JSON-LD: quando a imagem muda, o endereço muda, e WhatsApp/Facebook/LinkedIn buscam a nova (eles guardam a prévia pelo endereço).
+   - todo `href`/`src` local de `.css` e `.js` sai com `?v=<hash>` (`versionarRecursos`): o navegador nunca junta HTML novo com CSS velho do cache do Pages (10 min).
 3. Gera os redirecionamentos de `site.config.json › redirecionamentos`: `{ "antigo": "novo" }`, onde
    `""` significa o índice.
 4. Gera `index.html` (de `ferramentas/modelos/indice.html`), `404.html`, `sitemap.xml` e `robots.txt`.

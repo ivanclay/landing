@@ -24,6 +24,14 @@ Soluções**, com a lista de produtos como a coisa mais importante da página.
 - O original do logo (JPEG gerado por IA, 439 KB, com EXIF) mora em `entrada/indice/`, fora do git; no ar só
   vão os recortes sem metadados (`marca-fabrica.png/.webp`, `social-indice.jpg`).
 
+- **Revisão de 2026-09-23 (crítica do dono à 1ª versão):** a marca é assinatura, não protagonista — barra
+  fina com o logo de 40 px à esquerda e o lema ao lado; título "Soluções" curto com a busca na mesma faixa;
+  as duas listas em **painéis lado a lado** (≥ 60rem), cada linha com monograma, etiqueta e a linha inteira
+  clicável. A tabela vira bloco pela largura **do painel** (`@container`), não da tela.
+- **CSS e JS com versão:** a construção põe `?v=<hash>` em todo CSS/JS local de todas as páginas. O Pages manda
+  guardar por 10 min; sem a versão, quem abriu logo depois do push viu o HTML novo com o CSS velho — foi o que
+  fez a 1ª versão parecer sem estilo na tela do dono.
+
 ## Consequências
 - `indice.mostrarDemonstracoes: false` tira demonstrações e propostas do índice (só link direto).
 - Os testes provam: demonstração só na coluna de demonstrações, proposta só na de clientes, prévia de link do
