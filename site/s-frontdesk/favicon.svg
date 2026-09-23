@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="S-FrontDesk">
+  <rect width="32" height="32" rx="6" fill="#151a2e"/>
+  <path d="M8 9h16M8 14h16M8 23h16" stroke="#6f7797" stroke-width="1.5"/>
+  <rect x="8" y="16.5" width="12" height="4" rx="1" fill="#ffe45e"/>
+  <path d="M4 18.5h24" stroke="#ff4d63" stroke-width="2"/>
+  <circle cx="26.5" cy="18.5" r="2.5" fill="#ff4d63"/>
+</svg>

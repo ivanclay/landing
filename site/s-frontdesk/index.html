@@ -1,0 +1,315 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>S-FrontDesk — agenda para clínicas médicas, em pré-lançamento</title>
+    <meta name="description" content="S-FrontDesk, em pré-lançamento: agenda da recepção e agendamento pelo paciente num só lugar. Veja a demonstração e seja clínica piloto.">
+    <meta property="og:title" content="S-FrontDesk — agenda para clínicas médicas, em pré-lançamento">
+    <meta property="og:description" content="S-FrontDesk, em pré-lançamento: agenda da recepção e agendamento pelo paciente num só lugar. Veja a demonstração e seja clínica piloto.">
+    <meta name="theme-color" content="#f5f5ef">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <!-- @gerado:cabecalho -->
+    <link rel="preload" href="fontes/instrument-sans.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="../assets/css/base.css">
+    <link rel="stylesheet" href="../assets/css/componentes.css">
+    <link rel="stylesheet" href="tema.css">
+    <link rel="stylesheet" href="pagina.css">
+    <link rel="stylesheet" href="demo.css">
+    <script src="../assets/js/pagina.js" defer></script>
+    <script src="pagina.js" defer></script>
+    <script src="demo.js" defer></script>
+  </head>
+  <body>
+    <a class="pular-para-conteudo" href="#conteudo">Ir para o conteúdo</a>
+
+    <p class="selo"><span class="conteudo selo__texto"><strong>Pré-lançamento</strong> · em desenvolvimento.<span class="selo__extra"> Procuramos clínicas piloto.</span></span></p>
+
+    <header class="cabeca">
+      <div class="conteudo cabeca__linha">
+        <p class="cabeca__marca">
+          <img src="favicon.svg" alt="" width="28" height="28">
+          <span>S-FrontDesk</span>
+        </p>
+        <nav class="cabeca__nav" aria-label="Seções">
+          <a href="#um-dia">Um dia na recepção</a>
+          <a href="#demonstracao">Demonstração</a>
+          <a href="#como-comecar">Como começar</a>
+          <a href="#perguntas">Perguntas</a>
+        </nav>
+        <a class="botao botao--principal cabeca__contato" href="https://wa.me/5520999999999?text=Ol%C3%A1!%20Vi%20a%20p%C3%A1gina%20do%20S-FrontDesk%20e%20quero%20saber%20como%20ser%20cl%C3%ADnica%20piloto." target="_blank" rel="noopener">Quero ser clínica piloto</a>
+      </div>
+    </header>
+
+    <main id="conteudo">
+      <section class="abertura" aria-labelledby="titulo-principal">
+        <div class="conteudo abertura__grade">
+          <div class="abertura__texto">
+            <p class="abertura__sobre">Agenda e atendimento para clínicas e consultórios médicos</p>
+            <h1 id="titulo-principal" class="abertura__titulo">A agenda da clínica num lugar só: para a recepção e para o paciente.</h1>
+            <div class="agora" data-agora aria-hidden="true">
+              <ol class="agora__regua" role="list">
+                <li>04h</li><li>05h</li><li>06h</li><li>07h</li><li>08h</li><li>09h</li><li>10h</li><li>11h</li><li>12h</li><li>13h</li>
+              </ol>
+              <span class="agora__hora" data-agora-hora>08h00</span>
+            </div>
+            <p class="abertura__apoio">O S-FrontDesk está sendo construído para organizar o dia da recepção e deixar o paciente marcar o próprio horário. Veja o protótipo e ajude a construí-lo como clínica piloto.</p>
+            <p class="abertura__acoes" data-contato-topo>
+              <a class="botao botao--principal" href="https://wa.me/5520999999999?text=Ol%C3%A1!%20Vi%20a%20p%C3%A1gina%20do%20S-FrontDesk%20e%20quero%20saber%20como%20ser%20cl%C3%ADnica%20piloto." target="_blank" rel="noopener">Quero ser clínica piloto</a>
+              <a class="botao botao--secundario" href="#demonstracao">Ver a demonstração</a>
+            </p>
+          </div>
+          <div class="amostra" aria-hidden="true">
+            <p class="amostra__titulo">Agenda de hoje</p>
+            <ol class="amostra__lista" role="list">
+              <li class="amostra__horario amostra__horario--confirmado"><span>08h00</span><span>Consulta</span><span>Confirmado</span></li>
+              <li class="amostra__horario amostra__horario--agendado"><span>08h30</span><span>Retorno</span><span>Agendado</span></li>
+              <li class="amostra__horario amostra__horario--livre"><span>09h00</span><span>Livre</span><span></span></li>
+              <li class="amostra__horario amostra__horario--agendado"><span>09h30</span><span>Consulta</span><span>Agendado</span></li>
+              <li class="amostra__horario amostra__horario--bloqueio"><span>10h00</span><span>Bloqueio</span><span>Almoço</span></li>
+              <li class="amostra__horario amostra__horario--livre"><span>10h30</span><span>Livre</span><span></span></li>
+            </ol>
+          </div>
+        </div>
+      </section>
+
+      <section id="um-dia" class="dia" aria-labelledby="titulo-dia">
+        <div class="conteudo">
+          <h2 id="titulo-dia" class="secao__titulo">Um dia na recepção</h2>
+          <p class="secao__apoio">Tudo nesta página está em desenvolvimento. É o que estamos construindo, não uma promessa de resultado.</p>
+          <ol class="dia__lista" role="list">
+            <li class="momento">
+              <p class="momento__hora"><time>07h52</time></p>
+              <div class="momento__texto">
+                <h3 class="momento__dor">O telefone toca antes de a porta abrir.</h3>
+                <p>Com o S-FrontDesk, o paciente vai poder escolher um horário livre e marcar pelo aplicativo, sem ligar.</p>
+              </div>
+            </li>
+            <li class="momento">
+              <p class="momento__hora"><time>09h10</time></p>
+              <div class="momento__texto">
+                <h3 class="momento__dor">Paciente no balcão e outro na linha.</h3>
+                <p>A recepção vai ver o dia inteiro numa tela e agendar por telefone em poucos passos, com os horários livres de cada profissional à vista.</p>
+              </div>
+            </li>
+            <li class="momento">
+              <p class="momento__hora"><time>11h30</time></p>
+              <div class="momento__texto">
+                <h3 class="momento__dor">O horário das 11h ficou vazio, e ninguém avisou.</h3>
+                <p>O paciente vai receber um lembrete antes da consulta e poder confirmar, remarcar ou cancelar pelo aplicativo. O horário cancelado volta para a agenda.</p>
+              </div>
+            </li>
+            <li class="momento">
+              <p class="momento__hora"><time>14h00</time></p>
+              <div class="momento__texto">
+                <h3 class="momento__dor">A agenda está no caderno, na planilha e no celular da recepção.</h3>
+                <p>Profissionais, grade de horários e bloqueios, como férias e feriados, num lugar só.</p>
+              </div>
+            </li>
+            <li class="momento">
+              <p class="momento__hora"><time>17h45</time></p>
+              <div class="momento__texto">
+                <h3 class="momento__dor">Dois pacientes marcados para o mesmo horário.</h3>
+                <p>O S-FrontDesk está sendo feito para não deixar: um horário, um paciente. É regra do projeto.</p>
+              </div>
+            </li>
+          </ol>
+        </div>
+      </section>
+
+      <section id="demonstracao" class="demonstracao" aria-labelledby="titulo-demo">
+        <div class="conteudo">
+          <h2 id="titulo-demo" class="secao__titulo">Veja como vai funcionar</h2>
+          <p class="secao__apoio">Duas visões do mesmo dia: a da recepção e a do paciente. O que um faz aparece para o outro.</p>
+          <a class="demo__pular" href="#compromissos">Pular a demonstração</a>
+          <div class="demo" data-demo>
+            <p class="demo__aviso" data-aviso-ficticio><strong>Demonstração com dados fictícios.</strong> Protótipo das telas: o produto final pode mudar.</p>
+            <div class="demo__foto" data-demo-foto>
+              <!-- @foto-demo:inicio -->
+              <h3 class="foto__titulo">Como a recepção vê: a agenda de um dia na Clínica Exemplo (fictícia)</h3>
+              <p class="foto__apoio">Às 09h40, no fuso da clínica. Com JavaScript ligado, esta agenda vira a demonstração interativa.</p>
+              <div class="foto__tabelas">
+                <table class="foto__tabela">
+                  <caption><span class="id-profissional"><span class="id-profissional__nome">Dra. Helena Exemplo</span><span class="id-profissional__registro">Médica · CRM-BA 000000 · Clínica médica · RQE 000000</span></span></caption>
+                  <thead><tr><th scope="col">Horário</th><th scope="col">Situação</th><th scope="col">Paciente · serviço · canal</th></tr></thead>
+                  <tbody>
+                    <tr><th scope="row">08h00</th><td>Compareceu</td><td>Paciente Exemplo 1 · Consulta · Telefone</td></tr>
+                    <tr><th scope="row">08h30</th><td>Compareceu</td><td>Paciente Exemplo 2 · Retorno · App</td></tr>
+                    <tr><th scope="row">09h00</th><td>Faltou</td><td>Paciente Exemplo 3 · Consulta · Telefone</td></tr>
+                    <tr><th scope="row">09h30</th><td>Compareceu</td><td>Paciente Exemplo 4 · Consulta · Balcão</td></tr>
+                    <tr><th scope="row">10h00</th><td>Confirmado</td><td>Paciente Exemplo 5 · Retorno · App</td></tr>
+                    <tr><th scope="row">10h30</th><td>Livre</td><td>—</td></tr>
+                    <tr><th scope="row">11h00</th><td>Agendado</td><td>Paciente Exemplo 6 · Consulta · Telefone</td></tr>
+                    <tr><th scope="row">11h30</th><td>Livre</td><td>—</td></tr>
+                  </tbody>
+                </table>
+                <table class="foto__tabela">
+                  <caption><span class="id-profissional"><span class="id-profissional__nome">Dr. Caio Exemplo</span><span class="id-profissional__registro">Médico · CRM-BA 000000 · Cardiologia · RQE 000000</span></span></caption>
+                  <thead><tr><th scope="col">Horário</th><th scope="col">Situação</th><th scope="col">Paciente · serviço · canal</th></tr></thead>
+                  <tbody>
+                    <tr><th scope="row">08h00</th><td>Bloqueio</td><td>Reunião da equipe</td></tr>
+                    <tr><th scope="row">08h30</th><td>Bloqueio</td><td>Reunião da equipe</td></tr>
+                    <tr><th scope="row">09h00</th><td>Compareceu</td><td>Paciente Exemplo 7 · Consulta · App</td></tr>
+                    <tr><th scope="row">09h30</th><td>Faltou</td><td>Paciente Exemplo 8 · Retorno · Telefone</td></tr>
+                    <tr><th scope="row">10h00</th><td>Livre</td><td>—</td></tr>
+                    <tr><th scope="row">10h30</th><td>Confirmado</td><td>Paciente Exemplo 9 · Consulta · App</td></tr>
+                    <tr><th scope="row">11h00</th><td>Livre</td><td>—</td></tr>
+                    <tr><th scope="row">11h30</th><td>Agendado</td><td>Paciente Exemplo 10 · Retorno · Telefone</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="foto__passos">
+                <div>
+                  <h4>Na recepção, agendar por telefone</h4>
+                  <ol>
+                    <li>Escolher um horário livre na agenda do dia.</li>
+                    <li>Escolher o serviço e o paciente.</li>
+                    <li>Agendar: o horário fica marcado, com o canal Telefone. Horário ocupado não aceita outro paciente.</li>
+                    <li>Depois: confirmar, marcar a chegada ou a falta, ou cancelar.</li>
+                  </ol>
+                </div>
+                <div>
+                  <h4>No aplicativo, o paciente agenda sozinho</h4>
+                  <ol>
+                    <li>Escolher o atendimento e o profissional.</li>
+                    <li>Escolher o dia e um dos horários livres.</li>
+                    <li>Confirmar: a consulta aparece na agenda da recepção, com o canal App.</li>
+                    <li>O lembrete diz só: “Você tem uma consulta amanhã às 9h na Clínica Exemplo.”</li>
+                  </ol>
+                </div>
+              </div>
+              <!-- @foto-demo:fim -->
+            </div>
+            <div class="demo__app" data-demo-app hidden></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="compromissos" class="compromissos" aria-labelledby="titulo-compromissos">
+        <div class="conteudo compromissos__grade">
+          <div>
+            <h2 id="titulo-compromissos" class="secao__titulo">Regras que o S-FrontDesk segue desde o projeto</h2>
+            <p class="secao__apoio">São regras de projeto de um produto em desenvolvimento, não certificações.</p>
+          </div>
+          <ul class="compromissos__lista" role="list">
+            <li>Cada clínica só vê os próprios dados.</li>
+            <li>O agendamento não pede o motivo da consulta.</li>
+            <li>O lembrete não diz o nome do profissional nem a especialidade. “Você tem uma consulta amanhã às 9h na Clínica Exemplo” é o máximo que ele mostra.</li>
+            <li>Horários sempre no fuso da clínica.</li>
+            <li>Um horário, um paciente.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="como-comecar" class="comecar" aria-labelledby="titulo-comecar">
+        <div class="conteudo">
+          <h2 id="titulo-comecar" class="secao__titulo">Como ser clínica piloto</h2>
+          <ol class="comecar__passos">
+            <li class="passo">
+              <h3 class="passo__titulo">Chame a equipe no WhatsApp.</h3>
+              <p>Conte como é a agenda da sua clínica hoje.</p>
+            </li>
+            <li class="passo">
+              <h3 class="passo__titulo">Configuramos juntos.</h3>
+              <p>Profissionais, horários e bloqueios da sua clínica, com vocês.</p>
+            </li>
+            <li class="passo">
+              <h3 class="passo__titulo">A recepção usa e conta o que falta.</h3>
+              <p>Vocês usam no dia a dia; nós ajustamos.</p>
+            </li>
+          </ol>
+          <p class="comecar__condicoes">As condições do piloto são combinadas na conversa.</p>
+          <p><a class="botao botao--principal" href="https://wa.me/5520999999999?text=Ol%C3%A1!%20Vi%20a%20p%C3%A1gina%20do%20S-FrontDesk%20e%20quero%20saber%20como%20ser%20cl%C3%ADnica%20piloto." target="_blank" rel="noopener">Quero ser clínica piloto</a></p>
+        </div>
+      </section>
+
+      <section id="perguntas" class="perguntas" aria-labelledby="titulo-perguntas">
+        <div class="conteudo perguntas__grade">
+          <h2 id="titulo-perguntas" class="secao__titulo">Perguntas frequentes</h2>
+          <div class="perguntas__lista">
+            <details>
+              <summary>O S-FrontDesk já está pronto?</summary>
+              <p>Ainda não. Está em desenvolvimento, e a demonstração desta página é um protótipo com dados fictícios.</p>
+            </details>
+            <details>
+              <summary>Para quais clínicas?</summary>
+              <p>Clínicas e consultórios médicos. Outras profissões seguem regras próprias de cada conselho e ainda não estão no escopo.</p>
+            </details>
+            <details>
+              <summary>O paciente precisa instalar alguma coisa?</summary>
+              <p>Para marcar sozinho, vai usar o aplicativo do S-FrontDesk. Quem preferir continua marcando por telefone ou no balcão, com a recepção.</p>
+            </details>
+            <details>
+              <summary>Quanto custa?</summary>
+              <p>O preço ainda não foi definido.</p>
+            </details>
+            <details>
+              <summary>E os dados dos pacientes?</summary>
+              <p>O projeto segue as regras acima desde o começo. O contrato e a política de privacidade do produto serão definidos antes do primeiro paciente real.</p>
+            </details>
+            <details>
+              <summary>O que a clínica piloto faz?</summary>
+              <p>Usa o S-FrontDesk na rotina e conta o que falta. As condições são combinadas na conversa.</p>
+            </details>
+            <details>
+              <summary>Esta página coleta os meus dados?</summary>
+              <p>Não. Não tem formulário nem cookies; o contato é pelo WhatsApp.</p>
+            </details>
+          </div>
+        </div>
+      </section>
+
+      <section class="fecho" aria-labelledby="titulo-fecho">
+        <div class="conteudo">
+          <h2 id="titulo-fecho" class="fecho__titulo">Quer ajudar a construir a agenda da sua clínica?</h2>
+          <p class="fecho__acoes"><a class="botao botao--claro" href="https://wa.me/5520999999999?text=Ol%C3%A1!%20Vi%20a%20p%C3%A1gina%20do%20S-FrontDesk%20e%20quero%20saber%20como%20ser%20cl%C3%ADnica%20piloto." target="_blank" rel="noopener">Quero ser clínica piloto</a></p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="rodape-legal rodape">
+      <div class="conteudo">
+        <div class="rodape__grade">
+          <div class="rodape__marca">
+            <p class="rodape__nome">S-FrontDesk</p>
+            <p class="rodape__registro">Em desenvolvimento. Um produto da Fábrica de Apps e Soluções.</p>
+          </div>
+          <div class="rodape__coluna">
+            <h2 class="rodape__titulo">O produto</h2>
+            <ul class="rodape__lista" role="list">
+              <li>Agenda da recepção</li>
+              <li>Agendamento pelo paciente</li>
+              <li>Em pré-lançamento</li>
+            </ul>
+          </div>
+          <div class="rodape__coluna">
+            <h2 class="rodape__titulo">Nesta página</h2>
+            <ul class="rodape__lista" role="list">
+              <li><a href="#um-dia">Um dia na recepção</a></li>
+              <li><a href="#demonstracao">Veja como vai funcionar</a></li>
+              <li><a href="#compromissos">Regras que o S-FrontDesk segue</a></li>
+              <li><a href="#perguntas">Perguntas frequentes</a></li>
+            </ul>
+          </div>
+          <div class="rodape__coluna">
+            <h2 class="rodape__titulo">Contato</h2>
+            <ul class="rodape__lista" role="list">
+              <li><a href="https://wa.me/5520999999999?text=Ol%C3%A1!%20Vi%20a%20p%C3%A1gina%20do%20S-FrontDesk%20e%20quero%20saber%20como%20ser%20cl%C3%ADnica%20piloto." target="_blank" rel="noopener">Quero ser clínica piloto</a> <span>WhatsApp</span></li>
+              <li><a href="#como-comecar">Como ser clínica piloto</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="rodape__base">
+          <p>A demonstração usa dados fictícios: clínica, profissionais (CRM e RQE 000000), pacientes e telefones são inventados.</p>
+          <p>Esta página não usa cookies nem coleta dados. O contato acontece pelo WhatsApp, nos termos desse serviço.</p>
+          <p>© 2026 Fábrica de Apps e Soluções.</p>
+          <p><a href="../">Outras páginas</a></p>
+        </div>
+      </div>
+    </footer>
+
+    <nav class="barra-contato" aria-label="Contato">
+      <a class="botao botao--principal" href="https://wa.me/5520999999999?text=Ol%C3%A1!%20Vi%20a%20p%C3%A1gina%20do%20S-FrontDesk%20e%20quero%20saber%20como%20ser%20cl%C3%ADnica%20piloto." target="_blank" rel="noopener">Quero ser clínica piloto</a>
+    </nav>
+  </body>
+</html>

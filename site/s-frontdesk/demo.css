@@ -1,0 +1,210 @@
+/*
+ * demo.css — a moldura da demonstração e as telas do protótipo (roteiro.md, prototipo-1). Os kits do app e da
+ * gestão ainda não existem: estas telas são o ponto de partida deles. Só tokens do tema.css (regra 10).
+ * Os estados da agenda se distinguem por texto e forma, nunca só por cor.
+ */
+
+.demo__pular {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--alvo-minimo);
+  margin-top: var(--espaco-4);
+  font-size: var(--texto-apoio);
+}
+
+.demo {
+  margin-top: var(--espaco-4);
+  background: var(--cor-fundo);
+  border: 1px solid var(--cor-texto);
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+.demo__aviso {
+  background: var(--cor-marcatexto);
+  color: var(--cor-texto);
+  padding: var(--espaco-3) var(--espaco-5);
+  font-size: var(--texto-apoio);
+  border-bottom: 1px solid var(--cor-texto);
+}
+.demo--pronta .demo__foto { display: none; }
+.demo__foto, .demo__app { padding: var(--espaco-5); }
+
+/* ── A fotografia (sem JS) ── */
+.foto__titulo { font-size: var(--texto-destaque); }
+.foto__apoio { color: var(--cor-texto-suave); font-size: var(--texto-apoio); margin-top: var(--espaco-2); }
+.foto__tabelas { display: grid; gap: var(--espaco-5); margin-top: var(--espaco-5); }
+@media (min-width: 60rem) { .foto__tabelas { grid-template-columns: 1fr 1fr; } }
+.foto__tabela { width: 100%; border-collapse: collapse; font-size: var(--texto-apoio); }
+.foto__tabela caption { text-align: left; padding-bottom: var(--espaco-3); }
+.foto__tabela th, .foto__tabela td { text-align: left; padding: var(--espaco-2); border-top: 1px solid var(--cor-linha); vertical-align: top; }
+.foto__tabela thead th { font-size: var(--texto-meta); color: var(--cor-texto-suave); font-weight: 600; }
+.foto__passos { display: grid; gap: var(--espaco-5); margin-top: var(--espaco-6); }
+@media (min-width: 48rem) { .foto__passos { grid-template-columns: 1fr 1fr; } }
+.foto__passos h4 { font-size: var(--texto-corpo); margin-bottom: var(--espaco-2); }
+.foto__passos ol { padding-left: 1.25rem; font-size: var(--texto-apoio); display: grid; gap: var(--espaco-2); }
+
+/* ── Abas ── */
+.demo__topo {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--espaco-3);
+  margin-bottom: var(--espaco-5);
+}
+.demo__abas { display: flex; flex-wrap: wrap; gap: var(--espaco-2); }
+.demo__abas [role='tab'], .demo__recomecar, .acao, .opcao, .escolha, .celular__voltar {
+  min-height: var(--alvo-minimo);
+  padding: var(--espaco-2) var(--espaco-4);
+  border: 1px solid var(--cor-texto);
+  border-radius: var(--raio-botao);
+  background: var(--cor-fundo);
+  color: var(--cor-texto);
+  font-size: var(--texto-apoio);
+  font-weight: 600;
+  cursor: pointer;
+}
+.demo__abas [role='tab'][aria-selected='true'] { background: var(--cor-texto); color: var(--cor-fundo); }
+.demo__recomecar { border-color: transparent; text-decoration: underline; font-weight: 500; }
+.demo__anuncio { margin-top: var(--espaco-4); font-size: var(--texto-apoio); color: var(--cor-texto-suave); min-height: 1.5em; }
+
+/* ── Recepção: agenda do dia ── */
+.agenda__titulo { font-size: var(--texto-destaque); }
+.agenda__relogio { font-size: var(--texto-apoio); color: var(--cor-texto-suave); margin-top: var(--espaco-1); }
+.agenda { display: grid; gap: var(--espaco-5); margin-top: var(--espaco-5); }
+.agenda__colunas { display: grid; gap: var(--espaco-5); }
+@media (min-width: 40rem) { .agenda__colunas { grid-template-columns: 1fr 1fr; } }
+@media (min-width: 72rem) { .agenda { grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); align-items: start; } }
+.agenda__profissional { font-size: var(--texto-apoio); font-stretch: 100%; margin-bottom: var(--espaco-3); }
+.agenda__horarios { margin: 0; padding: 0; list-style: none; display: grid; gap: var(--espaco-1); }
+
+.id-profissional { display: grid; }
+.id-profissional__nome { font-weight: 650; }
+.id-profissional__registro { font-weight: 400; font-size: var(--texto-meta); color: var(--cor-texto-suave); }
+
+.horario {
+  display: grid;
+  grid-template-columns: 3.5rem minmax(0, 1fr);
+  grid-template-areas: 'hora situacao' 'hora quem';
+  column-gap: var(--espaco-3);
+  width: 100%;
+  min-height: 3.25rem;
+  padding: var(--espaco-2) var(--espaco-3);
+  border: 1px solid var(--cor-linha);
+  border-left-width: 4px;
+  border-radius: 0.25rem;
+  background: var(--cor-fundo);
+  color: var(--cor-texto);
+  text-align: left;
+  font-size: var(--texto-apoio);
+  cursor: pointer;
+}
+.horario__hora { grid-area: hora; font-weight: 700; font-variant-numeric: tabular-nums; font-stretch: 80%; }
+.horario__situacao { grid-area: situacao; font-weight: 600; justify-self: start; padding-inline: var(--espaco-1); }
+.horario__quem { grid-area: quem; font-size: var(--texto-meta); color: var(--cor-texto-suave); }
+.horario[aria-pressed='true'] { outline: 2px solid var(--cor-texto); outline-offset: 1px; }
+
+.horario--livre { border-style: dashed; border-left-width: 1px; background: transparent; color: var(--cor-texto-suave); }
+.horario--agendado { border-left-color: var(--cor-marca); }
+.horario--confirmado { border-left-color: var(--cor-marca); }
+.horario--confirmado .horario__situacao { background: var(--cor-marcatexto); color: var(--cor-texto); }
+.horario--compareceu { background: var(--cor-superficie); }
+.horario--faltou .horario__quem { text-decoration: line-through; }
+.horario--faltou { background: var(--cor-superficie); border-left-color: var(--cor-texto); border-left-style: double; }
+.horario--bloqueio {
+  background: repeating-linear-gradient(135deg, var(--cor-superficie) 0 6px, var(--cor-fundo) 6px 12px);
+  border-left-color: var(--cor-texto-suave);
+}
+
+/* O horário recém-marcado ganha o traço do marca-texto (o único movimento da página). */
+.horario--novo .horario__situacao {
+  background: linear-gradient(var(--cor-marcatexto), var(--cor-marcatexto)) left / 100% 100% no-repeat;
+  animation: grifar 300ms ease-out;
+}
+@keyframes grifar { from { background-size: 0 100%; } }
+
+.agenda__detalhe {
+  border: 1px solid var(--cor-linha);
+  border-radius: 0.5rem;
+  padding: var(--espaco-5);
+  background: var(--cor-superficie);
+  display: grid;
+  gap: var(--espaco-3);
+  align-content: start;
+}
+.agenda__detalhe h4 { font-size: var(--texto-destaque); font-stretch: 85%; }
+.detalhe__vazio { color: var(--cor-texto-suave); font-size: var(--texto-apoio); }
+.detalhe__grupo { display: flex; flex-wrap: wrap; gap: var(--espaco-2); }
+.detalhe__rotulo { flex-basis: 100%; font-weight: 600; font-size: var(--texto-apoio); }
+.detalhe__nota { font-weight: 400; color: var(--cor-texto-suave); }
+.detalhe__ocupado { font-weight: 600; }
+.detalhe__acoes { display: flex; flex-wrap: wrap; gap: var(--espaco-2); }
+.opcao[aria-pressed='true'] { background: var(--cor-texto); color: var(--cor-fundo); }
+.acao--principal { background: var(--cor-marca); border-color: var(--cor-marca); color: var(--cor-sobre-marca); }
+.acao--principal:disabled { background: var(--cor-superficie); border-color: var(--cor-linha); color: var(--cor-texto-suave); cursor: not-allowed; }
+.acao--leve { border-color: transparent; text-decoration: underline; font-weight: 500; }
+.acao--larga { width: 100%; }
+
+/* ── Paciente: o aplicativo, numa moldura reta e sem sombra ── */
+.paciente { display: grid; gap: var(--espaco-6); align-items: center; }
+@media (min-width: 60rem) { .paciente { grid-template-columns: minmax(0, 1fr) 23rem minmax(0, 1fr); } .paciente__nota { grid-column: 3; grid-row: 1; } .celular { grid-column: 2; grid-row: 1; } }
+.paciente__nota { font-size: var(--texto-apoio); color: var(--cor-texto-suave); max-width: 32ch; }
+.paciente__nota strong { color: var(--cor-texto); }
+.celular {
+  max-width: 23rem;
+  margin-inline: auto;
+  border: 2px solid var(--cor-texto);
+  border-radius: 1.75rem;
+  padding: var(--espaco-3);
+  background: var(--cor-texto);
+}
+.celular__barra {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--espaco-2);
+  padding: var(--espaco-1) var(--espaco-3) var(--espaco-2);
+  color: var(--cor-fundo);
+  font-size: var(--texto-meta);
+}
+.celular__tela {
+  background: var(--cor-fundo);
+  border-radius: 1.25rem;
+  padding: var(--espaco-5);
+  min-height: 26rem;
+  display: grid;
+  gap: var(--espaco-3);
+  align-content: start;
+}
+.celular__titulo { font-size: var(--texto-destaque); }
+.celular__apoio { color: var(--cor-texto-suave); font-size: var(--texto-apoio); }
+.celular__nota { color: var(--cor-texto-suave); font-size: var(--texto-meta); }
+.celular__voltar { justify-self: start; border-color: transparent; padding-inline: 0; text-decoration: underline; font-weight: 500; }
+.celular__grade { display: grid; grid-template-columns: 1fr 1fr; gap: var(--espaco-2); }
+.celular__grade--horas { grid-template-columns: repeat(3, 1fr); }
+.escolha { display: flex; justify-content: space-between; align-items: center; gap: var(--espaco-2); text-align: left; width: 100%; }
+.escolha span { font-weight: 400; color: var(--cor-texto-suave); }
+.escolha--profissional { display: block; padding-block: var(--espaco-3); }
+.escolha--hora { justify-content: center; font-variant-numeric: tabular-nums; }
+.escolha:hover, .opcao:hover, .acao:not(:disabled):hover { background: var(--cor-superficie); }
+.acao--principal:not(:disabled):hover { background: color-mix(in oklab, var(--cor-marca) 86%, var(--cor-texto)); }
+.celular__resumo { display: grid; gap: var(--espaco-3); font-size: var(--texto-apoio); }
+.celular__resumo dt { font-size: var(--texto-meta); color: var(--cor-texto-suave); }
+
+/* A tela bloqueada com o lembrete: o teto da E-04. */
+.bloqueio {
+  background: var(--cor-texto);
+  color: var(--cor-fundo);
+  border-radius: 1rem;
+  padding: var(--espaco-6) var(--espaco-4);
+  display: grid;
+  gap: var(--espaco-5);
+}
+.bloqueio__hora { font-size: var(--texto-titulo); font-weight: 600; font-stretch: 80%; text-align: center; font-variant-numeric: tabular-nums; }
+.bloqueio__notificacao {
+  background: var(--cor-fundo);
+  color: var(--cor-texto);
+  border-radius: 0.75rem;
+  padding: var(--espaco-3) var(--espaco-4);
+  font-size: var(--texto-apoio);
+}
+.bloqueio__notificacao strong { display: block; font-size: var(--texto-meta); }

@@ -1,0 +1,19 @@
+{
+  "slug": "s-frontdesk",
+  "tipo": "negocio",
+  "publicar": true,
+  "atualizadoEm": "2026-09-23",
+  "organizacao": {
+    "nome": "S-FrontDesk",
+    "categoria": "Agenda e atendimento para clínicas",
+    "areaAtendida": "Brasil"
+  },
+  "resumo": "S-FrontDesk, em pré-lançamento: agenda da recepção e agendamento pelo paciente num só lugar. Veja a demonstração e seja clínica piloto.",
+  "contato": {
+    "whatsapp": "+5520999999999"
+  },
+  "imagemSocial": "imagens/social.jpg",
+  "revisao": {
+    "aprovadoPeloClienteEm": "2026-09-23"
+  }
+}
