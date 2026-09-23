@@ -190,7 +190,9 @@ function verificarAvisoNoTopo(html, relativo, atributo, esperado, porque) {
     erros.push(`${relativo}: sem o elemento ${atributo} — ${porque}`);
     return;
   }
-  if (normalizar(textoVisivel(texto)) !== normalizar(esperado)) {
+  // Um link dentro do aviso vira espaço antes da pontuação no texto lido; a comparação ignora isso.
+  const comparavel = (valor) => normalizar(valor).replace(/\s+([.,;:])/g, '$1');
+  if (comparavel(textoVisivel(texto)) !== comparavel(esperado)) {
     erros.push(`${relativo}: o ${atributo} precisa dizer exatamente: "${esperado}"`);
   }
   const h1 = /<h1/i.exec(semComentarios(html));

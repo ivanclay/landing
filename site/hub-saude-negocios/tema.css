@@ -1,0 +1,29 @@
+/*
+ * tema.css — a identidade desta página: cor e fonte (regra 10). Do plano em
+ * docs/paginas/hub-saude-negocios/direcao-de-arte.md: o verde da marca do Hub (#2E6B57, do site oficial)
+ * sobre um papel quente que conversa com o marrom das fotos. Contraste medido lá.
+ */
+:root {
+  --cor-fundo: #f6f5f1;
+  --cor-superficie: #ebe7df;
+  --cor-texto: #1c2925;
+  --cor-texto-suave: #4e5e58;
+  --cor-linha: #cfc8bc;
+  --cor-marca: #2e6b57;
+  --cor-sobre-marca: #ffffff;
+  --cor-foco: #b25e1c;
+
+  /* A faixa escura (o gesto: a escada da ideia à escala) e o menta da marca. */
+  --cor-noite: #1d4538;
+  --cor-noite-texto: #f4f7f5;
+  --cor-noite-suave: #b9d2c8;
+  --cor-noite-foco: #e9a860;
+  --cor-menta: #d6ebe4;
+  --cor-cacau: #6b4533;
+
+  --fonte-titulo: 'Bricolage Grotesque Variable', 'Segoe UI', system-ui, sans-serif;
+  --fonte-texto: 'DM Sans Variable', 'Segoe UI', system-ui, sans-serif;
+
+  --raio-botao: 999px;
+  --raio-etiqueta: 999px;
+}

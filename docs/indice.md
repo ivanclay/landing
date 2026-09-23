@@ -13,6 +13,7 @@ Estado: `rascunho` · `aguardando médico` · `publicada` · `redirecionada` · 
 | Slug | Médico | Especialidade | Cidade | Estado | Criada | Aprovada | Publicada | Atualizada |
 |---|---|---|---|---|---|---|---|---|
 | [`dr-paulo-de-tarso`](paginas/dr-paulo-de-tarso/briefing.md) | Dr. Paulo de Tarso Lopes Pontes (**fictício**) | Cardiologia | São Paulo | **demonstração** (ADR-004: noindex, fora do índice, só link direto) | 2026-09-22 | — (não há médico) | 2026-09-22 (merge) | 2026-09-22 |
+| [`hub-saude-negocios`](paginas/hub-saude-negocios/briefing.md) | Hub Saúde Negócios (negócio real, Carla Rodrigues) | Consultoria em gestão e negócios de saúde | — | **proposta** (ADR-005: noindex, aguarda aprovação do Hub) | 2026-09-22 | — | 2026-09-22 (merge) | 2026-09-22 |
 
 ⌗ A tabela é atualizada pelo `documentador-landing` a cada página. Em caso de dúvida, o que vale é o
 `site/<slug>/pagina.json` (campo `publicar`) e o que está no ar — e a divergência é achado.

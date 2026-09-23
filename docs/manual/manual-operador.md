@@ -114,3 +114,13 @@ Uma demonstração é a página de um **médico fictício**, feita para mostrar 
 4. Refaça o briefing com os fatos do médico: CRM, RQE, formação, locais, a matriz real plano × local,
    contatos, retorno, documentos de reembolso.
 5. As três datas de `revisao`, com a aprovação do médico por escrito (regra 4).
+
+## Proposta de site para um negócio (não médico)
+
+Para refazer o site de uma empresa de saúde (consultoria, hub) antes da aprovação do dono
+([ADR-005](../decisoes/adr/ADR-005-pagina-de-negocio-e-proposta.md)): `"tipo": "negocio"` e
+`"proposta": true`. Ela vai ao ar com `noindex`, aviso no topo ("Proposta de novo site… Este não é o
+site oficial…") e aparece na raiz em "Demonstrações e propostas". Hoje: `/hub-saude-negocios/`.
+
+**Quando o cliente aprovar:** tire `"proposta"` e o aviso, preencha `revisao.aprovadoPeloClienteEm` e
+decida o endereço (ficar aqui, indexável, ou ir para o domínio do cliente).

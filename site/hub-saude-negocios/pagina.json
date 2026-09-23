@@ -1,0 +1,28 @@
+{
+  "slug": "hub-saude-negocios",
+  "tipo": "negocio",
+  "proposta": true,
+  "publicar": true,
+  "atualizadoEm": "2026-09-22",
+  "siteOficial": "https://hubsaudenegocios.com.br/",
+  "organizacao": {
+    "nome": "Hub Saúde Negócios",
+    "categoria": "Consultoria em gestão e negócios de saúde",
+    "slogan": "Soluções especializadas em saúde",
+    "logo": "imagens/marca.png",
+    "areaAtendida": "Brasil",
+    "responsavel": { "nome": "Carla Rodrigues" },
+    "temas": ["Inovação em saúde", "Saúde digital", "Regulamentação em saúde", "Gestão de serviços de saúde", "Atenção Primária", "Startups de saúde"],
+    "servicos": [
+      { "nome": "Consultoria", "descricao": "Diagnóstico de problemas, proposta de soluções e orientação de decisões estratégicas." },
+      { "nome": "Mentorias", "descricao": "Mentoria para gestores de saúde: um mapa para decisões e estratégias." },
+      { "nome": "Assessoria", "descricao": "Apoio operacional contínuo, como extensão da equipe do cliente." },
+      { "nome": "Escalabilidade de negócios", "descricao": "Soluções transformadas em modelos replicáveis, eficientes e prontos para expandir." },
+      { "nome": "Projetos", "descricao": "Criação e desenvolvimento de projetos, conteúdo técnico e implementação de ferramentas, aplicativos e softwares em saúde." }
+    ]
+  },
+  "resumo": "Consultoria, mentoria, assessoria e projetos para negócios de saúde pública e privada, da concepção à escala. Mais de 20 anos de experiência.",
+  "contato": { "whatsapp": "+5511930216938" },
+  "imagemSocial": "imagens/social.jpg",
+  "revisao": { "aprovadoPeloClienteEm": "" }
+}
