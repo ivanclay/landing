@@ -17,3 +17,7 @@
 
 Avisos do CI: "anos de experiência" (decidido acima) e peso da pasta (≈1,4 MB, soma das variações;
 primeira carga 170 KB no Lighthouse — aceito).
+
+## Reconferência do rodapé (2026-09-23)
+
+Rodapé reorganizado em colunas, no modelo do `arruda-seixas` (pedido do dono): marca · serviços · nesta página · contato, e os avisos na base. As frases do rodapé anterior ficaram iguais (proposta em avaliação e site oficial, citação sem endosso, sem cookies, ©). Itens novos: os cinco serviços (nomes do `pagina.json`), atalhos para as seções e "São Paulo, SP, com atendimento em todo o Brasil" (`cidade` + `areaAtendida`). Nenhum número, adjetivo ou promessa novo; o aviso "anos de experiencia" do CI é o antigo, já decidido.

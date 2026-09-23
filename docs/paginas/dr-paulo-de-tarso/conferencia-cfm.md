@@ -70,3 +70,16 @@ Nenhum aviso de termo. Um aviso de peso da **pasta** (≈1,3 MB): é a soma de t
 | Faixa do consultório ("Imagem ilustrativa") | mantida | Banco de imagem só pela exceção do ADR-004; a vista não é de São Paulo e a legenda não diz que é |
 
 `npm run verificar`: nenhum aviso de termo.
+
+## Reconferência do rodapé (2026-09-23)
+
+Rodapé reorganizado em colunas, no modelo do `arruda-seixas` (pedido do dono). A identificação CFM continua **inteira** dentro do `data-identificacao-cfm`, agora na grade toda: "Paulo de Tarso Lopes Pontes — Médico — CRM-SP 000000" junto do nome, e cada especialidade/área **seguida do RQE** (arts. 4º e 6º).
+
+| Item novo no rodapé | Decisão | Por quê |
+|---|---|---|
+| "Onde atende": consultório e os quatro hospitais, com o bairro | mantido | Mesmos locais do `pagina.json` e da página; fato, sem adjetivo |
+| "Contato": WhatsApp e secretaria | mantido | Mesmos números da página (fictícios, ADR-004) |
+| "Em emergência, não espere a consulta: ligue 192 (SAMU)." | mantido | Repete a orientação de "Quando procurar"; educativa |
+| As frases legais do rodapé anterior | mantidas | Só juntadas na base; "Atualizada em" passou a 23/09/2026 |
+
+`npm run verificar`: nenhum aviso de termo.
