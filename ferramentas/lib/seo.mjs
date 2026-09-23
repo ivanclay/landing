@@ -8,7 +8,7 @@ export function urlDaPagina(config, slug) {
 }
 
 /** O bloco que substitui <!-- @gerado:cabecalho --> numa página de médico. */
-export function cabecalhoDaPagina(pagina, config, { rascunho = false } = {}) {
+export function cabecalhoDaPagina(pagina, config, { rascunho = false, versaoImagem = '' } = {}) {
   const url = urlDaPagina(config, pagina.slug);
   const linhas = [
     `<link rel="canonical" href="${escaparHtml(url)}">`,
@@ -20,7 +20,9 @@ export function cabecalhoDaPagina(pagina, config, { rascunho = false } = {}) {
   if (pagina.imagemSocial) {
     // WhatsApp, Facebook, LinkedIn e X leem estas tags. A imagem social sai sempre em 1200 × 630 JPEG
     // (otimizar-imagens.mjs --social); declarar o tamanho deixa a prévia aparecer já no primeiro compartilhamento.
-    const imagem = escaparHtml(new URL(pagina.imagemSocial, url).href);
+    // A versão (hash do arquivo) muda o endereço quando a imagem muda: WhatsApp e Facebook guardam a prévia
+    // pelo endereço da imagem e não buscam de novo um endereço que já conhecem.
+    const imagem = escaparHtml(enderecoDaImagemSocial(pagina, url, versaoImagem));
     linhas.push(`<meta property="og:image" content="${imagem}">`);
     linhas.push(`<meta property="og:image:secure_url" content="${imagem}">`);
     linhas.push('<meta property="og:image:type" content="image/jpeg">');
@@ -32,8 +34,15 @@ export function cabecalhoDaPagina(pagina, config, { rascunho = false } = {}) {
   }
   // Rascunho, demonstração e proposta nunca vão para o Google — as duas últimas nem publicadas (ADR-004, ADR-005).
   if (rascunho || soPorLinkDireto(pagina)) linhas.push('<meta name="robots" content="noindex, nofollow">');
-  linhas.push(`<script type="application/ld+json">${JSON.stringify(dadosEstruturados(pagina, url))}</script>`);
+  linhas.push(`<script type="application/ld+json">${JSON.stringify(dadosEstruturados(pagina, url, versaoImagem))}</script>`);
   return linhas.join('\n    ');
+}
+
+/** URL absoluta da imagem social, com ?v=<hash> quando a construção sabe a versão do arquivo. */
+function enderecoDaImagemSocial(pagina, url, versaoImagem) {
+  const endereco = new URL(pagina.imagemSocial, url);
+  if (versaoImagem) endereco.searchParams.set('v', versaoImagem);
+  return endereco.href;
 }
 
 /** O alt da imagem social: quem, o quê, onde — e, na demonstração, que é demonstração (ADR-004). */
@@ -49,8 +58,8 @@ function textoDaImagemSocial(pagina) {
  * schema.org Physician. Só o que o pagina.json afirma — nada é deduzido (regra 1).
  * Conferir o resultado em https://validator.schema.org (seo-local-landing).
  */
-export function dadosEstruturados(pagina, url) {
-  if (ehNegocio(pagina)) return dadosDoNegocio(pagina, url);
+export function dadosEstruturados(pagina, url, versaoImagem = '') {
+  if (ehNegocio(pagina)) return dadosDoNegocio(pagina, url, versaoImagem);
   const { medico, contato = {}, locais = [], convenios = [] } = pagina;
   const principal = locais[0];
   const dados = {
@@ -65,7 +74,7 @@ export function dadosEstruturados(pagina, url) {
     })),
   };
   if (contato.telefone || contato.whatsapp) dados.telephone = contato.telefone ?? contato.whatsapp;
-  if (pagina.imagemSocial) dados.image = new URL(pagina.imagemSocial, url).href;
+  if (pagina.imagemSocial) dados.image = enderecoDaImagemSocial(pagina, url, versaoImagem);
   if (principal?.endereco) dados.address = endereco(principal.endereco);
   const hospitais = locais.filter((local) => local.tipo === 'hospital');
   if (hospitais.length) {
@@ -80,7 +89,7 @@ export function dadosEstruturados(pagina, url) {
 }
 
 /** schema.org ProfessionalService para página de negócio (ADR-005). Só o que o pagina.json afirma. */
-function dadosDoNegocio(pagina, url) {
+function dadosDoNegocio(pagina, url, versaoImagem) {
   const { organizacao, contato = {} } = pagina;
   const dados = {
     '@context': 'https://schema.org',
@@ -91,7 +100,7 @@ function dadosDoNegocio(pagina, url) {
   };
   if (organizacao.slogan) dados.slogan = organizacao.slogan;
   if (contato.telefone || contato.whatsapp) dados.telephone = contato.telefone ?? contato.whatsapp;
-  if (pagina.imagemSocial) dados.image = new URL(pagina.imagemSocial, url).href;
+  if (pagina.imagemSocial) dados.image = enderecoDaImagemSocial(pagina, url, versaoImagem);
   if (organizacao.logo) dados.logo = new URL(organizacao.logo, url).href;
   if (organizacao.areaAtendida) dados.areaServed = organizacao.areaAtendida;
   if (organizacao.temas?.length) dados.knowsAbout = organizacao.temas;

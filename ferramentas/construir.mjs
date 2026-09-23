@@ -14,6 +14,7 @@ import {
 } from './lib/pagina.mjs';
 import { cabecalhoDaPagina, cabecalhoDoIndice, urlDaPagina } from './lib/seo.mjs';
 import { escaparHtml } from './lib/html.mjs';
+import { createHash } from 'node:crypto';
 
 const MARCADOR_CABECALHO = '<!-- @gerado:cabecalho -->';
 const MARCADOR_LISTA = '<!-- @gerado:lista -->';
@@ -80,9 +81,15 @@ async function construirPagina(pasta, config) {
   if (!existsSync(arquivoHtml)) return { erros: ['sem index.html'] };
   const html = await readFile(arquivoHtml, 'utf8');
   if (!html.includes(MARCADOR_CABECALHO)) return { erros: [`index.html sem o marcador ${MARCADOR_CABECALHO} no <head>`] };
-  const cabecalho = cabecalhoDaPagina(pagina, config, { rascunho: !pagina.publicar });
+  const cabecalho = cabecalhoDaPagina(pagina, config, { rascunho: !pagina.publicar, versaoImagem: await versaoDoArquivo(path.join(origem, pagina.imagemSocial ?? '')) });
   await writeFile(arquivoHtml, html.replace(MARCADOR_CABECALHO, cabecalho));
   return { erros: [], pagina };
+}
+
+/** 8 caracteres do SHA-256 do arquivo; vazio se não houver arquivo. Muda sempre que o conteúdo muda. */
+async function versaoDoArquivo(caminho) {
+  if (!existsSync(caminho) || !path.extname(caminho)) return '';
+  return createHash('sha256').update(await readFile(caminho)).digest('hex').slice(0, 8);
 }
 
 async function gerarIndice(config, paginas, exemplos = []) {

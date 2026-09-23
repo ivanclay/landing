@@ -103,6 +103,8 @@ test('passa: demonstração publicada sem CRM conferido nem aprovação, com avi
   const pagina = await readFile(path.join(raiz, '_site', SLUG, 'index.html'), 'utf8');
   assert.match(pagina, /<meta name="robots" content="noindex, nofollow">/);
   assert.match(pagina, /<meta property="og:image:width" content="1200">/);
+  // A imagem social leva a versão do arquivo, para as redes buscarem de novo quando ela mudar.
+  assert.match(pagina, /<meta property="og:image" content="[^"]*imagens\/social\.jpg\?v=[0-9a-f]{8}">/);
   assert.match(pagina, /<meta property="og:image:alt" content="Demonstração: /);
   assert.doesNotMatch(await readFile(path.join(raiz, '_site', 'sitemap.xml'), 'utf8'), new RegExp(SLUG));
   // No índice, só na seção "Demonstrações e propostas", etiquetada (ADR-005; o site.config.json liga a seção).
