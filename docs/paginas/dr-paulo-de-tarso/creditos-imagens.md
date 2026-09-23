@@ -1,6 +1,6 @@
 # Créditos das imagens — `dr-paulo-de-tarso` (DEMONSTRAÇÃO, ADR-004)
 
-Imagens de banco com licença livre (Pexels e Unsplash), **só porque a página é de demonstração** (exceção da regra 12).
+Imagens de banco com licença livre (Pexels), **só porque a página é de demonstração** (exceção da regra 12).
 Originais em `entrada/dr-paulo-de-tarso/` (fora do git). Licença conferida na página de cada imagem
 antes do download ("Free to use" — Pexels License). A verificação cobra uma linha por imagem de
 `site/dr-paulo-de-tarso/imagens/`.
@@ -8,8 +8,8 @@ antes do download ("Free to use" — Pexels License). A verificação cobra uma 
 | Imagem | Arquivos | Original | Página da imagem | Autor | Banco | Licença | Baixada em | Onde foi usada |
 |---|---|---|---|---|---|---|---|---|
 | `retrato` | `retrato-480/720/1000` (.avif, .webp, .jpg) | `candidato-a1.jpg` (8167×5444), recorte 4:5 centrado no homem | https://www.pexels.com/photo/bearded-man-in-black-suit-jacket-4345160/ | Edmond Dantès | Pexels | [Pexels License](https://www.pexels.com/license/) | 2026-09-22 | Abertura. A imagem social `social.jpg` deriva desta: no modelo do hub — painel `#1d4a3d` com nome, especialidade e "Página de demonstração · médico fictício", e o busto recortado do quadro horizontal tratado à direita, 1200×630 |
-| `consultorio` | `consultorio-480/720` (.avif, .webp, .jpg) — celular | `premium-1.jpg` (4160×6240), recorte 4:5 | https://unsplash.com/photos/flIYUT7acCo | David Kristianto | Unsplash | [Unsplash License](https://unsplash.com/license) | 2026-09-22 | Faixa do consultório, depois das credenciais (substitui a sala de Max Vakhtbovych, julgada simples demais pelo dono) |
-| `consultorio-faixa` | `consultorio-faixa-800/1200/1600` — desktop | `premium-1.jpg`, recorte 21:9 na altura da mesa e da vista | https://unsplash.com/photos/flIYUT7acCo | David Kristianto | Unsplash | [Unsplash License](https://unsplash.com/license) | 2026-09-22 | A mesma faixa, a partir de 48 rem. A vista é de Jacarta: a legenda não diz São Paulo |
+| `consultorio` | `consultorio-480/720` (.avif, .webp, .jpg) — celular | `premium-4.jpg` (7360×4912), **retocada** (tomada e etiqueta de preço da luminária removidas por preenchimento com a própria parede), recorte 4:5 na mesa e nas poltronas | https://www.pexels.com/photo/modern-home-office-design-8082224/ | Max Vakhtbovych | Pexels | [Pexels License](https://www.pexels.com/license/) | 2026-09-22 | Faixa do consultório, depois das credenciais — escolhida pelo dono (opção F) entre 6, vendo cada uma aplicada na página |
+| `consultorio-faixa` | `consultorio-faixa-800/1200/1600` — desktop | a mesma retocada, recorte 21:9 sem o estouro de luz do teto e sem o sofá azul da borda | https://www.pexels.com/photo/modern-home-office-design-8082224/ | Max Vakhtbovych | Pexels | [Pexels License](https://www.pexels.com/license/) | 2026-09-22 | A mesma faixa, a partir de 48 rem |
 | `cidade` | `cidade-640/1100` | `candidato-d2.jpg` (3328×4160), faixa 16:9 do alto (sai a placa de rua) | https://www.pexels.com/photo/urban-landscape-with-trees-in-sao-paulo-38245331/ | Washington Gama | Pexels | [Pexels License](https://www.pexels.com/license/) | 2026-09-22 | Fecho |
 
 ## Tratamento de cor (o mesmo nas três)
@@ -28,5 +28,15 @@ conferidas na coleta; nenhuma é Unsplash+ nem Getty.
 
 ## Crédito na página
 
-Rodapé: "Imagens: Edmond Dantès / Pexels · David Kristianto / Unsplash · Washington Gama / Pexels." — a
+Rodapé: "Imagens: Edmond Dantès / Pexels · Max Vakhtbovych / Pexels · Washington Gama / Pexels." — a
 Pexels License não exige crédito; a demonstração dá o exemplo.
+
+## Histórico da faixa do consultório
+
+| Data | Imagem | Resultado |
+|---|---|---|
+| 2026-09-22 | Sala clara vazia (Max Vakhtbovych, Pexels 6934240) | "muito simples" — trocada |
+| 2026-09-22 | Sala em andar alto com vista (David Kristianto, Unsplash flIYUT7acCo) | "parece sala de jantar de classe média" — trocada |
+| 2026-09-22 | Seis opções mostradas aplicadas na página (A–F); o dono escolheu **F** | no ar |
+
+A Pexels License permite editar a imagem; o retoque (tomada e etiqueta) não altera o que ela representa.
