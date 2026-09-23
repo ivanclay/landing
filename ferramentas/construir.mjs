@@ -149,7 +149,7 @@ function linhaDoIndice(pagina) {
   const busca = [nomeDeExibicao(pagina), assunto, lugar, etiqueta, ehDemonstracao(pagina) ? 'demonstração' : ''].join(' ');
   return `
               <tr class="tabela__linha" data-busca="${escaparHtml(busca)}">
-                <th scope="row"><span class="tabela__celula-nome"><span class="tabela__monograma" aria-hidden="true">${escaparHtml(iniciais(nomeDeExibicao(pagina)))}</span><span class="tabela__identidade"><a class="tabela__nome" href="${escaparHtml(pagina.slug)}/">${escaparHtml(nomeDeExibicao(pagina))}</a>${etiqueta ? `
+                <th scope="row"><span class="tabela__celula-nome"><span class="tabela__monograma" aria-hidden="true">${escaparHtml(iniciais(nomeDeExibicao(pagina)))}</span><span class="tabela__identidade"><a class="tabela__nome" href="${escaparHtml(pagina.slug)}/" target="_blank" rel="noopener">${escaparHtml(nomeDeExibicao(pagina))}<span class="visualmente-oculto"> (abre em nova aba)</span></a>${etiqueta ? `
                   <span class="tabela__etiqueta${ehProposta(pagina) ? ' tabela__etiqueta--proposta' : ''}">${escaparHtml(etiqueta)}</span>` : ''}</span></span></th>
                 <td>${escaparHtml(assunto || '—')}</td>
                 <td>${escaparHtml(lugar || '—')}</td>
