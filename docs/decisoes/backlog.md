@@ -20,5 +20,5 @@
 | B-10 | Demonstração `arruda-seixas`: JSON-LD `LegalService` não colado no validator.schema.org; leitor de tela, zoom 200% e Tab não conferidos à mão | Baixo (noindex) | Antes de mostrar a um escritório |
 | B-11 | `s-frontdesk` no ar com WhatsApp provisório `+5520999999999` (DDD 20 não existe; decisão do dono, 2026-09-23): o botão não leva a ninguém | Clínica interessada não consegue falar | Assim que houver o número real: `pagina.json › contato.whatsapp` + os 6 links `wa.me` do `index.html` |
 | B-13 | Não há skill de publicidade do **CFN** (`publicidade-nutricao-cfn-landing`): a conferência da `emilia-kuwano` foi feita pelo techlead contra a Res. CFN 599/2018 (ADR-008) | Segunda nutricionista sem conferência especializada | Antes da segunda página de nutricionista |
-| B-14 | `emilia-kuwano`: CRN, cidade e endereço ausentes da entrada; logotipo não enviado | A página não publica sem o CRN | Com a resposta da Emília |
+| B-14 | `emilia-kuwano`: cidade e endereço ausentes da entrada; logotipo não enviado (CRN resolvido: CRN-5 1575, 2026-09-27) | Paciente sem endereço completo; SEO local mais fraco | Com a resposta da Emília |
 | B-12 | Sugestões da nota de entrega do `s-frontdesk`: JSON-LD `SoftwareApplication` para produto de software; modo de prévia (noindex) para produto próprio em pré-lançamento | Baixo | ADR quando houver o segundo produto |

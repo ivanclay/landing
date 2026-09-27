@@ -5,15 +5,15 @@
   Telenutrição: Res. CFN 760/2023.
 - **Quem conferiu:** techlead, em 2026-09-27, sobre o construído (`npm run rascunhos`). Não há skill do CFN
   (ADR-008, B-13).
-- **Estado:** conferida, **com o CRN pendente**. `revisao.conferenciaCfnEm` fica vazio até o número do CRN
-  entrar e a página ser conferida de novo.
+- **Estado:** conferida em 2026-09-27, com o CRN-5 1575 e o layout escolhido (opção 3). As datas de
+  `revisao` são preenchidas pelo dono (regra 4) — `crnConferidoEm` depois de conferir a inscrição no CRN-5.
 
 ## Achados na entrada
 
 | # | Na entrada | Decisão | Artigo |
 |---|---|---|---|
 | F-01 | Seção "Atendimento Nutricional (planos e valores)": **R$ 400** presencial, **R$ 380** on-line | **Fora da página.** Virou "Duas formas de atendimento", com o que cada uma inclui, e a nota "Informações sobre agendamento e pagamento pelo WhatsApp" | art. 57 — vedado usar o valor dos honorários como publicidade |
-| F-02 | Identificação: nome e "Nutricionista", **sem número do CRN** | Página mostra "CRN PENDENTE"; o `verificar` reprova até o número entrar | art. 21 |
+| F-02 | Identificação: nome e "Nutricionista", **sem número do CRN** | Resolvido: o dono informou **CRN-5 1575** (2026-09-27); está sobre o retrato e no rodapé (`data-identificacao-crn`), conferido pelo `verificar` | art. 21 |
 | F-03 | "Especialista em Clínica e Terapêutica Nutricional (UNIGUAÇU)" | Escrito como **"Especialização em…"** — o fato (o curso) sem transformar em título. Se ela tiver o título de especialista reconhecido, pode voltar a "Especialista" | art. 54 (divulgar qualificação) + regra 1 |
 | F-04 | Consulta on-line | Permitida | Res. CFN 760/2023 |
 | F-05 | "pagamento prévio para reserva do horário" | Mantido: é regra de agendamento, não valor | art. 57 não alcança |

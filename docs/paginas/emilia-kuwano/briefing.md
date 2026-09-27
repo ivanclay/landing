@@ -20,7 +20,7 @@
 | Nome completo | Emília Alves Kuwano | [MD §1, §2] |
 | Nome de uso / marca | Emília Kuwano · Nutrição Clínica e Funcional | [MD §1, Rodapé] |
 | Profissão | Nutricionista | [MD §1] |
-| **Inscrição no CRN** | **PENDENTE** — número e Regional | ausente de toda a entrada |
+| Inscrição no CRN | **CRN-5 1575** | mensagem do dono, 2026-09-27: "Nutricionista CRN5- 1575" (ausente de toda a entrada: texto, fotos e metadados). Formato da página: `CRN-5 1575` |
 | Graduação | Nutrição — Universidade Federal da Bahia | [MD §2] "Nutricionista graduada pela Universidade Federal da Bahia" |
 | Especialização | Clínica e Terapêutica Nutricional — Faculdade de Ciências Biológicas e da Saúde (UNIGUAÇU) | [MD §2] "Especialista em…" — ver conferência, item F-03 |
 | Pós-graduação | Nutrição Clínica Funcional — VP · Faculdade de Ciências Médicas da Santa Casa de São Paulo | [MD §2] |
@@ -39,7 +39,7 @@
 
 ## Pendências (perguntas ao dono — gate 1)
 
-1. **Número de inscrição no CRN e o Regional** (ex.: "CRN-5 12345"). **Trava a publicação**: sem ele a
+1. ~~**Número de inscrição no CRN e o Regional**~~ — **respondido em 2026-09-27: CRN-5 1575.** (ex.: "CRN-5 12345"). **Trava a publicação**: sem ele a
    página não cumpre o art. 21 da Res. CFN 599/2018. Hoje a prévia mostra "CRN PENDENTE" e o `verificar`
    reprova de propósito.
 2. **Cidade e endereço do Centro Médico Aliança** (rua, número, bairro, CEP) — para o paciente chegar, para

@@ -4,7 +4,16 @@
   `npx serve@14 _site -l 4173`.
 - **Ambiente:** Windows 11, Chrome (canal estável) via Playwright; Lighthouse 13.5.0.
 
-## Lighthouse — celular (mediana de 3)
+## Layout escolhido (opção 3, tela dividida) — 2026-09-27
+
+| Performance | Acessibilidade | Boas práticas | SEO | LCP | CLS | TBT | Peso |
+|---|---|---|---|---|---|---|---|
+| **97** | **100** | **100** | 69 ⚠ (só o `noindex` do rascunho) | 2,4 s | 0 | 0 ms | 221 KB |
+
+Mediana de 3, mesmo comando abaixo. Rolagem lateral 0 em 320 · 360 · 768 · 1440 · 1920 px. Sem JS: todo o
+conteúdo e os contatos aparecem (conferido em 320 px). `verificar:rascunhos`: só o erro esperado do CRN.
+
+## Primeira versão (recusada) — Lighthouse, celular (mediana de 3)
 
 `npx --yes lighthouse http://localhost:4173/emilia-kuwano/ --form-factor=mobile --screenEmulation.mobile --throttling-method=simulate --only-categories=performance,accessibility,best-practices,seo --output=json --chrome-flags="--headless"`
 

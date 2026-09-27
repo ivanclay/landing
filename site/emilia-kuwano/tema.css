@@ -1,32 +1,40 @@
 /*
- * tema.css — a identidade desta página: cor e fonte (regra 10). Nenhum outro arquivo desta página
- * digita cor. A paleta é a da marca da Emília (terracota, salmão, rosa, malva — entrada, Referência
- * visual); o plano está em docs/paginas/emilia-kuwano/direcao-de-arte.md.
- * Contraste conferido: texto 14,9:1 e texto-suave 7,0:1 no fundo; branco 5,1:1 na terracota;
- * linho 11,7:1 e rosa 7,8:1 na noite; café 7,3:1 no salmão. Na terracota, só branco puro: o rosado
- * #fbe3d9 dava 4,1:1 e reprovou no Lighthouse.
+ * tema.css — a identidade desta página ("tela dividida, escura e quente", escolhida pelo dono em 2026-09-27): cor e fonte (regra 10).
+ * Nenhum outro arquivo desta página digita cor. Paleta derivada da marca da Emília (terracota #AB5639,
+ * salmão #E5997A, rosa #F2B8A6, malva #9E8A91) sobre um café profundo — consultório à noite.
+ *
+ * Contraste (WCAG, calculado): creme 15,0:1 no fundo e 13,9:1 na superfície; texto-suave 8,7:1 no
+ * fundo e 8,1:1 na superfície; salmão 7,7:1 no fundo e 7,2:1 na superfície; rosa 10,2:1 no fundo;
+ * café 7,7:1 no salmão (botão principal). A terracota, 3,5:1 no fundo, só em fio e traço — nunca texto.
  */
 :root {
-  --cor-fundo: #f7f1ec;
-  --cor-superficie: #efe4dc;
-  --cor-texto: #2b1a14;
-  --cor-texto-suave: #6a4b40;
-  --cor-linha: #dcc9bd;
-  --cor-marca: #ab5639;
-  --cor-sobre-marca: #ffffff;
-  --cor-foco: #2b1a14;
+  --cor-fundo: #24150f;
+  --cor-superficie: #2e1b14;
+  --cor-texto: #f5ebe2;
+  --cor-texto-suave: #c9b2a5;
+  --cor-linha: #4a3027;
+  --cor-marca: #e5997a;
+  --cor-sobre-marca: #24150f;
+  --cor-foco: #f5ebe2;
 
-  --cor-marca-texto: #944a30; /* terracota para texto pequeno: 5,0:1 no rosa, 5,1:1 na superfície */
-  --cor-salmao: #e5997a;
-  --cor-rosa: #f2b8a6;
-  --cor-rosa-claro: #f9dfd5;
-  --cor-noite: #4a2419;
-  --cor-noite-texto: #f7ede6;
-  --cor-noite-suave: #f2b8a6;
-  --cor-foco-na-marca: #fff8f3;
+  --cor-acento: #e5997a;        /* salmão: rubricas, números, links */
+  --cor-rosa: #f2b8a6;          /* o nome em itálico sobre a foto */
+  --cor-terracota: #ab5639;     /* fios e traços — nunca texto */
+  --cor-malva: #9e8a91;         /* fio das observações */
+
+  /* Degradê da legenda sobre o retrato: o esfumado acontece no respiro de cima (--respiro-legenda);
+     do primeiro texto para baixo o café fica ≥ 92% opaco. Pior caso (jaleco branco por baixo):
+     fundo efetivo ≤ #3f2d26 → creme 11,1:1, texto-suave 6,4:1, salmão 5,7:1, rosa 7,5:1. */
+  --respiro-legenda: 9rem;
+  --degrade-legenda: linear-gradient(to top,
+    #24150f 0%,
+    rgb(36 21 15 / 0.92) calc(100% - var(--respiro-legenda)),
+    rgb(36 21 15 / 0) 100%);
+  --degrade-retrato-borda: linear-gradient(to left, rgb(36 21 15 / 0.6), rgb(36 21 15 / 0) 18%);
+  --sombra-texto: 0 1px 12px rgb(20 10 6 / 0.6);
 
   --fonte-titulo: 'Fraunces Variable', Georgia, 'Times New Roman', serif;
   --fonte-texto: 'DM Sans Variable', system-ui, -apple-system, 'Segoe UI', sans-serif;
 
-  --raio-botao: 999px;
+  --raio-botao: 2px;
 }

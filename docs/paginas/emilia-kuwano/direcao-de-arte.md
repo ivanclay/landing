@@ -1,5 +1,36 @@
 # Direção de arte — `emilia-kuwano`
 
+## Decisão vigente (2026-09-27): "tela dividida, escura e quente"
+
+O dono recusou a primeira versão ("troque o layout, não gostei desse"). Foram montadas três direções
+aplicadas na página inteira, mais a primeira como reserva:
+
+| Opção | Conceito | Captura |
+|---|---|---|
+| 1 | Editorial claro — nome em capa de revista, foto sangrando à direita, capítulos 01–05 (Instrument Serif + Hanken Grotesk) | `capturas/opcao-1-1440.png` |
+| 2 | Cartão de luxo simétrico — tudo centrado, retrato em círculo, ornamentos espelhados, malva e rosa (Instrument Serif + Montserrat + Public Sans) | `capturas/opcao-2-1440.png` |
+| **3 ✓** | **Tela dividida, escura** — retrato com o ripado em altura total e fixo à esquerda, conteúdo rolando à direita; café, creme e salmão (Fraunces + DM Sans) | `capturas/1440-janela.png`, `1440.png`, `360.png` |
+| reserva | A primeira versão (abertura terracota, retrato no arco) | commit `857c558` |
+
+**Escolhida: 3.** Paleta (tokens em `site/emilia-kuwano/tema.css`, contraste no cabeçalho do arquivo): fundo
+café `#24150F`, superfície `#2E1B14`, texto creme `#F5EBE2` (15,0:1), texto suave `#C9B2A5` (8,7:1), salmão
+`#E5997A` para botão principal, rubricas e números (7,7:1; café sobre salmão 7,7:1), rosa `#F2B8A6` no
+sobrenome em itálico, terracota `#AB5639` e malva só em fios. Foco: contorno creme.
+
+- **Desktop (≥ 60rem):** metade esquerda = retrato (foto original, com o painel ripado do consultório) em
+  `100svh`, `sticky`; na base, sobre degradê café, a rubrica, o h1 "Emília *Kuwano*" e a identificação com o CRN.
+  Metade direita: navegação em versalete, frase de abertura com os botões, depois as seções numa coluna.
+- **Celular:** retrato abre a página (~72svh) com o nome sobre o degradê; conteúdo embaixo; barra fixa de
+  contato com os ícones de WhatsApp e e-mail (pedido do dono).
+- **Passo a passo** em linha do tempo vertical (círculos com numeral itálico ligados por fio); modalidades
+  em dois blocos de borda fina, **sem preço**; preparo da bioimpedância em lista 01–05 entre fios.
+- **Imagem social:** retrato à esquerda, nome em Georgia (a fonte que o `sharp` tem) sobre café à direita.
+
+---
+
+## Primeira versão (recusada) — mantida como registro
+
+
 ## Ponto de partida
 
 A marca já existe: as artes dela usam **terracota**, salmão, rosa claro e malva, ornamentos florais

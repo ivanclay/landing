@@ -5,7 +5,7 @@
   "atualizadoEm": "2026-09-27",
   "nutricionista": {
     "nome": "Emília Alves Kuwano",
-    "crn": "PENDENTE",
+    "crn": { "regiao": 5, "numero": "1575" },
     "areas": ["Nutrição Clínica e Funcional"]
   },
   "resumo": "Emília Kuwano, nutricionista. Nutrição clínica e funcional, presencial e on-line, com acompanhamento semanal por e-mail entre as consultas.",
