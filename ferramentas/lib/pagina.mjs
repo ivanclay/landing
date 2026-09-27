@@ -1,9 +1,10 @@
 // O contrato do pagina.json: o que toda página precisa declarar para ser construída e publicada.
 // Cada mensagem cita a regra do CLAUDE.md (ou o ADR) que ela garante.
 //
-// Três tipos de página: "medico" (o padrão — identificação do CFM, regras 2 a 4), "negocio" (empresa ou
-// consultoria de saúde, sem CRM — ADR-005) e "advocacia" (sociedade de advogados: identificação da OAB e
-// Provimento 205/2021 no lugar do CFM — ADR-006). Dois modos que só abrem por link direto: "demonstracao"
+// Quatro tipos de página: "medico" (o padrão — identificação do CFM, regras 2 a 4), "negocio" (empresa ou
+// consultoria de saúde, sem CRM — ADR-005), "advocacia" (sociedade de advogados: identificação da OAB e
+// Provimento 205/2021 no lugar do CFM — ADR-006) e "nutricao" (nutricionista: identificação do CRN e
+// Código de Ética do Nutricionista, Res. CFN 599/2018, no lugar do CFM — ADR-008). Dois modos que só abrem por link direto: "demonstracao"
 // (médico ou escritório fictício, ADR-004 e ADR-006) e "proposta" (site de um negócio real ainda sem
 // aprovação, ADR-005).
 
@@ -15,6 +16,9 @@ const FORMATO_E164 = /^\+\d{10,15}$/;
 const SO_DIGITOS = /^\d+$/;
 // Inscrição na OAB como a página a mostra: "123.456", ou com a letra da inscrição suplementar ("12.345-S").
 const FORMATO_OAB = /^\d{1,3}(?:\.\d{3})*(?:-[A-Z])?$/;
+// Inscrição no CRN: só dígitos, com "/P" na inscrição provisória. A região é o número do Regional (1 a 11).
+const FORMATO_CRN = /^\d+(?:\/P)?$/;
+const PENDENTE = 'PENDENTE';
 export const UFS = ['AC', 'AL', 'AP', 'AM', 'BA', 'CE', 'DF', 'ES', 'GO', 'MA', 'MT', 'MS', 'MG', 'PA', 'PB',
   'PR', 'PE', 'PI', 'RJ', 'RN', 'RS', 'RO', 'RR', 'SC', 'SP', 'SE', 'TO'];
 
@@ -30,14 +34,15 @@ export function validarPagina(pagina, pasta) {
     'slug ausente ou fora do formato (minúsculas, dígitos e hífen; sem acento) — regra 7');
   exigir(pagina.slug === pasta, `slug "${pagina.slug}" diferente da pasta "${pasta}" — regra 7`);
   exigir(typeof pagina.publicar === 'boolean', 'publicar precisa ser true ou false');
-  exigir([undefined, 'medico', 'negocio', 'advocacia'].includes(pagina.tipo),
-    'tipo deve ser "medico" (padrão), "negocio" (ADR-005) ou "advocacia" (ADR-006)');
+  exigir([undefined, 'medico', 'negocio', 'advocacia', 'nutricao'].includes(pagina.tipo),
+    'tipo deve ser "medico" (padrão), "negocio" (ADR-005), "advocacia" (ADR-006) ou "nutricao" (ADR-008)');
   for (const [modo, adr] of [['demonstracao', 'ADR-004'], ['proposta', 'ADR-005']]) {
     exigir(pagina[modo] === undefined || typeof pagina[modo] === 'boolean', `${modo}, se existir, precisa ser true ou false — ${adr}`);
   }
 
   if (ehNegocio(pagina)) validarNegocio(pagina, exigir);
   else if (ehAdvocacia(pagina)) validarAdvocacia(pagina, exigir);
+  else if (ehNutricao(pagina)) validarNutricao(pagina, exigir);
   else validarMedico(pagina, exigir);
 
   exigir(texto(pagina.resumo) && pagina.resumo.length >= 50 && pagina.resumo.length <= 160,
@@ -55,6 +60,7 @@ export function validarPagina(pagina, pasta) {
     exigir(FORMATO_DATA.test(pagina.atualizadoEm ?? ''), 'atualizadoEm ausente (vai para o sitemap)');
     if (ehNegocio(pagina)) exigirRevisaoDeNegocio(pagina, exigir);
     else if (ehAdvocacia(pagina)) exigirRevisaoDeAdvocacia(pagina, exigir);
+    else if (ehNutricao(pagina)) exigirRevisaoDeNutricao(pagina, exigir);
     else exigirRevisaoDeMedico(pagina, exigir);
   }
   return erros;
@@ -123,6 +129,35 @@ function validarAdvocacia(pagina, exigir) {
   exigirResumoDeDemonstracao(pagina, exigir);
 }
 
+/**
+ * Nutricionista (ADR-008): nome, a palavra "Nutricionista" e a inscrição no CRN da jurisdição (Res. CFN
+ * 599/2018, art. 21). Enquanto o número não chega, `crn: "PENDENTE"` deixa construir o rascunho para ver
+ * no navegador — a página mostra "PENDENTE" e o verificar.mjs reprova (regra 1); publicar recusa.
+ */
+function validarNutricao(pagina, exigir) {
+  const nutricionista = pagina.nutricionista ?? {};
+  exigir(texto(nutricionista.nome), 'nutricionista.nome ausente — regra 2 (Res. CFN 599/2018, art. 21)');
+  const { crn } = nutricionista;
+  if (crn === PENDENTE) {
+    exigir(pagina.publicar !== true, 'nutricionista.crn PENDENTE: sem a inscrição no CRN a página não publica — regra 2 (ADR-008)');
+  } else {
+    exigir(Number.isInteger(crn?.regiao) && crn.regiao >= 1 && crn.regiao <= 11,
+      'nutricionista.crn.regiao precisa ser o número do Regional (1 a 11) — regra 2 (ADR-008)');
+    exigir(FORMATO_CRN.test(crn?.numero ?? ''), 'nutricionista.crn.numero precisa ser só dígitos (com "/P" se provisória) — regra 2 (ADR-008)');
+  }
+  for (const [i, area] of (nutricionista.areas ?? []).entries()) exigir(texto(area), `nutricionista.areas[${i}] vazia`);
+  // A sede aparece no índice; sem fonte, fica de fora (regra 1) — por isso não é obrigatória aqui.
+  if (pagina.uf !== undefined) exigir(UFS.includes(pagina.uf), 'uf inválida');
+  exigir(!ehProposta(pagina) && !ehDemonstracao(pagina),
+    'demonstracao e proposta não se aplicam a nutricionista: a página é de uma profissional real (ADR-008)');
+}
+
+/** "CRN-5 12345": como a inscrição aparece na página e no JSON-LD (ADR-008). */
+export function inscricaoCrn(pagina) {
+  const { crn } = pagina.nutricionista;
+  return crn === PENDENTE ? `CRN ${PENDENTE}` : `CRN-${crn.regiao} ${crn.numero}`;
+}
+
 /** Página de negócio (empresa, consultoria): sem CRM; o nome e, na proposta, o site oficial (ADR-005). */
 function validarNegocio(pagina, exigir) {
   exigir(texto(pagina.organizacao?.nome), 'organizacao.nome ausente — ADR-005');
@@ -165,6 +200,16 @@ function exigirRevisaoDeAdvocacia(pagina, exigir) {
     'revisao.conferenciaOabEm ausente: a conferência pelo Provimento 205/2021 da OAB não foi feita — regra 3 (ADR-006)');
 }
 
+function exigirRevisaoDeNutricao(pagina, exigir) {
+  const revisao = pagina.revisao ?? {};
+  exigir(FORMATO_DATA.test(revisao.crnConferidoEm ?? ''),
+    'revisao.crnConferidoEm ausente: inscrição conferida no CRN da jurisdição antes de publicar — regra 4 (ADR-008)');
+  exigir(FORMATO_DATA.test(revisao.conferenciaCfnEm ?? ''),
+    'revisao.conferenciaCfnEm ausente: a conferência pelo Código de Ética do Nutricionista não foi feita — regra 3 (ADR-008)');
+  exigir(FORMATO_DATA.test(revisao.aprovadoPelaNutricionistaEm ?? ''),
+    'revisao.aprovadoPelaNutricionistaEm ausente: a página só publica com a aprovação da nutricionista — regra 4 (ADR-008)');
+}
+
 function exigirRevisaoDeNegocio(pagina, exigir) {
   // A proposta, por definição, ainda não foi aprovada: vai ao ar só por link, com o aviso (ADR-005).
   if (ehProposta(pagina)) return;
@@ -175,6 +220,7 @@ function exigirRevisaoDeNegocio(pagina, exigir) {
 export function nomeDeExibicao(pagina) {
   if (ehNegocio(pagina)) return pagina.organizacao.nome;
   if (ehAdvocacia(pagina)) return pagina.sociedade.nome;
+  if (ehNutricao(pagina)) return pagina.nutricionista.nome;
   const { tratamento, nome } = pagina.medico;
   return tratamento ? `${tratamento} ${nome}` : nome;
 }
@@ -194,10 +240,16 @@ export function ehAdvocacia(pagina) {
   return pagina.tipo === 'advocacia';
 }
 
+/** Página de nutricionista: CRN e Código de Ética do Nutricionista no lugar do CFM (ADR-008). */
+export function ehNutricao(pagina) {
+  return pagina.tipo === 'nutricao';
+}
+
 /** O que a página anuncia, numa linha: as especialidades do médico, a categoria do negócio ou do escritório. */
 export function assuntoDaPagina(pagina) {
   if (ehNegocio(pagina)) return pagina.organizacao.categoria ?? '';
   if (ehAdvocacia(pagina)) return pagina.sociedade.categoria ?? 'Advocacia';
+  if (ehNutricao(pagina)) return (pagina.nutricionista.areas ?? []).join(', ') || 'Nutrição';
   return (pagina.medico.especialidades ?? []).map((e) => e.nome).join(', ');
 }
 

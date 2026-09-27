@@ -1,0 +1,310 @@
+/*
+ * pagina.css — o layout e o gesto desta página (docs/paginas/emilia-kuwano/direcao-de-arte.md):
+ * a abertura em terracota com o retrato no arco, a linha branca fina das artes dela contornando o arco e
+ * dividindo as seções, e os numerais em Fraunces itálico no passo a passo e no preparo.
+ */
+
+/* ── Cabeça ─────────────────────────────────────────────────────────── */
+.cabeca {
+  background: var(--cor-marca);
+  color: var(--cor-sobre-marca);
+}
+.cabeca__linha {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--espaco-2) var(--espaco-5);
+  padding-block: var(--espaco-4);
+  border-bottom: 1px solid color-mix(in oklab, var(--cor-sobre-marca) 35%, transparent);
+}
+.cabeca__nome {
+  font-family: var(--fonte-titulo);
+  font-size: var(--texto-destaque);
+  font-variation-settings: 'opsz' 36;
+  letter-spacing: 0.01em;
+}
+.cabeca__nav { display: none; gap: var(--espaco-5); }
+.cabeca__nav a {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--alvo-minimo);
+  font-size: var(--texto-apoio);
+  text-decoration: none;
+  color: var(--cor-sobre-marca);
+}
+.cabeca__nav a:hover { color: var(--cor-sobre-marca); text-decoration: underline; }
+@media (min-width: 48rem) { .cabeca__nav { display: flex; } }
+
+/* Na terracota, o foco é claro. */
+.cabeca :focus-visible,
+.abertura :focus-visible { outline-color: var(--cor-foco-na-marca); }
+
+/* ── Abertura ───────────────────────────────────────────────────────── */
+.abertura {
+  position: relative;
+  background: var(--cor-marca);
+  color: var(--cor-sobre-marca);
+  padding-block: var(--espaco-7) var(--espaco-9);
+  overflow: hidden;
+}
+.abertura__grade {
+  display: grid;
+  gap: var(--espaco-7);
+  align-items: center;
+}
+.abertura__texto { display: grid; gap: var(--espaco-5); }
+.abertura__rubrica,
+.secao__rubrica {
+  font-size: var(--texto-meta);
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+.abertura__rubrica { color: var(--cor-sobre-marca); }
+.abertura__nome {
+  font-size: var(--texto-vitrine);
+  font-weight: 380;
+  font-variation-settings: 'opsz' 144;
+  line-height: 0.98;
+  letter-spacing: -0.015em;
+}
+.abertura__nome span {
+  display: block;
+  font-style: italic;
+  font-weight: 300;
+  padding-left: 0.6em;
+}
+.abertura__apoio {
+  max-width: 34ch;
+  font-size: var(--texto-destaque);
+  line-height: 1.45;
+}
+.abertura__acoes { display: flex; flex-wrap: wrap; gap: var(--espaco-3); }
+.abertura__identificacao {
+  font-size: var(--texto-apoio);
+  color: var(--cor-sobre-marca);
+}
+
+.botao--claro { background: var(--cor-sobre-marca); color: var(--cor-marca); }
+.botao--claro:hover { background: var(--cor-rosa-claro); }
+.botao--contorno { border-color: currentColor; color: var(--cor-sobre-marca); }
+.botao--contorno:hover { background: color-mix(in oklab, var(--cor-sobre-marca) 14%, transparent); }
+.botao svg { fill: currentColor; }
+
+/* O retrato no arco, e a linha branca fina que o contorna — o gesto da página. */
+.retrato {
+  position: relative;
+  justify-self: center;
+  width: min(72vw, 26rem);
+  margin: var(--espaco-4) var(--espaco-4) 0;
+}
+.retrato::before {
+  content: '';
+  position: absolute;
+  inset: -0.9rem -0.9rem 1.5rem;
+  border: 1.25px solid var(--cor-sobre-marca);
+  border-bottom: 0;
+  border-radius: 999px 999px 0 0;
+  pointer-events: none;
+}
+.retrato picture,
+.retrato img {
+  border-radius: 999px 999px 0.25rem 0.25rem;
+  background: var(--cor-salmao);
+}
+.retrato img { width: 100%; aspect-ratio: 880 / 1054; object-fit: cover; }
+
+@media (min-width: 60rem) {
+  .abertura { padding-block: var(--espaco-8) var(--espaco-9); }
+  .abertura__grade { grid-template-columns: 1.15fr 0.85fr; }
+  .retrato { justify-self: end; margin: var(--espaco-5) var(--espaco-5) 0 0; }
+}
+
+/* A linha orgânica: traço contínuo de 1,25 px, nunca preenchimento. */
+.linha {
+  display: block;
+  width: 100%;
+  height: 3rem;
+  fill: none;
+  stroke-width: 1.25;
+  vector-effect: non-scaling-stroke;
+}
+.linha--abertura {
+  position: absolute;
+  inset: auto 0 var(--espaco-5);
+  stroke: var(--cor-sobre-marca);
+  opacity: 0.7;
+}
+.linha--contato { stroke: var(--cor-salmao); margin-bottom: var(--espaco-6); }
+
+/* ── Seções ─────────────────────────────────────────────────────────── */
+.secao { padding-block: var(--espaco-9); }
+.secao--superficie { background: var(--cor-superficie); }
+.secao__cabeca { display: grid; gap: var(--espaco-3); max-width: 40rem; margin-bottom: var(--espaco-7); }
+.secao__rubrica { color: var(--cor-marca-texto); }
+.secao h2 {
+  font-size: var(--texto-titulo);
+  font-weight: 400;
+  font-variation-settings: 'opsz' 96;
+  letter-spacing: -0.01em;
+}
+.secao h3 {
+  font-size: var(--texto-destaque);
+  font-weight: 500;
+  font-variation-settings: 'opsz' 36;
+}
+
+/* Passo a passo: sequência de verdade, numerada em Fraunces itálico. */
+.passos {
+  display: grid;
+  gap: var(--espaco-7) var(--espaco-6);
+  padding: 0;
+  margin: 0;
+  counter-reset: none;
+}
+.passo {
+  display: grid;
+  gap: var(--espaco-3);
+  align-content: start;
+  padding-top: var(--espaco-5);
+  border-top: 1px solid var(--cor-linha);
+}
+.passo p { color: var(--cor-texto-suave); }
+.passo__numero,
+.preparo__numero {
+  font-family: var(--fonte-titulo);
+  font-style: italic;
+  font-weight: 300;
+  font-variation-settings: 'opsz' 144;
+  line-height: 1;
+  color: var(--cor-marca-texto);
+}
+.passo__numero { font-size: clamp(3rem, 2.4rem + 2.6vw, 4.5rem); }
+@media (min-width: 40rem) { .passos { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 64rem) { .passos { grid-template-columns: repeat(4, 1fr); } }
+
+/* Duas formas de atendimento: o que cada uma inclui, sem preço (Res. CFN 599/2018, art. 57). */
+.modalidades { display: grid; gap: var(--espaco-5); }
+.modalidade {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  gap: var(--espaco-5);
+  padding: var(--espaco-6);
+  background: var(--cor-fundo);
+  border-radius: 12rem 12rem 0.75rem 0.75rem;
+  padding-top: var(--espaco-8);
+  text-align: center;
+}
+.modalidade h3 { font-size: var(--texto-secao); font-weight: 400; }
+.modalidade__itens { display: grid; align-content: start; gap: var(--espaco-3); padding: 0; margin: 0; }
+.modalidade__itens li {
+  padding-bottom: var(--espaco-3);
+  border-bottom: 1px solid var(--cor-linha);
+  color: var(--cor-texto-suave);
+}
+.modalidade__itens li:last-child { border-bottom: 0; }
+.modalidades__nota {
+  margin-top: var(--espaco-6);
+  text-align: center;
+  font-size: var(--texto-apoio);
+  color: var(--cor-texto-suave);
+}
+@media (min-width: 48rem) {
+  .modalidades { grid-template-columns: repeat(2, 1fr); max-width: 56rem; margin-inline: auto; }
+}
+
+/* Preparo da bioimpedância, sobre o rosa da marca. */
+.preparo { background: var(--cor-rosa-claro); }
+.preparo__grade { display: grid; gap: var(--espaco-6); }
+.preparo__cabeca { margin-bottom: 0; }
+.preparo__apoio { color: var(--cor-texto-suave); }
+.preparo__lista { display: grid; gap: 0; padding: 0; margin: 0; }
+.preparo__lista li {
+  display: grid;
+  grid-template-columns: 3rem 1fr;
+  align-items: baseline;
+  gap: var(--espaco-4);
+  padding-block: var(--espaco-4);
+  border-bottom: 1px solid var(--cor-rosa);
+}
+.preparo__numero { font-size: 2.75rem; }
+.preparo__observacoes {
+  display: grid;
+  gap: var(--espaco-3);
+  padding: var(--espaco-6);
+  background: var(--cor-fundo);
+  border-left: 3px solid var(--cor-marca);
+}
+.preparo__observacoes ul { display: grid; gap: var(--espaco-3); padding: 0; margin: 0; }
+.preparo__observacoes li { color: var(--cor-texto-suave); }
+@media (min-width: 60rem) {
+  .preparo__grade { grid-template-columns: 0.9fr 1.1fr; column-gap: var(--espaco-8); }
+  .preparo__cabeca { grid-row: span 2; align-self: start; position: sticky; top: var(--espaco-6); }
+}
+
+/* Formação: lista editorial, o curso em serifa, a instituição em apoio. */
+.formacao__lista { display: grid; padding: 0; margin: 0; }
+.formacao__lista li {
+  display: grid;
+  gap: var(--espaco-1);
+  padding-block: var(--espaco-5);
+  border-top: 1px solid var(--cor-linha);
+}
+.formacao__lista li:last-child { border-bottom: 1px solid var(--cor-linha); }
+.formacao__curso {
+  font-family: var(--fonte-titulo);
+  font-size: var(--texto-destaque);
+  font-variation-settings: 'opsz' 36;
+}
+.formacao__instituicao { color: var(--cor-texto-suave); font-size: var(--texto-apoio); }
+@media (min-width: 60rem) {
+  .formacao { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: var(--espaco-8); align-items: start; }
+}
+
+/* Contato */
+.contato { padding-top: var(--espaco-6); }
+.contato__grade { display: grid; gap: var(--espaco-6); }
+.contato .secao__cabeca { margin-bottom: 0; }
+.contato__canais { display: grid; gap: var(--espaco-4); padding: 0; margin: 0; }
+.contato__canais li { display: grid; gap: var(--espaco-1); }
+.contato__rotulo {
+  font-size: var(--texto-meta);
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--cor-marca-texto);
+}
+.contato__canais a {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--alvo-minimo);
+  font-family: var(--fonte-titulo);
+  font-size: var(--texto-destaque);
+  overflow-wrap: anywhere;
+}
+@media (min-width: 60rem) {
+  .contato__grade { grid-template-columns: repeat(3, 1fr); align-items: start; }
+}
+
+/* ── Rodapé ─────────────────────────────────────────────────────────── */
+.rodape {
+  background: var(--cor-noite);
+  color: var(--cor-noite-texto);
+  padding-block: var(--espaco-8) var(--espaco-7);
+  font-size: var(--texto-apoio);
+}
+.rodape :focus-visible { outline-color: var(--cor-foco-na-marca); }
+.rodape__grade { display: grid; gap: var(--espaco-6); }
+.rodape__marca {
+  font-family: var(--fonte-titulo);
+  font-size: var(--texto-secao);
+  font-variation-settings: 'opsz' 96;
+}
+.rodape__lema { color: var(--cor-noite-suave); }
+.rodape__legal { display: grid; gap: var(--espaco-3); color: var(--cor-noite-suave); }
+.rodape__legal strong { color: var(--cor-noite-texto); font-weight: 600; }
+@media (min-width: 60rem) { .rodape__grade { grid-template-columns: 1fr 1.4fr; } }
+
+/* Barra do celular na terracota da página. */
+.barra-contato .botao--secundario { color: var(--cor-texto); }

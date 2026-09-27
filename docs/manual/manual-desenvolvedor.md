@@ -36,7 +36,7 @@ Confere o que está em `_site/`. **Erro** reprova (exit 1); **aviso** é impress
 | Recurso de fora (`http…`, `//…`, `data:`) ou caminho absoluto `/…` | erro (exceto `404.html` com a URL base) |
 | Arquivo referenciado inexistente (HTML e `url()` do CSS) | erro |
 | Links: só `https:`, `tel:`, `mailto:`; `_blank` com `noopener` | erro |
-| Termos de `ferramentas/regras/termos-vedados.json` (CFM; em página de advocacia, `termos-vedados-oab.json`) | erro ou aviso, conforme o termo |
+| Termos de `ferramentas/regras/termos-vedados.json` (CFM; em página de advocacia, `termos-vedados-oab.json`; de nutricionista, `termos-vedados-cfn.json`) | erro ou aviso, conforme o termo |
 | `PENDENTE`, `DESCREVA A IMAGEM`, `{{`, `TODO`, `XXX`, lorem ipsum | erro |
 | `data-identificacao-cfm` com nome, Médico/Médica, `CRM-UF` e número, cada especialidade e `RQE n` | erro |
 | Advocacia: `data-identificacao-oab` com a razão social, `OAB/UF número` de cada registro da sociedade e cada sócio administrador com a inscrição; todo advogado do `pagina.json` com a inscrição em algum ponto da página | erro |
@@ -98,6 +98,14 @@ exige `sociedade.nome`, `sociedade.razaoSocial` (com "Advogados"), `sociedade.re
 com `"demonstracao": true`, só `conferenciaOabEm`, e o aviso tem texto próprio. JSON-LD `LegalService`;
 sem `og:site_name` (nenhuma página de cliente leva — ADR-007). O piso de termos é `termos-vedados-oab.json`.
 
+**Página de nutricionista** (`"tipo": "nutricao"`, [ADR-008](../decisoes/adr/ADR-008-pagina-de-nutricionista.md)):
+exige `nutricionista.nome` e `nutricionista.crn` (`{ regiao: 1..11, numero: "12345" }`, "/P" se provisória);
+`crn: "PENDENTE"` só com `publicar: false` (constrói o rascunho, o `verificar` reprova). Opcionais:
+`nutricionista.areas[]`, `cidade`, `uf`, `locais[]` (`nome`, `complemento`, `endereco`), `contato.email`.
+Publicar exige `revisao.crnConferidoEm`, `conferenciaCfnEm` e `aprovadoPelaNutricionistaEm`. A página tem o
+`data-identificacao-crn` (nome, "Nutricionista", `CRN-5 12345`). Piso de termos: `termos-vedados-cfn.json`
+(preço é **erro** — art. 57 da Res. CFN 599/2018). JSON-LD `ProfessionalService` com `employee` `Person`.
+
 **Índice** ([ADR-007](../decisoes/adr/ADR-007-indice-da-fabrica.md)): `ferramentas/modelos/indice.html`, com os
 marcadores `<!-- @gerado:demonstracoes -->` e `<!-- @gerado:clientes -->` (uma linha de `<table>` por página,
 `linhaDoIndice()` em `construir.mjs`). `site.config.json › indice`: `titulo`, `descricao`, `empresa`
@@ -118,7 +126,7 @@ não o `.painel`: um container isola o layout, e o `subgrid` deixaria de valer. 
 descartável numa pasta temporária e roda `construir.mjs` e `verificar.mjs` de verdade, apontados para ele
 pela variável `LANDING_RAIZ` (`lib/arquivos.mjs`; sem ela, a raiz é o repositório). O site descartável
 mora em `testes/apoio.mjs` (`comSite({ pagina, html, creditos }, conferir)`); cada `*.test.mjs` diz o que
-a página tem: `demonstracao.test.mjs` (ADR-004 e ADR-005), `advocacia.test.mjs` (ADR-006). O `verificar.yml`
+a página tem: `demonstracao.test.mjs` (ADR-004 e ADR-005), `advocacia.test.mjs` (ADR-006), `nutricao.test.mjs` (ADR-008). O `verificar.yml`
 roda os testes antes da verificação. Checagem nova entra com um caso que reprova e um que passa.
 
 ## Fontes e imagens

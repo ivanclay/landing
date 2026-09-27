@@ -133,6 +133,19 @@ Mostre pelo link direto, como a do Dr. Paulo.
   conferência OAB (`conferenciaOabEm`) e a aprovação de um sócio administrador por escrito
   (`aprovadoPeloEscritorioEm`). Antes do primeiro, falta a skill de conferência da OAB (B-09).
 
+## Página de nutricionista
+
+Nutricionista não tem CRM: tem **CRN**, e a norma é o **Código de Ética do Nutricionista** (Res. CFN
+599/2018) — [ADR-008](../decisoes/adr/ADR-008-pagina-de-nutricionista.md). Primeira: `emilia-kuwano`.
+
+- **Preço de consulta não entra** (art. 57), ao contrário da página de médico. O valor é informado pelo
+  WhatsApp. Também fora: promoção, sorteio, desconto, antes e depois (art. 58), garantia de resultado.
+- **Identificação obrigatória:** nome, "Nutricionista" e a inscrição (`CRN-5 12345`). Sem o número, a
+  página constrói para a prévia mas não passa na verificação.
+- O rodapé diz que os resultados podem não ocorrer da mesma forma para todos (art. 55).
+- **Para publicar:** inscrição conferida no CRN (`crnConferidoEm`), conferência CFN (`conferenciaCfnEm`) e a
+  aprovação da nutricionista por escrito (`aprovadoPelaNutricionistaEm`).
+
 ## Proposta de site para um negócio (não médico)
 
 Para refazer o site de uma empresa de saúde (consultoria, hub) antes da aprovação do dono

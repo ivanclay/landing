@@ -1,0 +1,32 @@
+/*
+ * tema.css — a identidade desta página: cor e fonte (regra 10). Nenhum outro arquivo desta página
+ * digita cor. A paleta é a da marca da Emília (terracota, salmão, rosa, malva — entrada, Referência
+ * visual); o plano está em docs/paginas/emilia-kuwano/direcao-de-arte.md.
+ * Contraste conferido: texto 14,9:1 e texto-suave 7,0:1 no fundo; branco 5,1:1 na terracota;
+ * linho 11,7:1 e rosa 7,8:1 na noite; café 7,3:1 no salmão. Na terracota, só branco puro: o rosado
+ * #fbe3d9 dava 4,1:1 e reprovou no Lighthouse.
+ */
+:root {
+  --cor-fundo: #f7f1ec;
+  --cor-superficie: #efe4dc;
+  --cor-texto: #2b1a14;
+  --cor-texto-suave: #6a4b40;
+  --cor-linha: #dcc9bd;
+  --cor-marca: #ab5639;
+  --cor-sobre-marca: #ffffff;
+  --cor-foco: #2b1a14;
+
+  --cor-marca-texto: #944a30; /* terracota para texto pequeno: 5,0:1 no rosa, 5,1:1 na superfície */
+  --cor-salmao: #e5997a;
+  --cor-rosa: #f2b8a6;
+  --cor-rosa-claro: #f9dfd5;
+  --cor-noite: #4a2419;
+  --cor-noite-texto: #f7ede6;
+  --cor-noite-suave: #f2b8a6;
+  --cor-foco-na-marca: #fff8f3;
+
+  --fonte-titulo: 'Fraunces Variable', Georgia, 'Times New Roman', serif;
+  --fonte-texto: 'DM Sans Variable', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  --raio-botao: 999px;
+}

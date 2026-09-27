@@ -225,6 +225,10 @@ skills. Nenhuma página de cliente publicada; três demonstrações/propostas no
 a **OAB** no lugar do CFM — inscrição na OAB em vez de CRM/RQE (`data-identificacao-oab`), **Provimento
 205/2021 do CFOAB** e Código de Ética da OAB em vez da Res. CFM 2.336/2023 (`conferencia-oab.md`,
 `termos-vedados-oab.json`); a regra 4 vira `oabConferidaEm` + `conferenciaOabEm` + `aprovadoPeloEscritorioEm`.
+⌗ **Nutricionista** (ADR-008): `"tipo": "nutricao"` — **CRN** no lugar do CRM/RQE (`data-identificacao-crn`),
+**Res. CFN 599/2018** no lugar da Res. CFM 2.336/2023 (`conferencia-cfn.md`, `termos-vedados-cfn.json`) e,
+diferente do médico, **sem preço de consulta** (art. 57); a regra 4 vira `crnConferidoEm` + `conferenciaCfnEm` +
+`aprovadoPelaNutricionistaEm`.
 
 ### Decisões abertas
 

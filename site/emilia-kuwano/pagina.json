@@ -1,0 +1,25 @@
+{
+  "slug": "emilia-kuwano",
+  "tipo": "nutricao",
+  "publicar": false,
+  "atualizadoEm": "2026-09-27",
+  "nutricionista": {
+    "nome": "Emília Alves Kuwano",
+    "crn": "PENDENTE",
+    "areas": ["Nutrição Clínica e Funcional"]
+  },
+  "resumo": "Emília Kuwano, nutricionista. Nutrição clínica e funcional, presencial e on-line, com acompanhamento semanal por e-mail entre as consultas.",
+  "contato": {
+    "whatsapp": "+5571999643504",
+    "email": "emilia.nutri10@gmail.com"
+  },
+  "locais": [
+    { "nome": "Núcleo de Endometriose e Fertilidade – Clínica NEF", "complemento": "Centro Médico Aliança – sala 311" }
+  ],
+  "imagemSocial": "imagens/social.jpg",
+  "revisao": {
+    "crnConferidoEm": "",
+    "conferenciaCfnEm": "",
+    "aprovadoPelaNutricionistaEm": ""
+  }
+}

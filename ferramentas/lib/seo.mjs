@@ -2,7 +2,7 @@
 // A página nunca digita a URL base — ela muda no dia em que houver domínio próprio (D-01, regra 8).
 import { escaparHtml } from './html.mjs';
 import {
-  nomeDeExibicao, assuntoDaPagina, ehAdvocacia, ehDemonstracao, ehNegocio, ehProposta, soPorLinkDireto,
+  nomeDeExibicao, assuntoDaPagina, ehAdvocacia, ehDemonstracao, ehNegocio, ehNutricao, ehProposta, soPorLinkDireto,
 } from './pagina.mjs';
 
 export function urlDaPagina(config, slug) {
@@ -57,7 +57,7 @@ function enderecoDaImagemSocial(caminho, url, versaoImagem) {
 
 /** O alt da imagem social: quem, o quê, onde — e, na demonstração, que é demonstração (ADR-004). */
 function textoDaImagemSocial(pagina) {
-  const assunto = ehNegocio(pagina) || ehAdvocacia(pagina)
+  const assunto = ehNegocio(pagina) || ehAdvocacia(pagina) || ehNutricao(pagina)
     ? assuntoDaPagina(pagina)
     : (pagina.medico.especialidades ?? [])[0]?.nome;
   const lugar = [pagina.cidade, pagina.uf].filter(Boolean).join('/');
@@ -73,6 +73,7 @@ function textoDaImagemSocial(pagina) {
 export function dadosEstruturados(pagina, url, versaoImagem = '') {
   if (ehNegocio(pagina)) return dadosDoNegocio(pagina, url, versaoImagem);
   if (ehAdvocacia(pagina)) return dadosDaAdvocacia(pagina, url, versaoImagem);
+  if (ehNutricao(pagina)) return dadosDaNutricao(pagina, url, versaoImagem);
   const { medico, contato = {}, locais = [], convenios = [] } = pagina;
   const principal = locais[0];
   const dados = {
@@ -168,6 +169,36 @@ function dadosDaAdvocacia(pagina, url, versaoImagem) {
       })),
     }));
   }
+  const perfis = Object.values(pagina.redes ?? {}).filter((valor) => valor.startsWith('https://'));
+  if (perfis.length) dados.sameAs = perfis;
+  return dados;
+}
+
+/**
+ * Nutricionista (ADR-008): schema.org não tem tipo para nutricionista, e Physician seria falso. O
+ * atendimento é um ProfessionalService; a profissional, o Person que o presta, com a inscrição no CRN.
+ * As áreas viram knowsAbout; cada local, um endereço — só o que o pagina.json afirma.
+ */
+function dadosDaNutricao(pagina, url, versaoImagem) {
+  const { nutricionista, contato = {}, locais = [] } = pagina;
+  const pessoa = { '@type': 'Person', name: nutricionista.nome, jobTitle: 'Nutricionista' };
+  if (nutricionista.crn !== 'PENDENTE') {
+    pessoa.identifier = { '@type': 'PropertyValue', propertyID: `CRN-${nutricionista.crn.regiao}`, value: nutricionista.crn.numero };
+  }
+  const dados = {
+    '@context': 'https://schema.org',
+    '@type': 'ProfessionalService',
+    name: nutricionista.nome,
+    url,
+    description: pagina.resumo,
+    employee: pessoa,
+  };
+  if (nutricionista.areas?.length) dados.knowsAbout = nutricionista.areas;
+  if (contato.telefone || contato.whatsapp) dados.telephone = contato.telefone ?? contato.whatsapp;
+  if (contato.email) dados.email = contato.email;
+  if (pagina.imagemSocial) dados.image = enderecoDaImagemSocial(pagina.imagemSocial, url, versaoImagem);
+  const enderecos = locais.filter((local) => local.endereco).map((local) => endereco(local.endereco));
+  if (enderecos.length) dados.address = enderecos.length === 1 ? enderecos[0] : enderecos;
   const perfis = Object.values(pagina.redes ?? {}).filter((valor) => valor.startsWith('https://'));
   if (perfis.length) dados.sameAs = perfis;
   return dados;
