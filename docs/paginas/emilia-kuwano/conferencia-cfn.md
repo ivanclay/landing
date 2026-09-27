@@ -30,6 +30,8 @@
 | Formação (3 itens) | ✓ entrada §2; ver F-03 |
 | "Cada plano alimentar é individual, e os resultados podem não ocorrer da mesma forma para todas as pessoas." | ✓ **exigido** pelo art. 55, parágrafo único |
 | "Esta página não usa cookies nem coleta dados." | ✓ verdadeiro (regra 5, 6) |
+| "Proposta de página para Emília Alves Kuwano, em avaliação pela nutricionista." (topo) | ✓ informativo; diz a verdade sobre o estado da página (emenda do ADR-008) |
+| "Centro Médico Aliança – sala 311 · Salvador, BA" | ✓ cidade informada pelo dono em 2026-09-27 |
 
 Não há: preço, desconto, sorteio, depoimento, antes e depois, imagem corporal, garantia, superlativo,
 marca de produto ou suplemento (arts. 56–63).

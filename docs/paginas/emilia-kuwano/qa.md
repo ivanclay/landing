@@ -4,6 +4,12 @@
   `npx serve@14 _site -l 4173`.
 - **Ambiente:** Windows 11, Chrome (canal estável) via Playwright; Lighthouse 13.5.0.
 
+## Build de produção, publicada como proposta — 2026-09-27
+
+`npm run verificar` (o do CI) aprovado. Lighthouse, celular, mediana de 3: **97 / 100 / 100 / 69**, LCP 2,3 s,
+CLS 0,001, 221 KB. SEO 69 = só `is-crawlable`: a proposta tem `noindex` **de propósito**; volta a 100 quando sair
+de proposta. Aviso de proposta no topo e etiqueta no índice conferidos por captura (1440 e 390 px).
+
 ## Layout escolhido (opção 3, tela dividida) — 2026-09-27
 
 | Performance | Acessibilidade | Boas práticas | SEO | LCP | CLS | TBT | Peso |

@@ -102,3 +102,36 @@ test('CRN PENDENTE não publica', async () => {
     assert.match(resultado.stderr, /nutricionista\.crn PENDENTE/);
   });
 });
+
+// Emenda de 2026-09-27: proposta de nutricionista — publicada antes da aprovação dela, por decisão do dono.
+const AVISO_PROPOSTA = 'Proposta de página para Fulana de Teste, em avaliação pela nutricionista.';
+const paginaProposta = () => paginaNutricao({ proposta: true, revisao: { conferenciaCfnEm: '2026-09-27' } });
+const htmlProposta = (comAviso = true) => htmlNutricao().replace('<body>',
+  `<body>\n    ${comAviso ? `<p data-aviso-proposta>${AVISO_PROPOSTA}</p>` : ''}`);
+
+test('proposta de nutricionista passa sem a aprovação dela — noindex, fora do sitemap, etiqueta no índice', async () => {
+  await comSite({ pagina: paginaProposta(), html: htmlProposta() }, async (resultado, raiz) => {
+    assert.equal(resultado.status, 0, resultado.stderr + resultado.stdout);
+    const html = await readFile(path.join(raiz, '_site', SLUG, 'index.html'), 'utf8');
+    assert.match(html, /<meta name="robots" content="noindex, nofollow">/);
+    const sitemap = await readFile(path.join(raiz, '_site', 'sitemap.xml'), 'utf8');
+    assert.doesNotMatch(sitemap, new RegExp(SLUG));
+    const indice = await readFile(path.join(raiz, '_site', 'index.html'), 'utf8');
+    assert.match(indice, /Proposta · em avaliação/);
+  });
+});
+
+test('proposta de nutricionista sem o aviso no topo reprova', async () => {
+  await comSite({ pagina: paginaProposta(), html: htmlProposta(false) }, (resultado) => {
+    assert.notEqual(resultado.status, 0);
+    assert.match(resultado.stderr, /sem o elemento data-aviso-proposta/);
+  });
+});
+
+test('proposta de nutricionista sem a conferência do CFN reprova', async () => {
+  const pagina = paginaNutricao({ proposta: true, revisao: {} });
+  await comSite({ pagina, html: htmlProposta() }, (resultado) => {
+    assert.notEqual(resultado.status, 0);
+    assert.match(resultado.stderr, /revisao\.conferenciaCfnEm ausente/);
+  });
+});

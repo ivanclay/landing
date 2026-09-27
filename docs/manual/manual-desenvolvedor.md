@@ -102,7 +102,9 @@ sem `og:site_name` (nenhuma página de cliente leva — ADR-007). O piso de term
 exige `nutricionista.nome` e `nutricionista.crn` (`{ regiao: 1..11, numero: "12345" }`, "/P" se provisória);
 `crn: "PENDENTE"` só com `publicar: false` (constrói o rascunho, o `verificar` reprova). Opcionais:
 `nutricionista.areas[]`, `cidade`, `uf`, `locais[]` (`nome`, `complemento`, `endereco`), `contato.email`.
-Publicar exige `revisao.crnConferidoEm`, `conferenciaCfnEm` e `aprovadoPelaNutricionistaEm`. A página tem o
+Publicar exige `revisao.crnConferidoEm`, `conferenciaCfnEm` e `aprovadoPelaNutricionistaEm`; com
+`"proposta": true` (emenda do ADR-008), só `conferenciaCfnEm`, e a página leva o `data-aviso-proposta` com o
+texto de `avisoDeProposta()` ("Proposta de página para <nome>, em avaliação pela nutricionista."). A página tem o
 `data-identificacao-crn` (nome, "Nutricionista", `CRN-5 12345`). Piso de termos: `termos-vedados-cfn.json`
 (preço é **erro** — art. 57 da Res. CFN 599/2018). JSON-LD `ProfessionalService` com `employee` `Person`.
 

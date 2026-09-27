@@ -30,7 +30,8 @@
 | Marcação | Pagamento prévio para reservar o horário; questionário de anamnese por e-mail, devolvido com exames laboratoriais e de imagem; pré-avaliação antes da consulta | [MD §3] |
 | Preparo da bioimpedância | 5 itens + 2 observações (menstruação; gestantes e marca-passo/implante eletrônico) | [MD §5] |
 | Local | Núcleo de Endometriose e Fertilidade – Clínica NEF · Centro Médico Aliança – sala 311 | [MD §6] |
-| Cidade, UF, endereço, CEP | **PENDENTE** — não entram na página | ausente |
+| Cidade e UF | **Salvador, BA** | mensagem do dono, 2026-09-27: "A cidade é Salvador, BA" |
+| Rua, número, CEP | **PENDENTE** — não entram na página | ausente |
 | WhatsApp | +55 71 99964-3504 | [MD §1, §4, §6] |
 | E-mail | emilia.nutri10@gmail.com | [MD §1, §6] |
 | Valores (R$ 400 presencial, R$ 380 on-line) | **Não entram** — vedados (Res. CFN 599/2018, art. 57) | [MD §4] · conferência F-01 |
@@ -42,7 +43,7 @@
 1. ~~**Número de inscrição no CRN e o Regional**~~ — **respondido em 2026-09-27: CRN-5 1575.** (ex.: "CRN-5 12345"). **Trava a publicação**: sem ele a
    página não cumpre o art. 21 da Res. CFN 599/2018. Hoje a prévia mostra "CRN PENDENTE" e o `verificar`
    reprova de propósito.
-2. **Cidade e endereço do Centro Médico Aliança** (rua, número, bairro, CEP) — para o paciente chegar, para
+2. ~~Cidade~~ — Salvador, BA (dono, 2026-09-27). Falta o **endereço do Centro Médico Aliança** (rua, número, bairro, CEP) — para o paciente chegar, para
    o link do mapa e para o Google. Sem eles, a página diz só o que a entrada diz.
 3. **Preços:** a entrada traz R$ 400 e R$ 380. O art. 57 do Código de Ética do Nutricionista **veda** usar o
    valor dos honorários como publicidade — ficaram fora. O valor segue sendo informado pelo WhatsApp.

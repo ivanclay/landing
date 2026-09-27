@@ -49,6 +49,14 @@ Anuncie o plano, o que pula e por quê. Espere o "segue".
 - Antes do PR (verificação verde, QA registrado, conferência CFM feita).
 - **Nunca** virar `publicar: true` sem as três datas de `revisao` preenchidas pelo dono (regra 4).
 
+## Delegação e custo
+- **Opus orquestra; Sonnet e Haiku executam**, conforme a tabela do `CLAUDE.md` §8: julgamento caro (arte,
+  norma, briefing real, ADR, revisão final) fica no Opus; construção com plano definido e QA vão ao **Sonnet**;
+  busca, extração e conferência mecânica vão ao **Haiku**. Passe `model` explícito em todo agente.
+- Tarefas independentes (ex.: três opções de layout) rodam em **agentes paralelos**, cada um só nos seus
+  arquivos; o resultado volta para o Opus revisar antes de ir ao dono.
+- O registro conta **todos** os agentes (`registro-implementacao-landing`, `tokens-por-agente.mjs`).
+
 ## Hand-off
 Referencie, não repita: briefing → fatos e pendências; direção de arte → plano; publicidade-cfm →
 conferência e perguntas ao médico; qa → números e parecer; revisor → `REV`; segurança → `SEC`.

@@ -1,25 +1,40 @@
 {
   "slug": "emilia-kuwano",
   "tipo": "nutricao",
-  "publicar": false,
+  "publicar": true,
+  "proposta": true,
   "atualizadoEm": "2026-09-27",
   "nutricionista": {
     "nome": "Emília Alves Kuwano",
-    "crn": { "regiao": 5, "numero": "1575" },
-    "areas": ["Nutrição Clínica e Funcional"]
+    "crn": {
+      "regiao": 5,
+      "numero": "1575"
+    },
+    "areas": [
+      "Nutrição Clínica e Funcional"
+    ]
   },
-  "resumo": "Emília Kuwano, nutricionista. Nutrição clínica e funcional, presencial e on-line, com acompanhamento semanal por e-mail entre as consultas.",
+  "resumo": "Emília Kuwano, nutricionista em Salvador. Nutrição clínica e funcional, presencial e on-line, com acompanhamento semanal por e-mail entre as consultas.",
+  "cidade": "Salvador",
+  "uf": "BA",
   "contato": {
     "whatsapp": "+5571999643504",
     "email": "emilia.nutri10@gmail.com"
   },
   "locais": [
-    { "nome": "Núcleo de Endometriose e Fertilidade – Clínica NEF", "complemento": "Centro Médico Aliança – sala 311" }
+    {
+      "nome": "Núcleo de Endometriose e Fertilidade – Clínica NEF",
+      "complemento": "Centro Médico Aliança – sala 311",
+      "endereco": {
+        "cidade": "Salvador",
+        "uf": "BA"
+      }
+    }
   ],
   "imagemSocial": "imagens/social.jpg",
   "revisao": {
     "crnConferidoEm": "",
-    "conferenciaCfnEm": "",
+    "conferenciaCfnEm": "2026-09-27",
     "aprovadoPelaNutricionistaEm": ""
   }
 }

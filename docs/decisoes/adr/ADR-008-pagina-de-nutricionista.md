@@ -54,6 +54,20 @@ o termo começa ou termina em letra/dígito, para `R$` pegar também "R$400".
 - O esqueleto de `nova-pagina-medico-landing` continua de médico; a página de nutricionista parte dele e troca
   a identificação.
 
+## Emenda — 2026-09-27: proposta de nutricionista
+O dono decidiu publicar a `emilia-kuwano` **antes** da aprovação da nutricionista ("pode publicar, ela vai ver
+publicado"), na mesma condição do Hub Saúde Negócios: **"Proposta · em avaliação"**.
+- `"proposta": true` passa a valer para `nutricao` (antes, recusado). Publica com `noindex`, fora do sitemap,
+  no índice com a etiqueta "Proposta · em avaliação" — o mesmo tratamento do ADR-005.
+- Exige só `revisao.conferenciaCfnEm` (a norma continua conferida) e o CRN válido (identificação, art. 21);
+  dispensa `crnConferidoEm` e `aprovadoPelaNutricionistaEm` enquanto for proposta.
+- `siteOficial` é opcional; sem ele, o `data-aviso-proposta` diz exatamente: *"Proposta de página para
+  <nome>, em avaliação pela nutricionista."* (`avisoDeProposta()`), antes do `<h1>`.
+- **Saída da proposta:** com a aprovação dela, o dono preenche `crnConferidoEm` e `aprovadoPelaNutricionistaEm`,
+  tira `"proposta": true` e o aviso do topo — a página vira indexável e entra no sitemap.
+- Prova: 3 casos novos em `nutricao.test.mjs` (passa com aviso e noindex, fora do sitemap, com a etiqueta;
+  reprova sem o aviso; reprova sem `conferenciaCfnEm`).
+
 ## Alternativas
 - **`tipo` genérico "saude" com conselho parametrizado** (CRN, CRP, CREFITO…): mais geral, mas cada conselho
   tem vedação própria (o art. 57 não existe no CFM). Revisitar quando houver o segundo conselho.

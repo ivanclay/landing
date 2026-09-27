@@ -62,14 +62,26 @@ inicio,fim,duracao_min,slug,tipo,tokens_entrada,tokens_saida,tokens_cache,custo_
 - Se `multi_sessao=true`, marque os tokens como **aproximados** e diga quantas sessões.
 
 ## Regras
+- 🔴 **O custo conta TODOS os agentes** (regra do dono, 2026-09-27). Toda implementação que delega a agentes
+  registra o total da sessão **com** os agentes e a quebra por agente e por modelo:
+  `node .claude/skills/registro-implementacao-landing/scripts/tokens-por-agente.mjs <id-da-sessão>`.
+  O `ccusage session` **já soma** os agentes (eles gravam sob o mesmo número de sessão, em
+  `~/.claude/projects/<projeto>/<sessão>/subagents/agent-*.jsonl`) — o TOTAL do script tem de bater com ele;
+  se não bater, investigue antes de registrar.
+- 🔴 **O relatório diz QUEM FEZ O QUÊ** (pedido do dono, 2026-09-27): a tabela que o script imprime (quem ·
+  tarefa · modelo · tokens), colada como está, e logo abaixo, em texto, o que a conversa principal fez
+  (decisões, revisões, correções nos entregáveis dos agentes) e o que cada agente entregou (arquivos). O custo
+  em US$ é o total do ccusage — não se reparte por agente (seria estimativa, e medido e estimado não dividem
+  tabela). Na `observacao` do CSV: quantos agentes, em que modelos e para quê.
 - **Nunca inventar** tokens/custo. Sem fonte real → só tempo.
 - 🔴 **Antes de escrever "sem fonte real", confira o `PATH`.** `command not found` para `npx` diz
   *"não está no `PATH`"*, não *"não existe"*. No Windows (Git Bash), o Node costuma morar em
   `C:\Program Files\nodejs`: `export PATH="/c/Program Files/nodejs:$PATH"` e
   `npx --yes ccusage@latest session --json`. (O S-Card passou onze entregas registrando só tempo por
   não conferir isso.)
-- 🔴 **Ler tokens do `jsonl` exige DEDUPLICAR por `(requestId, message.id)`.** Cada registro de uso
-  aparece várias vezes (parciais de streaming); somar tudo infla os tokens.
+- 🔴 **Ler tokens do `jsonl` exige DEDUPLICAR por `(requestId, message.id)` ficando com o MAIOR valor.**
+  Cada registro de uso aparece várias vezes (parciais de streaming): somar tudo infla; ficar com o primeiro
+  parcial subconta a saída (o script `tokens-por-agente.mjs` já faz certo).
 - ⚠️ **Um campo de registro vazio pela terceira vez seguida com a mesma razão:** o que se mede de
   novo é a **razão**, não o campo.
 - **Pausa não conta:** entre `pausar` e `retomar`, nem tempo nem tokens são somados.

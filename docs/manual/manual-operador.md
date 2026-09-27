@@ -145,6 +145,9 @@ Nutricionista não tem CRM: tem **CRN**, e a norma é o **Código de Ética do N
 - O rodapé diz que os resultados podem não ocorrer da mesma forma para todos (art. 55).
 - **Para publicar:** inscrição conferida no CRN (`crnConferidoEm`), conferência CFN (`conferenciaCfnEm`) e a
   aprovação da nutricionista por escrito (`aprovadoPelaNutricionistaEm`).
+- **Para mostrar a ela antes de aprovar:** publique como **proposta** (`"proposta": true` + o aviso no topo).
+  Fica fora do Google e do sitemap, e no índice aparece com a etiqueta "Proposta · em avaliação". Quando ela
+  aprovar: preencha as duas datas que faltam, tire `proposta` e o aviso — a página passa a ser indexada.
 
 ## Proposta de site para um negócio (não médico)
 

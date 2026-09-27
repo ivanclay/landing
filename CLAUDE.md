@@ -228,7 +228,9 @@ a **OAB** no lugar do CFM — inscrição na OAB em vez de CRM/RQE (`data-identi
 ⌗ **Nutricionista** (ADR-008): `"tipo": "nutricao"` — **CRN** no lugar do CRM/RQE (`data-identificacao-crn`),
 **Res. CFN 599/2018** no lugar da Res. CFM 2.336/2023 (`conferencia-cfn.md`, `termos-vedados-cfn.json`) e,
 diferente do médico, **sem preço de consulta** (art. 57); a regra 4 vira `crnConferidoEm` + `conferenciaCfnEm` +
-`aprovadoPelaNutricionistaEm`.
+`aprovadoPelaNutricionistaEm`. Por decisão do dono, a nutricionista pode ir ao ar antes de aprovar como
+**proposta** (`"proposta": true`, noindex, etiqueta "Proposta · em avaliação" e aviso no topo), como o negócio do
+ADR-005 — só com a conferência CFN feita.
 
 ### Decisões abertas
 
@@ -305,6 +307,20 @@ pelo techlead.
 - Mexeu em `site/assets/`? Muda todas as páginas: **reconstrua e olhe cada uma**.
 - **Pausar:** checkpoint em `docs/paginas/<slug>/checkpoint.md`. **Retomar:** o checkpoint é a fonte de
   verdade; sem ele, pergunte.
+- **Custo conta todos os agentes.** O registro (`registro-implementacao-landing`) soma a conversa principal
+  **e** cada agente delegado, com a quebra por agente e por modelo (`scripts/tokens-por-agente.mjs`), e confere
+  o total contra o `ccusage`. Relatório "sem os agentes" é defeito.
+- **Opus orquestra; Sonnet e Haiku executam, conforme a complexidade.** O modelo principal (Opus) decide,
+  conversa com o dono e revisa; ao delegar, escolhe o modelo pelo tipo de tarefa (parâmetro `model` do agente):
+
+  | Modelo | Quando | Exemplos |
+  |---|---|---|
+  | **Opus** | Julgamento que custa caro errar | plano de arte e crítica final; conferência CFM/CFN/OAB frase a frase; briefing de página real; decisão de estrutura (ADR); revisão antes do merge |
+  | **Sonnet** | Construção com plano já definido | montar HTML/CSS a partir do plano; variações de layout para o dono escolher; QA (Lighthouse, larguras, capturas); documentação |
+  | **Haiku** | Mecânico e verificável | buscar no repositório; extrair texto da entrada; conferir links, contagens, termos; renomear, mover, limpar arquivos |
+
+  Na dúvida, desce um nível e revisa o resultado. O que o agente entrega volta para o Opus revisar antes de
+  ir ao dono. O registro mostra que modelo cada agente usou.
 - **Ao listar um levantamento** (páginas, pendências, custo): número medido e estimado **nunca** na
   mesma tabela; dificuldade em bolinhas (`●●●○○`); linha de total; a origem do número com o comando que
   a reproduz — o formato do §9 do S-Card.

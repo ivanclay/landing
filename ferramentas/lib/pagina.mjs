@@ -148,8 +148,10 @@ function validarNutricao(pagina, exigir) {
   for (const [i, area] of (nutricionista.areas ?? []).entries()) exigir(texto(area), `nutricionista.areas[${i}] vazia`);
   // A sede aparece no índice; sem fonte, fica de fora (regra 1) — por isso não é obrigatória aqui.
   if (pagina.uf !== undefined) exigir(UFS.includes(pagina.uf), 'uf inválida');
-  exigir(!ehProposta(pagina) && !ehDemonstracao(pagina),
-    'demonstracao e proposta não se aplicam a nutricionista: a página é de uma profissional real (ADR-008)');
+  exigir(!ehDemonstracao(pagina), 'demonstracao não se aplica a nutricionista: a página é de uma profissional real (ADR-008)');
+  if (pagina.siteOficial !== undefined) {
+    exigir(texto(pagina.siteOficial) && pagina.siteOficial.startsWith('https://'), 'siteOficial, se existir, precisa ser https://');
+  }
 }
 
 /** "CRN-5 12345": como a inscrição aparece na página e no JSON-LD (ADR-008). */
@@ -202,10 +204,13 @@ function exigirRevisaoDeAdvocacia(pagina, exigir) {
 
 function exigirRevisaoDeNutricao(pagina, exigir) {
   const revisao = pagina.revisao ?? {};
-  exigir(FORMATO_DATA.test(revisao.crnConferidoEm ?? ''),
-    'revisao.crnConferidoEm ausente: inscrição conferida no CRN da jurisdição antes de publicar — regra 4 (ADR-008)');
+  // A proposta vai ao ar antes da aprovação da nutricionista, por decisão do dono: só por link, com noindex,
+  // etiqueta no índice e o aviso no topo (ADR-008, emenda de 2026-09-27). A norma continua conferida.
   exigir(FORMATO_DATA.test(revisao.conferenciaCfnEm ?? ''),
     'revisao.conferenciaCfnEm ausente: a conferência pelo Código de Ética do Nutricionista não foi feita — regra 3 (ADR-008)');
+  if (ehProposta(pagina)) return;
+  exigir(FORMATO_DATA.test(revisao.crnConferidoEm ?? ''),
+    'revisao.crnConferidoEm ausente: inscrição conferida no CRN da jurisdição antes de publicar — regra 4 (ADR-008)');
   exigir(FORMATO_DATA.test(revisao.aprovadoPelaNutricionistaEm ?? ''),
     'revisao.aprovadoPelaNutricionistaEm ausente: a página só publica com a aprovação da nutricionista — regra 4 (ADR-008)');
 }
@@ -258,7 +263,10 @@ export function ehDemonstracao(pagina) {
   return pagina.demonstracao === true;
 }
 
-/** Proposta de site de um negócio real, ainda sem aprovação: noindex, fora do índice e do sitemap (ADR-005). */
+/**
+ * Proposta: página de um negócio (ADR-005) ou de uma nutricionista (ADR-008) real, ainda sem aprovação —
+ * noindex, fora do sitemap, no índice com a etiqueta "Proposta · em avaliação".
+ */
 export function ehProposta(pagina) {
   return pagina.proposta === true;
 }
@@ -281,6 +289,10 @@ export function avisoDeDemonstracao(pagina) {
 
 /** O texto exato que o elemento data-aviso-proposta mostra no topo da página (ADR-005). */
 export function avisoDeProposta(pagina) {
+  // Nutricionista sem site oficial: o aviso diz que a página ainda não foi aprovada por ela (ADR-008).
+  if (ehNutricao(pagina) && !pagina.siteOficial) {
+    return `Proposta de página para ${nomeDeExibicao(pagina)}, em avaliação pela nutricionista.`;
+  }
   const oficial = new URL(pagina.siteOficial).hostname.replace(/^www\./, '');
   return `Proposta de novo site para ${nomeDeExibicao(pagina)}, em avaliação. Este não é o site oficial: `
     + `o site oficial é ${oficial}.`;
