@@ -1,10 +1,10 @@
 # Tabela de projetos — Landing (páginas de profissionais no GitHub Pages)
 
-> **Última atualização:** 2026-09-28 09:33 (UTC−03:00)
+> **Última atualização:** 2026-09-28 10:07 (UTC−03:00)
 > **Atualizado por:** Claude Opus 5.5 · Ivan C M Moura
 > **Referências:** perfil e regras em [`CLAUDE.md`](../CLAUDE.md) (§5 decisões abertas, §8 delegação e custo) · índice em [`indice.md`](indice.md) · registro por segmento em [`metricas/implementacoes.csv`](metricas/implementacoes.csv) · delegações em [`metricas/delegacoes.csv`](metricas/delegacoes.csv)
 
-**Resumo:** 0 em andamento · 8 realizadas (questionário do cliente; ajuste da karoline-melo) · 1 pendente (adv-rudolf-mateus, aguarda o questionário) · decisões abertas no `CLAUDE.md` §5 (D-01, D-03 a D-06)
+**Resumo:** 0 em andamento · 8 realizadas (questionário do cliente; ajuste da karoline-melo) · 0 pendentes · 1 bloqueado (rudolf-specht: 3 opções publicadas como proposta, aguarda a escolha do cliente) · decisões abertas no `CLAUDE.md` §5 (D-01, D-03 a D-06)
 
 ---
 
@@ -32,15 +32,15 @@
 
 | Projeto | O que é | Início | Branch | Modelo | Desenvolvedor | Modelo sugerido | Observação |
 |---|---|---|---|---|---|---|---|
-| — | nenhum agora | — | — | — | — | — | — |
+| `rudolf-specht` | Escolha de uma das 3 opções e os ajustes do Rudolf; razão social e registro da sociedade na OAB/BA; `oabConferidaEm` (dono, no CNA). Parcial: 29 min, US$ 15,96 (1 segmento) | ADR-006 (emenda 2026-09-28), [checkpoint](paginas/rudolf-specht/checkpoint.md) | — | — | — | — | — |
 
 ## 2. Pendentes — **estimativa**
 
-Um projeto pedido e não começado.
+Nenhum projeto pedido e não começado.
 
 | Ordem | Projeto | O que entrega | Branch | Dificuldade | Esforço est. | Custo est. | Modelo sugerido | Observação |
 |---|---|---|---|---|---|---|---|---|
-| 1 | `adv-rudolf-mateus` | Página de advocacia real: Specht Sociedade de Advocacia, Rudolf Mateus de Jesus Specht, OAB/BA 77.991 (tipo `advocacia`) | `pagina/<slug>` (slug a confirmar) | ●●○○○ | — | — | Claude Opus 5.5 + Sonnet 5 | Texto e 1 foto recebidos; questionário enxuto pronto para enviar (`entrada/adv-rudolf-mateus/questionario-enviar.md`); começa com as respostas |
+| — | — | — | — | — | — | — | — | — |
 
 ---
 
@@ -133,3 +133,4 @@ Decisões que valem para **todos** os projetos: **D-01** (domínio próprio, ant
 | 2026-09-27 22:16 | Claude Opus 5.5 | Ivan C M Moura | `karoline-melo`: a cliente escolheu a opção 3 e **aprovou**; 4 ajustes dela; `avaliador` no contrato; etiqueta "Aprovado" no índice. 2º segmento: 7 min, US$ 2,83 (total 85 min, US$ 29,73). Publicação travada até o dono conferir o CRECI-BA (captcha). |
 | 2026-09-27 22:20 | Claude Opus 5.5 | Ivan C M Moura | **`karoline-melo` realizada**: publicada aprovada (opção 3), CRECI conferido pelo dono no portal; B-16 fechada na parte do CRECI. Total 89 min, US$ 30,74. |
 | 2026-09-28 09:33 | Claude Opus 5.5 + Sonnet 5 ×2 | Ivan C M Moura | **`questionario-cliente` realizado**, a pedido do dono antes da página do Rudolf: `docs/questionario/` (mestre + `enviar/` por profissão), passo 0 no manual do operador e nas skills `briefing-medico-landing` e `nova-pagina-medico-landing`. Em paralelo, **ajuste da `karoline-melo`** (fotógrafa + CRECI/CNAI em duas linhas) publicado. 10 min, US$ 3,06 (os dois juntos). `adv-rudolf-mateus` entra em Pendentes. |
+| 2026-09-28 10:07 | Claude Opus 5.5 + Sonnet 5 ×4 | Ivan C M Moura | `rudolf-specht` (Specht Sociedade de Advocacia, OAB/BA 77.991): 3 opções (Tinta, Noturno, Trilha) e a página de escolha **publicadas como proposta**. A advocacia passa a aceitar proposta (ADR-006, emenda; 6 testes). Vai para Bloqueados, aguardando a escolha do cliente. 1º segmento: 29 min, US$ 15,96. |
