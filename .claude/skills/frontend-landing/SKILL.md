@@ -48,7 +48,7 @@ marcação e armadilhas em `references/estrutura-frontend.md`.
 
 1. Copie o esqueleto (`nova-pagina-medico-landing/assets/esqueleto/`) para `site/<slug>/`.
 2. Traga as fontes do plano (`npm i -D @fontsource-variable/<id>` + `npm run fontes <id>`).
-3. Otimize as imagens de `entrada/<slug>/` (`npm run imagens …`), incluindo a social (`--social`).
+3. Otimize as imagens de `entrada/<área>-<nome>/` (`npm run imagens …`), incluindo a social (`--social`).
 4. Escreva o `tema.css` (do plano), o HTML (do texto aprovado), o `pagina.css` (do layout).
 5. `npm run verificar:rascunhos` até verde; `npm run servir` e **olhe** em 360, 768 e 1440 px, com
    teclado (Tab do começo ao fim) e com zoom de 200%.

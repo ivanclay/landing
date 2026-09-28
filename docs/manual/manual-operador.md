@@ -3,6 +3,22 @@
 > Para quem pede as páginas e fala com os médicos. Nada aqui exige saber programar.
 > Última revisão: 2026-09-22.
 
+## 0. Enviar o questionário ao cliente
+
+Antes de pedir a página, mande um questionário curto para o cliente responder — evita ida e volta
+depois (foto errada, cor recusada, número de registro faltando).
+
+- Os textos prontos para colar no WhatsApp ou no e-mail estão em
+  [`docs/questionario/enviar/`](../questionario/enviar/), um por profissão (médico, advocacia,
+  nutrição, imóveis, negócio). O porquê de cada pergunta está no mestre,
+  [`docs/questionario/questionario-cliente.md`](../questionario/questionario-cliente.md).
+- Se o cliente **já mandou** parte da informação, **apague** do texto as perguntas já respondidas antes
+  de enviar. Questionário que repete o que o cliente já disse irrita.
+- Guarde as respostas em `entrada/<área>-<nome>/` (fora do git) do jeito que chegaram — mensagem, áudio
+  transcrito, arquivo. O briefing cita cada fato como "questionário respondido em `<data>`".
+- **Não use formulário on-line** (Google Forms, Typeform ou parecido) para colher as respostas: WhatsApp
+  e e-mail já são o canal do cliente, e um formulário põe dado dele num terceiro sem necessidade.
+
 ## 1. Pedir a página
 
 Abra o Claude Code na pasta do repositório e descreva o médico em uma frase, com tudo o que você já
@@ -25,7 +41,7 @@ Ele devolve uma lista em dois grupos:
 ⌗ **Sobre o RQE:** sem o RQE de uma área, a página não pode chamar o médico de "especialista" nela.
 Ela escreve "atende pacientes com…". Isso é regra do CFM, não escolha de estilo.
 
-**Fotos e logotipo:** coloque os originais em `entrada/<slug>/`. Essa pasta não vai para o GitHub.
+**Fotos e logotipo:** coloque os originais em `entrada/<área>-<nome>/` (prefixo da área: `med-`, `adv-`, `nut-`, `cor-`, `bus-`; ex.: `adv-rudolf-mateus`). Essa pasta não vai para o GitHub.
 Use só foto real do médico, com autorização. Banco de imagem não serve.
 
 ## 3. Aprovar o visual

@@ -9,3 +9,5 @@ data,projeto,tarefa,executor,modelo,resultado,tentativas,observacao
 2026-09-27,karoline-melo,Opcao 1: Atlantico escuro,agente ab785f33,claude-sonnet-5,aceita (publicada para a escolha da cliente),1,
 2026-09-27,karoline-melo,Opcao 2: Galeria editorial clara,agente a7fad595,claude-sonnet-5,aceita (publicada para a escolha da cliente),1,italico da Instrument Serif sintetizado (fonte sem o arquivo italico)
 2026-09-27,karoline-melo,Opcao 3: Nevoa azul em cartoes,agente ae5ba0c0,claude-sonnet-5,aceita (publicada para a escolha da cliente),1,margem da abertura no desktop corrigida pelo coordenador
+2026-09-28,questionario-cliente,"Blocos nutricao, imobiliario e negocio + textos de envio + manual do operador + indice",agente ad7aee68,claude-sonnet-5,aceita,1,frase da Res. CFN 760/2023 corrigida pelo coordenador
+2026-09-28,karoline-melo,"Fotografa, corretora e avaliadora + CRECI/CNAI na abertura e no rodape",agente abcac5fe,claude-sonnet-5,aceita e publicada (3068151),1,manteve CRECI-BA porque o verificar exige a UF

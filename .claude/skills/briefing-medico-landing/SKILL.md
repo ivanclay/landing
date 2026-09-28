@@ -32,12 +32,16 @@ irritada; uma especialidade sem RQE gera processo ético.
 sobre o médico. Proponha o texto, marque **a confirmar pelo médico**.
 
 ⌗ **A fonte tem nome.** `pedido do dono em 2026-09-22`, `mensagem do médico (WhatsApp, 2026-09-23)`,
-`portal do CFM, busca de médicos, 2026-09-23`, `site do hospital X`. "Conhecimento geral" não é fonte
+`portal do CFM, busca de médicos, 2026-09-23`, `questionário respondido em 2026-09-28`, `site do hospital X`. "Conhecimento geral" não é fonte
 de fato sobre o médico.
 
 ## Fluxo
 
-1. **Extraia** do pedido cada fato, com a fonte `pedido`.
+1. **Extraia** do pedido cada fato, com a fonte `pedido`. Se o cliente respondeu o
+   [questionário](../../../docs/questionario/questionario-cliente.md) (em `entrada/<área>-<nome>/`), leia as
+   respostas **primeiro**: cada fato dali entra com a fonte `questionário respondido em <data>`, e só o
+   que ficou em branco vira `PENDENTE`. Sem questionário respondido, sugira ao dono enviá-lo (o texto da
+   profissão está em `docs/questionario/enviar/`) antes de perguntar item por item.
 2. **Separe** o que o pedido dá como especialidade em: especialidade (tem RQE?) e área de atuação (tem
    RQE?). Sem RQE informado → `PENDENTE`, e a nota "sem RQE, a página diz *atende*, não *especialista*".
 3. **Proponha o slug** (regra 7): `dr`/`dra` + primeiro nome, ou + sobrenome se houver colisão ou

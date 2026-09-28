@@ -155,8 +155,8 @@ roda os testes antes da verificação. Checagem nova entra com um caso que repro
 npm i -D @fontsource-variable/<id>          # ou @fontsource/<id> se não houver versão variável
 npm run fontes <id> [--italico] [--opsz]    # variável
 npm run fontes <id> --pesos=400,700         # estática
-npm run imagens entrada/<slug>/foto.jpg site/<slug>/imagens/retrato 480,800,1200
-npm run imagens entrada/<slug>/foto.jpg site/<slug>/imagens/social --social
+npm run imagens entrada/<área>-<nome>/foto.jpg site/<slug>/imagens/retrato 480,800,1200
+npm run imagens entrada/<área>-<nome>/foto.jpg site/<slug>/imagens/social --social
 ```
 
 `copiar-fontes` traz só o subconjunto latin, que cobre o português inteiro, e só woff2.

@@ -5,6 +5,7 @@
   [desenvolvedor](manual/manual-desenvolvedor.md) (ferramentas, contrato, workflows)
 - **Decisões:** [ADRs](decisoes/adr/) · [backlog](decisoes/backlog.md)
 - **Métricas:** [`metricas/implementacoes.csv`](metricas/implementacoes.csv) · [`tabela-projetos.md`](tabela-projetos.md) (projetos: em andamento, realizadas, agentes, tempo, custo, esforço) · [`metricas/delegacoes.csv`](metricas/delegacoes.csv)
+- **Questionário do cliente:** [mestre](questionario/questionario-cliente.md) · textos para enviar em [`questionario/enviar/`](questionario/enviar/)
 
 ## Estado do projeto
 

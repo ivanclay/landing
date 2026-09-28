@@ -1,10 +1,10 @@
 # Tabela de projetos — Landing (páginas de profissionais no GitHub Pages)
 
-> **Última atualização:** 2026-09-27 22:20 (UTC−03:00)
+> **Última atualização:** 2026-09-28 09:33 (UTC−03:00)
 > **Atualizado por:** Claude Opus 5.5 · Ivan C M Moura
 > **Referências:** perfil e regras em [`CLAUDE.md`](../CLAUDE.md) (§5 decisões abertas, §8 delegação e custo) · índice em [`indice.md`](indice.md) · registro por segmento em [`metricas/implementacoes.csv`](metricas/implementacoes.csv) · delegações em [`metricas/delegacoes.csv`](metricas/delegacoes.csv)
 
-**Resumo:** 0 em andamento · 7 realizadas (karoline-melo aprovada e publicada) · 0 pendentes · decisões abertas no `CLAUDE.md` §5 (D-01, D-03 a D-06)
+**Resumo:** 0 em andamento · 8 realizadas (questionário do cliente; ajuste da karoline-melo) · 1 pendente (adv-rudolf-mateus, aguarda o questionário) · decisões abertas no `CLAUDE.md` §5 (D-01, D-03 a D-06)
 
 ---
 
@@ -36,29 +36,24 @@
 
 ## 2. Pendentes — **estimativa**
 
-Nenhum projeto pedido e não começado.
+Um projeto pedido e não começado.
 
 | Ordem | Projeto | O que entrega | Branch | Dificuldade | Esforço est. | Custo est. | Modelo sugerido | Observação |
 |---|---|---|---|---|---|---|---|---|
-| — | — | — | — | — | — | — | — | — |
+| 1 | `adv-rudolf-mateus` | Página de advocacia real: Specht Sociedade de Advocacia, Rudolf Mateus de Jesus Specht, OAB/BA 77.991 (tipo `advocacia`) | `pagina/<slug>` (slug a confirmar) | ●●○○○ | — | — | Claude Opus 5.5 + Sonnet 5 | Texto e 1 foto recebidos; questionário enxuto pronto para enviar (`entrada/adv-rudolf-mateus/questionario-enviar.md`); começa com as respostas |
 
 ---
 
-## 3. Delegações do projeto em andamento ([`delegacoes.csv`](metricas/delegacoes.csv))
+## 3. Delegações do último projeto ([`delegacoes.csv`](metricas/delegacoes.csv))
 
-`karoline-melo` — 7 tarefas, 1 devolvida (layout recusado pelo dono), 0 escaladas:
+`questionario-cliente` (e o ajuste da `karoline-melo`, feito em paralelo na mesma sessão): 2 tarefas, 0 devolvidas, 0 escaladas.
 
 | Tarefa | Executor | Modelo | Resultado |
 |---|---|---|---|
-| Pesquisar a norma do COFECI na fonte | agente | Sonnet 5 | aceita (consulta ao CRECI-BA recusou acesso automatizado) |
-| Tipo `imobiliario` nas ferramentas (contrato, verificação, JSON-LD, 12 testes) | agente | Sonnet 5 | aceita; piso de termos revisto pelo coordenador |
-| Construir a 1ª versão da página | agente | Sonnet 5 | **devolvida pelo dono** ("muito simples", "marrom"); guardada como reserva (`8ccfe98`) |
-| Documentar o tipo (CLAUDE.md, índice, manuais, backlog) | agente | Sonnet 5 | aceita; número do backlog no ADR corrigido pelo coordenador |
-| Opção 1 — Atlântico escuro | agente | Sonnet 5 | aceita; publicada para a escolha |
-| Opção 2 — Galeria editorial clara | agente | Sonnet 5 | aceita; publicada para a escolha |
-| Opção 3 — Névoa azul em cartões | agente | Sonnet 5 | aceita; margem da abertura corrigida pelo coordenador; publicada |
+| Blocos de nutrição, imobiliário e negócio + textos de envio + manual do operador + índice | agente | Sonnet 5 | aceita; frase sobre a Res. CFN 760/2023 corrigida pelo coordenador para bater com o ADR-008 |
+| Karoline: "Fotógrafa, Corretora e Avaliadora de Imóveis" + CRECI/CNAI na abertura e no rodapé | agente (worktree) | Sonnet 5 | aceita; manteve "CRECI-BA" (o `verificar` exige a UF); publicada |
 
-As delegações dos projetos anteriores: `emilia-kuwano` 3 tarefas (3 layouts, Opus 5.5 — pela regra de hoje seriam Sonnet), no [relatório](paginas/emilia-kuwano/metricas/relatorio.md); `dr-paulo-de-tarso` e `hub-saude-negocios` tiveram agentes de coleta **não registrados** (antes da regra "o custo conta todos os agentes").
+As delegações dos projetos anteriores: `karoline-melo` 7 tarefas (Sonnet 5; 1 devolvida pelo dono), no [relatório](paginas/karoline-melo/metricas/relatorio.md); `emilia-kuwano` 3 tarefas (3 layouts, Opus 5.5 — pela regra de hoje seriam Sonnet), no [relatório](paginas/emilia-kuwano/metricas/relatorio.md); `dr-paulo-de-tarso` e `hub-saude-negocios` tiveram agentes de coleta **não registrados** (antes da regra "o custo conta todos os agentes").
 
 ## 4. Pendências e lacunas encontradas
 
@@ -86,7 +81,9 @@ As delegações dos projetos anteriores: `emilia-kuwano` 3 tarefas (3 layouts, O
 | `emilia-kuwano` | Nutricionista real (ADR-008), 3 layouts, publicada como proposta | 2026-09-27 16:38 | `badba5b` | Claude Opus 5.5 + Opus 5.5 ×3 | Ivan C M Moura | Claude Opus 5.5 | 52 min (3 segmentos) | US$ 15,83 |
 | `emilia-kuwano` · ajuste | Aviso de proposta tirado da página (só a etiqueta do índice) | 2026-09-27 21:15 | `62d71e5` | Claude Opus 5.5 | Ivan C M Moura | Claude Sonnet 5 | — (dentro da sessão da karoline-melo) | — |
 | `karoline-melo` | Corretora de imóveis real (ADR-009, tipo `imobiliario`), 3 layouts, opção 3 escolhida e **aprovada** pela cliente, com 4 ajustes; publicada fora da proposta | 2026-09-27 22:20 | `af8a67a` | Claude Opus 5.5 + Sonnet 5 ×7 | Ivan C M Moura | Claude Opus 5.5 | 89 min (3 segmentos) | US$ 30,74 |
-| **Total** | **7 projetos + 1 ajuste** | | | | | | **247 min** | **US$ 85,57** |
+| `questionario-cliente` | Questionário do cliente enviado antes da página: mestre com o porquê de cada pergunta + textos de envio por profissão (médico, advocacia, nutrição, imóveis, negócio); passo 0 no manual do operador e nas skills de briefing e página nova | 2026-09-28 09:33 | (este) | Claude Opus 5.5 + Sonnet 5 ×2 | Ivan C M Moura | Claude Opus 5.5 | 10 min | US$ 3,06 (inclui o agente do ajuste abaixo) |
+| `karoline-melo` · ajuste | "Fotógrafa, Corretora e Avaliadora de Imóveis" e "CRECI-BA 36.265 | CNAI 58.909" na abertura e no rodapé | 2026-09-28 09:31 | `3068151` | Sonnet 5 | Ivan C M Moura | Claude Sonnet 5 | — (dentro da sessão do questionario-cliente) | — |
+| **Total** | **8 projetos + 2 ajustes** | | | | | | **257 min** | **US$ 88,63** |
 
 Reproduzir: somar por `slug` as colunas `duracao_min` e `custo_usd` de `metricas/implementacoes.csv`.
 
@@ -101,6 +98,8 @@ Reproduzir: somar por `slug` as colunas `duracao_min` e `custo_usd` de `metricas
 | `s-frontdesk` · publicação | ●○○○○ | página entregue pronta |
 | `emilia-kuwano` | ●●●●○ | tipo nutrição + 3 layouts inteiros |
 | `karoline-melo` | ●●●●○ | tipo imobiliário, norma do COFECI do zero, 3 layouts depois da recusa |
+| `questionario-cliente` | ●●○○○ | só documentação e processo; blocos de norma de cinco profissões a partir das conferências existentes |
+| `karoline-melo` · ajuste | ●○○○○ | uma linha de identificação em dois lugares |
 
 ---
 
@@ -133,3 +132,4 @@ Decisões que valem para **todos** os projetos: **D-01** (domínio próprio, ant
 | 2026-09-27 21:49 | Claude Opus 5.5 + Sonnet 5 ×7 | Ivan C M Moura | `karoline-melo`: 3 opções publicadas como proposta para a cliente escolher, com página de escolha e prévia (OG) própria por opção — a construção passou a gerar cabeçalho para outras páginas da pasta (1 teste). 1º segmento fechado: 78 min, US$ 26,90. Pendência 4 (QA) segue; Lighthouse das opções depois da escolha. |
 | 2026-09-27 22:16 | Claude Opus 5.5 | Ivan C M Moura | `karoline-melo`: a cliente escolheu a opção 3 e **aprovou**; 4 ajustes dela; `avaliador` no contrato; etiqueta "Aprovado" no índice. 2º segmento: 7 min, US$ 2,83 (total 85 min, US$ 29,73). Publicação travada até o dono conferir o CRECI-BA (captcha). |
 | 2026-09-27 22:20 | Claude Opus 5.5 | Ivan C M Moura | **`karoline-melo` realizada**: publicada aprovada (opção 3), CRECI conferido pelo dono no portal; B-16 fechada na parte do CRECI. Total 89 min, US$ 30,74. |
+| 2026-09-28 09:33 | Claude Opus 5.5 + Sonnet 5 ×2 | Ivan C M Moura | **`questionario-cliente` realizado**, a pedido do dono antes da página do Rudolf: `docs/questionario/` (mestre + `enviar/` por profissão), passo 0 no manual do operador e nas skills `briefing-medico-landing` e `nova-pagina-medico-landing`. Em paralelo, **ajuste da `karoline-melo`** (fotógrafa + CRECI/CNAI em duas linhas) publicado. 10 min, US$ 3,06 (os dois juntos). `adv-rudolf-mateus` entra em Pendentes. |

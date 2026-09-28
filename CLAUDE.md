@@ -188,7 +188,7 @@ landing/
 │   ├── lib/                 pagina.mjs (contrato do pagina.json) · seo.mjs · html.mjs · arquivos.mjs
 │   ├── modelos/             indice.html · 404.html · redirecionamento.html
 │   └── regras/              termos-vedados.json
-├── entrada/                 FORA DO GIT — originais de foto e logo, por slug
+├── entrada/                 FORA DO GIT — originais de foto e logo, uma pasta por cliente com prefixo da área (`med-`, `adv-`, `nut-`, `cor-`, `bus-`)
 ├── docs/                    §6
 └── _site/                   FORA DO GIT — o construído
 ```

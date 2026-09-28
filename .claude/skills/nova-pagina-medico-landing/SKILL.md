@@ -21,6 +21,7 @@ trocar depois custa redirecionar.
 
 | # | Etapa | Skill | Sai |
 |---|---|---|---|
+| 0 | **Questionário do cliente**, se ainda não foi respondido: o texto da profissão em `docs/questionario/enviar/`, sem as perguntas que o pedido já responde | — (operador) | respostas em `entrada/<área>-<nome>/` |
 | 1 | Briefing: fatos, fontes, pendências, slug | `briefing-medico-landing` | `docs/paginas/<slug>/briefing.md` · `site/<slug>/pagina.json` com `publicar: false` |
 | ◆ | **Gate 1 — pendências.** Mostre o que falta e pergunte **tudo de uma vez** | — | respostas do dono |
 | 2 | Texto: estrutura de seções e redação dentro da norma | `publicidade-medica-cfm-landing` | rascunho do texto no `briefing.md` (seção Texto) |
@@ -57,6 +58,8 @@ pelos planos A, B, C"* saem: especialidade, área, locais, convênios. **Não sa
 - **Foto real** e autorização de uso; logotipo do consultório, se houver.
 - **Slug** desejado (proponha a partir do nome: `drjoao`, `drajoanaribeiro`).
 - **Tom e público** (adultos? idosos? atletas? criança?) — muda o texto e a arte.
+
+⌗ **Quase tudo isso o [questionário do cliente](../../../docs/questionario/questionario-cliente.md) já pergunta.** Se ele veio respondido, o gate 1 só lista o que ficou em branco; se não veio, mande o texto de `docs/questionario/enviar/` em vez de montar a lista à mão.
 
 Pergunte **no gate 1, numa lista só**, e siga com o que já dá para fazer (texto educativo, plano de
 arte) enquanto a resposta não vem. **Não preencha lacuna com palpite plausível** — um CRM de exemplo
