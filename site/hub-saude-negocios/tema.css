@@ -19,6 +19,8 @@
   --cor-noite-suave: #b9d2c8;
   --cor-noite-foco: #e9a860;
   --cor-menta: #d6ebe4;
+  /* A placa dos logotipos das organizações: branco, para as cores das marcas lerem como no original. */
+  --cor-vitrine: #ffffff;
   --cor-cacau: #6b4533;
 
   --fonte-titulo: 'Bricolage Grotesque Variable', 'Segoe UI', system-ui, sans-serif;
