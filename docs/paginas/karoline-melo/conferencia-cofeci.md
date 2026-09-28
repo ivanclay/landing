@@ -56,3 +56,12 @@ do CI: nenhum na versão conferida (ver `qa.md`).
 | C-11 | "Corretora e Avaliadora de Imóveis" (identificação, título, descrição) | título de avaliador sem inscrição (Res. COFECI 1.066/2007) | ✅ com o CNAI 58.909 ao lado, que ela informou. O contrato exige `cnai` para `avaliador: true` (teste). **Conferir o CNAI ativo** junto com o CRECI |
 | C-12 | botão "Fazer simulação" (antes "Quero falar com Karoline") | promessa? | ✅ convite para a simulação que a página já descreve, com a nota de estimativa no bloco 03 |
 | C-13 | foto com tripé e ring light | — | ✅ imagem real dela, escolha dela; nenhuma afirmação |
+
+## Ajuste da cliente — 2026-09-28: "Fotógrafa" na identificação
+
+| # | Frase | Risco | Decisão |
+|---|---|---|---|
+| C-14 | "Fotógrafa, Corretora e Avaliadora de Imóveis" (abertura e rodapé, `data-identificacao-creci`) | atividade de fotógrafa não é regulada pelo COFECI; poderia ler-se como inscrição indevida | ✅ **não é anúncio de inscrição**: fotografia não exige registro em conselho, e a frase não diz "fotógrafa registrada" nem aproxima a palavra do CRECI/CNAI. A identificação obrigatória (Lei 6.530/1978, art. 20, IV) continua completa e junto: nome, "Corretora e Avaliadora de Imóveis" e "CRECI-BA 36.265 \| CNAI 58.909" na mesma frase. Nenhuma promessa, comparação ou superlativo agregado. Fonte do fato: pedido da cliente repassado pelo dono, 2026-09-28 (`briefing.md`) |
+
+Piso automático (`termos-vedados-cofeci.json`) conferido de novo com o texto atualizado: nenhum termo
+vetado na frase nova. `npm run verificar` é quem garante isso a cada mudança.
