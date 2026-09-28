@@ -48,3 +48,11 @@ do CI: nenhum na versão conferida (ver `qa.md`).
 1. Nome completo e região do CRECI (`CRECI-BA`?), para `creciConferidoEm`.
 2. Atua por uma imobiliária? Se sim, o CRECI-J dela pode precisar aparecer.
 3. A inscrição no CNAI está ativa?
+
+## Ajustes da cliente — 2026-09-27 22:10
+
+| # | Frase | Risco | Decisão |
+|---|---|---|---|
+| C-11 | "Corretora e Avaliadora de Imóveis" (identificação, título, descrição) | título de avaliador sem inscrição (Res. COFECI 1.066/2007) | ✅ com o CNAI 58.909 ao lado, que ela informou. O contrato exige `cnai` para `avaliador: true` (teste). **Conferir o CNAI ativo** junto com o CRECI |
+| C-12 | botão "Fazer simulação" (antes "Quero falar com Karoline") | promessa? | ✅ convite para a simulação que a página já descreve, com a nota de estimativa no bloco 03 |
+| C-13 | foto com tripé e ring light | — | ✅ imagem real dela, escolha dela; nenhuma afirmação |

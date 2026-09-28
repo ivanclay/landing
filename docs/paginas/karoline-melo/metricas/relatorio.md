@@ -42,3 +42,15 @@
 - **Opções 1, 2 e 3 (Sonnet ×3):** `opcao-N.html`, `opcao-N-tema.css`, `opcao-N.css` e capturas. Todas publicadas para a escolha.
 
 **Total até aqui:** 78 min · **US$ 26,90** (conversa principal + 7 agentes Sonnet).
+
+## 2º segmento — escolha da cliente (opção 3), ajustes e aprovação
+
+- 2026-09-27, das 22:09 às 22:16 (-03:00) — **7 min**
+- Tokens — entrada: 58 · saída: 19.301 · cache: 10.810.169 · **Custo: US$ 2,83** · Origem: ccusage, diferença entre
+  duas leituras da mesma sessão (exata). Sem agentes: tudo pela conversa principal (Opus)
+- Esforço: `●○○○○` — ajustes de texto e foto numa página que já existe (+ 1 campo no contrato e a etiqueta do índice)
+- Escopo: opção 3 promovida a página; 4 ajustes da cliente; `corretor.avaliador` (Res. COFECI 1.066/2007, 2 testes);
+  etiqueta "Aprovado" no índice (1 teste); imagem social nova; Lighthouse 98/100/96/69, LCP 2,2 s
+- **Pausado:** esperando a conferência do CRECI-BA pelo dono (captcha)
+
+**Total da página até aqui:** 85 min · **US$ 29,73** (conversa principal + 7 agentes Sonnet).

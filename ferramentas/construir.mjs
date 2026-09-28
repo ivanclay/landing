@@ -151,19 +151,23 @@ function iniciais(nome) {
   return (palavras[0]?.[0] ?? '') + (palavras.length > 1 ? palavras[1][0] : '');
 }
 
-/** Uma linha de tabela do índice; demonstração, proposta e pré-lançamento levam etiqueta sob o nome. */
+/**
+ * Uma linha de tabela do índice; demonstração, proposta e pré-lançamento levam etiqueta sob o nome, e a página
+ * de cliente real que saiu da proposta, "Aprovado" (pedido do dono, 2026-09-27).
+ */
 function linhaDoIndice(pagina) {
   const assunto = assuntoDaPagina(pagina);
   const lugar = [pagina.cidade, pagina.uf].filter(Boolean).join(', ');
   // No painel de demonstrações a etiqueta só diz o que é fictício; a palavra "demonstração" já está no título.
   const ficticio = ehAdvocacia(pagina) ? 'Escritório fictício' : ehNegocio(pagina) ? 'Empresa fictícia' : 'Médico fictício';
   const emAvaliacao = ehProposta(pagina) ? 'Proposta · em avaliação' : pagina.preLancamento ? 'Pré-lançamento · em avaliação' : '';
-  const etiqueta = ehDemonstracao(pagina) ? ficticio : emAvaliacao;
+  const aprovado = !ehDemonstracao(pagina) && !emAvaliacao && pagina.publicar === true;
+  const etiqueta = ehDemonstracao(pagina) ? ficticio : emAvaliacao || (aprovado ? 'Aprovado' : '');
   const busca = [nomeDeExibicao(pagina), assunto, lugar, etiqueta, ehDemonstracao(pagina) ? 'demonstração' : ''].join(' ');
   return `
               <tr class="tabela__linha" data-busca="${escaparHtml(busca)}">
                 <th scope="row"><span class="tabela__celula-nome"><span class="tabela__monograma" aria-hidden="true">${escaparHtml(iniciais(nomeDeExibicao(pagina)))}</span><span class="tabela__identidade"><a class="tabela__nome" href="${escaparHtml(pagina.slug)}/" target="_blank" rel="noopener">${escaparHtml(nomeDeExibicao(pagina))}<span class="visualmente-oculto"> (abre em nova aba)</span></a>${etiqueta ? `
-                  <span class="tabela__etiqueta${emAvaliacao ? ' tabela__etiqueta--avaliacao' : ''}">${escaparHtml(etiqueta)}</span>` : ''}</span></span></th>
+                  <span class="tabela__etiqueta${emAvaliacao ? ' tabela__etiqueta--avaliacao' : aprovado ? ' tabela__etiqueta--aprovado' : ''}">${escaparHtml(etiqueta)}</span>` : ''}</span></span></th>
                 <td>${escaparHtml(assunto || '—')}</td>
                 <td>${escaparHtml(lugar || '—')}</td>
               </tr>`;

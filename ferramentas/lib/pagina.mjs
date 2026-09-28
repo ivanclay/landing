@@ -191,6 +191,11 @@ function validarImobiliario(pagina, exigir) {
   if (corretor.cnai !== undefined) {
     exigir(FORMATO_CNAI.test(corretor.cnai ?? ''), 'corretor.cnai fora do formato ("58.909") — ADR-009');
   }
+  // "Avaliador(a)" só com inscrição no CNAI (Res. COFECI 1.066/2007): o número vai junto na identificação.
+  if (corretor.avaliador !== undefined) {
+    exigir(corretor.avaliador === true && texto(corretor.cnai),
+      'corretor.avaliador só aceita true, e exige corretor.cnai: sem inscrição no CNAI não há avaliador (Res. COFECI 1.066/2007) — ADR-009');
+  }
   // A cidade aparece no índice; sem fonte, fica de fora (regra 1) — por isso não é obrigatória aqui.
   if (pagina.uf !== undefined) exigir(UFS.includes(pagina.uf), 'uf inválida');
   if (pagina.redes?.instagram !== undefined) {
@@ -208,7 +213,11 @@ export function inscricaoCreci(pagina) {
 
 /** "Corretora de Imóveis" ou "Corretor de Imóveis" (Lei 6.530/1978, art. 3º) — ADR-009. */
 export function profissaoCorretor(pagina) {
-  return pagina.corretor.generoGramatical === 'F' ? 'Corretora de Imóveis' : 'Corretor de Imóveis';
+  const feminino = pagina.corretor.generoGramatical === 'F';
+  const corretor = feminino ? 'Corretora' : 'Corretor';
+  // Com a inscrição no CNAI, "Corretora e Avaliadora de Imóveis" (Res. COFECI 1.066/2007).
+  if (pagina.corretor.avaliador === true) return `${corretor} e ${feminino ? 'Avaliadora' : 'Avaliador'} de Imóveis`;
+  return `${corretor} de Imóveis`;
 }
 
 /** Página de negócio (empresa, consultoria): sem CRM; o nome e, na proposta, o site oficial (ADR-005). */

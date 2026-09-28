@@ -252,6 +252,8 @@
   color: var(--cor-sobre-laranja-clara);
 }
 .tabela__etiqueta--avaliacao { background: var(--cor-marca-clara); color: var(--cor-sobre-marca-clara); }
+/* Cliente real que aprovou a página: a marca cheia (branco sobre #0B6B76, 6,2:1). */
+.tabela__etiqueta--aprovado { background: var(--cor-marca); color: var(--cor-sobre-marca); }
 .tabela__vazio td,
 .tabela__nenhum td {
   padding: var(--espaco-5);

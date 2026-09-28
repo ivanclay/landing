@@ -46,3 +46,15 @@ ficha, e os emojis viram tipografia.
 - P-02: **aprovação da Karoline** (`revisao.aprovadoPelaCorretoraEm`).
 - P-03: se ela atua por uma imobiliária, o CRECI da pessoa jurídica também pode ser exigido no anúncio
   (ver conferência). Perguntar.
+
+## Atualização — 2026-09-27 22:10: escolha e ajustes da cliente (mensagem do dono)
+- **Escolhida a opção 3 ("Névoa azul")**, com quatro ajustes pedidos por ela:
+  1. a foto sentada **inteira, com o tripé e o ring light à frente** (antes recortada para escondê-los);
+  2. no fechamento, **o mesmo retrato da abertura** no círculo;
+  3. o botão **"Quero falar com Karoline" → "Fazer simulação"** (a mensagem do WhatsApp passa a ser a da simulação);
+  4. **"Corretora de Imóveis" → "Corretora e Avaliadora de Imóveis"**: fato novo, fonte = pedido da cliente,
+     sustentado pelo CNAI 58.909 que ela mesma informou [T 108] (Res. COFECI 1.066/2007). `corretor.avaliador: true`.
+- **Aprovação da corretora:** 2026-09-27 (dono: "Aqui você coloca aprovado!") → `aprovadoPelaCorretoraEm`.
+- **Pendente:** `creciConferidoEm`. A consulta pública do CRECI-BA
+  (`creciba.conselho.net.br/form_pesquisa_cadastro_geral_site.php`) tem captcha (Cloudflare Turnstile): a
+  conferência é do dono, no navegador — inscrição 36265, nome completo e situação; e o CNAI 58.909 ativo.

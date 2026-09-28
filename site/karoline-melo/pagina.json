@@ -2,7 +2,6 @@
   "slug": "karoline-melo",
   "tipo": "imobiliario",
   "publicar": true,
-  "proposta": true,
   "atualizadoEm": "2026-09-27",
   "corretor": {
     "nome": "Karoline Melo",
@@ -12,9 +11,10 @@
       "uf": "BA",
       "numero": "36.265"
     },
-    "cnai": "58.909"
+    "cnai": "58.909",
+    "avaliador": true
   },
-  "resumo": "Karoline Melo, corretora de imóveis em Salvador. Simulação de crédito gratuita e orientação da primeira conversa às etapas da compra.",
+  "resumo": "Karoline Melo, corretora e avaliadora de imóveis em Salvador. Simulação de crédito gratuita e orientação da primeira conversa às etapas da compra.",
   "cidade": "Salvador",
   "uf": "BA",
   "contato": {
@@ -27,6 +27,6 @@
   "revisao": {
     "creciConferidoEm": "",
     "conferenciaCofeciEm": "2026-09-27",
-    "aprovadoPelaCorretoraEm": ""
+    "aprovadoPelaCorretoraEm": "2026-09-27"
   }
 }

@@ -1,6 +1,6 @@
 # Tabela de projetos — Landing (páginas de profissionais no GitHub Pages)
 
-> **Última atualização:** 2026-09-27 21:49 (UTC−03:00)
+> **Última atualização:** 2026-09-27 22:16 (UTC−03:00)
 > **Atualizado por:** Claude Opus 5.5 · Ivan C M Moura
 > **Referências:** perfil e regras em [`CLAUDE.md`](../CLAUDE.md) (§5 decisões abertas, §8 delegação e custo) · índice em [`indice.md`](indice.md) · registro por segmento em [`metricas/implementacoes.csv`](metricas/implementacoes.csv) · delegações em [`metricas/delegacoes.csv`](metricas/delegacoes.csv)
 
@@ -32,7 +32,7 @@
 
 | Projeto | O que é | Início | Branch | Modelo | Desenvolvedor | Modelo sugerido | Observação |
 |---|---|---|---|---|---|---|---|
-| `karoline-melo` | Corretora de imóveis real, Salvador (CRECI-BA 36.265) — tipo novo `imobiliario` (ADR-009) | 2026-09-27 20:31 | `pagina/karoline-melo` | Claude Opus 5.5 + Sonnet 5 ×7 | Ivan C M Moura | Claude Opus 5.5 (tipo novo + norma nova) | 1ª versão recusada ("muito simples", "marrom"); **3 opções publicadas como proposta** (página de escolha + prévia própria por opção), **esperando a cliente escolher**. **Parcial:** 78 min · US$ 26,90 (1º segmento) |
+| `karoline-melo` | Corretora de imóveis real, Salvador (CRECI-BA 36.265) — tipo novo `imobiliario` (ADR-009) | 2026-09-27 20:31 | `ajuste/karoline-melo-aprovada` | Claude Opus 5.5 + Sonnet 5 ×7 | Ivan C M Moura | Claude Opus 5.5 (tipo novo + norma nova) | 1ª versão recusada ("muito simples", "marrom"); cliente escolheu a opção 3 e **aprovou** (4 ajustes); **falta o dono conferir o CRECI-BA** para publicar. **Parcial:** 85 min · US$ 29,73 (2 segmentos) |
 
 ## 2. Pendentes — **estimativa**
 
@@ -131,3 +131,4 @@ Decisões que valem para **todos** os projetos: **D-01** (domínio próprio, ant
 |---|---|---|---|
 | 2026-09-27 21:20 | Claude Opus 5.5 | Ivan C M Moura | Primeira versão da tabela de projetos da Landing, a pedido do dono: um projeto por página ou mudança com nome, tempo e custo do `ccusage` com a quebra por agente do `tokens-por-agente.mjs`, esforço em tabela separada, `delegacoes.csv` novo. Substitui o `metricas/projetos.md` (apagado). Realizadas reconstruídas do `implementacoes.csv` e do `git log`; `karoline-melo` em andamento. |
 | 2026-09-27 21:49 | Claude Opus 5.5 + Sonnet 5 ×7 | Ivan C M Moura | `karoline-melo`: 3 opções publicadas como proposta para a cliente escolher, com página de escolha e prévia (OG) própria por opção — a construção passou a gerar cabeçalho para outras páginas da pasta (1 teste). 1º segmento fechado: 78 min, US$ 26,90. Pendência 4 (QA) segue; Lighthouse das opções depois da escolha. |
+| 2026-09-27 22:16 | Claude Opus 5.5 | Ivan C M Moura | `karoline-melo`: a cliente escolheu a opção 3 e **aprovou**; 4 ajustes dela; `avaliador` no contrato; etiqueta "Aprovado" no índice. 2º segmento: 7 min, US$ 2,83 (total 85 min, US$ 29,73). Publicação travada até o dono conferir o CRECI-BA (captcha). |

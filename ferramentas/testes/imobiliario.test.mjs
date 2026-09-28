@@ -167,3 +167,31 @@ test('outra página da pasta com o marcador ganha canonical e prévia próprios,
     assert.doesNotMatch(html, /application\/ld\+json/);
   });
 });
+
+// "Corretora e Avaliadora de Imóveis": só com a inscrição no CNAI (Res. COFECI 1.066/2007).
+test('avaliadora com CNAI passa, com a profissão completa na identificação', async () => {
+  const pagina = paginaImobiliario({ proposta: true, revisao: { conferenciaCofeciEm: '2026-09-27' },
+    corretor: { nome: 'Fulana de Teste', generoGramatical: 'F', creci: { uf: 'BA', numero: '12.345' }, cnai: '1.234', avaliador: true } });
+  const html = htmlImobiliario({ identificacao: 'Fulana de Teste · Corretora e Avaliadora de Imóveis · CRECI-BA 12.345 · CNAI 1.234' });
+  await comSite({ pagina, html }, (resultado) => {
+    assert.equal(resultado.status, 0, resultado.stderr + resultado.stdout);
+  });
+});
+
+test('avaliadora sem CNAI reprova', async () => {
+  const pagina = paginaImobiliario({ corretor: { nome: 'Fulana de Teste', generoGramatical: 'F', creci: { uf: 'BA', numero: '12.345' }, avaliador: true } });
+  await comSite({ pagina, html: htmlImobiliario() }, (resultado) => {
+    assert.notEqual(resultado.status, 0);
+    assert.match(resultado.stderr, /sem inscrição no CNAI não há avaliador/);
+  });
+});
+
+// Saiu da proposta com as três datas: o índice mostra "Aprovado" (pedido do dono, 2026-09-27).
+test('página aprovada (fora da proposta) leva a etiqueta "Aprovado" no índice', async () => {
+  await comSite({ pagina: paginaImobiliario(), html: htmlImobiliario() }, async (resultado, raiz) => {
+    assert.equal(resultado.status, 0, resultado.stderr + resultado.stdout);
+    const indice = await readFile(path.join(raiz, '_site', 'index.html'), 'utf8');
+    assert.match(indice, /tabela__etiqueta--aprovado">Aprovado</);
+    assert.doesNotMatch(indice, /Proposta · em avaliação/);
+  });
+});

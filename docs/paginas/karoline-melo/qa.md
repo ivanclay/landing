@@ -27,3 +27,14 @@
   absoluto; todo `target="_blank"` com `rel="noopener"` e aviso "(abre em nova aba)".
 - **Não feito:** leitor de tela (NVDA) e os links de WhatsApp/Instagram num celular real. Fazer antes de
   sair da proposta.
+
+## Página final (opção 3 com os ajustes) — 2026-09-27 22:15
+`npx lighthouse@12 http://localhost:4175/karoline-melo/` (servindo `_site/`, construído ainda como proposta), celular, 3 rodadas:
+
+| Performance | Acessibilidade | Boas práticas | SEO | LCP | CLS | TBT | Peso |
+|---|---|---|---|---|---|---|---|
+| 98 · 98 · 98 | 100 | 96 | 69 | 2,2 s | 0,002 | 0 ms | 221 KiB |
+
+- SEO 69 = o `noindex` da proposta; com a saída da proposta a página fica indexável (conferir de novo no ar).
+- Capturas: `capturas/1440.png`, `1440-janela.png`, `390.png`, `fechamento-1440.png` (o círculo aparece vazio na
+  captura de página inteira pelo `loading="lazy"`; no navegador carrega — `naturalWidth` 480 conferido).
