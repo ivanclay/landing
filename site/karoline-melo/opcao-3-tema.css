@@ -1,0 +1,49 @@
+/*
+ * opcao-3-tema.css — identidade da opção 3 ("Névoa Azul", rascunho para escolha do dono).
+ * Cor e fonte desta opção moram só aqui (regra 10). Tirada da cor de fundo do retrato de estúdio
+ * (azul-acinzentado claro) — o oposto do marrom recusado.
+ *
+ * Contraste (WCAG 2.1, calculado em node com a fórmula de luminância relativa — script descartável,
+ * ferramentas/../scratchpad/contraste.mjs — números abaixo):
+ *   texto (ardósia #1C3247) sobre névoa (#DCE5EC)      10,31:1
+ *   texto (ardósia #1C3247) sobre branco (#FFFFFF)     13,15:1
+ *   texto-suave (#3E5A70) sobre névoa                   5,67:1
+ *   texto-suave (#3E5A70) sobre branco                  7,24:1
+ *   branco sobre ardósia (blocos escuros)              13,15:1
+ *   névoa sobre ardósia (blocos escuros)                10,31:1
+ *   dourado-claro (#CDB27A) sobre ardósia               6,42:1  — vale para texto normal, não só fio
+ *   branco sobre azul-médio (#4F6F8C, botão/detalhe)     5,27:1
+ *   azul-médio (#4F6F8C) sobre névoa — só texto grande   4,13:1  (≥ 3:1 exigido; abaixo de 4,5:1,
+ *     por isso nunca em texto de corpo — regra do pedido: "só em fundo/detalhe ou texto grande")
+ *   texto-suave-noite (#A9C3D6) sobre ardósia            7,18:1
+ *   texto sobre névoa-cartão (#EEF3F7, pílulas)         11,77:1
+ *   texto-suave sobre névoa-cartão                        6,48:1
+ *   champanhe (#CDB27A) sobre branco                      2,05:1  — por isso NUNCA texto sobre
+ *     branco; só fio, ícone de linha e texto sobre a ardósia (6,42:1, ver acima)
+ * Todos os pares usados em texto de corpo passam AA (≥ 4,5:1); os que não passam ficam só em
+ * fundo, fio decorativo ou texto grande, como no S-Card.
+ */
+:root {
+  --cor-fundo: #dce5ec;
+  --cor-superficie: #ffffff;
+  --cor-texto: #1c3247;
+  --cor-texto-suave: #3e5a70;
+  --cor-linha: #bdd0dc;
+  --cor-marca: #1c3247;
+  --cor-sobre-marca: #ffffff;
+  --cor-foco: #1c3247;
+
+  --cor-noite: #1c3247;              /* blocos escuros: simulação e fechamento */
+  --cor-texto-suave-noite: #a9c3d6;  /* texto secundário sobre a ardósia */
+  --cor-medio: #4f6f8c;              /* só fundo/detalhe ou texto grande (ver contraste acima) */
+  --cor-champanhe: #cdb27a;          /* fios finos e ícones de linha — nunca texto sobre branco */
+  --cor-nevoa-cartao: #eef3f7;       /* névoa mais clara para pílula e moldura sobre branco */
+
+  --fonte-titulo: 'Source Serif 4 Variable', Georgia, 'Times New Roman', serif;
+  --fonte-texto: 'Hanken Grotesk Variable', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  --raio-cartao: 1.75rem;      /* 28px — cantos generosamente arredondados */
+  --raio-cartao-grande: 2rem;  /* 32px */
+  --raio-arco: 999px;          /* clampado pelo navegador ao raio do arco — vira semicírculo */
+  --sombra-cartao: 0 20px 44px -18px rgba(20, 38, 54, 0.28), 0 2px 8px -2px rgba(20, 38, 54, 0.12);
+}

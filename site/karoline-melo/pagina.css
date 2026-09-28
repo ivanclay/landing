@@ -1,463 +1,106 @@
 /*
- * pagina.css — layout desta página ("a prancha da consultora", docs/paginas/karoline-melo/direcao-de-arte.md).
- * O gesto: a linha de cota — um fio ouro com um traço curto em cada ponta, como a cota de uma planta —
- * mede o topo de cada seção e liga os passos do atendimento. Cor só em tema.css (regra 10).
+ * pagina.css — enquanto a cliente escolhe, /karoline-melo/ mostra as três propostas lado a lado; cada
+ * cartão abre a página inteira (opcao-N.html). Escolhida, a opção vira o index.html e este arquivo sai.
  */
+.escolha { padding-block: clamp(3rem, 2rem + 5vw, 6rem); }
 
-/* ---------- Cabeçalho ---------- */
-.cabecalho__interno {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--espaco-3) var(--espaco-6);
-  padding-block: var(--espaco-4);
+.escolha__cabeca { max-width: 46rem; margin-inline: auto; text-align: center; }
+.escolha__rubrica {
+  font-size: var(--texto-meta);
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--cor-marca);
+}
+.escolha__titulo {
+  margin-top: var(--espaco-3);
+  font-family: var(--fonte-titulo);
+  font-size: var(--texto-vitrine);
+  font-weight: 400;
+  line-height: 1.05;
+}
+.escolha__titulo em {
+  display: block;
+  margin-top: var(--espaco-2);
+  font-size: 0.55em;
+  font-style: italic;
+  color: var(--cor-marca);
+}
+.escolha__apoio {
+  margin-top: var(--espaco-5);
+  font-size: var(--texto-destaque);
+  color: var(--cor-texto-suave);
+}
+
+.opcoes {
+  display: grid;
+  gap: var(--espaco-6);
+  margin-top: clamp(2.5rem, 2rem + 3vw, 4.5rem);
+  padding: 0;
+  list-style: none;
+}
+@media (min-width: 60rem) {
+  .opcoes { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+.opcao__link {
+  display: grid;
+  gap: var(--espaco-2);
+  height: 100%;
+  padding-bottom: var(--espaco-5);
+  background: var(--cor-superficie);
+  border-radius: 0.75rem;
+  box-shadow: var(--sombra-cartao);
+  overflow: hidden;
+  color: inherit;
+  text-decoration: none;
+  transition: transform 0.25s ease;
+}
+.opcao__link:hover { transform: translateY(-4px); }
+.opcao__link:focus-visible { outline: 3px solid var(--cor-foco); outline-offset: 4px; }
+
+.opcao__imagem img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  object-position: top;
   border-bottom: 1px solid var(--cor-linha);
 }
-.cabecalho__marca {
-  font-family: var(--fonte-titulo);
-  font-size: var(--texto-destaque);
-  font-weight: 500;
-}
-.cabecalho__marca span {
-  font-weight: 400;
-  font-style: italic;
-  color: var(--cor-texto-suave);
-}
-.navegacao {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--espaco-2) var(--espaco-5);
-}
-.navegacao a {
-  display: flex;
-  align-items: center;
-  min-height: var(--alvo-minimo);
-  font-size: var(--texto-meta);
-  font-weight: 500;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  text-decoration: none;
-  color: var(--cor-texto-suave);
-}
-.navegacao a:hover { color: var(--cor-marca); }
-
-/* ---------- Entrada ---------- */
-.entrada { padding-block: var(--espaco-7) var(--espaco-8); }
-.entrada__grade {
-  display: flex;
-  flex-direction: column;
-  gap: var(--espaco-8);
-}
-.entrada__retrato { order: -1; }
-
-/* Celular: o título precisa caber na primeira tela junto com o rosto. A navegação sai (a barra de contato
-   fixa leva ao WhatsApp e ao Instagram; as seções seguem rolando), e o retrato fica quadrado, no rosto. */
-@media (max-width: 35.99rem) {
-  .navegacao { display: none; }
-  .entrada { padding-block-start: var(--espaco-5); }
-  .entrada__grade { gap: var(--espaco-6); }
-  .retrato picture,
-  .retrato img { aspect-ratio: 1; }
-  .retrato img { object-position: 50% 18%; }
-}
-
-.entrada__rubrica {
+.opcao__numero,
+.opcao__nome,
+.opcao__descricao,
+.opcao__acao { padding-inline: var(--espaco-5); }
+.opcao__numero {
+  margin-top: var(--espaco-4);
   font-size: var(--texto-meta);
   font-weight: 600;
   letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--cor-marca);
+  color: var(--cor-texto-suave);
 }
-.entrada__titulo {
+.opcao__nome {
+  font-family: var(--fonte-titulo);
+  font-size: 1.75rem;
+  line-height: 1.15;
+}
+.opcao__descricao { color: var(--cor-texto-suave); }
+.opcao__acao {
   margin-top: var(--espaco-3);
-  font-size: var(--texto-vitrine);
-  font-weight: 340;
-  letter-spacing: -0.01em;
-}
-.entrada__titulo em {
-  font-style: italic;
-  font-weight: 400;
+  font-weight: 600;
   color: var(--cor-marca);
-}
-.entrada__apoio {
-  max-width: 30ch;
-  margin-top: var(--espaco-5);
-  font-size: var(--texto-destaque);
-  color: var(--cor-texto-suave);
-}
-.entrada__acoes {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--espaco-3);
-  margin-top: var(--espaco-6);
-}
-.entrada__identificacao {
-  margin-top: var(--espaco-6);
-  padding-top: var(--espaco-4);
-  border-top: 1px solid var(--cor-linha);
-  max-width: 34rem;
-  font-size: var(--texto-meta);
-  letter-spacing: 0.02em;
-  color: var(--cor-texto-suave);
 }
 
-/* Retrato: moldura fina de ouro, deslocada — o traço de uma prancha atrás da foto. */
-.retrato {
-  position: relative;
-  max-width: 22rem;
-  margin: 0 auto;
-}
-.retrato::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border: 1px solid var(--cor-ouro);
-  transform: translate(0.75rem, 0.75rem);
-  z-index: -1;
-}
-.retrato picture,
-.retrato img {
-  display: block;
-  width: 100%;
-  aspect-ratio: 4 / 5;
-  background: var(--cor-nevoa);
-}
-.retrato img {
-  object-fit: cover;
-  object-position: 48% 28%;
-}
-.entrada__prancha {
-  position: relative;
-  max-width: 22rem;
-  /* abaixo da moldura, que desce 0,75rem além da foto */
-  margin: calc(0.75rem + var(--espaco-4)) auto 0;
-  padding-top: var(--espaco-3);
+.rodape {
+  padding-block: var(--espaco-6);
+  border-top: 1px solid var(--cor-linha);
+  font-size: var(--texto-meta);
+  color: var(--cor-texto-suave);
   text-align: center;
-  font-size: var(--texto-meta);
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--cor-texto-suave);
-  background-image:
-    linear-gradient(var(--cor-ouro), var(--cor-ouro)),
-    linear-gradient(var(--cor-ouro), var(--cor-ouro)),
-    linear-gradient(var(--cor-ouro), var(--cor-ouro));
-  background-repeat: no-repeat;
-  background-position: left top, right top, center top;
-  background-size: 1px 8px, 1px 8px, 100% 1px;
 }
+.rodape__identificacao { color: var(--cor-texto); }
 
-/* ---------- Seções: a linha de cota mede o topo de cada uma ---------- */
-.secao {
-  border-top: 1px solid var(--cor-linha);
-  padding-block: clamp(3rem, 2rem + 4vw, 5.5rem);
-}
-.secao--areia { background: var(--cor-superficie); }
-.secao > .conteudo { position: relative; }
-.secao > .conteudo::before {
-  content: '';
-  position: absolute;
-  top: -1px;
-  left: 0;
-  right: 0;
-  height: 8px;
-  transform: translateY(-3.5px);
-  background-image:
-    linear-gradient(var(--cor-ouro), var(--cor-ouro)),
-    linear-gradient(var(--cor-ouro), var(--cor-ouro)),
-    linear-gradient(var(--cor-ouro), var(--cor-ouro));
-  background-repeat: no-repeat;
-  background-position: left center, right center, left center;
-  background-size: 1px 8px, 1px 8px, 100% 1px;
-  pointer-events: none;
-}
-.secao__cabeca {
-  display: flex;
-  gap: var(--espaco-4);
-  padding-top: var(--espaco-6);
-}
-.secao__numero {
-  /* Decorativo (aria-hidden): mantido em ≥ 24 px para o ouro valer como "numeral grande" — regra 11. */
-  flex: none;
-  width: 2.75rem;
-  font-family: var(--fonte-titulo);
-  font-size: clamp(1.5rem, 1.35rem + 0.5vw, 1.75rem);
-  font-style: italic;
-  font-weight: 400;
-  color: var(--cor-ouro);
-}
-.secao__rubrica {
-  font-size: var(--texto-meta);
-  font-weight: 600;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--cor-marca);
-}
-.secao h2 {
-  margin-top: var(--espaco-2);
-  font-size: var(--texto-secao);
-  font-weight: 340;
-  letter-spacing: -0.01em;
-}
-.secao h2 em {
-  font-style: italic;
-  font-weight: 400;
-  color: var(--cor-marca);
-}
-.secao__corpo {
-  max-width: var(--medida);
-  margin-top: var(--espaco-6);
-  margin-left: calc(2.75rem + var(--espaco-4));
-}
-.secao__corpo > * + * { margin-top: var(--espaco-4); }
-
-/* As três linhas em recuo escalonado. */
-.talvez {
-  margin-top: var(--espaco-6);
-  font-family: var(--fonte-titulo);
-  font-size: clamp(1.25rem, 1.1rem + 0.7vw, 1.625rem);
-  line-height: 1.35;
-}
-.talvez__linha + .talvez__linha { margin-top: var(--espaco-3); }
-.talvez__linha--2 { margin-left: clamp(0.5rem, 1vw, 1.5rem); }
-.talvez__linha--3 { margin-left: clamp(1rem, 2.4vw, 3rem); }
-
-.citacao {
-  margin-top: var(--espaco-6);
-  padding-left: var(--espaco-5);
-  border-left: 2px solid var(--cor-ouro);
-  font-family: var(--fonte-titulo);
-  font-size: var(--texto-destaque);
-  font-style: italic;
-  color: var(--cor-marca);
-}
-
-/* ---------- Caminhos: colunas separadas por fio, sem ícone e sem caixa ---------- */
-.caminhos {
-  display: grid;
-  gap: var(--espaco-7);
-  margin-top: var(--espaco-6);
-  margin-left: calc(2.75rem + var(--espaco-4));
-}
-.caminho {
-  padding-top: var(--espaco-5);
-  border-top: 1px solid var(--cor-linha);
-}
-.caminho h3 {
-  font-size: var(--texto-destaque);
-  font-weight: 450;
-}
-.caminho p {
-  margin-top: var(--espaco-3);
-  color: var(--cor-texto-suave);
-}
-.caminho .botao {
-  margin-top: var(--espaco-5);
-  width: 100%;
-}
-
-/* ---------- Simulação ---------- */
-.simulacao {
-  display: grid;
-  gap: var(--espaco-7);
-  margin-top: var(--espaco-6);
-  margin-left: calc(2.75rem + var(--espaco-4));
-}
-.simulacao__texto > * + * { margin-top: var(--espaco-4); }
-.simulacao__texto .botao { margin-top: var(--espaco-5); }
-
-.ficha {
-  padding: var(--espaco-6);
-  background: var(--cor-fundo);
-  border: 1px solid var(--cor-linha);
-}
-.secao--areia .ficha { background: var(--cor-fundo); }
-.ficha h3 {
-  font-size: var(--texto-meta);
-  font-weight: 600;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--cor-marca);
-}
-.ficha__lista {
-  margin-top: var(--espaco-4);
-  font-size: var(--texto-apoio);
-}
-.ficha__lista li {
-  padding-block: var(--espaco-3);
-  border-top: 1px dotted var(--cor-linha);
-}
-.ficha__lista li:last-child { border-bottom: 1px dotted var(--cor-linha); }
-.ficha__fecho {
-  margin-top: var(--espaco-5);
-  font-family: var(--fonte-titulo);
-  font-style: italic;
-  color: var(--cor-marca);
-}
-.nota {
-  margin-top: var(--espaco-6);
-  margin-left: calc(2.75rem + var(--espaco-4));
-  max-width: var(--medida);
-  font-size: var(--texto-apoio);
-  color: var(--cor-texto-suave);
-}
-
-/* ---------- Informação: lista em linha separada por ponto médio ---------- */
-.criterios {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0 var(--espaco-2);
-  margin-top: var(--espaco-4);
-  font-size: var(--texto-apoio);
-  color: var(--cor-texto);
-}
-.criterios li { display: flex; align-items: center; }
-.criterios li:not(:first-child)::before {
-  content: '';
-  width: 5px;
-  height: 5px;
-  margin-right: var(--espaco-2);
-  border-radius: 50%;
-  background: var(--cor-ouro);
-}
-.destaque {
-  margin-top: var(--espaco-5);
-  font-family: var(--fonte-titulo);
-  font-size: var(--texto-destaque);
-  font-style: italic;
-  color: var(--cor-marca);
-}
-
-/* ---------- Atendimento: etapas ligadas pela linha de cota ---------- */
-.etapas {
-  display: grid;
-  gap: var(--espaco-7);
-  margin-top: var(--espaco-7);
-  margin-left: calc(2.75rem + var(--espaco-4));
-}
-.etapa {
-  position: relative;
-  padding-left: var(--espaco-6);
-  border-left: 1px solid var(--cor-ouro);
-}
-.etapa::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -1px;
-  width: 0.6rem;
-  height: 1px;
-  background: var(--cor-ouro);
-}
-.etapa__numero {
-  display: block;
-  font-family: var(--fonte-titulo);
-  font-size: clamp(1.75rem, 1.5rem + 1vw, 2.5rem);
-  font-style: italic;
-  font-weight: 400;
-  line-height: 1;
-  color: var(--cor-ouro);
-}
-.etapa h3 {
-  margin-top: var(--espaco-3);
-  font-size: var(--texto-destaque);
-  font-weight: 450;
-}
-.etapa p {
-  margin-top: var(--espaco-2);
-  color: var(--cor-texto-suave);
-}
-
-/* ---------- Fechamento ---------- */
-.fechamento {
-  background: var(--cor-noite);
-  color: var(--cor-fundo);
-  --cor-foco: var(--cor-fundo);
-}
-.fechamento__conteudo {
-  padding-block: var(--espaco-9);
-  max-width: 40rem;
-}
-.fechamento h2 {
-  font-size: var(--texto-titulo);
-  font-weight: 340;
-}
-.fechamento p { margin-top: var(--espaco-4); }
-.fechamento__destaque {
-  font-family: var(--fonte-titulo);
-  font-style: italic;
-  color: var(--cor-ouro-claro);
-}
-.fechamento .botao--secundario { border-color: var(--cor-ouro-claro); color: var(--cor-fundo); }
-.fechamento .botao--secundario:hover { background: color-mix(in oklab, var(--cor-fundo) 12%, transparent); }
-.fechamento__acoes {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--espaco-3);
-  margin-top: var(--espaco-7);
-}
-
-/* ---------- Rodapé ---------- */
-.rodape { padding-block: var(--espaco-7); }
-.rodape .conteudo { display: grid; gap: var(--espaco-2); }
-.rodape p {
-  font-size: var(--texto-meta);
-  color: var(--cor-texto-suave);
-}
-.rodape [data-identificacao-creci] { color: var(--cor-texto); font-weight: 600; }
-.rodape a { color: var(--cor-marca); }
-
-/* ---------- Tablet ---------- */
-@media (min-width: 36rem) {
-  .entrada__grade { flex-direction: row-reverse; align-items: center; gap: var(--espaco-7); }
-  .entrada__texto { flex: 1.1; }
-  .entrada__retrato { flex: 0.9; order: 0; }
-}
-
-/* ---------- Desktop ---------- */
-@media (min-width: 60rem) {
-  .entrada__grade {
-    display: grid;
-    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
-    align-items: center;
-    gap: clamp(3rem, 6vw, 6rem);
-  }
-  .entrada__retrato { max-width: 24rem; justify-self: end; }
-  .retrato, .entrada__prancha { max-width: 24rem; }
-
-  .secao__cabeca { padding-top: var(--espaco-7); }
-
-  .caminhos { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; }
-  .caminho {
-    padding-top: 0;
-    padding-inline: var(--espaco-6);
-    border-top: none;
-    border-left: 1px solid var(--cor-linha);
-    display: flex;
-    flex-direction: column;
-  }
-  .caminho:first-child { padding-left: 0; border-left: none; }
-  .caminho .botao { margin-top: auto; }
-
-  .simulacao { grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: var(--espaco-8); }
-
-  .etapas {
-    grid-template-columns: repeat(5, minmax(0, 1fr));
-    gap: var(--espaco-5);
-  }
-  .etapa {
-    padding-left: 0;
-    padding-top: var(--espaco-5);
-    border-left: none;
-    border-top: 1px solid var(--cor-ouro);
-  }
-  .etapa::before {
-    top: -1px;
-    left: 0;
-    width: 1px;
-    height: 0.6rem;
-    background: var(--cor-ouro);
-  }
-
-  .fechamento__acoes { margin-top: var(--espaco-8); }
+@media (prefers-reduced-motion: reduce) {
+  .opcao__link { transition: none; }
+  .opcao__link:hover { transform: none; }
 }

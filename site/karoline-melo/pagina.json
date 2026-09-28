@@ -1,11 +1,32 @@
 {
-  "slug": "karoline-melo", "tipo": "imobiliario", "publicar": false, "atualizadoEm": "2026-09-27",
-  "corretor": { "nome": "Karoline Melo", "generoGramatical": "F", "titulo": "Consultora imobiliária",
-                "creci": { "uf": "BA", "numero": "36.265" }, "cnai": "58.909" },
+  "slug": "karoline-melo",
+  "tipo": "imobiliario",
+  "publicar": true,
+  "proposta": true,
+  "atualizadoEm": "2026-09-27",
+  "corretor": {
+    "nome": "Karoline Melo",
+    "generoGramatical": "F",
+    "titulo": "Consultora imobiliária",
+    "creci": {
+      "uf": "BA",
+      "numero": "36.265"
+    },
+    "cnai": "58.909"
+  },
   "resumo": "Karoline Melo, corretora de imóveis em Salvador. Simulação de crédito gratuita e orientação da primeira conversa às etapas da compra.",
-  "cidade": "Salvador", "uf": "BA",
-  "contato": { "whatsapp": "+5571996412384" },
-  "redes": { "instagram": "https://www.instagram.com/karolinemelo_imoveis/" },
+  "cidade": "Salvador",
+  "uf": "BA",
+  "contato": {
+    "whatsapp": "+5571996412384"
+  },
+  "redes": {
+    "instagram": "https://www.instagram.com/karolinemelo_imoveis/"
+  },
   "imagemSocial": "imagens/social.jpg",
-  "revisao": { "creciConferidoEm": "", "conferenciaCofeciEm": "", "aprovadoPelaCorretoraEm": "" }
+  "revisao": {
+    "creciConferidoEm": "",
+    "conferenciaCofeciEm": "2026-09-27",
+    "aprovadoPelaCorretoraEm": ""
+  }
 }
