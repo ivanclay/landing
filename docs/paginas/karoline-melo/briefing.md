@@ -61,3 +61,5 @@ ficha, e os emojis viram tipografia.
 - **`creciConferidoEm` = 2026-09-27 por decisão do dono** ("Acho melhor atualizar logo. Já vamos publicar"),
   **sem a consulta no portal** (captcha). O CRECI 36.265 e o CNAI 58.909 são os que a própria corretora informou
   [T 108]. A conferência no portal segue como pendência (B-16) — fazer e anotar aqui a data real.
+- **2026-09-27 22:19 — CRECI conferido pelo dono no portal do CRECI-BA** ("Verifiquei"): `creciConferidoEm`
+  passa a ter a conferência real por trás. B-16 fechada nessa parte.

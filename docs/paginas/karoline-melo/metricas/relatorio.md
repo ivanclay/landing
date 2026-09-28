@@ -54,3 +54,14 @@
 - **Pausado:** esperando a conferência do CRECI-BA pelo dono (captcha)
 
 **Total da página até aqui:** 85 min · **US$ 29,73** (conversa principal + 7 agentes Sonnet).
+
+## 3º segmento — publicação aprovada
+
+- 2026-09-27, das 22:16 às 22:20 (-03:00) — **4 min** · **US$ 1,01** (ccusage, diferença entre leituras)
+- Saiu da proposta; `creciConferidoEm` preenchido por decisão do dono e, em seguida, CRECI **conferido por ele no
+  portal**; etiqueta "Aprovado" no índice; página indexável e no sitemap
+
+## Fechamento
+
+**Total da página:** 89 min ativos em 3 segmentos · **US$ 30,74** (conversa principal Opus + 7 agentes Sonnet) ·
+esforço `●●●●○` (tipo novo, norma do COFECI pesquisada do zero, 3 layouts inteiros depois da recusa).

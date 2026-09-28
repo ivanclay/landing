@@ -1,10 +1,10 @@
 # Tabela de projetos — Landing (páginas de profissionais no GitHub Pages)
 
-> **Última atualização:** 2026-09-27 22:16 (UTC−03:00)
+> **Última atualização:** 2026-09-27 22:20 (UTC−03:00)
 > **Atualizado por:** Claude Opus 5.5 · Ivan C M Moura
 > **Referências:** perfil e regras em [`CLAUDE.md`](../CLAUDE.md) (§5 decisões abertas, §8 delegação e custo) · índice em [`indice.md`](indice.md) · registro por segmento em [`metricas/implementacoes.csv`](metricas/implementacoes.csv) · delegações em [`metricas/delegacoes.csv`](metricas/delegacoes.csv)
 
-**Resumo:** 1 em andamento (karoline-melo) · 6 realizadas · 0 pendentes · decisões abertas no `CLAUDE.md` §5 (D-01, D-03 a D-06)
+**Resumo:** 0 em andamento · 7 realizadas (karoline-melo aprovada e publicada) · 0 pendentes · decisões abertas no `CLAUDE.md` §5 (D-01, D-03 a D-06)
 
 ---
 
@@ -32,7 +32,7 @@
 
 | Projeto | O que é | Início | Branch | Modelo | Desenvolvedor | Modelo sugerido | Observação |
 |---|---|---|---|---|---|---|---|
-| `karoline-melo` | Corretora de imóveis real, Salvador (CRECI-BA 36.265) — tipo novo `imobiliario` (ADR-009) | 2026-09-27 20:31 | `ajuste/karoline-melo-aprovada` | Claude Opus 5.5 + Sonnet 5 ×7 | Ivan C M Moura | Claude Opus 5.5 (tipo novo + norma nova) | 1ª versão recusada ("muito simples", "marrom"); cliente escolheu a opção 3 e **aprovou** (4 ajustes); **falta o dono conferir o CRECI-BA** para publicar. **Parcial:** 85 min · US$ 29,73 (2 segmentos) |
+| — | nenhum agora | — | — | — | — | — | — |
 
 ## 2. Pendentes — **estimativa**
 
@@ -64,7 +64,6 @@ As delegações dos projetos anteriores: `emilia-kuwano` 3 tarefas (3 layouts, O
 
 | # | Encontrado em | Pendência ou lacuna | Destino |
 |---|---|---|---|
-| 1 | karoline-melo, briefing | Nome completo, região do CRECI (BA inferida do DDD 71) e CNAI ativo: a consulta pública do CRECI-BA recusou acesso automatizado | Dono confere no navegador antes de sair da proposta (B-16) |
 | 2 | karoline-melo, norma | Lei 6.530/1978 e CDC lidos de espelhos (planalto.gov.br recusou conexão) | Revalidar na fonte oficial (B-16) |
 | 3 | karoline-melo, conferência | Se ela atua por uma imobiliária, o CRECI-J pode ter de aparecer | Perguntar à corretora |
 | 4 | karoline-melo, QA | Leitor de tela (NVDA) e links de WhatsApp/Instagram num celular real não feitos | Antes de sair da proposta |
@@ -86,7 +85,8 @@ As delegações dos projetos anteriores: `emilia-kuwano` 3 tarefas (3 layouts, O
 | `s-frontdesk` · publicação | Página de pré-lançamento entregue pronta + rodapés em colunas | 2026-09-23 11:05 | `c28f4c8` | não confirmado | Ivan C M Moura | Claude Sonnet 5 | 5 min | — (só tempo) |
 | `emilia-kuwano` | Nutricionista real (ADR-008), 3 layouts, publicada como proposta | 2026-09-27 16:38 | `badba5b` | Claude Opus 5.5 + Opus 5.5 ×3 | Ivan C M Moura | Claude Opus 5.5 | 52 min (3 segmentos) | US$ 15,83 |
 | `emilia-kuwano` · ajuste | Aviso de proposta tirado da página (só a etiqueta do índice) | 2026-09-27 21:15 | `62d71e5` | Claude Opus 5.5 | Ivan C M Moura | Claude Sonnet 5 | — (dentro da sessão da karoline-melo) | — |
-| **Total** | **6 projetos + 1 ajuste** | | | | | | **158 min** | **US$ 54,83** |
+| `karoline-melo` | Corretora de imóveis real (ADR-009, tipo `imobiliario`), 3 layouts, opção 3 escolhida e **aprovada** pela cliente, com 4 ajustes; publicada fora da proposta | 2026-09-27 22:20 | `af8a67a` | Claude Opus 5.5 + Sonnet 5 ×7 | Ivan C M Moura | Claude Opus 5.5 | 89 min (3 segmentos) | US$ 30,74 |
+| **Total** | **7 projetos + 1 ajuste** | | | | | | **247 min** | **US$ 85,57** |
 
 Reproduzir: somar por `slug` as colunas `duracao_min` e `custo_usd` de `metricas/implementacoes.csv`.
 
@@ -100,7 +100,7 @@ Reproduzir: somar por `slug` as colunas `duracao_min` e `custo_usd` de `metricas
 | `indice` | ●●●○○ | índice novo |
 | `s-frontdesk` · publicação | ●○○○○ | página entregue pronta |
 | `emilia-kuwano` | ●●●●○ | tipo nutrição + 3 layouts inteiros |
-| `karoline-melo` (em andamento) | ●●●●○ | tipo imobiliário, norma do COFECI do zero, 3 layouts depois da recusa |
+| `karoline-melo` | ●●●●○ | tipo imobiliário, norma do COFECI do zero, 3 layouts depois da recusa |
 
 ---
 
@@ -132,3 +132,4 @@ Decisões que valem para **todos** os projetos: **D-01** (domínio próprio, ant
 | 2026-09-27 21:20 | Claude Opus 5.5 | Ivan C M Moura | Primeira versão da tabela de projetos da Landing, a pedido do dono: um projeto por página ou mudança com nome, tempo e custo do `ccusage` com a quebra por agente do `tokens-por-agente.mjs`, esforço em tabela separada, `delegacoes.csv` novo. Substitui o `metricas/projetos.md` (apagado). Realizadas reconstruídas do `implementacoes.csv` e do `git log`; `karoline-melo` em andamento. |
 | 2026-09-27 21:49 | Claude Opus 5.5 + Sonnet 5 ×7 | Ivan C M Moura | `karoline-melo`: 3 opções publicadas como proposta para a cliente escolher, com página de escolha e prévia (OG) própria por opção — a construção passou a gerar cabeçalho para outras páginas da pasta (1 teste). 1º segmento fechado: 78 min, US$ 26,90. Pendência 4 (QA) segue; Lighthouse das opções depois da escolha. |
 | 2026-09-27 22:16 | Claude Opus 5.5 | Ivan C M Moura | `karoline-melo`: a cliente escolheu a opção 3 e **aprovou**; 4 ajustes dela; `avaliador` no contrato; etiqueta "Aprovado" no índice. 2º segmento: 7 min, US$ 2,83 (total 85 min, US$ 29,73). Publicação travada até o dono conferir o CRECI-BA (captcha). |
+| 2026-09-27 22:20 | Claude Opus 5.5 | Ivan C M Moura | **`karoline-melo` realizada**: publicada aprovada (opção 3), CRECI conferido pelo dono no portal; B-16 fechada na parte do CRECI. Total 89 min, US$ 30,74. |
