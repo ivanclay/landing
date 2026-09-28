@@ -10,7 +10,8 @@ const RAIZ_DO_CODIGO = path.resolve(path.dirname(fileURLToPath(import.meta.url))
 export const SLUG = 'demo-teste';
 
 /** Monta o site de teste e devolve a raiz. `creditos: null` não grava o creditos-imagens.md. */
-async function montarSite({ pagina, html, creditos = null }) {
+// `extras`: outros arquivos da pasta da página, ex. { 'opcao-1.html': '<!doctype html>…' }.
+async function montarSite({ pagina, html, creditos = null, extras = {} }) {
   const raiz = await mkdtemp(path.join(tmpdir(), 'landing-teste-'));
   await cp(path.join(RAIZ_DO_CODIGO, 'site', 'assets'), path.join(raiz, 'site', 'assets'), { recursive: true });
   await cp(path.join(RAIZ_DO_CODIGO, 'site.config.json'), path.join(raiz, 'site.config.json'));
@@ -20,6 +21,7 @@ async function montarSite({ pagina, html, creditos = null }) {
   await writeFile(path.join(pasta, 'index.html'), html);
   await writeFile(path.join(pasta, 'imagens', 'retrato-480.jpg'), 'jpeg de teste');
   await writeFile(path.join(pasta, 'imagens', 'social.jpg'), 'jpeg de teste');
+  for (const [nome, conteudo] of Object.entries(extras)) await writeFile(path.join(pasta, nome), conteudo);
   const docs = path.join(raiz, 'docs', 'paginas', SLUG);
   await mkdir(docs, { recursive: true });
   await writeFile(path.join(docs, 'briefing.md'), '# Briefing de teste\n');

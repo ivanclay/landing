@@ -1,6 +1,6 @@
 # Tabela de projetos — Landing (páginas de profissionais no GitHub Pages)
 
-> **Última atualização:** 2026-09-27 21:20 (UTC−03:00)
+> **Última atualização:** 2026-09-27 21:49 (UTC−03:00)
 > **Atualizado por:** Claude Opus 5.5 · Ivan C M Moura
 > **Referências:** perfil e regras em [`CLAUDE.md`](../CLAUDE.md) (§5 decisões abertas, §8 delegação e custo) · índice em [`indice.md`](indice.md) · registro por segmento em [`metricas/implementacoes.csv`](metricas/implementacoes.csv) · delegações em [`metricas/delegacoes.csv`](metricas/delegacoes.csv)
 
@@ -32,7 +32,7 @@
 
 | Projeto | O que é | Início | Branch | Modelo | Desenvolvedor | Modelo sugerido | Observação |
 |---|---|---|---|---|---|---|---|
-| `karoline-melo` | Corretora de imóveis real, Salvador (CRECI-BA 36.265) — tipo novo `imobiliario` (ADR-009) | 2026-09-27 20:31 | `pagina/karoline-melo` | Claude Opus 5.5 + Sonnet 5 ×7 | Ivan C M Moura | Claude Opus 5.5 (tipo novo + norma nova) | 1ª versão recusada ("muito simples", "marrom"); 3 opções de layout em construção; sai como proposta, só etiqueta no índice. **Parcial:** ~50 min |
+| `karoline-melo` | Corretora de imóveis real, Salvador (CRECI-BA 36.265) — tipo novo `imobiliario` (ADR-009) | 2026-09-27 20:31 | `pagina/karoline-melo` | Claude Opus 5.5 + Sonnet 5 ×7 | Ivan C M Moura | Claude Opus 5.5 (tipo novo + norma nova) | 1ª versão recusada ("muito simples", "marrom"); **3 opções publicadas como proposta** (página de escolha + prévia própria por opção), **esperando a cliente escolher**. **Parcial:** 78 min · US$ 26,90 (1º segmento) |
 
 ## 2. Pendentes — **estimativa**
 
@@ -54,9 +54,9 @@ Nenhum projeto pedido e não começado.
 | Tipo `imobiliario` nas ferramentas (contrato, verificação, JSON-LD, 12 testes) | agente | Sonnet 5 | aceita; piso de termos revisto pelo coordenador |
 | Construir a 1ª versão da página | agente | Sonnet 5 | **devolvida pelo dono** ("muito simples", "marrom"); guardada como reserva (`8ccfe98`) |
 | Documentar o tipo (CLAUDE.md, índice, manuais, backlog) | agente | Sonnet 5 | aceita; número do backlog no ADR corrigido pelo coordenador |
-| Opção 1 — Atlântico escuro | agente | Sonnet 5 | em andamento |
-| Opção 2 — Galeria editorial clara | agente | Sonnet 5 | em andamento |
-| Opção 3 — Névoa azul em cartões | agente | Sonnet 5 | em andamento |
+| Opção 1 — Atlântico escuro | agente | Sonnet 5 | aceita; publicada para a escolha |
+| Opção 2 — Galeria editorial clara | agente | Sonnet 5 | aceita; publicada para a escolha |
+| Opção 3 — Névoa azul em cartões | agente | Sonnet 5 | aceita; margem da abertura corrigida pelo coordenador; publicada |
 
 As delegações dos projetos anteriores: `emilia-kuwano` 3 tarefas (3 layouts, Opus 5.5 — pela regra de hoje seriam Sonnet), no [relatório](paginas/emilia-kuwano/metricas/relatorio.md); `dr-paulo-de-tarso` e `hub-saude-negocios` tiveram agentes de coleta **não registrados** (antes da regra "o custo conta todos os agentes").
 
@@ -121,7 +121,7 @@ Decisões que valem para **todos** os projetos: **D-01** (domínio próprio, ant
 | Projetos realizados e medidos | 5 com custo (dr-paulo-de-tarso, hub-saude-negocios, arruda-seixas, indice, emilia-kuwano) |
 | Média por página nova com tipo novo | 3 páginas (hub, arruda, emilia): 116 min · US$ 40,00 → ~39 min e ~US$ 13,33 cada |
 | emilia-kuwano | 52 min · US$ 15,83 — os 3 agentes de layout em Opus (hoje seriam Sonnet) |
-| karoline-melo (parcial, até 21:20) | tokens: principal Opus + 7 agentes Sonnet, 252.545 de saída; custo em US$ no fechamento (`ccusage`, sessão `4a17a855…`) |
+| karoline-melo (1º segmento) | 78 min · US$ 26,90 — Sonnet 5 US$ 16,94 (7 agentes) · Opus 5.5 US$ 9,97 (`npx ccusage@latest session --json`, sessão `4a17a855…`) |
 
 ---
 
@@ -130,3 +130,4 @@ Decisões que valem para **todos** os projetos: **D-01** (domínio próprio, ant
 | Data e hora | Modelo | Desenvolvedor | O que mudou |
 |---|---|---|---|
 | 2026-09-27 21:20 | Claude Opus 5.5 | Ivan C M Moura | Primeira versão, adaptada da tabela de fatias do S-Checker a pedido do dono: projetos no lugar de fatias, página no lugar de tela, `ccusage` + `tokens-por-agente.mjs` como fonte, esforço em tabela separada, `delegacoes.csv` novo. Absorve o `metricas/projetos.md` (apagado). Realizadas reconstruídas do `implementacoes.csv` e do `git log`; `karoline-melo` em andamento. |
+| 2026-09-27 21:49 | Claude Opus 5.5 + Sonnet 5 ×7 | Ivan C M Moura | `karoline-melo`: 3 opções publicadas como proposta para a cliente escolher, com página de escolha e prévia (OG) própria por opção — a construção passou a gerar cabeçalho para outras páginas da pasta (1 teste). 1º segmento fechado: 78 min, US$ 26,90. Pendência 4 (QA) segue; Lighthouse das opções depois da escolha. |

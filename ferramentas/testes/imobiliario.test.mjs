@@ -154,3 +154,16 @@ test('demonstracao não se aplica a corretor de imóveis — reprova', async () 
     assert.match(resultado.stderr, /demonstracao não se aplica a corretor de imóveis/);
   });
 });
+
+// Opções de layout da proposta (opcao-N.html): cada uma com cabeçalho gerado próprio, para a prévia do link.
+test('outra página da pasta com o marcador ganha canonical e prévia próprios, sem JSON-LD', async () => {
+  const extras = { 'opcao-1.html': htmlImobiliario(), 'imagens/social-opcao-1.jpg': 'jpeg de teste' };
+  await comSite({ pagina: paginaProposta(), html: htmlImobiliario(), extras }, async (resultado, raiz) => {
+    assert.equal(resultado.status, 0, resultado.stderr + resultado.stdout);
+    const html = await readFile(path.join(raiz, '_site', SLUG, 'opcao-1.html'), 'utf8');
+    assert.match(html, new RegExp(`<link rel="canonical" href="[^"]*/${SLUG}/opcao-1\.html">`));
+    assert.match(html, /<meta property="og:image" content="[^"]*\/imagens\/social-opcao-1\.jpg/);
+    assert.match(html, /<meta name="robots" content="noindex, nofollow">/);
+    assert.doesNotMatch(html, /application\/ld\+json/);
+  });
+});

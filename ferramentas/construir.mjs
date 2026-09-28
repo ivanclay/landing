@@ -16,6 +16,7 @@ import {
 import { cabecalhoDaPagina, cabecalhoDoIndice, urlDaPagina } from './lib/seo.mjs';
 import { escaparHtml } from './lib/html.mjs';
 import { createHash } from 'node:crypto';
+import { readdir } from 'node:fs/promises';
 
 const MARCADOR_CABECALHO = '<!-- @gerado:cabecalho -->';
 const MARCADOR_DEMONSTRACOES = '<!-- @gerado:demonstracoes -->';
@@ -87,8 +88,19 @@ async function construirPagina(pasta, config) {
   if (!existsSync(arquivoHtml)) return { erros: ['sem index.html'] };
   const html = await readFile(arquivoHtml, 'utf8');
   if (!html.includes(MARCADOR_CABECALHO)) return { erros: [`index.html sem o marcador ${MARCADOR_CABECALHO} no <head>`] };
-  const cabecalho = cabecalhoDaPagina(pagina, config, { rascunho: !pagina.publicar, versaoImagem: await versaoDoArquivo(path.join(origem, pagina.imagemSocial ?? '')) });
-  await writeFile(arquivoHtml, await versionarRecursos(html.replace(MARCADOR_CABECALHO, cabecalho), origem));
+  const opcoes = { rascunho: !pagina.publicar, versaoImagem: await versaoDoArquivo(path.join(origem, pagina.imagemSocial ?? '')) };
+  await writeFile(arquivoHtml, await versionarRecursos(html.replace(MARCADOR_CABECALHO, cabecalhoDaPagina(pagina, config, opcoes)), origem));
+  // Outras páginas da pasta com o marcador (ex. opções de layout de uma proposta) ganham o próprio cabeçalho.
+  for (const arquivo of (await readdir(destino)).filter((nome) => nome.endsWith('.html') && nome !== 'index.html')) {
+    const outro = await readFile(path.join(destino, arquivo), 'utf8');
+    if (!outro.includes(MARCADOR_CABECALHO)) continue;
+    // Com imagens/social-<nome>.jpg, a prévia do link mostra aquela página; senão, a imagem social da página.
+    const imagemPropria = `imagens/social-${path.basename(arquivo, '.html')}.jpg`;
+    const imagemSocial = existsSync(path.join(origem, imagemPropria)) ? imagemPropria : pagina.imagemSocial;
+    const cabecalho = cabecalhoDaPagina({ ...pagina, imagemSocial }, config,
+      { ...opcoes, arquivo, versaoImagem: await versaoDoArquivo(path.join(origem, imagemSocial ?? '')) });
+    await writeFile(path.join(destino, arquivo), await versionarRecursos(outro.replace(MARCADOR_CABECALHO, cabecalho), origem));
+  }
   return { erros: [], pagina };
 }
 

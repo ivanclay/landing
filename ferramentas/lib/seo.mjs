@@ -10,9 +10,13 @@ export function urlDaPagina(config, slug) {
   return new URL(`${slug}/`, config.urlBase).href;
 }
 
-/** O bloco que substitui <!-- @gerado:cabecalho --> numa página de médico. */
-export function cabecalhoDaPagina(pagina, config, { rascunho = false, versaoImagem = '' } = {}) {
-  const url = urlDaPagina(config, pagina.slug);
+/**
+ * O bloco que substitui <!-- @gerado:cabecalho --> numa página. `arquivo`: outra página HTML da mesma pasta
+ * (ex. as opções de layout de uma proposta, "opcao-1.html"), que ganha canonical, og:url e prévia com o
+ * próprio endereço, sem JSON-LD: a ficha da pessoa ou do negócio já está no index.html.
+ */
+export function cabecalhoDaPagina(pagina, config, { rascunho = false, versaoImagem = '', arquivo = '' } = {}) {
+  const url = new URL(arquivo, urlDaPagina(config, pagina.slug)).href;
   const linhas = [
     `<link rel="canonical" href="${escaparHtml(url)}">`,
     `<meta property="og:url" content="${escaparHtml(url)}">`,
@@ -25,7 +29,7 @@ export function cabecalhoDaPagina(pagina, config, { rascunho = false, versaoImag
   }
   // Rascunho, demonstração e proposta nunca vão para o Google — as duas últimas nem publicadas (ADR-004, ADR-005).
   if (rascunho || soPorLinkDireto(pagina)) linhas.push('<meta name="robots" content="noindex, nofollow">');
-  linhas.push(`<script type="application/ld+json">${JSON.stringify(dadosEstruturados(pagina, url, versaoImagem))}</script>`);
+  if (!arquivo) linhas.push(`<script type="application/ld+json">${JSON.stringify(dadosEstruturados(pagina, url, versaoImagem))}</script>`);
   return linhas.join('\n    ');
 }
 
