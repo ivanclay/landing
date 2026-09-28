@@ -11,7 +11,7 @@
   conferência COFECI, plano de arte; 1ª versão (recusada: "muito simples", "marrom"); recorte da foto sentada sem
   o ring light; 3 opções de layout; página de escolha; OG e prévia próprios por opção (construção + 1 teste);
   Lighthouse da 1ª versão (troca da Newsreader, LCP 3,0 → 2,1 s). No mesmo segmento, fora da página: aviso de
-  proposta tirado da emilia-kuwano (emenda do ADR-008) e a `tabela-projetos.md` adaptada do S-Checker
+  proposta tirado da emilia-kuwano (emenda do ADR-008) e a primeira versão da `tabela-projetos.md`
 - **Pausado:** esperando a cliente escolher a opção
 
 ## Quem fez o quê
