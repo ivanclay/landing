@@ -25,3 +25,11 @@ Quando o dono trouxer as respostas: atualizar `briefing.md` (fonte = mensagem da
 
 ## Arquivos
 `site/hub-saude-negocios/` · `docs/paginas/hub-saude-negocios/` · originais em `entrada/hub-saude-negocios/` (fora do git).
+
+## 2026-09-28 — três opções para a seção de clientes
+- A Carla pediu os logotipos dos clientes; o dono considerou as autorizações como do Hub (`autorizacoes.md`).
+- No ar, **sem mexer na página principal**: `clientes.html` (escolha) → `clientes-1.html` (placas por setor),
+  `clientes-2.html` (mural em cinza), `clientes-3.html` (faixa em movimento). Estilos em `clientes.css`;
+  logotipos em `imagens/marcas/`; token `--cor-vitrine` no `tema.css`.
+- **Próximo passo:** com a escolha, levar a seção e o CSS da opção para `index.html`/`pagina.css`, ajustar a
+  frase do rodapé ("sem logotipo" → titulares), apagar `clientes*.html`, `clientes.css` e as miniaturas.

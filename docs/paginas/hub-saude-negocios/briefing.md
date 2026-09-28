@@ -45,7 +45,7 @@ Página antiga (id 13): `https://hubsaudenegocios.com.br/landing-page-hubsaudene
   - **FIDI**, **L2D**, **TL2**, **IQG**: classificados pelo nome — **confirmar**.
 - O site não diz **o que** foi feito com cada organização nem **quando**: a página diz "com quem já
   trabalhamos", sem "case de sucesso" (não há case descrito).
-- Logotipos das organizações: **dentro** desde 2026-09-28 — autorização considerada do Hub (já os exibe no site oficial), decisão do dono — `autorizacoes.md`.
+- Logotipos das organizações: autorização considerada do Hub (já os exibe no site oficial), decisão do dono em 2026-09-28 — `autorizacoes.md`. Por enquanto só nas três opções em `clientes.html` (clientes-1, -2, -3); o `index.html` segue com os nomes até o Hub escolher.
 - O texto "Sobre" é da Carla, em primeira pessoa, mantido quase literal.
 
 ## Perguntas para o Hub (antes de aprovar)
