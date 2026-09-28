@@ -60,7 +60,8 @@ Anuncie o plano, o que pula e por quê. Espere o "segue".
 ## Registro do projeto — agentes, tempo e esforço (pedido do dono, 2026-09-27)
 Todo projeto (uma página, ou uma mudança com nome) é **anotado do começo ao fim**, sem exceção:
 1. **Ao receber o pedido**, antes de ler a entrada: `registro-implementacao-landing` modo `inicio` (grava o
-   snapshot com a hora e a sessão). Sessão dedicada ao projeto = tokens exatos.
+   snapshot com a hora e a sessão) e abre a linha do projeto em **Em andamento** na `docs/tabela-projetos.md`.
+   Sessão dedicada ao projeto = tokens exatos.
 2. **A cada agente lançado**: `description` curta e com o que ele faz (é o que aparece na tabela "quem fez o
    quê") e `model` explícito (§8 do `CLAUDE.md`).
 3. **No fim** (ou a cada entrega ao dono): modo `fim` (ou `pausar`). O relatório
@@ -75,7 +76,7 @@ Todo projeto (uma página, ou uma mudança com nome) é **anotado do começo ao 
    | `●●●●○` | tipo novo **e** opções/redesenho, ou página que precisou de pesquisa de norma do zero |
    | `●●●●●` | mudança transversal (`site/assets/` ou `ferramentas/`) com QA de todas as páginas |
 
-4. Acrescenta (ou atualiza) a linha do projeto em **`docs/metricas/projetos.md`**: o consolidado de todos os
+4. Atualiza **`docs/tabela-projetos.md`** (cabeçalho, seção do projeto, histórico — as regras de manutenção estão no topo dela) e uma linha por agente em **`docs/metricas/delegacoes.csv`**: o consolidado de todos os
    segmentos e sessões do projeto (tempo, custo, agentes por modelo, esforço). É a tabela que o dono lê para
    comparar projetos; o CSV continua sendo o registro por segmento.
 

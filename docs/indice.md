@@ -4,7 +4,7 @@
 - **Manuais:** [operador](manual/manual-operador.md) (pedir, aprovar e publicar uma página) ·
   [desenvolvedor](manual/manual-desenvolvedor.md) (ferramentas, contrato, workflows)
 - **Decisões:** [ADRs](decisoes/adr/) · [backlog](decisoes/backlog.md)
-- **Métricas:** [`metricas/implementacoes.csv`](metricas/implementacoes.csv) · [`metricas/projetos.md`](metricas/projetos.md) (consolidado por projeto)
+- **Métricas:** [`metricas/implementacoes.csv`](metricas/implementacoes.csv) · [`tabela-projetos.md`](tabela-projetos.md) (projetos: em andamento, realizadas, agentes, tempo, custo, esforço) · [`metricas/delegacoes.csv`](metricas/delegacoes.csv)
 
 ## Estado do projeto
 

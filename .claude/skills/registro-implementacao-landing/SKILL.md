@@ -36,7 +36,7 @@ O snapshot `docs/paginas/<slug>/metricas/.registro-snapshot.json` (ou `docs/metr
 2. Resultado: `tempo_ativo` total (soma dos segmentos, sem pausas) e `tokens_ativos` total. Custo idem.
 3. Sem ccusage em algum segmento: pede `/cost` colado (origem `cost-manual`) ou registra `so-tempo`.
 4. Anexa uma linha em `docs/metricas/implementacoes.csv` e **gera o relatório** em `docs/paginas/<slug>/metricas/relatorio.md`.
-5. Atualiza a linha do projeto em **`docs/metricas/projetos.md`** (consolidado por projeto: soma de todos os
+5. Atualiza a linha do projeto em **`docs/tabela-projetos.md`** (seção 5 Realizadas, e o esforço em tabela à parte; soma de todos os
    segmentos do CSV com o mesmo slug, agentes por modelo, esforço em bolinhas pela escala do
    `techlead-landing`). Medido (tempo, custo) e estimado (esforço) ficam em colunas separadas e rotuladas.
 6. Remove o snapshot.

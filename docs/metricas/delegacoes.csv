@@ -1,0 +1,11 @@
+data,projeto,tarefa,executor,modelo,resultado,tentativas,observacao
+2026-09-27,emilia-kuwano,Layout 1: editorial claro,agente a4b4d93b,claude-opus-5-5,descartada (dono escolheu a 3),1,
+2026-09-27,emilia-kuwano,Layout 2: cartao simetrico,agente ab429b9a,claude-opus-5-5,descartada (dono escolheu a 3),1,passos desalinhados corrigidos pelo coordenador
+2026-09-27,emilia-kuwano,Layout 3: tela dividida escura,agente a8309b8a,claude-opus-5-5,aceita (escolhida),1,
+2026-09-27,karoline-melo,Pesquisar norma COFECI publicidade,agente a57c601e,claude-sonnet-5,aceita,1,consulta do CRECI-BA recusou acesso automatizado
+2026-09-27,karoline-melo,Tipo imobiliario nas ferramentas,agente a2d1ffbb,claude-sonnet-5,aceita,1,piso de termos revisto pelo coordenador
+2026-09-27,karoline-melo,Construir pagina karoline-melo (1a versao),agente a04bc44c,claude-sonnet-5,devolvida pelo dono,1,"muito simples" e "marrom"; guardada como reserva (8ccfe98); celular e LCP corrigidos pelo coordenador
+2026-09-27,karoline-melo,Documentar tipo imobiliario,agente a5934012,claude-sonnet-5,aceita,1,numero do backlog no ADR-009 corrigido pelo coordenador
+2026-09-27,karoline-melo,Opcao 1: Atlantico escuro,agente ab785f33,claude-sonnet-5,em andamento,1,
+2026-09-27,karoline-melo,Opcao 2: Galeria editorial clara,agente a7fad595,claude-sonnet-5,em andamento,1,
+2026-09-27,karoline-melo,Opcao 3: Nevoa azul em cartoes,agente ae5ba0c0,claude-sonnet-5,em andamento,1,
