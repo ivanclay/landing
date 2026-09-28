@@ -1,12 +1,14 @@
 // O contrato do pagina.json: o que toda página precisa declarar para ser construída e publicada.
 // Cada mensagem cita a regra do CLAUDE.md (ou o ADR) que ela garante.
 //
-// Quatro tipos de página: "medico" (o padrão — identificação do CFM, regras 2 a 4), "negocio" (empresa ou
+// Cinco tipos de página: "medico" (o padrão — identificação do CFM, regras 2 a 4), "negocio" (empresa ou
 // consultoria de saúde, sem CRM — ADR-005), "advocacia" (sociedade de advogados: identificação da OAB e
-// Provimento 205/2021 no lugar do CFM — ADR-006) e "nutricao" (nutricionista: identificação do CRN e
-// Código de Ética do Nutricionista, Res. CFN 599/2018, no lugar do CFM — ADR-008). Dois modos que só abrem por link direto: "demonstracao"
-// (médico ou escritório fictício, ADR-004 e ADR-006) e "proposta" (site de um negócio real ainda sem
-// aprovação, ADR-005).
+// Provimento 205/2021 no lugar do CFM — ADR-006), "nutricao" (nutricionista: identificação do CRN e
+// Código de Ética do Nutricionista, Res. CFN 599/2018, no lugar do CFM — ADR-008) e "imobiliario"
+// (corretor(a) de imóveis: identificação do CRECI e Código de Ética do COFECI, Res. COFECI 326/1992, no
+// lugar do CFM — ADR-009). Dois modos que só abrem por link direto: "demonstracao"
+// (médico ou escritório fictício, ADR-004 e ADR-006) e "proposta" (site de um negócio, nutricionista ou
+// corretora real ainda sem aprovação, ADR-005, ADR-008 e ADR-009).
 
 import { normalizar } from './html.mjs';
 
@@ -18,6 +20,10 @@ const SO_DIGITOS = /^\d+$/;
 const FORMATO_OAB = /^\d{1,3}(?:\.\d{3})*(?:-[A-Z])?$/;
 // Inscrição no CRN: só dígitos, com "/P" na inscrição provisória. A região é o número do Regional (1 a 11).
 const FORMATO_CRN = /^\d+(?:\/P)?$/;
+// Inscrição no CRECI como a página mostra ("36.265"), com "-F" (pessoa física) ou "-J" (pessoa jurídica).
+const FORMATO_CRECI = /^\d{1,3}(?:\.\d{3})*(?:-[FJ])?$/;
+// CNAI (Cadastro Nacional de Avaliadores Imobiliários): mesmo formato do CRECI, sem a letra.
+const FORMATO_CNAI = /^\d{1,3}(?:\.\d{3})*$/;
 const PENDENTE = 'PENDENTE';
 export const UFS = ['AC', 'AL', 'AP', 'AM', 'BA', 'CE', 'DF', 'ES', 'GO', 'MA', 'MT', 'MS', 'MG', 'PA', 'PB',
   'PR', 'PE', 'PI', 'RJ', 'RN', 'RS', 'RO', 'RR', 'SC', 'SP', 'SE', 'TO'];
@@ -34,8 +40,8 @@ export function validarPagina(pagina, pasta) {
     'slug ausente ou fora do formato (minúsculas, dígitos e hífen; sem acento) — regra 7');
   exigir(pagina.slug === pasta, `slug "${pagina.slug}" diferente da pasta "${pasta}" — regra 7`);
   exigir(typeof pagina.publicar === 'boolean', 'publicar precisa ser true ou false');
-  exigir([undefined, 'medico', 'negocio', 'advocacia', 'nutricao'].includes(pagina.tipo),
-    'tipo deve ser "medico" (padrão), "negocio" (ADR-005), "advocacia" (ADR-006) ou "nutricao" (ADR-008)');
+  exigir([undefined, 'medico', 'negocio', 'advocacia', 'nutricao', 'imobiliario'].includes(pagina.tipo),
+    'tipo deve ser "medico" (padrão), "negocio" (ADR-005), "advocacia" (ADR-006), "nutricao" (ADR-008) ou "imobiliario" (ADR-009)');
   for (const [modo, adr] of [['demonstracao', 'ADR-004'], ['proposta', 'ADR-005']]) {
     exigir(pagina[modo] === undefined || typeof pagina[modo] === 'boolean', `${modo}, se existir, precisa ser true ou false — ${adr}`);
   }
@@ -43,6 +49,7 @@ export function validarPagina(pagina, pasta) {
   if (ehNegocio(pagina)) validarNegocio(pagina, exigir);
   else if (ehAdvocacia(pagina)) validarAdvocacia(pagina, exigir);
   else if (ehNutricao(pagina)) validarNutricao(pagina, exigir);
+  else if (ehImobiliario(pagina)) validarImobiliario(pagina, exigir);
   else validarMedico(pagina, exigir);
 
   exigir(texto(pagina.resumo) && pagina.resumo.length >= 50 && pagina.resumo.length <= 160,
@@ -61,6 +68,7 @@ export function validarPagina(pagina, pasta) {
     if (ehNegocio(pagina)) exigirRevisaoDeNegocio(pagina, exigir);
     else if (ehAdvocacia(pagina)) exigirRevisaoDeAdvocacia(pagina, exigir);
     else if (ehNutricao(pagina)) exigirRevisaoDeNutricao(pagina, exigir);
+    else if (ehImobiliario(pagina)) exigirRevisaoDeImobiliario(pagina, exigir);
     else exigirRevisaoDeMedico(pagina, exigir);
   }
   return erros;
@@ -160,6 +168,49 @@ export function inscricaoCrn(pagina) {
   return crn === PENDENTE ? `CRN ${PENDENTE}` : `CRN-${crn.regiao} ${crn.numero}`;
 }
 
+/**
+ * Corretor(a) de imóveis (ADR-009): nome, o gênero gramatical (decide "Corretor de Imóveis" ou "Corretora
+ * de Imóveis") e a inscrição no CRECI da jurisdição (Lei 6.530/1978, art. 3º; Res. COFECI 326/1992). Enquanto
+ * o número não chega, `creci: "PENDENTE"` deixa construir o rascunho para ver no navegador — a página mostra
+ * "CRECI PENDENTE" e o verificar.mjs reprova (regra 1); publicar recusa.
+ */
+function validarImobiliario(pagina, exigir) {
+  const corretor = pagina.corretor ?? {};
+  exigir(texto(corretor.nome), 'corretor.nome ausente — regra 2 (ADR-009)');
+  exigir(['M', 'F'].includes(corretor.generoGramatical),
+    'corretor.generoGramatical deve ser "M" ou "F" (decide "Corretor de Imóveis" ou "Corretora de Imóveis") — ADR-009');
+  if (corretor.titulo !== undefined) exigir(texto(corretor.titulo), 'corretor.titulo, se existir, precisa ser texto');
+  const { creci } = corretor;
+  if (creci === PENDENTE) {
+    exigir(pagina.publicar !== true, 'corretor.creci PENDENTE: sem a inscrição no CRECI a página não publica — regra 2 (ADR-009)');
+  } else {
+    exigir(UFS.includes(creci?.uf), 'corretor.creci.uf inválida — regra 2 (ADR-009)');
+    exigir(FORMATO_CRECI.test(creci?.numero ?? ''),
+      'corretor.creci.numero fora do formato ("36.265" ou "36.265-F") — regra 2 (ADR-009)');
+  }
+  if (corretor.cnai !== undefined) {
+    exigir(FORMATO_CNAI.test(corretor.cnai ?? ''), 'corretor.cnai fora do formato ("58.909") — ADR-009');
+  }
+  // A cidade aparece no índice; sem fonte, fica de fora (regra 1) — por isso não é obrigatória aqui.
+  if (pagina.uf !== undefined) exigir(UFS.includes(pagina.uf), 'uf inválida');
+  if (pagina.redes?.instagram !== undefined) {
+    exigir(texto(pagina.redes.instagram) && pagina.redes.instagram.startsWith('https://www.instagram.com/'),
+      'redes.instagram, se existir, precisa começar com https://www.instagram.com/');
+  }
+  exigir(!ehDemonstracao(pagina), 'demonstracao não se aplica a corretor de imóveis: a página é de uma profissional real (ADR-009)');
+}
+
+/** "CRECI-BA 36.265": como a inscrição aparece na página e no JSON-LD (ADR-009). */
+export function inscricaoCreci(pagina) {
+  const { creci } = pagina.corretor;
+  return creci === PENDENTE ? `CRECI ${PENDENTE}` : `CRECI-${creci.uf} ${creci.numero}`;
+}
+
+/** "Corretora de Imóveis" ou "Corretor de Imóveis" (Lei 6.530/1978, art. 3º) — ADR-009. */
+export function profissaoCorretor(pagina) {
+  return pagina.corretor.generoGramatical === 'F' ? 'Corretora de Imóveis' : 'Corretor de Imóveis';
+}
+
 /** Página de negócio (empresa, consultoria): sem CRM; o nome e, na proposta, o site oficial (ADR-005). */
 function validarNegocio(pagina, exigir) {
   exigir(texto(pagina.organizacao?.nome), 'organizacao.nome ausente — ADR-005');
@@ -215,6 +266,19 @@ function exigirRevisaoDeNutricao(pagina, exigir) {
     'revisao.aprovadoPelaNutricionistaEm ausente: a página só publica com a aprovação da nutricionista — regra 4 (ADR-008)');
 }
 
+function exigirRevisaoDeImobiliario(pagina, exigir) {
+  const revisao = pagina.revisao ?? {};
+  // A proposta vai ao ar antes da aprovação da corretora, como na nutricionista (ADR-009, espelha a
+  // emenda do ADR-008). A norma continua conferida.
+  exigir(FORMATO_DATA.test(revisao.conferenciaCofeciEm ?? ''),
+    'revisao.conferenciaCofeciEm ausente: a conferência pelo Código de Ética do COFECI não foi feita — regra 3 (ADR-009)');
+  if (ehProposta(pagina)) return;
+  exigir(FORMATO_DATA.test(revisao.creciConferidoEm ?? ''),
+    'revisao.creciConferidoEm ausente: inscrição conferida no CRECI da jurisdição antes de publicar — regra 4 (ADR-009)');
+  exigir(FORMATO_DATA.test(revisao.aprovadoPelaCorretoraEm ?? ''),
+    'revisao.aprovadoPelaCorretoraEm ausente: a página só publica com a aprovação da corretora ou do corretor — regra 4 (ADR-009)');
+}
+
 function exigirRevisaoDeNegocio(pagina, exigir) {
   // A proposta, por definição, ainda não foi aprovada: vai ao ar só por link, com o aviso (ADR-005).
   if (ehProposta(pagina)) return;
@@ -226,6 +290,7 @@ export function nomeDeExibicao(pagina) {
   if (ehNegocio(pagina)) return pagina.organizacao.nome;
   if (ehAdvocacia(pagina)) return pagina.sociedade.nome;
   if (ehNutricao(pagina)) return pagina.nutricionista.nome;
+  if (ehImobiliario(pagina)) return pagina.corretor.nome;
   const { tratamento, nome } = pagina.medico;
   return tratamento ? `${tratamento} ${nome}` : nome;
 }
@@ -250,11 +315,17 @@ export function ehNutricao(pagina) {
   return pagina.tipo === 'nutricao';
 }
 
+/** Página de corretor(a) de imóveis: CRECI e Código de Ética do COFECI no lugar do CFM (ADR-009). */
+export function ehImobiliario(pagina) {
+  return pagina.tipo === 'imobiliario';
+}
+
 /** O que a página anuncia, numa linha: as especialidades do médico, a categoria do negócio ou do escritório. */
 export function assuntoDaPagina(pagina) {
   if (ehNegocio(pagina)) return pagina.organizacao.categoria ?? '';
   if (ehAdvocacia(pagina)) return pagina.sociedade.categoria ?? 'Advocacia';
   if (ehNutricao(pagina)) return (pagina.nutricionista.areas ?? []).join(', ') || 'Nutrição';
+  if (ehImobiliario(pagina)) return pagina.corretor.titulo ?? profissaoCorretor(pagina);
   return (pagina.medico.especialidades ?? []).map((e) => e.nome).join(', ');
 }
 
@@ -264,8 +335,9 @@ export function ehDemonstracao(pagina) {
 }
 
 /**
- * Proposta: página de um negócio (ADR-005) ou de uma nutricionista (ADR-008) real, ainda sem aprovação —
- * noindex, fora do sitemap, no índice com a etiqueta "Proposta · em avaliação".
+ * Proposta: página de um negócio (ADR-005), de uma nutricionista (ADR-008) ou de uma corretora de imóveis
+ * (ADR-009) real, ainda sem aprovação — noindex, fora do sitemap, no índice com a etiqueta "Proposta · em
+ * avaliação".
  */
 export function ehProposta(pagina) {
   return pagina.proposta === true;
@@ -292,6 +364,11 @@ export function avisoDeProposta(pagina) {
   // Nutricionista sem site oficial: o aviso diz que a página ainda não foi aprovada por ela (ADR-008).
   if (ehNutricao(pagina) && !pagina.siteOficial) {
     return `Proposta de página para ${nomeDeExibicao(pagina)}, em avaliação pela nutricionista.`;
+  }
+  // Corretor(a) de imóveis sem site oficial: idem, com o gênero gramatical certo (ADR-009).
+  if (ehImobiliario(pagina) && !pagina.siteOficial) {
+    const quem = pagina.corretor.generoGramatical === 'F' ? 'pela corretora' : 'pelo corretor';
+    return `Proposta de página para ${nomeDeExibicao(pagina)}, em avaliação ${quem}.`;
   }
   const oficial = new URL(pagina.siteOficial).hostname.replace(/^www\./, '');
   return `Proposta de novo site para ${nomeDeExibicao(pagina)}, em avaliação. Este não é o site oficial: `

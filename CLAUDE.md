@@ -218,7 +218,8 @@ gerado, índice, sitemap, conferências) cabe em duas ferramentas sem dependênc
 
 **Estado:** repositório aberto em 2026-09-22 com a fundação: ferramentas, CI, índice vazio, time de
 skills. Nenhuma página de cliente publicada; três demonstrações/propostas no ar só por link
-(`dr-paulo-de-tarso`, `hub-saude-negocios`, `arruda-seixas`).
+(`dr-paulo-de-tarso`, `hub-saude-negocios`, `arruda-seixas`); `karoline-melo` em rascunho, aguardando
+a aprovação do dono.
 
 ⌗ **Além de médicos** (ADR-005, ADR-006): `"tipo": "negocio"` para empresa de saúde sem CRM, e
 `"tipo": "advocacia"` para sociedade de advogados. Numa página de advocacia, as regras 2 e 3 leem-se com
@@ -231,6 +232,11 @@ diferente do médico, **sem preço de consulta** (art. 57); a regra 4 vira `crnC
 `aprovadoPelaNutricionistaEm`. Por decisão do dono, a nutricionista pode ir ao ar antes de aprovar como
 **proposta** (`"proposta": true`, noindex, etiqueta "Proposta · em avaliação" e aviso no topo), como o negócio do
 ADR-005 — só com a conferência CFN feita.
+⌗ **Corretor(a) de imóveis** (ADR-009): `"tipo": "imobiliario"` — CRECI no lugar do CRM/RQE
+(`data-identificacao-creci`), Lei 6.530/1978, Res. COFECI 458/1995 e Código de Ética (Res. COFECI
+326/1992) no lugar da Res. CFM 2.336/2023 (`conferencia-cofeci.md`, `termos-vedados-cofeci.json`); a
+página anuncia a profissional, não imóveis; a regra 4 vira `creciConferidoEm` + `conferenciaCofeciEm` +
+`aprovadoPelaCorretoraEm`; `proposta: true` vale desde o início.
 
 ### Decisões abertas
 

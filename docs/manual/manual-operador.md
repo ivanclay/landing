@@ -149,6 +149,32 @@ Nutricionista não tem CRM: tem **CRN**, e a norma é o **Código de Ética do N
   Fica fora do Google e do sitemap, e no índice aparece com a etiqueta "Proposta · em avaliação". Quando ela
   aprovar: preencha as duas datas que faltam, tire `proposta` e o aviso — a página passa a ser indexada.
 
+## Página de corretor(a) de imóveis
+
+Corretor(a) de imóveis não tem CRM: tem **CRECI**, e a norma é a **Lei 6.530/1978** e o **Código de Ética
+dos Corretores de Imóveis** (Res. COFECI 326/1992), com a Res. COFECI 458/1995 sobre o que o anúncio precisa
+trazer — [ADR-009](../decisoes/adr/ADR-009-pagina-de-corretor-de-imoveis.md). Primeira: `karoline-melo`.
+
+- **O que pedir:** nome completo, **CRECI com a UF** (e a letra "F" ou "J", se for o caso), o **CNAI**
+  (Cadastro Nacional de Avaliadores Imobiliários) se ela tiver, e se atua por conta própria ou por uma
+  **imobiliária** — nesse caso, o CRECI-J da imobiliária também pode precisar aparecer no anúncio.
+- **A página anuncia a profissional, não imóveis.** Nada de foto, preço ou endereço de imóvel à venda ou
+  para alugar: isso exige contrato escrito de intermediação com o proprietário (e, em loteamento ou
+  incorporação, o número do registro) — é um pedido à parte, com ADR próprio.
+- **Identificação obrigatória:** nome, "Corretor de Imóveis" ou "Corretora de Imóveis" e a inscrição
+  (`CRECI-BA 36.265`). Sem o número, a página constrói para a prévia mas não passa na verificação.
+- **Fora, sempre:** garantia de aprovação de crédito, de retorno ou de valorização do imóvel; "nome sujo",
+  "sem consulta ao SPC/Serasa"; superlativo ("a melhor corretora", "nº 1"); pressão de urgência ("últimas
+  unidades", "ainda hoje", "imperdível").
+- **Para publicar:** inscrição conferida no CRECI da jurisdição (`creciConferidoEm`), conferência COFECI
+  (`conferenciaCofeciEm`) e a aprovação da corretora ou do corretor por escrito (`aprovadoPelaCorretoraEm`).
+- **Para mostrar antes de aprovar:** publique como **proposta** (`"proposta": true` + o aviso no topo,
+  desde o início — diferente da nutricionista, não é preciso esperar um segundo pedido). Fica fora do
+  Google e do sitemap, e no índice aparece com a etiqueta "Proposta · em avaliação". Quando ela aprovar:
+  preencha as duas datas que faltam, tire `proposta` e o aviso.
+- Ainda não há skill de conferência do COFECI: a conferência é feita pelo tech lead contra os textos das
+  normas (backlog B-13).
+
 ## Proposta de site para um negócio (não médico)
 
 Para refazer o site de uma empresa de saúde (consultoria, hub) antes da aprovação do dono

@@ -36,10 +36,11 @@ Confere o que está em `_site/`. **Erro** reprova (exit 1); **aviso** é impress
 | Recurso de fora (`http…`, `//…`, `data:`) ou caminho absoluto `/…` | erro (exceto `404.html` com a URL base) |
 | Arquivo referenciado inexistente (HTML e `url()` do CSS) | erro |
 | Links: só `https:`, `tel:`, `mailto:`; `_blank` com `noopener` | erro |
-| Termos de `ferramentas/regras/termos-vedados.json` (CFM; em página de advocacia, `termos-vedados-oab.json`; de nutricionista, `termos-vedados-cfn.json`) | erro ou aviso, conforme o termo |
+| Termos de `ferramentas/regras/termos-vedados.json` (CFM; em página de advocacia, `termos-vedados-oab.json`; de nutricionista, `termos-vedados-cfn.json`; de corretor(a) de imóveis, `termos-vedados-cofeci.json`) | erro ou aviso, conforme o termo |
 | `PENDENTE`, `DESCREVA A IMAGEM`, `{{`, `TODO`, `XXX`, lorem ipsum | erro |
 | `data-identificacao-cfm` com nome, Médico/Médica, `CRM-UF` e número, cada especialidade e `RQE n` | erro |
 | Advocacia: `data-identificacao-oab` com a razão social, `OAB/UF número` de cada registro da sociedade e cada sócio administrador com a inscrição; todo advogado do `pagina.json` com a inscrição em algum ponto da página | erro |
+| Corretor(a) de imóveis: `data-identificacao-creci` com o nome, a profissão ("Corretor de Imóveis" ou "Corretora de Imóveis") e `CRECI-UF número` | erro |
 | `docs/paginas/<slug>/briefing.md` existe (página publicada) | erro |
 | Imagem > 250 KB; pasta > 900 KB | aviso |
 
@@ -108,6 +109,22 @@ texto de `avisoDeProposta()` ("Proposta de página para <nome>, em avaliação p
 `data-identificacao-crn` (nome, "Nutricionista", `CRN-5 12345`). Piso de termos: `termos-vedados-cfn.json`
 (preço é **erro** — art. 57 da Res. CFN 599/2018). JSON-LD `ProfessionalService` com `employee` `Person`.
 
+**Página de corretor(a) de imóveis** (`"tipo": "imobiliario"`, [ADR-009](../decisoes/adr/ADR-009-pagina-de-corretor-de-imoveis.md)):
+exige `corretor.nome`, `corretor.generoGramatical` (`"M"` ou `"F"` — decide "Corretor de Imóveis" ou
+"Corretora de Imóveis", via `profissaoCorretor()`) e `corretor.creci` (`{ uf, numero: "36.265" | "36.265-F" | "36.265-J" }`,
+ou `"PENDENTE"`, só com `publicar: false`, constrói o rascunho e o `verificar` reprova — como o CRN).
+Opcionais: `corretor.titulo` (o título que a profissional usa, ex.: "Consultora imobiliária"),
+`corretor.cnai`, `cidade`, `uf`, `redes.instagram`. `inscricaoCreci()` monta "CRECI-BA 36.265" (ou
+"CRECI PENDENTE") para a página e o JSON-LD. Publicar exige `revisao.conferenciaCofeciEm` sempre; fora da
+proposta, também `revisao.creciConferidoEm` e `revisao.aprovadoPelaCorretoraEm`. Com `"proposta": true`
+(desde o início, sem emenda — diferente da nutricionista), só `conferenciaCofeciEm`, e o
+`data-aviso-proposta` usa o texto de `avisoDeProposta()` ("Proposta de página para <nome>, em avaliação
+pela corretora/pelo corretor."). A página tem o `data-identificacao-creci` (nome, a profissão de
+`profissaoCorretor()`, `CRECI-UF número`, e o `CNAI número` se houver). `demonstracao` é recusado: a
+página é sempre de uma profissional real. Piso de termos: `termos-vedados-cofeci.json` (garantia de
+crédito, retorno ou valorização; "nome sujo"; superlativos; urgência artificial — ver o `_leia` do
+arquivo). JSON-LD `RealEstateAgent`, com `employee` `Person` e o CRECI (e o CNAI) em `identifier`.
+
 **Índice** ([ADR-007](../decisoes/adr/ADR-007-indice-da-fabrica.md)): `ferramentas/modelos/indice.html`, com os
 marcadores `<!-- @gerado:demonstracoes -->` e `<!-- @gerado:clientes -->` (uma linha de `<table>` por página,
 `linhaDoIndice()` em `construir.mjs`). `site.config.json › indice`: `titulo`, `descricao`, `empresa`
@@ -128,7 +145,8 @@ não o `.painel`: um container isola o layout, e o `subgrid` deixaria de valer. 
 descartável numa pasta temporária e roda `construir.mjs` e `verificar.mjs` de verdade, apontados para ele
 pela variável `LANDING_RAIZ` (`lib/arquivos.mjs`; sem ela, a raiz é o repositório). O site descartável
 mora em `testes/apoio.mjs` (`comSite({ pagina, html, creditos }, conferir)`); cada `*.test.mjs` diz o que
-a página tem: `demonstracao.test.mjs` (ADR-004 e ADR-005), `advocacia.test.mjs` (ADR-006), `nutricao.test.mjs` (ADR-008). O `verificar.yml`
+a página tem: `demonstracao.test.mjs` (ADR-004 e ADR-005), `advocacia.test.mjs` (ADR-006), `nutricao.test.mjs` (ADR-008),
+`imobiliario.test.mjs` (ADR-009). O `verificar.yml`
 roda os testes antes da verificação. Checagem nova entra com um caso que reprova e um que passa.
 
 ## Fontes e imagens
@@ -143,6 +161,12 @@ npm run imagens entrada/<slug>/foto.jpg site/<slug>/imagens/social --social
 
 `copiar-fontes` traz só o subconjunto latin, que cobre o português inteiro, e só woff2.
 `otimizar-imagens` remove os metadados (EXIF, GPS) e imprime o `<picture>` pronto.
+
+⌗ **Newsreader com o eixo `opsz`:** o par normal + itálico com o eixo óptico pesava 273 KB (129 + 144 KB) e
+competia com o retrato pelo LCP na `karoline-melo` (reprovou em 3,0 s). Recopiada só com o eixo de peso
+(`npm run fontes newsreader --italico`, sem `--opsz`): 123 KB (58 + 65 KB), LCP 2,1 s — ver
+`docs/paginas/karoline-melo/qa.md`. Ao copiar fonte variável para uma página nova, avalie se o `opsz`
+compensa o peso antes de incluir. **Jost** (`site/assets/fontes/jost/`) é nova, trazida para a `karoline-melo`.
 
 ## Workflows
 

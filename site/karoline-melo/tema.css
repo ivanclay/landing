@@ -1,0 +1,32 @@
+/*
+ * tema.css — a identidade desta página ("a prancha da consultora", docs/paginas/karoline-melo/direcao-de-arte.md):
+ * cor e fonte (regra 10). Nenhum outro arquivo desta página digita cor.
+ * Paleta tirada do retrato de estúdio: ameixa (o vestido), ouro fosco (o brinco), névoa (o fundo).
+ *
+ * Contraste (WCAG, calculado):
+ *   tinta        13,9:1 no marfim  · 12,1:1 na areia
+ *   texto-suave   6,5:1 no marfim  ·  5,6:1 na areia
+ *   marfim sobre ameixa (botão principal)  9,7:1
+ *   marfim / areia / ouro-claro sobre ameixa-escura (fechamento)  13,0:1 / 11,3:1 / 6,4:1
+ *   ouro fosco sobre marfim  3,7:1 — nunca texto pequeno; só fio e numeral grande (≥ 24 px)
+ */
+:root {
+  --cor-fundo: #f5f0e8;
+  --cor-superficie: #eae0d3;
+  --cor-texto: #2b2024;
+  --cor-texto-suave: #62534f;
+  --cor-linha: #ddccb2;
+  --cor-marca: #5a2f3b;
+  --cor-sobre-marca: #f5f0e8;
+  --cor-foco: #5a2f3b;
+
+  --cor-noite: #3d1f28;          /* fechamento e rodapé */
+  --cor-ouro: #9a7440;           /* fios de cota, numerais grandes — nunca texto pequeno */
+  --cor-ouro-claro: #c9a66b;     /* numerais e rubricas sobre a ameixa escura */
+  --cor-nevoa: #dde2e3;          /* moldura do retrato (o fundo da foto) */
+
+  --fonte-titulo: 'Newsreader Variable', Georgia, 'Times New Roman', serif;
+  --fonte-texto: 'Jost Variable', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  --raio-botao: 2px;
+}

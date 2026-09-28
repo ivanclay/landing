@@ -4,7 +4,7 @@
 - **Manuais:** [operador](manual/manual-operador.md) (pedir, aprovar e publicar uma página) ·
   [desenvolvedor](manual/manual-desenvolvedor.md) (ferramentas, contrato, workflows)
 - **Decisões:** [ADRs](decisoes/adr/) · [backlog](decisoes/backlog.md)
-- **Métricas:** [`metricas/implementacoes.csv`](metricas/implementacoes.csv)
+- **Métricas:** [`metricas/implementacoes.csv`](metricas/implementacoes.csv) · [`metricas/projetos.md`](metricas/projetos.md) (consolidado por projeto)
 
 ## Estado do projeto
 
@@ -25,6 +25,7 @@ Estado: `rascunho` · `aguardando médico` · `publicada` · `redirecionada` · 
 | [`arruda-seixas`](paginas/arruda-seixas/briefing.md) | Arruda Seixas Advogados (**fictício**; escritório de advocacia, ADR-006) | Advocacia empresarial | São Paulo | **demonstração** (noindex, só link direto e na seção de demonstrações da raiz) | 2026-09-23 | — (não há escritório) | 2026-09-23 (merge) | 2026-09-23 |
 | [`hub-saude-negocios`](paginas/hub-saude-negocios/briefing.md) | Hub Saúde Negócios (negócio real, Carla Rodrigues) | Consultoria em gestão e negócios de saúde | — | **proposta** (ADR-005: noindex, aguarda aprovação do Hub) | 2026-09-22 | — | 2026-09-22 (merge) | 2026-09-23 (rodapé em colunas) |
 | [`emilia-kuwano`](paginas/emilia-kuwano/briefing.md) | Emília Alves Kuwano (nutricionista **real**, CRN-5 1575, `nutricao`, ADR-008) | Nutrição Clínica e Funcional | Salvador, BA | **proposta** (publicada antes da aprovação dela, por decisão do dono: noindex, etiqueta "Proposta · em avaliação") | 2026-09-27 | — (aguarda a Emília) | 2026-09-27 (merge) | 2026-09-27 |
+| [`karoline-melo`](paginas/karoline-melo/briefing.md) | Karoline Melo (corretora de imóveis **real**, CRECI-BA 36.265, CNAI 58.909, `imobiliario`, ADR-009) | Corretora de Imóveis · Consultora imobiliária | Salvador, BA (inferida do DDD; conferir) | **rascunho** — aguardando a aprovação do dono ([checkpoint](paginas/karoline-melo/checkpoint.md)) | 2026-09-27 | — | — | 2026-09-27 |
 | [`s-frontdesk`](paginas/s-frontdesk/briefing.md) | S-FrontDesk (produto da Fábrica de Apps e Soluções, `negocio`) | Agenda e atendimento para clínicas | São Paulo | **publicada** (indexável, painel "Produtos dos clientes", etiqueta "Pré-lançamento · em avaliação"; WhatsApp provisório com DDD 20 inexistente) | 2026-09-23 (entregue pelo repositório `sfrontdesk-landing`) | 2026-09-23 (dono) | 2026-09-23 (merge) | 2026-09-23 |
 
 ⌗ A tabela é atualizada pelo `documentador-landing` a cada página. Em caso de dúvida, o que vale é o

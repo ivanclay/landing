@@ -12,8 +12,8 @@ import {
   tags, aberturaDoElementoCom, conteudoDoElementoCom, textoVisivel, normalizar, semComentarios,
 } from './lib/html.mjs';
 import {
-  palavraMedico, ehAdvocacia, ehDemonstracao, ehNegocio, ehNutricao, ehProposta, avisoDeDemonstracao, avisoDeProposta,
-  inscricaoCrn,
+  palavraMedico, ehAdvocacia, ehDemonstracao, ehImobiliario, ehNegocio, ehNutricao, ehProposta, avisoDeDemonstracao,
+  avisoDeProposta, inscricaoCrn, inscricaoCreci, profissaoCorretor,
 } from './lib/pagina.mjs';
 
 const LIMITE_IMAGEM_BYTES = 250 * 1024;
@@ -27,10 +27,11 @@ async function verificar() {
   if (!existsSync(PASTA_SAIDA)) throw new Error('_site/ não existe — rode "npm run construir" antes');
   const config = await lerJson(path.join(RAIZ, 'site.config.json'));
   // Cada norma tem o seu piso: a do CFM para páginas de saúde, índice e 404; a da OAB para advocacia
-  // (ADR-006); a do CFN para nutricionista (ADR-008).
+  // (ADR-006); a do CFN para nutricionista (ADR-008); a do COFECI para corretor de imóveis (ADR-009).
   const { termos: termosCfm } = await lerJson(path.join(PASTA_REGRAS, 'termos-vedados.json'));
   const { termos: termosOab } = await lerJson(path.join(PASTA_REGRAS, 'termos-vedados-oab.json'));
   const { termos: termosCfn } = await lerJson(path.join(PASTA_REGRAS, 'termos-vedados-cfn.json'));
+  const { termos: termosCofeci } = await lerJson(path.join(PASTA_REGRAS, 'termos-vedados-cofeci.json'));
   const pisoDaPasta = new Map();
   for (const pasta of await listarPastas(PASTA_SAIDA)) {
     const fonte = path.join(PASTA_SITE, pasta, 'pagina.json');
@@ -38,6 +39,7 @@ async function verificar() {
     const pagina = await lerJson(fonte);
     if (ehAdvocacia(pagina)) pisoDaPasta.set(pasta, termosOab);
     else if (ehNutricao(pagina)) pisoDaPasta.set(pasta, termosCfn);
+    else if (ehImobiliario(pagina)) pisoDaPasta.set(pasta, termosCofeci);
   }
 
   const arquivosHtml = (await listarArquivosRecursivo(PASTA_SAIDA)).filter((a) => a.endsWith('.html'));
@@ -61,9 +63,10 @@ async function verificar() {
     const pagina = await lerJson(fonte);
     const html = await readFile(path.join(PASTA_SAIDA, pasta, 'index.html'), 'utf8');
     // Identificação do CFM é de página de médico; negócio não tem CRM (ADR-005); advocacia tem a da OAB
-    // (ADR-006); nutricionista, a do CRN (ADR-008).
+    // (ADR-006); nutricionista, a do CRN (ADR-008); corretor de imóveis, a do CRECI (ADR-009).
     if (ehAdvocacia(pagina)) verificarIdentificacaoOab(html, pagina, `${pasta}/index.html`);
     else if (ehNutricao(pagina)) verificarIdentificacaoCrn(html, pagina, `${pasta}/index.html`);
+    else if (ehImobiliario(pagina)) verificarIdentificacaoCreci(html, pagina, `${pasta}/index.html`);
     else if (!ehNegocio(pagina)) verificarIdentificacaoCfm(html, pagina, `${pasta}/index.html`);
     if (ehProposta(pagina)) {
       verificarAvisoNoTopo(html, `${pasta}/index.html`, 'data-aviso-proposta', avisoDeProposta(pagina),
@@ -243,6 +246,23 @@ function verificarIdentificacaoCrn(html, pagina, relativo) {
   exigir(pagina.nutricionista.nome, 'o nome');
   exigir('Nutricionista', 'a profissão');
   exigir(inscricaoCrn(pagina), 'a inscrição no CRN');
+}
+
+/** Lei 6.530/1978, art. 3º (ADR-009): no data-identificacao-creci, o nome, a profissão e a inscrição no CRECI. */
+function verificarIdentificacaoCreci(html, pagina, relativo) {
+  const bloco = conteudoDoElementoCom(html, 'data-identificacao-creci');
+  if (bloco === null) {
+    erros.push(`${relativo}: sem o elemento data-identificacao-creci (regra 2, ADR-009)`);
+    return;
+  }
+  const texto = normalizar(textoVisivel(bloco));
+  const exigir = (trecho, oQue) => {
+    if (!texto.includes(normalizar(trecho))) erros.push(`${relativo}: a identificação CRECI não mostra ${oQue} ("${trecho}") — regra 2 (ADR-009)`);
+  };
+  exigir(pagina.corretor.nome, 'o nome');
+  exigir(profissaoCorretor(pagina), 'a profissão');
+  exigir(inscricaoCreci(pagina), 'a inscrição no CRECI');
+  if (pagina.corretor.cnai) exigir(`CNAI ${pagina.corretor.cnai}`, 'o CNAI');
 }
 
 /** O aviso que impede a página de passar pelo que não é: existe, diz o texto exato, vem antes do h1, não se esconde. */

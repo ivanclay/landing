@@ -2,7 +2,8 @@
 // A página nunca digita a URL base — ela muda no dia em que houver domínio próprio (D-01, regra 8).
 import { escaparHtml } from './html.mjs';
 import {
-  nomeDeExibicao, assuntoDaPagina, ehAdvocacia, ehDemonstracao, ehNegocio, ehNutricao, ehProposta, soPorLinkDireto,
+  nomeDeExibicao, assuntoDaPagina, ehAdvocacia, ehDemonstracao, ehImobiliario, ehNegocio, ehNutricao, ehProposta,
+  soPorLinkDireto, inscricaoCreci, profissaoCorretor,
 } from './pagina.mjs';
 
 export function urlDaPagina(config, slug) {
@@ -57,7 +58,7 @@ function enderecoDaImagemSocial(caminho, url, versaoImagem) {
 
 /** O alt da imagem social: quem, o quê, onde — e, na demonstração, que é demonstração (ADR-004). */
 function textoDaImagemSocial(pagina) {
-  const assunto = ehNegocio(pagina) || ehAdvocacia(pagina) || ehNutricao(pagina)
+  const assunto = ehNegocio(pagina) || ehAdvocacia(pagina) || ehNutricao(pagina) || ehImobiliario(pagina)
     ? assuntoDaPagina(pagina)
     : (pagina.medico.especialidades ?? [])[0]?.nome;
   const lugar = [pagina.cidade, pagina.uf].filter(Boolean).join('/');
@@ -74,6 +75,7 @@ export function dadosEstruturados(pagina, url, versaoImagem = '') {
   if (ehNegocio(pagina)) return dadosDoNegocio(pagina, url, versaoImagem);
   if (ehAdvocacia(pagina)) return dadosDaAdvocacia(pagina, url, versaoImagem);
   if (ehNutricao(pagina)) return dadosDaNutricao(pagina, url, versaoImagem);
+  if (ehImobiliario(pagina)) return dadosDoImobiliario(pagina, url, versaoImagem);
   const { medico, contato = {}, locais = [], convenios = [] } = pagina;
   const principal = locais[0];
   const dados = {
@@ -200,6 +202,37 @@ function dadosDaNutricao(pagina, url, versaoImagem) {
   const enderecos = locais.filter((local) => local.endereco).map((local) => endereco(local.endereco));
   if (enderecos.length) dados.address = enderecos.length === 1 ? enderecos[0] : enderecos;
   const perfis = Object.values(pagina.redes ?? {}).filter((valor) => valor.startsWith('https://'));
+  if (perfis.length) dados.sameAs = perfis;
+  return dados;
+}
+
+/**
+ * Corretor(a) de imóveis (ADR-009): schema.org tem RealEstateAgent para quem intermedia imóveis. `name` e
+ * `url` são da página; quem atende vira `employee` (Person), com a inscrição no CRECI (e o CNAI, se houver)
+ * — só o que o pagina.json afirma (regra 1).
+ */
+function dadosDoImobiliario(pagina, url, versaoImagem) {
+  const { corretor, contato = {} } = pagina;
+  const pessoa = { '@type': 'Person', name: corretor.nome, jobTitle: profissaoCorretor(pagina) };
+  if (corretor.creci !== 'PENDENTE') {
+    pessoa.identifier = [{ '@type': 'PropertyValue', propertyID: `CRECI-${corretor.creci.uf}`, value: corretor.creci.numero }];
+    if (corretor.cnai) pessoa.identifier.push({ '@type': 'PropertyValue', propertyID: 'CNAI', value: corretor.cnai });
+  }
+  const dados = {
+    '@context': 'https://schema.org',
+    '@type': 'RealEstateAgent',
+    name: corretor.nome,
+    url,
+    description: pagina.resumo,
+    employee: pessoa,
+  };
+  if (contato.telefone || contato.whatsapp) dados.telephone = contato.telefone ?? contato.whatsapp;
+  if (pagina.imagemSocial) dados.image = enderecoDaImagemSocial(pagina.imagemSocial, url, versaoImagem);
+  if (pagina.cidade) {
+    dados.areaServed = pagina.cidade;
+    dados.address = endereco({ cidade: pagina.cidade, uf: pagina.uf });
+  }
+  const perfis = [pagina.siteOficial, ...Object.values(pagina.redes ?? {})].filter((valor) => valor?.startsWith('https://'));
   if (perfis.length) dados.sameAs = perfis;
   return dados;
 }
