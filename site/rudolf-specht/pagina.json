@@ -1,0 +1,47 @@
+{
+  "slug": "rudolf-specht",
+  "tipo": "advocacia",
+  "publicar": true,
+  "proposta": true,
+  "atualizadoEm": "2026-09-28",
+  "sociedade": {
+    "nome": "Specht Sociedade de Advocacia",
+    "razaoSocial": "Specht Sociedade de Advocacia",
+    "categoria": "Advocacia do consumidor, da saúde e do trabalho",
+    "registros": [],
+    "areas": [
+      "Direito do Consumidor",
+      "Direito da Saúde",
+      "Responsabilidade Civil",
+      "Direito de Família e Sucessões",
+      "Direito do Trabalho"
+    ],
+    "escritorios": [
+      { "logradouro": "", "cidade": "Salvador", "uf": "BA" }
+    ]
+  },
+  "advogados": [
+    {
+      "nome": "Rudolf Mateus de Jesus Specht",
+      "cargo": "Advogado responsável",
+      "socioAdministrador": true,
+      "oab": [{ "uf": "BA", "numero": "77.991" }]
+    }
+  ],
+  "resumo": "Specht Sociedade de Advocacia, com o advogado Rudolf Specht (OAB/BA 77.991): consumidor, saúde, trabalho e família. Salvador e todo o Brasil.",
+  "cidade": "Salvador",
+  "uf": "BA",
+  "contato": {
+    "whatsapp": "+5571992554099",
+    "email": "rudolfspecht.adv@gmail.com"
+  },
+  "redes": {
+    "instagram": "https://www.instagram.com/rudolfspecht.adv/"
+  },
+  "imagemSocial": "imagens/social.jpg",
+  "revisao": {
+    "oabConferidaEm": "",
+    "conferenciaOabEm": "2026-09-28",
+    "aprovadoPeloEscritorioEm": ""
+  }
+}

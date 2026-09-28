@@ -1,0 +1,303 @@
+/*
+ * opcao-1.css — layout da opção 1 ("Tinta"): clara, editorial. O gesto: o título nomeia os três
+ * públicos (consumidores, pacientes, trabalhadores) em versos numerados a ocre — e o mesmo numeral
+ * editorial volta a marcar cada área de atuação e cada etapa do atendimento. Cor e fonte só em
+ * opcao-1-tema.css (regra 10); aqui só estrutura, espaço e tipo, pelos tokens de base.css.
+ */
+
+/* ---------- Cabeçalho ---------- */
+.cabeca {
+  border-bottom: 1px solid var(--cor-linha);
+}
+.cabeca__linha {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--espaco-2) var(--espaco-6);
+  padding-block: var(--espaco-4);
+}
+.cabeca__marca {
+  font-family: var(--fonte-titulo);
+  font-size: var(--texto-destaque);
+  font-weight: 600;
+}
+.cabeca__marca span {
+  font-weight: 400;
+  font-style: italic;
+  color: var(--cor-texto-suave);
+}
+.cabeca__nav {
+  display: none;
+  gap: var(--espaco-5);
+}
+.cabeca__nav a {
+  display: flex;
+  align-items: center;
+  min-height: var(--alvo-minimo);
+  font-size: var(--texto-apoio);
+  font-weight: 600;
+  text-decoration: none;
+  color: var(--cor-texto-suave);
+  border-bottom: 2px solid transparent;
+}
+.cabeca__nav a:hover { color: var(--cor-texto); border-color: var(--cor-marca); }
+
+/* ---------- Abertura ---------- */
+.abertura__grade {
+  display: grid;
+  gap: var(--espaco-7);
+  padding-block: var(--espaco-7) var(--espaco-8);
+}
+.abertura__coluna { min-width: 0; }
+.abertura__rubrica {
+  font-size: var(--texto-meta);
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--cor-marca);
+}
+.abertura__titulo {
+  /* Escala própria (não a --texto-vitrine do contrato): com o numeral ao lado da palavra, a escala
+     cheia encosta na borda da coluna assimétrica no desktop — aqui o teto é um pouco menor. */
+  margin-top: var(--espaco-4);
+  font-size: clamp(2.75rem, 1.7rem + 3.4vw, 4.75rem);
+  font-weight: 480;
+  letter-spacing: -0.01em;
+}
+.abertura__linha { display: block; }
+.abertura__linha--publico { display: flex; align-items: baseline; gap: var(--espaco-3); }
+
+/* Nos telefones mais estreitos, "consumidores," e "trabalhadores." (com o numeral ao lado) não cabem
+   na largura da tela no tamanho da escala vitrine — recuar aqui em vez de deixar rolagem lateral
+   (regra 11). De 23,4rem (375 px) em diante, a escala normal já cabe. */
+@media (max-width: 23.4rem) {
+  .abertura__titulo { font-size: clamp(2rem, 1.5rem + 4vw, 2.75rem); }
+  .abertura__linha--publico { gap: var(--espaco-2); }
+}
+.abertura__numeral {
+  font-size: 0.42em;
+  font-weight: 600;
+  font-style: normal;
+  font-variant-numeric: tabular-nums;
+  color: var(--cor-marca);
+}
+.abertura__apoio {
+  max-width: 34ch;
+  margin-top: var(--espaco-6);
+  font-size: var(--texto-destaque);
+  color: var(--cor-texto-suave);
+}
+.abertura__identificacao {
+  margin-top: var(--espaco-5);
+  font-size: var(--texto-apoio);
+  font-weight: 600;
+}
+.abertura__acoes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--espaco-3);
+  margin-top: var(--espaco-6);
+}
+
+.abertura__retrato {
+  position: relative;
+  max-width: 24rem;
+  margin-inline: auto;
+}
+.abertura__retrato picture,
+.abertura__retrato img {
+  display: block;
+  width: 100%;
+  border: 1px solid var(--cor-linha);
+}
+.abertura__retrato img { filter: grayscale(1); }
+.abertura__legenda {
+  margin-top: var(--espaco-3);
+  padding-top: var(--espaco-3);
+  border-top: 1px solid var(--cor-linha);
+  font-size: var(--texto-meta);
+  color: var(--cor-texto-suave);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .abertura__coluna { animation: opcao1-entra 550ms ease-out both; }
+}
+@keyframes opcao1-entra {
+  from { transform: translateY(0.9rem); }
+  to { transform: none; }
+}
+
+/* ---------- Seções comuns ---------- */
+.secao {
+  padding-block: clamp(3rem, 2.2rem + 3.6vw, 5rem);
+  background: var(--cor-fundo);
+}
+.secao--superficie { background: var(--cor-superficie); }
+.secao__interior { max-width: var(--medida); }
+.secao h2 {
+  font-size: var(--texto-secao);
+  font-weight: 460;
+}
+.secao__interior > * + *,
+.secao__interior p + p { margin-top: var(--espaco-4); }
+
+/* ---------- Áreas de atuação: índice editorial, sem cartões ---------- */
+#areas h2 { margin-bottom: var(--espaco-6); }
+.indice-areas { display: grid; }
+.indice-areas__item {
+  display: grid;
+  gap: var(--espaco-3) var(--espaco-7);
+  padding-block: var(--espaco-6);
+  border-top: 1px solid var(--cor-linha);
+}
+.indice-areas__item:last-child { border-bottom: 1px solid var(--cor-linha); }
+.indice-areas__cabeca {
+  display: flex;
+  align-items: baseline;
+  gap: var(--espaco-4);
+}
+.indice-areas__numero {
+  font-family: var(--fonte-titulo);
+  font-size: var(--texto-destaque);
+  font-style: italic;
+  color: var(--cor-marca);
+}
+.indice-areas__item h3 {
+  font-size: var(--texto-destaque);
+  font-weight: 500;
+}
+.indice-areas__item p {
+  max-width: var(--medida);
+  color: var(--cor-texto-suave);
+}
+
+@media (min-width: 48rem) {
+  .indice-areas__item {
+    grid-template-columns: 16rem 1fr;
+    align-items: start;
+  }
+  .indice-areas__item p {
+    padding-left: var(--espaco-6);
+    border-left: 1px solid var(--cor-linha);
+  }
+}
+
+/* ---------- O advogado ---------- */
+.advogado__grade {
+  display: grid;
+  gap: var(--espaco-6);
+}
+.advogado__retrato { max-width: 16rem; }
+.advogado__retrato picture,
+.advogado__retrato img {
+  display: block;
+  width: 100%;
+  border: 1px solid var(--cor-linha);
+}
+.advogado__retrato img { filter: grayscale(1); }
+.advogado__corpo { max-width: var(--medida); }
+.advogado__corpo > * + * { margin-top: var(--espaco-4); }
+.advogado__formacao {
+  padding-top: var(--espaco-4);
+  border-top: 1px solid var(--cor-linha);
+  font-family: var(--fonte-titulo);
+  font-style: italic;
+  color: var(--cor-marca);
+}
+
+@media (min-width: 40rem) {
+  .advogado__grade { grid-template-columns: 16rem 1fr; align-items: start; }
+}
+
+/* ---------- Como funciona o atendimento: régua de etapas ---------- */
+#como-funciona h2 { margin-bottom: var(--espaco-7); }
+.etapas {
+  display: grid;
+  gap: var(--espaco-6);
+}
+.etapa {
+  padding-top: var(--espaco-4);
+  border-top: 2px solid var(--cor-linha);
+}
+.etapa__numero {
+  display: block;
+  font-family: var(--fonte-titulo);
+  font-size: var(--texto-secao);
+  font-style: italic;
+  color: var(--cor-marca);
+  line-height: 1;
+}
+.etapa h3 {
+  margin-top: var(--espaco-3);
+  font-size: var(--texto-destaque);
+  font-weight: 500;
+}
+.etapa p {
+  margin-top: var(--espaco-2);
+  color: var(--cor-texto-suave);
+}
+
+@media (min-width: 60rem) {
+  .etapas { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+
+/* ---------- Como o escritório trabalha ---------- */
+.lista-marcada {
+  display: grid;
+  gap: var(--espaco-3);
+}
+.lista-marcada li {
+  position: relative;
+  padding-left: var(--espaco-5);
+}
+.lista-marcada li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.65em;
+  width: 0.5rem;
+  height: 0.09rem;
+  background: var(--cor-marca);
+}
+
+@media (min-width: 40rem) {
+  .lista-marcada { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: var(--espaco-7); }
+}
+
+/* ---------- Atendimento e contato ---------- */
+.contato__acoes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--espaco-3);
+  margin-top: var(--espaco-6);
+}
+
+/* ---------- Rodapé ---------- */
+.rodape {
+  padding-block: var(--espaco-7);
+  border-top: 1px solid var(--cor-linha);
+}
+.rodape__interior { display: grid; gap: var(--espaco-3); max-width: var(--medida); }
+.rodape__interior p { font-size: var(--texto-meta); color: var(--cor-texto-suave); }
+.rodape [data-identificacao-oab] { color: var(--cor-texto); font-weight: 600; }
+.rodape a { color: var(--cor-marca); }
+
+/* ---------- Barra de contato do celular: WhatsApp cheio, e-mail e Instagram só com ícone ---------- */
+.barra-contato__somente-icone {
+  flex: 0 0 auto;
+  width: var(--alvo-minimo);
+  padding-inline: 0;
+}
+
+/* ---------- Tablet / desktop ---------- */
+@media (min-width: 60rem) {
+  .cabeca__nav { display: flex; }
+
+  .abertura__grade {
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.85fr);
+    align-items: center;
+    padding-block: var(--espaco-8) var(--espaco-9);
+  }
+  .abertura__retrato { max-width: none; }
+}

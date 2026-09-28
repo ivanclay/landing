@@ -1,0 +1,39 @@
+/*
+ * opcao-3-tema.css — identidade da opção 3 ("Trilha", rascunho para escolha do cliente).
+ * Cor e fonte desta opção moram só aqui (regra 10). Petróleo escolhido para não repetir o azul-cobalto
+ * do terno no retrato e fazer par com ele, sem disputar a mesma família de azul.
+ *
+ * Contraste (WCAG 2.1, luminância relativa, calculado em node — script descartável):
+ *   texto (#18211f) sobre fundo (#eef2f0)             14,57:1
+ *   texto (#18211f) sobre superficie (#ffffff)        16,46:1
+ *   texto-suave (#4b5854) sobre fundo (#eef2f0)         6,59:1
+ *   texto-suave (#4b5854) sobre superficie (#ffffff)    7,44:1
+ *   marca petroleo (#0f5560) sobre branco               8,44:1
+ *   marca petroleo (#0f5560) sobre fundo                7,47:1
+ *   marca petroleo (#0f5560) sobre destaque-claro       6,87:1
+ *   texto (#18211f) sobre destaque-claro (#dcebe8)     13,39:1
+ *   texto-suave (#4b5854) sobre destaque-claro           6,05:1
+ *   branco sobre marca petroleo (botão principal)        8,44:1
+ * Todos os pares usados em texto passam AA (>= 4,5:1) com folga.
+ */
+:root {
+  --cor-fundo: #eef2f0;
+  --cor-superficie: #ffffff;
+  --cor-texto: #18211f;
+  --cor-texto-suave: #4b5854;
+  --cor-linha: #cfd9d5;
+  --cor-marca: #0f5560;
+  --cor-sobre-marca: #ffffff;
+  --cor-foco: #0f5560;
+
+  --cor-destaque-claro: #dcebe8; /* fundo das etiquetas de público e de situação */
+
+  --fonte-titulo: 'Bricolage Grotesque Variable', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --fonte-texto: 'Atkinson Hyperlegible Next Variable', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  --raio-cartao: 1.5rem;       /* 24px — cantos arredondados dos cartões */
+  --raio-selo: 1rem;           /* 16px — selo de identificação sobre o retrato */
+  --raio-pilula: 999px;
+  --sombra-cartao: 0 16px 32px -18px rgba(15, 40, 43, 0.22), 0 2px 8px -2px rgba(15, 40, 43, 0.1);
+  --sombra-selo: 0 8px 20px -8px rgba(15, 40, 43, 0.35);
+}

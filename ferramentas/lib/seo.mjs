@@ -155,10 +155,14 @@ function dadosDaAdvocacia(pagina, url, versaoImagem) {
     legalName: sociedade.razaoSocial,
     url,
     description: pagina.resumo,
-    identifier: sociedade.registros.map((registro) => ({
-      '@type': 'PropertyValue', propertyID: `OAB/${registro.uf}`, value: registro.numero,
-    })),
   };
+  // Na proposta (ADR-006, emenda 2026-09-28) o registro na OAB pode ainda não ter chegado: "identifier": []
+  // é pior que não dizer (o validador acusa), então só entra quando há ao menos um registro.
+  if (sociedade.registros?.length) {
+    dados.identifier = sociedade.registros.map((registro) => ({
+      '@type': 'PropertyValue', propertyID: `OAB/${registro.uf}`, value: registro.numero,
+    }));
+  }
   if (contato.telefone || contato.whatsapp) dados.telephone = contato.telefone ?? contato.whatsapp;
   if (contato.email) dados.email = contato.email;
   if (pagina.imagemSocial) dados.image = enderecoDaImagemSocial(pagina.imagemSocial, url, versaoImagem);

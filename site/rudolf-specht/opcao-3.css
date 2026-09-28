@@ -1,0 +1,337 @@
+/*
+ * opcao-3.css — layout da opção 3 ("Trilha", rascunho para escolha do cliente).
+ * O gesto: as etiquetas de situações (o texto do cliente em pedaços, para quem procura o próprio
+ * problema achar de relance) e a trilha do atendimento (linha contínua ligando os 4 passos, vertical
+ * no celular e horizontal no desktop). Cor só em opcao-3-tema.css (regra 10).
+ */
+
+/* ---------- Cabeçalho ---------- */
+.cabecalho__interno {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--espaco-3) var(--espaco-6);
+  padding-block: var(--espaco-4);
+}
+.cabecalho__marca {
+  font-family: var(--fonte-titulo);
+  font-weight: 600;
+  font-size: var(--texto-destaque);
+}
+.cabecalho__marca span {
+  font-weight: 400;
+  color: var(--cor-texto-suave);
+}
+.navegacao { display: flex; flex-wrap: wrap; gap: var(--espaco-2) var(--espaco-5); }
+.navegacao a {
+  display: flex;
+  align-items: center;
+  min-height: var(--alvo-minimo);
+  font-size: var(--texto-apoio);
+  font-weight: 600;
+  text-decoration: none;
+  color: var(--cor-texto-suave);
+}
+.navegacao a:hover { color: var(--cor-marca); }
+@media (max-width: 47.99rem) { .navegacao { display: none; } }
+
+/* ---------- Entrada ---------- */
+.entrada { padding-block: var(--espaco-7) var(--espaco-8); }
+.entrada__grade {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: var(--espaco-7);
+}
+.entrada__rubrica {
+  font-size: var(--texto-meta);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--cor-marca);
+}
+.entrada__titulo {
+  margin-top: var(--espaco-3);
+  font-size: clamp(2.5rem, 1.6rem + 2.6vw, 4rem);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  overflow-wrap: break-word;
+}
+.entrada__apoio {
+  max-width: 42ch;
+  margin-top: var(--espaco-5);
+  font-size: var(--texto-destaque);
+  color: var(--cor-texto-suave);
+}
+
+.etiquetas-publico {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--espaco-2);
+  margin-top: var(--espaco-5);
+  padding: 0;
+}
+.etiquetas-publico li {
+  padding: var(--espaco-2) var(--espaco-4);
+  background: var(--cor-destaque-claro);
+  color: var(--cor-marca);
+  border-radius: var(--raio-pilula);
+  font-size: var(--texto-apoio);
+  font-weight: 600;
+}
+
+.entrada__acoes { display: flex; flex-wrap: wrap; gap: var(--espaco-3); margin-top: var(--espaco-6); }
+
+.entrada__retrato { position: relative; max-width: 30rem; margin-inline: auto; }
+.entrada__retrato picture,
+.entrada__retrato img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1122 / 1402;
+  object-fit: cover;
+  object-position: 50% 22%;
+  border-radius: var(--raio-cartao);
+  box-shadow: var(--sombra-cartao);
+}
+.entrada__selo {
+  position: absolute;
+  left: var(--espaco-4);
+  right: var(--espaco-4);
+  bottom: var(--espaco-4);
+  padding: var(--espaco-3) var(--espaco-4);
+  background: var(--cor-superficie);
+  color: var(--cor-texto);
+  border-radius: var(--raio-selo);
+  box-shadow: var(--sombra-selo);
+  font-size: var(--texto-apoio);
+  font-weight: 600;
+}
+
+@media (min-width: 60rem) {
+  .entrada__grade {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: clamp(2rem, 4vw, 3.5rem);
+  }
+  .entrada__texto { flex: 1.35; padding-top: var(--espaco-1); }
+  .entrada__retrato { flex: 0.65; max-width: none; margin-inline: 0; }
+  .entrada__selo { left: var(--espaco-4); right: var(--espaco-4); bottom: var(--espaco-4); }
+}
+
+/* ---------- Seções ---------- */
+.secao { padding-block: clamp(3.5rem, 2.5rem + 4vw, 6rem); }
+.secao--branco { background: var(--cor-superficie); }
+.secao--estreita { padding-block: clamp(2.5rem, 1.8rem + 3vw, 4rem); }
+.apresentacao__texto {
+  max-width: var(--medida);
+  font-family: var(--fonte-titulo);
+  font-weight: 500;
+  font-size: var(--texto-destaque);
+  color: var(--cor-texto);
+}
+
+.secao__cabeca { max-width: var(--medida); }
+.secao__rubrica {
+  font-size: var(--texto-meta);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--cor-marca);
+}
+.secao h2 { margin-top: var(--espaco-2); font-size: var(--texto-secao); font-weight: 600; }
+
+/* ---------- Áreas: cartões com etiquetas de situação ---------- */
+.cartoes-areas {
+  display: grid;
+  gap: var(--espaco-5);
+  margin-top: var(--espaco-7);
+}
+.cartao-area {
+  padding: var(--espaco-6);
+  background: var(--cor-fundo);
+  border-radius: var(--raio-cartao);
+}
+.cartao-area__nome { font-size: var(--texto-destaque); font-weight: 600; }
+.cartao-area__intro { margin-top: var(--espaco-3); color: var(--cor-texto-suave); }
+.etiquetas-situacoes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--espaco-2);
+  margin-top: var(--espaco-4);
+  padding: 0;
+}
+.etiquetas-situacoes li {
+  padding: var(--espaco-1) var(--espaco-3);
+  background: var(--cor-superficie);
+  border: 1px solid var(--cor-linha);
+  border-radius: var(--raio-pilula);
+  font-size: var(--texto-meta);
+  color: var(--cor-texto);
+}
+
+@media (min-width: 40rem) {
+  .cartoes-areas { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (min-width: 76rem) {
+  .cartoes-areas { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .cartao-area:last-child { grid-column: span 1; }
+}
+
+/* ---------- O advogado ---------- */
+.advogado__grade { display: flex; flex-direction: column; gap: var(--espaco-7); }
+.advogado__retrato { max-width: 18rem; margin-inline: auto; }
+.advogado__retrato picture,
+.advogado__retrato img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1122 / 1402;
+  object-fit: cover;
+  object-position: 50% 22%;
+  border-radius: var(--raio-cartao);
+}
+.advogado__texto { max-width: var(--medida); }
+.advogado__texto h2 { margin-top: var(--espaco-2); font-size: var(--texto-secao); font-weight: 600; }
+.advogado__texto p { margin-top: var(--espaco-4); }
+.advogado__texto p:first-of-type { margin-top: var(--espaco-4); }
+
+.formacao {
+  display: grid;
+  gap: var(--espaco-4);
+  margin-top: var(--espaco-6);
+  padding-top: var(--espaco-5);
+  border-top: 1px solid var(--cor-linha);
+}
+.formacao__item dt {
+  font-size: var(--texto-meta);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--cor-marca);
+}
+.formacao__item dd { margin: var(--espaco-1) 0 0; color: var(--cor-texto-suave); }
+
+@media (min-width: 56rem) {
+  .advogado__grade { flex-direction: row; align-items: center; gap: var(--espaco-8); }
+  .advogado__retrato { flex: none; width: 18rem; margin-inline: 0; }
+  .advogado__texto { flex: 1; }
+  .formacao { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+/* ---------- Atendimento: a trilha ---------- */
+.trilha {
+  position: relative;
+  display: grid;
+  gap: var(--espaco-7);
+  margin-top: var(--espaco-8);
+  padding: 0;
+}
+.trilha::before {
+  content: '';
+  position: absolute;
+  z-index: 0;
+  background: var(--cor-linha);
+  left: 1.375rem;
+  top: 0.1rem;
+  bottom: 0.1rem;
+  width: 2px;
+}
+.trilha__passo {
+  position: relative;
+  z-index: 1;
+  padding-left: calc(2.75rem + var(--espaco-4));
+}
+.trilha__numero {
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 50%;
+  background: var(--cor-marca);
+  color: var(--cor-sobre-marca);
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  font-size: var(--texto-destaque);
+}
+.trilha__passo h3 { font-size: var(--texto-destaque); font-weight: 600; }
+.trilha__passo p { margin-top: var(--espaco-2); color: var(--cor-texto-suave); }
+
+@media (min-width: 60rem) {
+  .trilha { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--espaco-6); }
+  .trilha::before { left: 12.5%; right: 12.5%; top: 1.375rem; bottom: auto; width: auto; height: 2px; }
+  .trilha__passo { padding-left: 0; padding-top: calc(2.75rem + var(--espaco-4)); text-align: center; }
+  .trilha__numero { left: 50%; top: 0; transform: translateX(-50%); }
+}
+
+/* ---------- Como o escritório trabalha ---------- */
+.lista-diferenciais {
+  display: grid;
+  gap: var(--espaco-4);
+  margin-top: var(--espaco-7);
+  padding: 0;
+  max-width: var(--medida);
+}
+.lista-diferenciais li {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--espaco-3);
+  font-size: var(--texto-apoio);
+}
+.lista-diferenciais svg {
+  flex: none;
+  width: 1.5rem;
+  height: 1.5rem;
+  margin-top: 0.1em;
+  padding: 0.25rem;
+  background: var(--cor-destaque-claro);
+  color: var(--cor-marca);
+  border-radius: 50%;
+}
+
+@media (min-width: 48rem) {
+  .lista-diferenciais { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: none; }
+}
+
+/* ---------- Fechamento ---------- */
+.fechamento { padding-block: clamp(4rem, 3rem + 5vw, 7rem); }
+.cartao-fechamento {
+  max-width: 40rem;
+  margin-inline: auto;
+  padding: var(--espaco-8) var(--espaco-6);
+  background: var(--cor-fundo);
+  border-radius: var(--raio-cartao);
+  text-align: center;
+}
+.cartao-fechamento h2 { margin-top: var(--espaco-2); font-size: var(--texto-titulo); font-weight: 600; }
+.cartao-fechamento p { margin-top: var(--espaco-4); color: var(--cor-texto-suave); }
+.fechamento__acoes {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--espaco-3);
+  margin-top: var(--espaco-7);
+}
+
+/* ---------- Rodapé ---------- */
+.rodape { padding-block: var(--espaco-7); border-top: 1px solid var(--cor-linha); }
+.rodape .conteudo { display: grid; gap: var(--espaco-2); }
+.rodape p { font-size: var(--texto-meta); color: var(--cor-texto-suave); }
+.rodape__identificacao { color: var(--cor-texto); font-weight: 600; }
+.rodape a { color: var(--cor-marca); }
+
+/* ---------- Barra de contato: WhatsApp (ação principal) com ícone e rótulo, ocupando o espaço que
+   sobra; e-mail e Instagram só com ícone (nome acessível no aria-label), largura fixa no alvo mínimo.
+   Ícones de 24 px nos três — bem maiores que o texto ao redor, para achar de relance. */
+.barra-contato .botao {
+  padding-inline: var(--espaco-4);
+  font-size: var(--texto-meta);
+  gap: var(--espaco-2);
+}
+.barra-contato .botao svg { width: 1.5rem; height: 1.5rem; }
+.barra-contato .botao--icone {
+  flex: 0 0 var(--alvo-minimo);
+  padding-inline: 0;
+}

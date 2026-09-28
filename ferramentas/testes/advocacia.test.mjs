@@ -129,3 +129,128 @@ test('reprova: escritório real publicado sem inscrições conferidas nem aprova
     assert.match(resultado.stderr, /revisao\.aprovadoPeloEscritorioEm ausente/);
   },
 ));
+
+// Emenda 2026-09-28 (ADR-006): proposta de escritório real, como a Specht Sociedade de Advocacia — publicada
+// antes do registro da sociedade chegar da OAB e da aprovação do sócio administrador, espelhando a emenda do
+// ADR-008 e o tratamento do ADR-009. O nome exato da razão social ainda está a confirmar com o cliente.
+const paginaPropostaAdvocacia = (extra = {}) => paginaAdvocacia({
+  demonstracao: false,
+  proposta: true,
+  sociedade: {
+    nome: 'Specht Sociedade de Advocacia',
+    razaoSocial: 'Specht Sociedade de Advocacia',
+    categoria: 'Advocacia',
+    registros: [],
+    areas: ['Cível', 'Empresarial'],
+    escritorios: [{ cidade: 'Salvador', uf: 'BA' }],
+  },
+  advogados: [
+    { nome: 'Rudolf Mateus de Jesus Specht', cargo: 'Advogado responsável', socioAdministrador: true, oab: [{ uf: 'BA', numero: '77.991' }] },
+  ],
+  resumo: 'Proposta de página para a Specht Sociedade de Advocacia, escritório de advocacia em Salvador (BA).',
+  revisao: { conferenciaOabEm: '2026-09-28' },
+  ...extra,
+});
+
+const htmlPropostaAdvocacia = ({ identificacao = true, texto = '' } = {}) => `<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Specht Sociedade de Advocacia</title>
+    <meta name="description" content="Proposta de página para a Specht Sociedade de Advocacia, escritório de advocacia em Salvador (BA).">
+    <!-- @gerado:cabecalho -->
+  </head>
+  <body>
+    <main>
+      <h1>Specht Sociedade de Advocacia</h1>
+      <p>Atua em direito cível e empresarial. ${texto}</p>
+    </main>
+    <footer>
+      ${identificacao ? '<p data-identificacao-oab>Specht Sociedade de Advocacia · Advogado responsável: Rudolf Mateus de Jesus Specht, OAB/BA 77.991</p>' : ''}
+    </footer>
+  </body>
+</html>
+`;
+
+test('passa: proposta de escritório real sem o registro da sociedade — noindex, fora do sitemap, etiqueta no índice', () => comSite(
+  { pagina: paginaPropostaAdvocacia(), html: htmlPropostaAdvocacia() },
+  async (resultado, raiz) => {
+    assert.equal(resultado.status, 0, resultado.stderr + resultado.stdout);
+    const html = await readFile(path.join(raiz, '_site', SLUG, 'index.html'), 'utf8');
+    assert.match(html, /<meta name="robots" content="noindex, nofollow">/);
+    const sitemap = await readFile(path.join(raiz, '_site', 'sitemap.xml'), 'utf8');
+    assert.doesNotMatch(sitemap, new RegExp(SLUG));
+    const indice = await readFile(path.join(raiz, '_site', 'index.html'), 'utf8');
+    assert.match(indice, /Proposta · em avaliação/);
+  },
+));
+
+test('reprova: proposta de escritório sem a conferência da OAB', () => comSite(
+  { pagina: paginaPropostaAdvocacia({ revisao: {} }), html: htmlPropostaAdvocacia() },
+  (resultado) => {
+    assert.notEqual(resultado.status, 0);
+    assert.match(resultado.stderr, /revisao\.conferenciaOabEm ausente/);
+  },
+));
+
+test('reprova: publicação normal (fora da proposta) sem o registro da sociedade', () => comSite(
+  {
+    pagina: paginaAdvocacia({ demonstracao: false, sociedade: { ...paginaAdvocacia().sociedade, registros: [] },
+      revisao: { oabConferidaEm: '2026-09-28', conferenciaOabEm: '2026-09-28', aprovadoPeloEscritorioEm: '2026-09-28' } }),
+    html: htmlAdvocacia({ comAviso: false }),
+  },
+  (resultado) => {
+    assert.notEqual(resultado.status, 0);
+    assert.match(resultado.stderr, /sociedade\.registros precisa do registro na seccional da OAB/);
+  },
+));
+
+test('reprova: publicação normal com razão social só "Sociedade de Advocacia" (sem "Advogados" nem "Sociedade Individual de Advocacia")', () => comSite(
+  {
+    pagina: paginaAdvocacia({ demonstracao: false, sociedade: { ...paginaAdvocacia().sociedade, razaoSocial: 'Specht Sociedade de Advocacia' },
+      revisao: { oabConferidaEm: '2026-09-28', conferenciaOabEm: '2026-09-28', aprovadoPeloEscritorioEm: '2026-09-28' } }),
+    html: htmlAdvocacia({ comAviso: false }),
+  },
+  (resultado) => {
+    assert.notEqual(resultado.status, 0);
+    assert.match(resultado.stderr, /sociedade\.razaoSocial ausente ou sem "Advogados" nem "Sociedade Individual de Advocacia"/);
+  },
+));
+
+const htmlAdvocaciaIndividual = () => `<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Rudolf Specht Sociedade Individual de Advocacia</title>
+    <meta name="description" content="Escritório de advocacia individual de teste, para provar a razão social do art. 16, § 4º.">
+    <!-- @gerado:cabecalho -->
+  </head>
+  <body>
+    <main>
+      <h1>Rudolf Specht Sociedade Individual de Advocacia</h1>
+      <p>Atua em direito societário e tributário.</p>
+    </main>
+    <footer>
+      <p data-identificacao-oab>Rudolf Specht Sociedade Individual de Advocacia · OAB/SP 00.000 · Sócia administradora: Fulana de Teste, OAB/SP 000.001</p>
+    </footer>
+  </body>
+</html>
+`;
+
+test('passa: publicação normal com "Sociedade Individual de Advocacia" na razão social (Lei 8.906/1994, art. 16, § 4º)', () => comSite(
+  {
+    pagina: paginaAdvocacia({
+      demonstracao: false,
+      sociedade: { ...paginaAdvocacia().sociedade, razaoSocial: 'Rudolf Specht Sociedade Individual de Advocacia' },
+      // Sociedade individual: um único advogado, sócio administrador — não há "Beltrano" a citar na página.
+      advogados: [{ nome: 'Fulana de Teste', cargo: 'Sócia administradora', socioAdministrador: true, oab: [{ uf: 'SP', numero: '000.001' }] }],
+      revisao: { oabConferidaEm: '2026-09-28', conferenciaOabEm: '2026-09-28', aprovadoPeloEscritorioEm: '2026-09-28' },
+    }),
+    html: htmlAdvocaciaIndividual(),
+  },
+  (resultado) => {
+    assert.equal(resultado.status, 0, resultado.stderr + resultado.stdout);
+  },
+));

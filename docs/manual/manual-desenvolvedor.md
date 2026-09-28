@@ -92,12 +92,20 @@ etiqueta "Pré-lançamento · em avaliação" no índice: não muda publicação
 `proposta`.
 
 **Página de advocacia** (`"tipo": "advocacia"`, [ADR-006](../decisoes/adr/ADR-006-pagina-de-advocacia.md)):
-exige `sociedade.nome`, `sociedade.razaoSocial` (com "Advogados"), `sociedade.registros[]` (`uf`,
-`numero` como "12.345" ou "12.345-S"), `advogados[]` (`nome`, `oab[]`) com ao menos um
-`socioAdministrador: true`, `cidade` e `uf`. Opcionais: `sociedade.categoria`, `areas[]`, `escritorios[]`,
-`contato.email`. Publicar exige `revisao.oabConferidaEm`, `conferenciaOabEm` e `aprovadoPeloEscritorioEm`;
-com `"demonstracao": true`, só `conferenciaOabEm`, e o aviso tem texto próprio. JSON-LD `LegalService`;
-sem `og:site_name` (nenhuma página de cliente leva — ADR-007). O piso de termos é `termos-vedados-oab.json`.
+exige `sociedade.nome`, `sociedade.razaoSocial` (com "Advogados" ou "Sociedade Individual de Advocacia" —
+Lei 8.906/1994, art. 16, § 4º), `sociedade.registros[]` (`uf`, `numero` como "12.345" ou "12.345-S"),
+`advogados[]` (`nome`, `oab[]`) com ao menos um `socioAdministrador: true`, `cidade` e `uf`. Opcionais:
+`sociedade.categoria`, `areas[]`, `escritorios[]`, `contato.email`. Publicar exige `revisao.oabConferidaEm`,
+`conferenciaOabEm` e `aprovadoPeloEscritorioEm`; com `"demonstracao": true`, só `conferenciaOabEm`, e o
+aviso tem texto próprio. JSON-LD `LegalService`; sem `og:site_name` (nenhuma página de cliente leva —
+ADR-007). O piso de termos é `termos-vedados-oab.json`.
+
+Com `"proposta": true` (ADR-006, emenda 2026-09-28 — espelha ADR-008 e ADR-009: escritório real, número de
+registro ou razão social final ainda a confirmar): `sociedade.registros[]` pode ficar vazio (`identifier` só
+entra no JSON-LD quando há ao menos um registro — array vazio é pior que omitir o campo), e a razão social
+provisória basta conter "Advocacia"; publicar só exige `revisao.conferenciaOabEm`, dispensando
+`oabConferidaEm` e `aprovadoPeloEscritorioEm`. Sem `siteOficial`, a proposta não leva `data-aviso-proposta`
+(regra geral de `propostaAvisaNoTopo()`): fica só a etiqueta "Proposta · em avaliação" no índice.
 
 **Página de nutricionista** (`"tipo": "nutricao"`, [ADR-008](../decisoes/adr/ADR-008-pagina-de-nutricionista.md)):
 exige `nutricionista.nome` e `nutricionista.crn` (`{ regiao: 1..11, numero: "12345" }`, "/P" se provisória);

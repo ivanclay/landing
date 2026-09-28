@@ -1,0 +1,36 @@
+/*
+ * opcao-1-tema.css — identidade da opção 1 ("Tinta"): clara, editorial. Papel e tinta, com um único
+ * acento ocre que carrega os numerais e os destaques. Nenhuma outra cor mora em opcao-1.css (regra 10).
+ *
+ * Contraste (WCAG, fórmula relativa — ver docs/paginas/rudolf-specht/direcao-de-arte.md):
+ *   tinta #15203a sobre papel #fbfaf6            15,00:1
+ *   tinta #15203a sobre superfície #f1eee6       13,55:1
+ *   texto-suave #4a5266 sobre papel #fbfaf6       7,98:1
+ *   texto-suave #4a5266 sobre superfície #f1eee6   7,21:1
+ *   ocre #9a6414 sobre papel #fbfaf6              4,78:1  (texto e numerais grandes)
+ *   ocre-superfície #855510 sobre superfície      5,48:1  (mesmo uso, sobre a superfície: o ocre
+ *                                                          padrão só chega a 4,31:1 ali — regra 11)
+ *   papel #fbfaf6 sobre ocre #9a6414 (botão)       4,78:1
+ *   foco #1f4fd1 sobre papel e sobre superfície   > 4,5:1 (não-texto, WCAG 1.4.11)
+ *   linha #d9d4c7 é só decorativa (filete, borda) — nunca texto.
+ */
+:root {
+  --cor-fundo: #fbfaf6;
+  --cor-superficie: #f1eee6;
+  --cor-texto: #15203a;
+  --cor-texto-suave: #4a5266;
+  --cor-linha: #d9d4c7;
+  --cor-marca: #9a6414;
+  --cor-marca-superficie: #855510;
+  --cor-sobre-marca: #fbfaf6;
+  --cor-foco: #1f4fd1;
+
+  --fonte-titulo: 'Source Serif 4 Variable', Georgia, 'Times New Roman', serif;
+  --fonte-texto: 'Public Sans Variable', system-ui, -apple-system, 'Segoe UI', sans-serif;
+}
+
+/* Seções com fundo de superfície redefinem --cor-marca para a variante de mais contraste (regra 11):
+   nenhuma cor nova é escrita, só a que o próprio tema já declara para este caso. */
+.secao--superficie {
+  --cor-marca: var(--cor-marca-superficie);
+}

@@ -7,8 +7,9 @@
 // Código de Ética do Nutricionista, Res. CFN 599/2018, no lugar do CFM — ADR-008) e "imobiliario"
 // (corretor(a) de imóveis: identificação do CRECI e Código de Ética do COFECI, Res. COFECI 326/1992, no
 // lugar do CFM — ADR-009). Dois modos que só abrem por link direto: "demonstracao"
-// (médico ou escritório fictício, ADR-004 e ADR-006) e "proposta" (site de um negócio, nutricionista ou
-// corretora real ainda sem aprovação, ADR-005, ADR-008 e ADR-009).
+// (médico ou escritório fictício, ADR-004 e ADR-006) e "proposta" (site de um negócio, de uma sociedade de
+// advogados, de uma nutricionista ou de uma corretora real ainda sem aprovação, ADR-005, ADR-006 (emenda
+// 2026-09-28), ADR-008 e ADR-009).
 
 import { normalizar } from './html.mjs';
 
@@ -111,10 +112,28 @@ function exigirResumoDeDemonstracao(pagina, exigir) {
 function validarAdvocacia(pagina, exigir) {
   const sociedade = pagina.sociedade ?? {};
   exigir(texto(sociedade.nome), 'sociedade.nome ausente — ADR-006');
-  exigir(texto(sociedade.razaoSocial) && normalizar(sociedade.razaoSocial).includes('advogados'),
-    'sociedade.razaoSocial ausente ou sem "Advogados": é a razão social registrada na OAB (Lei 8.906/1994, art. 16) — ADR-006');
-  exigir(Array.isArray(sociedade.registros) && sociedade.registros.length > 0,
-    'sociedade.registros precisa do registro na seccional da OAB (Código de Ética e Disciplina da OAB, art. 44) — ADR-006');
+  if (ehProposta(pagina)) {
+    // O nome do contrato social ainda está a confirmar com o cliente (emenda 2026-09-28): a razão social
+    // provisória só precisa indicar que é sociedade de advocacia (Lei 8.906/1994, art. 16, § 4º).
+    exigir(texto(sociedade.razaoSocial) && normalizar(sociedade.razaoSocial).includes('advocacia'),
+      'sociedade.razaoSocial ausente ou sem "Advocacia": na proposta, o nome exato ainda está a confirmar, mas a razão '
+      + 'social precisa ao menos indicar que é sociedade de advocacia (Lei 8.906/1994, art. 16, § 4º) — ADR-006, emenda 2026-09-28');
+  } else {
+    exigir(texto(sociedade.razaoSocial) && ['advogados', 'sociedade individual de advocacia']
+      .some((termo) => normalizar(sociedade.razaoSocial).includes(termo)),
+      'sociedade.razaoSocial ausente ou sem "Advogados" nem "Sociedade Individual de Advocacia": é a razão social '
+      + 'registrada na OAB (Lei 8.906/1994, art. 16, § 4º, incluído pela Lei 13.247/2016) — ADR-006');
+  }
+  // Fora da proposta, o registro da sociedade na seccional é obrigatório; na proposta, pode faltar enquanto o
+  // número não chega da OAB — o verificar.mjs confere o que já existe (razão social, sócios) sem exigi-lo
+  // (ADR-006, emenda 2026-09-28). Se houver registro, o formato continua conferido nos dois casos.
+  if (ehProposta(pagina)) {
+    exigir(Array.isArray(sociedade.registros),
+      'sociedade.registros precisa ser uma lista (pode ficar vazia na proposta, enquanto o registro na OAB não chega) — ADR-006');
+  } else {
+    exigir(Array.isArray(sociedade.registros) && sociedade.registros.length > 0,
+      'sociedade.registros precisa do registro na seccional da OAB (Código de Ética e Disciplina da OAB, art. 44) — ADR-006');
+  }
   for (const [i, registro] of (sociedade.registros ?? []).entries()) {
     exigir(UFS.includes(registro.uf), `sociedade.registros[${i}].uf inválida`);
     exigir(FORMATO_OAB.test(registro.numero ?? ''), `sociedade.registros[${i}].numero fora do formato ("12.345")`);
@@ -133,7 +152,6 @@ function validarAdvocacia(pagina, exigir) {
   }
   exigir(texto(pagina.cidade), 'cidade ausente (a sede; aparece no índice)');
   exigir(UFS.includes(pagina.uf), 'uf ausente ou inválida (aparece no índice)');
-  exigir(!ehProposta(pagina), 'proposta é modo de página de negócio (ADR-005); escritório fictício usa demonstracao (ADR-006)');
   exigirResumoDeDemonstracao(pagina, exigir);
 }
 
@@ -251,8 +269,10 @@ function exigirRevisaoDeMedico(pagina, exigir) {
 
 function exigirRevisaoDeAdvocacia(pagina, exigir) {
   const revisao = pagina.revisao ?? {};
-  // Na demonstração não há escritório para conferir inscrições nem aprovar; a conferência OAB continua (ADR-006).
-  if (!ehDemonstracao(pagina)) {
+  // Na demonstração não há escritório para conferir inscrições nem aprovar (ADR-006); na proposta, o
+  // escritório real ainda não aprovou (ADR-006, emenda 2026-09-28, espelha ADR-008 e ADR-009). Nos dois
+  // casos a conferência pelo Provimento 205/2021 continua obrigatória.
+  if (!ehDemonstracao(pagina) && !ehProposta(pagina)) {
     exigir(FORMATO_DATA.test(revisao.oabConferidaEm ?? ''),
       'revisao.oabConferidaEm ausente: inscrições conferidas no Cadastro Nacional dos Advogados antes de publicar — regra 4 (ADR-006)');
     exigir(FORMATO_DATA.test(revisao.aprovadoPeloEscritorioEm ?? ''),
@@ -344,9 +364,9 @@ export function ehDemonstracao(pagina) {
 }
 
 /**
- * Proposta: página de um negócio (ADR-005), de uma nutricionista (ADR-008) ou de uma corretora de imóveis
- * (ADR-009) real, ainda sem aprovação — noindex, fora do sitemap, no índice com a etiqueta "Proposta · em
- * avaliação".
+ * Proposta: página de um negócio (ADR-005), de uma sociedade de advogados (ADR-006, emenda 2026-09-28), de
+ * uma nutricionista (ADR-008) ou de uma corretora de imóveis (ADR-009) real, ainda sem aprovação — noindex,
+ * fora do sitemap, no índice com a etiqueta "Proposta · em avaliação".
  */
 export function ehProposta(pagina) {
   return pagina.proposta === true;

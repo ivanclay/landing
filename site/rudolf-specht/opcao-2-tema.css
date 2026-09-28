@@ -1,0 +1,40 @@
+/*
+ * opcao-2-tema.css — identidade da opção 2 ("Noturno"): azul-noite com acento areia fosca, tela
+ * dividida. Cor e fonte só aqui (regra 10); opcao-2.css nunca escreve uma cor.
+ *
+ * Contraste (WCAG, fórmula relativa):
+ *   marfim #f2ede3 sobre fundo #0d1624              15,55:1
+ *   marfim #f2ede3 sobre superfície #152136         13,82:1
+ *   suave #b9c0cc sobre fundo #0d1624                 9,91:1
+ *   suave #b9c0cc sobre superfície #152136            8,81:1
+ *   areia #e4c79a sobre fundo #0d1624 (rubricas, numerais) 11,18:1
+ *   areia #e4c79a sobre superfície #152136             9,93:1
+ *   fundo #0d1624 sobre areia #e4c79a (texto do botão) 11,18:1
+ * Nenhum uso fica abaixo de 4,5:1; o fio --cor-linha é só decorativo (filete, borda), nunca texto.
+ */
+:root {
+  --cor-fundo: #0d1624;
+  --cor-superficie: #152136;
+  --cor-texto: #f2ede3;
+  --cor-texto-suave: #b9c0cc;
+  --cor-linha: #26344d;
+  --cor-marca: #e4c79a;
+  --cor-sobre-marca: #0d1624;
+  --cor-foco: #f2ede3;
+
+  --fonte-titulo: 'Instrument Serif', Georgia, 'Times New Roman', serif;
+  --fonte-texto: 'Hanken Grotesk Variable', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  --raio-botao: 2px;
+
+  /* Degradê da legenda sobre o retrato: o esfumado acontece no respiro de cima (--respiro-legenda);
+     do primeiro texto para baixo o fundo fica >= 92% opaco. Pior caso (camisa branca por baixo):
+     fundo efetivo aprox #2a3242 -> marfim 11,9:1, areia 8,6:1 -- ambos seguros. */
+  --respiro-legenda: 7rem;
+  --degrade-legenda: linear-gradient(to top,
+    #0d1624 0%,
+    rgb(13 22 36 / 0.92) calc(100% - var(--respiro-legenda)),
+    rgb(13 22 36 / 0) 100%);
+  --degrade-painel-borda: linear-gradient(to right, rgb(13 22 36 / 0.55), rgb(13 22 36 / 0) 14%);
+  --sombra-texto: 0 1px 12px rgb(4 8 14 / 0.6);
+}
