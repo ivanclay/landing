@@ -72,3 +72,10 @@ publicado"), na mesma condição do Hub Saúde Negócios: **"Proposta · em aval
 - **`tipo` genérico "saude" com conselho parametrizado** (CRN, CRP, CREFITO…): mais geral, mas cada conselho
   tem vedação própria (o art. 57 não existe no CFM). Revisitar quando houver o segundo conselho.
 - **Reusar `negocio`**: sem o CRN na página e sem o piso do CFN — a página poderia mostrar o preço e passar.
+
+## Emenda — 2026-09-27 (2): sem aviso na página
+O dono pediu para tirar da página o aviso "Proposta de página para…, em avaliação pela nutricionista": a
+condição de proposta fica **só na etiqueta "Proposta · em avaliação" do índice** (a página continua com
+`noindex` e fora do sitemap). Regra geral nova (`propostaAvisaNoTopo()` em `lib/pagina.mjs`): o
+`data-aviso-proposta` só é exigido quando há `siteOficial` a apontar (o caso do ADR-005). Testes ajustados em
+`nutricao.test.mjs`.

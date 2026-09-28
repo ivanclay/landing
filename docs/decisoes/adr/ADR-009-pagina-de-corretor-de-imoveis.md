@@ -51,5 +51,11 @@ CNAI) em `identifier`.
 
 ## Alternativas
 - **`tipo` genérico "profissional" com conselho parametrizado**: com o quarto conselho (CFM, OAB, CFN,
-  COFECI), a repetição já pesa. Revisitar: B-14.
+  COFECI), a repetição já pesa. Revisitar: B-15.
 - **Reusar `negocio`**: sem o CRECI na página, contra o art. 20, IV da Lei 6.530/1978.
+
+## Emenda — 2026-09-27: proposta sem aviso na página
+Por decisão do dono, a `karoline-melo` sai como **"Proposta · em avaliação" só no índice**, sem aviso na
+landing (mesma regra aplicada à emilia-kuwano, emenda 2 do ADR-008): sem `siteOficial`, a proposta não leva
+`data-aviso-proposta`; com `siteOficial`, o aviso continua obrigatório. Continua `noindex` e fora do sitemap
+até a aprovação da corretora. Testes em `imobiliario.test.mjs`.

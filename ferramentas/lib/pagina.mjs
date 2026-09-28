@@ -343,6 +343,14 @@ export function ehProposta(pagina) {
   return pagina.proposta === true;
 }
 
+/**
+ * A proposta sem site oficial não leva aviso na página, só a etiqueta "Proposta · em avaliação" no índice
+ * (decisão do dono, 2026-09-27: emenda do ADR-008 e do ADR-009). Com site oficial, o aviso diz qual é o verdadeiro.
+ */
+export function propostaAvisaNoTopo(pagina) {
+  return ehProposta(pagina) && Boolean(pagina.siteOficial);
+}
+
 /** Página que só abre por link direto: nunca no Google, no índice nem no sitemap (ADR-004, ADR-005). */
 export function soPorLinkDireto(pagina) {
   return ehDemonstracao(pagina) || ehProposta(pagina);
@@ -359,17 +367,11 @@ export function avisoDeDemonstracao(pagina) {
     + 'Os hospitais e planos citados não têm relação com esta página.';
 }
 
-/** O texto exato que o elemento data-aviso-proposta mostra no topo da página (ADR-005). */
+/**
+ * O texto exato que o elemento data-aviso-proposta mostra no topo da página (ADR-005). Só existe quando há um
+ * site oficial a apontar; a proposta sem site oficial (nutricionista, corretor) fica só na etiqueta do índice.
+ */
 export function avisoDeProposta(pagina) {
-  // Nutricionista sem site oficial: o aviso diz que a página ainda não foi aprovada por ela (ADR-008).
-  if (ehNutricao(pagina) && !pagina.siteOficial) {
-    return `Proposta de página para ${nomeDeExibicao(pagina)}, em avaliação pela nutricionista.`;
-  }
-  // Corretor(a) de imóveis sem site oficial: idem, com o gênero gramatical certo (ADR-009).
-  if (ehImobiliario(pagina) && !pagina.siteOficial) {
-    const quem = pagina.corretor.generoGramatical === 'F' ? 'pela corretora' : 'pelo corretor';
-    return `Proposta de página para ${nomeDeExibicao(pagina)}, em avaliação ${quem}.`;
-  }
   const oficial = new URL(pagina.siteOficial).hostname.replace(/^www\./, '');
   return `Proposta de novo site para ${nomeDeExibicao(pagina)}, em avaliação. Este não é o site oficial: `
     + `o site oficial é ${oficial}.`;

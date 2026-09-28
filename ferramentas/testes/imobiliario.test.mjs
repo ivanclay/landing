@@ -116,13 +116,11 @@ test('CRECI PENDENTE publicada não constrói', async () => {
 });
 
 // Proposta (ADR-009, espelha a emenda do ADR-008): publica antes da aprovação da corretora, só por link.
-const AVISO_PROPOSTA = 'Proposta de página para Fulana de Teste, em avaliação pela corretora.';
+// Sem site oficial, a proposta não leva aviso na página: só a etiqueta do índice (decisão do dono, 2026-09-27).
 const paginaProposta = () => paginaImobiliario({ proposta: true, revisao: { conferenciaCofeciEm: '2026-09-27' } });
-const htmlProposta = (comAviso = true) => htmlImobiliario().replace('<body>',
-  `<body>\n    ${comAviso ? `<p data-aviso-proposta>${AVISO_PROPOSTA}</p>` : ''}`);
 
 test('proposta de corretora passa sem a aprovação dela — noindex, fora do sitemap, etiqueta no índice', async () => {
-  await comSite({ pagina: paginaProposta(), html: htmlProposta() }, async (resultado, raiz) => {
+  await comSite({ pagina: paginaProposta(), html: htmlImobiliario() }, async (resultado, raiz) => {
     assert.equal(resultado.status, 0, resultado.stderr + resultado.stdout);
     const html = await readFile(path.join(raiz, '_site', SLUG, 'index.html'), 'utf8');
     assert.match(html, /<meta name="robots" content="noindex, nofollow">/);
@@ -133,8 +131,17 @@ test('proposta de corretora passa sem a aprovação dela — noindex, fora do si
   });
 });
 
-test('proposta de corretora sem o aviso no topo reprova', async () => {
-  await comSite({ pagina: paginaProposta(), html: htmlProposta(false) }, (resultado) => {
+test('proposta de corretora dispensa o aviso no topo', async () => {
+  await comSite({ pagina: paginaProposta(), html: htmlImobiliario() }, async (resultado, raiz) => {
+    assert.equal(resultado.status, 0, resultado.stderr + resultado.stdout);
+    const html = await readFile(path.join(raiz, '_site', SLUG, 'index.html'), 'utf8');
+    assert.doesNotMatch(html, /data-aviso-proposta/);
+  });
+});
+
+test('proposta com site oficial ainda exige o aviso no topo', async () => {
+  const pagina = paginaImobiliario({ proposta: true, siteOficial: 'https://exemplo.com.br', revisao: { conferenciaCofeciEm: '2026-09-27' } });
+  await comSite({ pagina, html: htmlImobiliario() }, (resultado) => {
     assert.notEqual(resultado.status, 0);
     assert.match(resultado.stderr, /sem o elemento data-aviso-proposta/);
   });

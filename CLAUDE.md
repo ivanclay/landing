@@ -236,7 +236,7 @@ ADR-005 — só com a conferência CFN feita.
 (`data-identificacao-creci`), Lei 6.530/1978, Res. COFECI 458/1995 e Código de Ética (Res. COFECI
 326/1992) no lugar da Res. CFM 2.336/2023 (`conferencia-cofeci.md`, `termos-vedados-cofeci.json`); a
 página anuncia a profissional, não imóveis; a regra 4 vira `creciConferidoEm` + `conferenciaCofeciEm` +
-`aprovadoPelaCorretoraEm`; `proposta: true` vale desde o início.
+`aprovadoPelaCorretoraEm`; `proposta: true` vale desde o início, sem aviso na página (só a etiqueta do índice).
 
 ### Decisões abertas
 

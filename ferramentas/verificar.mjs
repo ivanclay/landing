@@ -13,7 +13,7 @@ import {
 } from './lib/html.mjs';
 import {
   palavraMedico, ehAdvocacia, ehDemonstracao, ehImobiliario, ehNegocio, ehNutricao, ehProposta, avisoDeDemonstracao,
-  avisoDeProposta, inscricaoCrn, inscricaoCreci, profissaoCorretor,
+  avisoDeProposta, propostaAvisaNoTopo, inscricaoCrn, inscricaoCreci, profissaoCorretor,
 } from './lib/pagina.mjs';
 
 const LIMITE_IMAGEM_BYTES = 250 * 1024;
@@ -68,7 +68,7 @@ async function verificar() {
     else if (ehNutricao(pagina)) verificarIdentificacaoCrn(html, pagina, `${pasta}/index.html`);
     else if (ehImobiliario(pagina)) verificarIdentificacaoCreci(html, pagina, `${pasta}/index.html`);
     else if (!ehNegocio(pagina)) verificarIdentificacaoCfm(html, pagina, `${pasta}/index.html`);
-    if (ehProposta(pagina)) {
+    if (propostaAvisaNoTopo(pagina)) {
       verificarAvisoNoTopo(html, `${pasta}/index.html`, 'data-aviso-proposta', avisoDeProposta(pagina),
         'a proposta avisa no topo que não é o site oficial (ADR-005)');
     }
