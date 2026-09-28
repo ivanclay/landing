@@ -58,3 +58,6 @@ ficha, e os emojis viram tipografia.
 - **Pendente:** `creciConferidoEm`. A consulta pública do CRECI-BA
   (`creciba.conselho.net.br/form_pesquisa_cadastro_geral_site.php`) tem captcha (Cloudflare Turnstile): a
   conferência é do dono, no navegador — inscrição 36265, nome completo e situação; e o CNAI 58.909 ativo.
+- **`creciConferidoEm` = 2026-09-27 por decisão do dono** ("Acho melhor atualizar logo. Já vamos publicar"),
+  **sem a consulta no portal** (captcha). O CRECI 36.265 e o CNAI 58.909 são os que a própria corretora informou
+  [T 108]. A conferência no portal segue como pendência (B-16) — fazer e anotar aqui a data real.
