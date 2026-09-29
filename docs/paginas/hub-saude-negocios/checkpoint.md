@@ -33,3 +33,8 @@ Quando o dono trouxer as respostas: atualizar `briefing.md` (fonte = mensagem da
   logotipos em `imagens/marcas/`; token `--cor-vitrine` no `tema.css`.
 - **Próximo passo:** com a escolha, levar a seção e o CSS da opção para `index.html`/`pagina.css`, ajustar a
   frase do rodapé ("sem logotipo" → titulares), apagar `clientes*.html`, `clientes.css` e as miniaturas.
+
+## 2026-09-29 — opção 3 escolhida e publicada
+- O dono escolheu a **faixa em movimento**. A seção está no `index.html` (CSS no `pagina.css`); rodapé: "Nomes e logotipos das organizações pertencem aos seus titulares".
+- `clientes.html`, `clientes-1/2/3.html`, `clientes.css` e `imagens/miniatura-clientes-*` apagados. Capturas finais em `capturas/clientes-final-*.png`.
+- Segue valendo o **Falta** acima (respostas da Carla, aprovação, conferências à mão).

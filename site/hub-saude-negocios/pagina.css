@@ -221,36 +221,60 @@
 .diferencial dt { font-family: var(--fonte-titulo); font-size: var(--texto-destaque); font-weight: 650; }
 .diferencial dd { margin: var(--espaco-2) 0 0; color: var(--cor-texto-suave); max-width: var(--medida); }
 
-/* ---------- Experiência: parede tipográfica, por setor ---------- */
-.experiencia { padding-block: var(--espaco-9); border-top: 1px solid var(--cor-linha); }
-.experiencia__grupos {
+/* ---------- Experiência: duas esteiras de logotipos na faixa escura, em sentidos opostos ---------- */
+.experiencia {
+  padding-block: var(--espaco-9);
+  background: var(--cor-noite);
+  border-top: 0;
+  --cor-texto: var(--cor-noite-texto);
+  --cor-texto-suave: var(--cor-noite-suave);
+  --cor-foco: var(--cor-noite-foco);
+  color: var(--cor-texto);
+}
+.faixa { display: grid; gap: var(--espaco-4); margin-block: var(--espaco-7); }
+.faixa__janela {
+  overflow: hidden;
+  mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+}
+.faixa__trilho { display: flex; width: max-content; animation: faixa-rolar 70s linear infinite; }
+.faixa__janela--volta .faixa__trilho { animation-direction: reverse; }
+.faixa:hover .faixa__trilho { animation-play-state: paused; }
+.faixa__lista { display: flex; gap: var(--espaco-4); padding-right: var(--espaco-4); }
+.faixa__placa {
   display: grid;
-  gap: var(--espaco-7);
-  margin-top: var(--espaco-7);
+  place-items: center;
+  width: 11rem;
+  height: 6rem;
+  padding: var(--espaco-3) var(--espaco-4);
+  background: var(--cor-vitrine);
+  border-radius: 0.75rem;
 }
-.grupo__nome {
-  font-family: var(--fonte-texto);
-  font-size: var(--texto-apoio);
+.faixa__placa .marca__logo { max-width: 100%; max-height: 4rem; width: auto; height: auto; }
+@keyframes faixa-rolar { to { transform: translateX(-50%); } }
+
+/* Sem movimento: as placas param e quebram em linhas, sem a cópia da esteira. */
+@media (prefers-reduced-motion: reduce) {
+  .faixa__janela { mask-image: none; padding-inline: var(--margem-lateral); }
+  .faixa__trilho { width: auto; animation: none; justify-content: center; }
+  .faixa__lista { flex-wrap: wrap; justify-content: center; padding-right: 0; }
+  .faixa__lista--eco { display: none; }
+}
+
+.faixa__setores { border-top: 1px solid var(--cor-noite-suave); padding-top: var(--espaco-4); }
+.faixa__setores summary {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
   font-weight: 600;
-  color: var(--cor-marca);
-  padding-bottom: var(--espaco-3);
-  border-bottom: 1px solid var(--cor-linha);
+  cursor: pointer;
 }
-.grupo__lista { display: flex; flex-wrap: wrap; gap: var(--espaco-2) var(--espaco-5); margin-top: var(--espaco-4); }
-.grupo__lista .marca {
-  font-family: var(--fonte-titulo);
-  font-size: var(--texto-destaque);
-  font-weight: 500;
-  line-height: 1.3;
-}
-/* Logotipo autorizado: SVG monocromático na cor do texto, todos na mesma altura. */
-.marca__logo { width: auto; max-width: 100%; height: 2rem; }
-@media (min-width: 60rem) {
-  .experiencia__grupos { grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--espaco-6); }
-  .grupo { grid-column: span 4; }
-  .grupo:nth-child(2), .grupo:nth-child(3) { grid-column: span 8; }
-  .grupo:nth-child(3) { grid-column: 5 / -1; }
-}
+.faixa__setores summary::before { content: "+"; margin-right: var(--espaco-2); font-size: 1.25em; }
+.faixa__setores[open] summary::before { content: "−"; }
+.faixa__grupos { display: grid; gap: var(--espaco-5); margin-top: var(--espaco-4); }
+.faixa__grupo { font-family: var(--fonte-texto); font-size: var(--texto-apoio); font-weight: 600; color: var(--cor-menta); }
+.faixa__grupos ul { margin-top: var(--espaco-2); color: var(--cor-texto-suave); font-size: var(--texto-apoio); line-height: 1.6; }
+@media (min-width: 60rem) { .faixa__grupos { grid-template-columns: repeat(5, minmax(0, 1fr)); } }
+.experiencia .secao__acao { margin-top: var(--espaco-6); }
 
 /* ---------- Quem conduz ---------- */
 .carla { display: grid; gap: var(--espaco-7); }

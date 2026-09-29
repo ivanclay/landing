@@ -1,10 +1,10 @@
 # Tabela de projetos — Landing (páginas de profissionais no GitHub Pages)
 
-> **Última atualização:** 2026-09-28 10:07 (UTC−03:00)
+> **Última atualização:** 2026-09-29 09:39 (UTC−03:00)
 > **Atualizado por:** Claude Opus 5.5 · Ivan C M Moura
 > **Referências:** perfil e regras em [`CLAUDE.md`](../CLAUDE.md) (§5 decisões abertas, §8 delegação e custo) · índice em [`indice.md`](indice.md) · registro por segmento em [`metricas/implementacoes.csv`](metricas/implementacoes.csv) · delegações em [`metricas/delegacoes.csv`](metricas/delegacoes.csv)
 
-**Resumo:** 0 em andamento · 8 realizadas (questionário do cliente; ajuste da karoline-melo) · 0 pendentes · 1 bloqueado (rudolf-specht: 3 opções publicadas como proposta, aguarda a escolha do cliente) · decisões abertas no `CLAUDE.md` §5 (D-01, D-03 a D-06)
+**Resumo:** 0 em andamento · 8 realizadas (ajuste do hub-saude-negocios: faixa de clientes) · 0 pendentes · 1 bloqueado (rudolf-specht: 3 opções publicadas como proposta, aguarda a escolha do cliente) · decisões abertas no `CLAUDE.md` §5 (D-01, D-03 a D-06)
 
 ---
 
@@ -83,7 +83,8 @@ As delegações dos projetos anteriores: `karoline-melo` 7 tarefas (Sonnet 5; 1 
 | `karoline-melo` | Corretora de imóveis real (ADR-009, tipo `imobiliario`), 3 layouts, opção 3 escolhida e **aprovada** pela cliente, com 4 ajustes; publicada fora da proposta | 2026-09-27 22:20 | `af8a67a` | Claude Opus 5.5 + Sonnet 5 ×7 | Ivan C M Moura | Claude Opus 5.5 | 89 min (3 segmentos) | US$ 30,74 |
 | `questionario-cliente` | Questionário do cliente enviado antes da página: mestre com o porquê de cada pergunta + textos de envio por profissão (médico, advocacia, nutrição, imóveis, negócio); passo 0 no manual do operador e nas skills de briefing e página nova | 2026-09-28 09:33 | (este) | Claude Opus 5.5 + Sonnet 5 ×2 | Ivan C M Moura | Claude Opus 5.5 | 10 min | US$ 3,06 (inclui o agente do ajuste abaixo) |
 | `karoline-melo` · ajuste | "Fotógrafa, Corretora e Avaliadora de Imóveis" e "CRECI-BA 36.265 | CNAI 58.909" na abertura e no rodapé | 2026-09-28 09:31 | `3068151` | Sonnet 5 | Ivan C M Moura | Claude Sonnet 5 | — (dentro da sessão do questionario-cliente) | — |
-| **Total** | **8 projetos + 2 ajustes** | | | | | | **257 min** | **US$ 88,63** |
+| `hub-saude-negocios` · ajuste | Seção de clientes: opção 3 (faixa de logotipos em movimento) na página principal; páginas de escolha apagadas | 2026-09-29 09:39 | (este) | Claude Opus 5.5 | Ivan C M Moura | Claude Sonnet 5 | 3 min | — (ccusage sem preço para Opus 5.5) |
+| **Total** | **8 projetos + 3 ajustes** | | | | | | **260 min** | **US$ 88,63** (sem o ajuste de 29/09) |
 
 Reproduzir: somar por `slug` as colunas `duracao_min` e `custo_usd` de `metricas/implementacoes.csv`.
 
@@ -100,6 +101,7 @@ Reproduzir: somar por `slug` as colunas `duracao_min` e `custo_usd` de `metricas
 | `karoline-melo` | ●●●●○ | tipo imobiliário, norma do COFECI do zero, 3 layouts depois da recusa |
 | `questionario-cliente` | ●●○○○ | só documentação e processo; blocos de norma de cinco profissões a partir das conferências existentes |
 | `karoline-melo` · ajuste | ●○○○○ | uma linha de identificação em dois lugares |
+| `hub-saude-negocios` · ajuste | ●○○○○ | opção já construída e escolhida, levada para a página principal |
 
 ---
 
@@ -134,3 +136,4 @@ Decisões que valem para **todos** os projetos: **D-01** (domínio próprio, ant
 | 2026-09-27 22:20 | Claude Opus 5.5 | Ivan C M Moura | **`karoline-melo` realizada**: publicada aprovada (opção 3), CRECI conferido pelo dono no portal; B-16 fechada na parte do CRECI. Total 89 min, US$ 30,74. |
 | 2026-09-28 09:33 | Claude Opus 5.5 + Sonnet 5 ×2 | Ivan C M Moura | **`questionario-cliente` realizado**, a pedido do dono antes da página do Rudolf: `docs/questionario/` (mestre + `enviar/` por profissão), passo 0 no manual do operador e nas skills `briefing-medico-landing` e `nova-pagina-medico-landing`. Em paralelo, **ajuste da `karoline-melo`** (fotógrafa + CRECI/CNAI em duas linhas) publicado. 10 min, US$ 3,06 (os dois juntos). `adv-rudolf-mateus` entra em Pendentes. |
 | 2026-09-28 10:07 | Claude Opus 5.5 + Sonnet 5 ×4 | Ivan C M Moura | `rudolf-specht` (Specht Sociedade de Advocacia, OAB/BA 77.991): 3 opções (Tinta, Noturno, Trilha) e a página de escolha **publicadas como proposta**. A advocacia passa a aceitar proposta (ADR-006, emenda; 6 testes). Vai para Bloqueados, aguardando a escolha do cliente. 1º segmento: 29 min, US$ 15,96. |
+| 2026-09-29 09:39 | Claude Opus 5.5 | Ivan C M Moura | **`hub-saude-negocios` · ajuste realizado**: o dono escolheu a opção 3 (faixa em movimento) para a seção de clientes; levada ao `index.html`/`pagina.css`, rodapé com "nomes e logotipos pertencem aos titulares", `clientes*.html`, `clientes.css` e miniaturas apagados; o dono viu as capturas antes de publicar. 3 min; custo não disponível (ccusage devolve US$ 0 para `claude-opus-5-5`), tokens no relatório. |
