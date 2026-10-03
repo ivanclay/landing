@@ -1,10 +1,10 @@
 # Tabela de projetos — Landing (páginas de profissionais no GitHub Pages)
 
-> **Última atualização:** 2026-10-03 18:12 (UTC−03:00)
+> **Última atualização:** 2026-10-03 18:55 (UTC−03:00)
 > **Atualizado por:** Claude Opus 5.5 · Ivan C M Moura
 > **Referências:** perfil e regras em [`CLAUDE.md`](../CLAUDE.md) (§5 decisões abertas, §8 delegação e custo) · índice em [`indice.md`](indice.md) · registro por segmento em [`metricas/implementacoes.csv`](metricas/implementacoes.csv) · delegações em [`metricas/delegacoes.csv`](metricas/delegacoes.csv)
 
-**Resumo:** 0 em andamento · 8 realizadas (ajuste do hub-saude-negocios: faixa de clientes) · 0 pendentes · 2 bloqueados (rudolf-specht: aguarda a escolha do cliente; monica-santos: 3 opções prontas, aguarda o WhatsApp e a escolha da cliente) · decisões abertas no `CLAUDE.md` §5 (D-01, D-03 a D-06)
+**Resumo:** 0 em andamento · 8 realizadas (ajuste do hub-saude-negocios: faixa de clientes) · 0 pendentes · 2 bloqueados (rudolf-specht: aguarda a escolha do cliente; monica-santos: 3 opções no ar como proposta com WhatsApp fictício, aguarda a resposta da cliente) · decisões abertas no `CLAUDE.md` §5 (D-01, D-03 a D-06)
 
 ---
 
@@ -119,7 +119,7 @@ Reproduzir: somar por `slug` as colunas `duracao_min` e `custo_usd` de `metricas
 
 | Projeto | O que falta | Ref. |
 |---|---|---|
-| `monica-santos` | WhatsApp da Mônica (sem ele a página não publica); depois, a escolha entre Pérola, Orla e Planta, `creciConferidoEm` e a aprovação. Parcial: 14 min, US$ 4,83 (1 segmento) | [checkpoint](paginas/monica-santos/checkpoint.md) |
+| `monica-santos` | Resposta da cliente ([pendências](../entrada/cor-monica-santos/pencencias.md)): WhatsApp real (hoje fictício, DDD 20), Instagram/e-mail, nome e UF do CRECI, a escolha entre Pérola, Orla e Planta; depois `creciConferidoEm` e a aprovação. No ar como proposta. Parcial: 57 min, US$ 7,10 (2 segmentos, inclui o ajuste `entrada-no-repo`) | [checkpoint](paginas/monica-santos/checkpoint.md) |
 
 Decisões que valem para **todos** os projetos: **D-01** (domínio próprio, antes do primeiro QR impresso), D-03 a D-06 (`CLAUDE.md` §5).
 
@@ -148,3 +148,4 @@ Decisões que valem para **todos** os projetos: **D-01** (domínio próprio, ant
 | 2026-09-28 10:07 | Claude Opus 5.5 + Sonnet 5 ×4 | Ivan C M Moura | `rudolf-specht` (Specht Sociedade de Advocacia, OAB/BA 77.991): 3 opções (Tinta, Noturno, Trilha) e a página de escolha **publicadas como proposta**. A advocacia passa a aceitar proposta (ADR-006, emenda; 6 testes). Vai para Bloqueados, aguardando a escolha do cliente. 1º segmento: 29 min, US$ 15,96. |
 | 2026-09-29 09:39 | Claude Opus 5.5 | Ivan C M Moura | **`hub-saude-negocios` · ajuste realizado**: o dono escolheu a opção 3 (faixa em movimento) para a seção de clientes; levada ao `index.html`/`pagina.css`, rodapé com "nomes e logotipos pertencem aos titulares", `clientes*.html`, `clientes.css` e miniaturas apagados; o dono viu as capturas antes de publicar. 3 min; custo não disponível (ccusage devolve US$ 0 para `claude-opus-5-5`), tokens no relatório. |
 | 2026-10-03 18:12 | Claude Opus 5.5 + Sonnet 5.5 ×3 | Ivan C M Moura | `monica-santos` (corretora, CRECI-BA 37.685): 3 opções (Pérola, Orla, Planta) e a página de escolha, em rascunho na branch: o texto dela não trouxe contato e o dono pediu para construir com pendências. O contrato aceita `contato.whatsapp: "PENDENTE"` só em rascunho (2 testes). Vai para Bloqueados. 1º segmento: 14 min, US$ 4,83. |
+| 2026-10-03 18:55 | Claude Opus 5.5 | Ivan C M Moura | `monica-santos` **publicada como proposta** com WhatsApp fictício (DDD 20), por decisão do dono; pendências para a cliente em `entrada/`. Ajuste **`entrada-no-repo`** (ADR-010): `entrada/` versionada no repositório público. Pausado aguardando a cliente. 2º segmento: 43 min (parede), US$ 2,27. |

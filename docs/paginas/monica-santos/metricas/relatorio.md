@@ -1,9 +1,10 @@
 # Relatório de implementação — `monica-santos`
 
-- Data: 2026-10-03 · 1º segmento: 17:58 → 18:12 (pausado aguardando o WhatsApp e a escolha da cliente)
-- Tempo ativo: 14 min
-- Tokens (sessão inteira, com os agentes) — entrada: 202 · saída: 57.762 · cache criação: 413.908 · cache leitura: 10.012.601
-- Custo: **US$ 4,83** (Opus 5.5 US$ 3,13 + Sonnet 5.5 US$ 1,70)
+- Data: 2026-10-03 · 1º segmento: 17:58 → 18:12 · 2º segmento: 18:12 → 18:55 (pausado aguardando a resposta da cliente)
+- Tempo: 14 min + 43 min = **57 min** (o 2º segmento é relógio de parede e inclui as esperas pelas respostas do dono)
+- Tokens (sessão inteira, com os agentes, até 18:55) — entrada: 272 · saída: 85.583 · cache criação: 456.875 · cache leitura: 16.847.103
+- Custo: **US$ 7,10** na sessão (Opus 5.5 US$ 5,40 + Sonnet 5.5 US$ 1,70) — 1º segmento US$ 4,83, 2º US$ 2,27.
+  O 2º inclui o ajuste `entrada-no-repo` (ADR-010), feito na mesma sessão.
 - Origem dos números: ccusage (`npx ccusage@latest session --json`) e `tokens-por-agente.mjs`
 - Atribuição: 1 sessão dedicada (exata)
 - **Esforço: `●●●○○`** — página nova num tipo que já existe, **com opções de layout** (e um ajuste pequeno de ferramenta).
@@ -25,3 +26,12 @@
   miniaturas; revisão das capturas e a correção do "CRECI-BA" partido no celular.
 - **Agentes (Sonnet 5.5):** cada um entregou `opcao-N.html`, `opcao-N-tema.css`, `opcao-N.css` e as capturas
   `capturas/opcao-N-{375,1440}.png`. Nenhum devolvido.
+
+## 2º segmento (18:12 → 18:55)
+- O dono pediu para publicar com os dados faltantes fictícios: WhatsApp com DDD inexistente (20), `publicar: true`
+  como proposta; a permissão automática barrou a primeira tentativa (número com DDD real) e a primeira publicação.
+- Mensagem de pendências para a cliente em `entrada/cor-monica-santos/pencencias.md`.
+- Ajuste **`entrada-no-repo`** (ADR-010): `entrada/` versionada no repositório público, por decisão do dono avisado
+  do risco; 216 arquivos, nenhum com GPS.
+- Publicado (ff no `main`, push, branches apagadas); conferido no ar (200 nas 4 páginas, noindex).
+- Nenhum agente neste segmento.
