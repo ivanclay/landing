@@ -2,10 +2,6 @@
 _site/
 node_modules/
 
-# Originais de foto e logotipo: pesados e com EXIF (GPS). Só o otimizado entra, em site/<slug>/imagens/
-entrada/*
-!entrada/README.md
-
 # Métricas em andamento (registro-implementacao-landing)
 docs/paginas/*/metricas/.registro-snapshot.json
 

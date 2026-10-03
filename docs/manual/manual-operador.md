@@ -14,7 +14,7 @@ depois (foto errada, cor recusada, número de registro faltando).
   [`docs/questionario/questionario-cliente.md`](../questionario/questionario-cliente.md).
 - Se o cliente **já mandou** parte da informação, **apague** do texto as perguntas já respondidas antes
   de enviar. Questionário que repete o que o cliente já disse irrita.
-- Guarde as respostas em `entrada/<área>-<nome>/` (fora do git) do jeito que chegaram — mensagem, áudio
+- Guarde as respostas em `entrada/<área>-<nome>/` (no repositório público, fora do ar — ADR-010) do jeito que chegaram — mensagem, áudio
   transcrito, arquivo. O briefing cita cada fato como "questionário respondido em `<data>`".
 - **Não use formulário on-line** (Google Forms, Typeform ou parecido) para colher as respostas: WhatsApp
   e e-mail já são o canal do cliente, e um formulário põe dado dele num terceiro sem necessidade.
@@ -41,7 +41,7 @@ Ele devolve uma lista em dois grupos:
 ⌗ **Sobre o RQE:** sem o RQE de uma área, a página não pode chamar o médico de "especialista" nela.
 Ela escreve "atende pacientes com…". Isso é regra do CFM, não escolha de estilo.
 
-**Fotos e logotipo:** coloque os originais em `entrada/<área>-<nome>/` (prefixo da área: `med-`, `adv-`, `nut-`, `cor-`, `bus-`; ex.: `adv-rudolf-mateus`). Essa pasta não vai para o GitHub.
+**Fotos e logotipo:** coloque os originais em `entrada/<área>-<nome>/` (prefixo da área: `med-`, `adv-`, `nut-`, `cor-`, `bus-`; ex.: `adv-rudolf-mateus`). Essa pasta vai para o GitHub (repositório **público**, ADR-010), mas não para o ar: confira que a foto não tem GPS e não guarde ali documento pessoal.
 Use só foto real do médico, com autorização. Banco de imagem não serve.
 
 ## 3. Aprovar o visual

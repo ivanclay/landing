@@ -22,7 +22,7 @@ quando alguém quiser mudar.
 | 2 | Formulário, campo, embed | `verificar.mjs` reprova `form`, `iframe`, `embed`, `object` | Alta |
 | 3 | Links externos | `rel="noopener"` em `_blank`; só `https:`, `tel:`, `mailto:` (verificado) | Média |
 | 4 | EXIF/GPS nas fotos | `npx --yes exifr site/<slug>/imagens/*.jpg` ou `exiftool` — **nenhum** GPS; `npm run imagens` já remove | Alta |
-| 5 | Arquivo sensível no git | `git ls-files` — nada de `entrada/`, RG, diploma, print de conversa, contrato, planilha de pacientes | Crítica |
+| 5 | Arquivo sensível no git | `git ls-files` — `entrada/` entra (ADR-010), mas sem foto com GPS, RG, diploma, print de conversa, contrato ou planilha de pacientes | Crítica |
 | 6 | Mensagem pré-preenchida do WhatsApp | não pede sintoma, exame nem dado de saúde | Média |
 | 7 | Workflow | `permissions` mínimas por job; ações oficiais `actions/*` fixadas em versão maior; nenhum segredo; nada de `pull_request_target` | Alta |
 | 8 | Proteção do `main` | revisão obrigatória, status check `verificar`, sem push direto (conferir em Settings, com o dono) | Média |
