@@ -33,8 +33,14 @@
 Texto em `texto.md`, construído sobre as frases dela, conferido em `conferencia-cofeci.md`. As explicações
 curtas de MCMV, SBPE e FGTS são redação de caráter geral, sem condição, taxa ou prazo.
 
+## Decisão do dono — 2026-10-03: publicar com WhatsApp fictício
+*"publique com os dados que faltam de forma fake"* e *"coloque código de área inexistente, que nunca vai coincidir
+com ninguém"*. WhatsApp **+55 20 90000-0000**: o DDD 20 não existe no Brasil, então nenhuma pessoa recebe as
+mensagens. É **marcador, não fato**: troca-se pelo número dela antes de mandar o link para qualquer pessoa além da
+Mônica. A página segue como proposta (noindex, fora do sitemap, só por link).
+
 ## Pendências
-- P-01 **WhatsApp** (obrigatório): trava publicar. Nas três opções o botão aponta para `wa.me/PENDENTE`.
+- P-01 **WhatsApp** (obrigatório): hoje o número é fictício (DDD 20), por decisão do dono. Trocar em `pagina.json` e nos `wa.me/5520900000000` das três opções.
 - P-02 **Instagram** e **e-mail** (opcionais): entram se ela quiser.
 - P-03 **Nome completo** e **região do CRECI** conferidos na consulta pública (`revisao.creciConferidoEm`, dono).
 - P-04 **Instituição** de que é correspondente bancária (opcional na página; se entrar, com o nome exato).

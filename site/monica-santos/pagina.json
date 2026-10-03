@@ -1,7 +1,7 @@
 {
   "slug": "monica-santos",
   "tipo": "imobiliario",
-  "publicar": false,
+  "publicar": true,
   "proposta": true,
   "atualizadoEm": "2026-10-03",
   "corretor": {
@@ -17,7 +17,7 @@
   "cidade": "Salvador",
   "uf": "BA",
   "contato": {
-    "whatsapp": "PENDENTE"
+    "whatsapp": "+5520900000000"
   },
   "imagemSocial": "imagens/social.jpg",
   "revisao": {
