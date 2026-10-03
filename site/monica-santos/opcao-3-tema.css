@@ -1,0 +1,44 @@
+/*
+ * opcao-3-tema.css — identidade da opção 3, "Planta" (clara, arquitetônica). Cor e fonte moram só aqui
+ * (regra 10). Papel, verde-folha tirado da planta do retrato, lima só como detalhe sobre o verde.
+ *
+ * Contraste (WCAG 2.1, luminância relativa em node — script descartável no scratchpad, c3.mjs):
+ *   grafite #2B2F2C sobre papel #FBFBF8            13,10:1
+ *   grafite sobre branco #FFFFFF                    13,59:1
+ *   grafite sobre verde-claro #DCE9E1               10,86:1
+ *   cinza-técnico #5D6661 sobre papel                5,72:1
+ *   cinza-técnico sobre branco                       5,93:1
+ *   cinza-técnico sobre verde-claro                  4,74:1
+ *   verde-folha #1E4D3B sobre papel                  9,29:1  (títulos, rótulos, botão principal e secundário)
+ *   verde-folha sobre branco                         9,63:1
+ *   verde-folha sobre verde-claro                    7,70:1
+ *   branco sobre verde-folha                         9,63:1  (blocos escuros, botão principal)
+ *   verde-claro sobre verde-folha                    7,70:1
+ *   verde-suave #BDD5C6 sobre verde-folha            6,19:1  (texto secundário nos blocos escuros)
+ *   lima #C8E06B sobre verde-folha                   6,57:1  (rótulos e detalhes sobre o verde)
+ *   verde-folha sobre lima (botão lima)              6,57:1
+ * Todo texto passa AA (>= 4,5:1). A linha #D5DDD7 e a grade são só desenho, nunca texto.
+ */
+:root {
+  --cor-fundo: #fbfbf8;
+  --cor-superficie: #ffffff;
+  --cor-texto: #2b2f2c;
+  --cor-texto-suave: #5d6661;
+  --cor-linha: #d5ddd7;
+  --cor-marca: #1e4d3b;
+  --cor-sobre-marca: #ffffff;
+  --cor-foco: #1e4d3b;
+
+  --cor-verde: #1e4d3b;
+  --cor-verde-claro: #dce9e1;
+  --cor-verde-suave: #bdd5c6;
+  --cor-lima: #c8e06b;
+  --cor-grade: rgba(30, 77, 59, 0.07);
+  --cor-grade-forte: rgba(30, 77, 59, 0.16);
+  --cor-grade-verde: rgba(200, 224, 107, 0.09);
+  --cor-sombra: rgba(30, 77, 59, 0.18);
+
+  --fonte-titulo: 'Bricolage Grotesque Variable', 'Bricolage Grotesque', system-ui, sans-serif;
+  --fonte-texto: 'Public Sans Variable', 'Public Sans', system-ui, sans-serif;
+  --raio-botao: 2px;
+}

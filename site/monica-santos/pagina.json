@@ -1,0 +1,28 @@
+{
+  "slug": "monica-santos",
+  "tipo": "imobiliario",
+  "publicar": false,
+  "proposta": true,
+  "atualizadoEm": "2026-10-03",
+  "corretor": {
+    "nome": "Mônica Santos",
+    "generoGramatical": "F",
+    "titulo": "Crédito e financiamento habitacional",
+    "creci": {
+      "uf": "BA",
+      "numero": "37.685"
+    }
+  },
+  "resumo": "Mônica Santos, corretora de imóveis em Salvador e Região Metropolitana: imóveis prontos, na planta e lançamentos, com apoio no financiamento.",
+  "cidade": "Salvador",
+  "uf": "BA",
+  "contato": {
+    "whatsapp": "PENDENTE"
+  },
+  "imagemSocial": "imagens/social.jpg",
+  "revisao": {
+    "creciConferidoEm": "",
+    "conferenciaCofeciEm": "2026-10-03",
+    "aprovadoPelaCorretoraEm": ""
+  }
+}

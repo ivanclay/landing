@@ -1,0 +1,47 @@
+/*
+ * opcao-1-tema.css — identidade da opção 1, "Pérola" (clara, joalheria editorial).
+ * Cor e fonte moram só aqui (regra 10). Vêm do retrato: pérola do brinco, ônix do blazer, ouro do aro.
+ *
+ * Contraste (WCAG 2.1, luminância relativa em node — script descartável no scratchpad):
+ *   ônix #141414 sobre pérola #F6F3EE          16,64:1  (texto)
+ *   ônix #141414 sobre branco #FFFFFF          18,42:1
+ *   grafite #4A4A4A sobre pérola                8,01:1  (texto suave)
+ *   grafite #4A4A4A sobre branco                8,86:1
+ *   pérola #F6F3EE sobre ônix                  16,64:1  (blocos escuros)
+ *   branco #FFFFFF sobre ônix                  18,42:1  (botão principal)
+ *   cinza-claro #C9C9C9 sobre ônix             11,13:1  (texto suave nos blocos escuros)
+ *   ouro-claro #D9C29A sobre ônix              10,64:1  (texto e citação sobre ônix)
+ *   ônix sobre ouro-claro #D9C29A              10,64:1  (botão principal nos blocos escuros)
+ *   ouro #B08D57 sobre ônix                     5,96:1  (ícone/algarismo sobre ônix)
+ *   ouro-texto #8A6A35 sobre branco             5,01:1  (rubricas e algarismos sobre claro)
+ *   ouro-texto #8A6A35 sobre pérola             4,52:1  (idem; passa AA)
+ *   ouro #B08D57 sobre branco 3,09:1 / sobre pérola 2,79:1 — por isso NUNCA texto: só fio, moldura e
+ *     pérola decorativa (ornamento, não carrega informação).
+ * Todo texto de corpo passa AA (>= 4,5:1).
+ * Instrument Serif só existe em peso 400 normal: o itálico é sintetizado pelo navegador (aceito no plano).
+ */
+:root {
+  --cor-fundo: #f6f3ee;
+  --cor-superficie: #ffffff;
+  --cor-texto: #141414;
+  --cor-texto-suave: #4a4a4a;
+  --cor-linha: #e2dccf;
+  --cor-marca: #141414;
+  --cor-sobre-marca: #ffffff;
+  --cor-foco: #8a6a35;
+
+  --cor-onix: #141414;
+  --cor-onix-suave: #1f1f1f;
+  --cor-texto-suave-onix: #c9c9c9;
+  --cor-ouro: #b08d57;
+  --cor-ouro-texto: #8a6a35;
+  --cor-ouro-claro: #d9c29a;
+  --cor-perola-sombra: #d8d1c4;
+
+  --fonte-titulo: 'Instrument Serif', Georgia, 'Times New Roman', serif;
+  --fonte-texto: 'DM Sans Variable', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  --raio-botao: 999px;
+  --sombra-ficha: 0 24px 48px -28px rgba(20, 20, 20, 0.35), 0 2px 6px -2px rgba(20, 20, 20, 0.08);
+  --gradiente-perola: radial-gradient(circle at 32% 28%, #ffffff 0%, #f3eee4 38%, #d9d0bf 100%);
+}

@@ -15,3 +15,6 @@ data,projeto,tarefa,executor,modelo,resultado,tentativas,observacao
 2026-09-28,rudolf-specht,Opcao 1 Tinta (clara editorial),agente a347d134,claude-sonnet-5,aceita; publicada para a escolha,1,cabecalho normalizado pelo coordenador
 2026-09-28,rudolf-specht,Opcao 2 Noturno (escura tela dividida),agente ad84645f,claude-sonnet-5,aceita; publicada para a escolha,2,devolvida: menu quebrando e ponto solto na legenda no celular
 2026-09-28,rudolf-specht,Opcao 3 Trilha (clara em cartoes),agente ad57e00b,claude-sonnet-5,aceita; publicada para a escolha,2,devolvida: titulo em 7 linhas e icones minusculos na barra; selo corrigido pelo coordenador
+2026-10-03,monica-santos,Opcao 1 Perola (clara joalheria),agente a4d66c4a,claude-sonnet-5-5,aceita; aguardando a escolha,1,CRECI partido no celular corrigido pelo coordenador
+2026-10-03,monica-santos,Opcao 2 Orla (escura tela dividida mar),agente af0e3d59,claude-sonnet-5-5,aceita; aguardando a escolha,1,CRECI partido no celular corrigido pelo coordenador
+2026-10-03,monica-santos,Opcao 3 Planta (clara arquitetonica),agente aca3b220,claude-sonnet-5-5,aceita; aguardando a escolha,1,CRECI partido no celular corrigido pelo coordenador

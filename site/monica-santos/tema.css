@@ -1,0 +1,19 @@
+/*
+ * tema.css — a página de escolha entre as três propostas (cada opção tem o próprio opcao-N-tema.css).
+ * Neutra de propósito, para não puxar a escolha para nenhuma das três.
+ * Contraste (WCAG): texto #1B1D1F / fundo #F7F7F5 16,0:1 · suave #55595E / fundo 6,9:1 ·
+ * marca #1F2A44 / fundo 13,5:1 · suave / superfície #FFFFFF 7,4:1.
+ */
+:root {
+  --cor-fundo: #f7f7f5;
+  --cor-superficie: #ffffff;
+  --cor-texto: #1b1d1f;
+  --cor-texto-suave: #55595e;
+  --cor-marca: #1f2a44;
+  --cor-linha: #dcdcd8;
+  --cor-foco: #1f2a44;
+  --sombra-cartao: 0 1px 2px rgb(27 29 31 / 0.06), 0 12px 32px rgb(27 29 31 / 0.08);
+  --fonte-titulo: 'Newsreader Variable', Georgia, serif;
+  --fonte-texto: 'Jost Variable', system-ui, sans-serif;
+}
+body { background: var(--cor-fundo); color: var(--cor-texto); font-family: var(--fonte-texto); }

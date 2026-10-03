@@ -115,6 +115,26 @@ test('CRECI PENDENTE publicada não constrói', async () => {
   });
 });
 
+test('WhatsApp PENDENTE publicado não constrói (regras 1 e 5)', async () => {
+  const pagina = paginaImobiliario({ contato: { whatsapp: 'PENDENTE' } });
+  await comSite({ pagina, html: htmlImobiliario() }, (resultado) => {
+    assert.notEqual(resultado.status, 0);
+    assert.match(resultado.stderr, /contato\.whatsapp PENDENTE/);
+  });
+});
+
+test('WhatsApp PENDENTE em rascunho constrói, mas a página que mostra PENDENTE reprova e o JSON-LD fica sem telefone', async () => {
+  const pagina = paginaImobiliario({ publicar: false, contato: { whatsapp: 'PENDENTE' } });
+  await comSite({ pagina, html: htmlImobiliario({ texto: 'WhatsApp PENDENTE' }), rascunhos: true }, async (resultado, raiz) => {
+    assert.notEqual(resultado.status, 0);
+    assert.doesNotMatch(resultado.stderr, /contato\.whatsapp/);
+    assert.match(resultado.stdout + resultado.stderr, /PENDENTE/);
+    const html = await readFile(path.join(raiz, '_site', SLUG, 'index.html'), 'utf8');
+    const dados = JSON.parse(/<script type="application\/ld\+json">([^<]+)<\/script>/.exec(html)[1]);
+    assert.equal(dados.telephone, undefined);
+  });
+});
+
 // Proposta (ADR-009, espelha a emenda do ADR-008): publica antes da aprovação da corretora, só por link.
 // Sem site oficial, a proposta não leva aviso na página: só a etiqueta do índice (decisão do dono, 2026-09-27).
 const paginaProposta = () => paginaImobiliario({ proposta: true, revisao: { conferenciaCofeciEm: '2026-09-27' } });

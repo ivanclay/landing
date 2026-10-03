@@ -59,3 +59,6 @@ Por decisão do dono, a `karoline-melo` sai como **"Proposta · em avaliação" 
 landing (mesma regra aplicada à emilia-kuwano, emenda 2 do ADR-008): sem `siteOficial`, a proposta não leva
 `data-aviso-proposta`; com `siteOficial`, o aviso continua obrigatório. Continua `noindex` e fora do sitemap
 até a aprovação da corretora. Testes em `imobiliario.test.mjs`.
+
+## Emenda — 2026-10-03: contato PENDENTE em rascunho
+Na `monica-santos`, o texto da corretora veio sem nenhum contato e o dono pediu para construir com as pendências. O contrato (`lib/pagina.mjs`, vale para todos os tipos) passa a aceitar `contato.whatsapp` ou `contato.telefone` igual a `"PENDENTE"` **só com `publicar` diferente de `true`**, como já era com o CRECI e o CRN; o JSON-LD do corretor omite o telefone pendente, e o `verificar.mjs` reprova a página que mostra `PENDENTE` (regra 1). Testes em `imobiliario.test.mjs`.

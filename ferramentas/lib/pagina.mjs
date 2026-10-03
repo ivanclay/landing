@@ -60,7 +60,13 @@ export function validarPagina(pagina, pasta) {
   exigir(texto(contato.whatsapp) || texto(contato.telefone) || texto(contato.agendamento),
     'contato precisa de whatsapp, telefone ou agendamento — é o único caminho da página até quem a lê (regra 5)');
   for (const campo of ['whatsapp', 'telefone']) {
-    if (texto(contato[campo])) exigir(FORMATO_E164.test(contato[campo]), `contato.${campo} precisa estar em E.164 (+5571991234567)`);
+    // Como o CRECI e o CRN: o número que ainda não chegou deixa construir o rascunho (a página mostra PENDENTE e
+    // o verificar.mjs reprova, regra 1), mas nunca publica.
+    if (contato[campo] === PENDENTE) {
+      exigir(pagina.publicar !== true, `contato.${campo} PENDENTE: sem o contato real a página não publica — regras 1 e 5`);
+    } else if (texto(contato[campo])) {
+      exigir(FORMATO_E164.test(contato[campo]), `contato.${campo} precisa estar em E.164 (+5571991234567)`);
+    }
   }
   if (texto(contato.agendamento)) exigir(contato.agendamento.startsWith('https://'), 'contato.agendamento precisa ser https://');
 

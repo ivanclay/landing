@@ -220,7 +220,8 @@ function dadosDaNutricao(pagina, url, versaoImagem) {
  * — só o que o pagina.json afirma (regra 1).
  */
 function dadosDoImobiliario(pagina, url, versaoImagem) {
-  const { corretor, contato = {} } = pagina;
+  const { corretor } = pagina;
+  const contato = Object.fromEntries(Object.entries(pagina.contato ?? {}).filter(([, valor]) => valor !== 'PENDENTE'));
   const pessoa = { '@type': 'Person', name: corretor.nome, jobTitle: profissaoCorretor(pagina) };
   if (corretor.creci !== 'PENDENTE') {
     pessoa.identifier = [{ '@type': 'PropertyValue', propertyID: `CRECI-${corretor.creci.uf}`, value: corretor.creci.numero }];

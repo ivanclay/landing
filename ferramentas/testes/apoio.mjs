@@ -29,9 +29,10 @@ async function montarSite({ pagina, html, creditos = null, extras = {} }) {
   return raiz;
 }
 
-function rodar(raiz) {
+function rodar(raiz, rascunhos = false) {
   const opcoes = { cwd: raiz, env: { ...process.env, LANDING_RAIZ: raiz }, encoding: 'utf8' };
-  const construcao = spawnSync(process.execPath, [path.join(RAIZ_DO_CODIGO, 'ferramentas', 'construir.mjs')], opcoes);
+  const argumentos = [path.join(RAIZ_DO_CODIGO, 'ferramentas', 'construir.mjs'), ...(rascunhos ? ['--rascunhos'] : [])];
+  const construcao = spawnSync(process.execPath, argumentos, opcoes);
   if (construcao.status !== 0) return construcao;
   return spawnSync(process.execPath, [path.join(RAIZ_DO_CODIGO, 'ferramentas', 'verificar.mjs')], opcoes);
 }
@@ -40,7 +41,7 @@ function rodar(raiz) {
 export async function comSite(opcoes, conferir) {
   const raiz = await montarSite(opcoes);
   try {
-    await conferir(rodar(raiz), raiz);
+    await conferir(rodar(raiz, opcoes.rascunhos === true), raiz);
   } finally {
     await rm(raiz, { recursive: true, force: true });
   }
