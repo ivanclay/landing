@@ -126,3 +126,11 @@ judiciais cabíveis.
 | Data | Mudança | Fonte |
 |---|---|---|
 | 2026-09-28 | Criado a partir do texto do cliente; 3 opções de layout como proposta | pedido do dono |
+
+## Escolha do cliente (2026-10-05)
+
+- O Rudolf escolheu a **opção 2 "Noturno"** (azul-noite e areia, retrato em cores fixo ao lado do texto). Fonte:
+  mensagem do cliente ao dono, repassada na conversa de 2026-10-05 ("gostou da opção 2, vamos publicar").
+- A opção 2 virou `index.html`, `tema.css` e `pagina.css`; a página de escolha, as opções 1 e 3, as miniaturas
+  e as prévias das outras opções saíram. Nenhum fato nem frase mudou: a conferência OAB de 2026-09-28 vale.
+- Gostar do layout **não** é a aprovação da página inteira: `aprovadoPeloEscritorioEm` segue vazio (regra 4).

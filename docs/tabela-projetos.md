@@ -1,10 +1,10 @@
 # Tabela de projetos — Landing (páginas de profissionais no GitHub Pages)
 
-> **Última atualização:** 2026-10-03 18:55 (UTC−03:00)
+> **Última atualização:** 2026-10-05 11:04 (UTC−03:00)
 > **Atualizado por:** Claude Opus 5.5 · Ivan C M Moura
 > **Referências:** perfil e regras em [`CLAUDE.md`](../CLAUDE.md) (§5 decisões abertas, §8 delegação e custo) · índice em [`indice.md`](indice.md) · registro por segmento em [`metricas/implementacoes.csv`](metricas/implementacoes.csv) · delegações em [`metricas/delegacoes.csv`](metricas/delegacoes.csv)
 
-**Resumo:** 0 em andamento · 8 realizadas (ajuste do hub-saude-negocios: faixa de clientes) · 0 pendentes · 2 bloqueados (rudolf-specht: aguarda a escolha do cliente; monica-santos: versão final Pérola no ar como proposta com os dados reais, aguarda o CRECI conferido pelo dono e a aprovação final da cliente) · decisões abertas no `CLAUDE.md` §5 (D-01, D-03 a D-06)
+**Resumo:** 0 em andamento · 8 realizadas (ajuste do hub-saude-negocios: faixa de clientes) · 0 pendentes · 2 bloqueados (rudolf-specht: opção 2 Noturno escolhida e no ar como proposta, aguarda a OAB conferida pelo dono e a aprovação final do escritório; monica-santos: versão final Pérola no ar como proposta com os dados reais, aguarda o CRECI conferido pelo dono e a aprovação final da cliente) · decisões abertas no `CLAUDE.md` §5 (D-01, D-03 a D-06)
 
 ---
 
@@ -32,7 +32,7 @@
 
 | Projeto | O que é | Início | Branch | Modelo | Desenvolvedor | Modelo sugerido | Observação |
 |---|---|---|---|---|---|---|---|
-| `rudolf-specht` | Escolha de uma das 3 opções e os ajustes do Rudolf; razão social e registro da sociedade na OAB/BA; `oabConferidaEm` (dono, no CNA). Parcial: 29 min, US$ 15,96 (1 segmento) | ADR-006 (emenda 2026-09-28), [checkpoint](paginas/rudolf-specht/checkpoint.md) | — | — | — | — | — |
+| — | — | — | — | — | — | — | — |
 
 ## 2. Pendentes — **estimativa**
 
@@ -120,6 +120,7 @@ Reproduzir: somar por `slug` as colunas `duracao_min` e `custo_usd` de `metricas
 | Projeto | O que falta | Ref. |
 |---|---|---|
 | `monica-santos` | A cliente respondeu (2026-10-05): escolheu a **Pérola**; WhatsApp, Instagram e e-mail reais no ar como proposta. Falta `creciConferidoEm` (dono, CRECI-BA) e `aprovadoPelaCorretoraEm` (aprovação da versão final). Parcial: 60 min, US$ 8,35 (3 segmentos, 2 sessões dedicadas) | [checkpoint](paginas/monica-santos/checkpoint.md) |
+| `rudolf-specht` | O cliente escolheu a **opção 2 "Noturno"** (2026-10-05), no ar como proposta. Falta `oabConferidaEm` (dono, no CNA), `aprovadoPeloEscritorioEm`, razão social e registro da sociedade na OAB/BA, endereço. Parcial: 33 min, US$ 17,10 (2 segmentos, 2 sessões dedicadas) | [checkpoint](paginas/rudolf-specht/checkpoint.md) |
 
 Decisões que valem para **todos** os projetos: **D-01** (domínio próprio, antes do primeiro QR impresso), D-03 a D-06 (`CLAUDE.md` §5).
 
@@ -150,3 +151,4 @@ Decisões que valem para **todos** os projetos: **D-01** (domínio próprio, ant
 | 2026-10-03 18:12 | Claude Opus 5.5 + Sonnet 5.5 ×3 | Ivan C M Moura | `monica-santos` (corretora, CRECI-BA 37.685): 3 opções (Pérola, Orla, Planta) e a página de escolha, em rascunho na branch: o texto dela não trouxe contato e o dono pediu para construir com pendências. O contrato aceita `contato.whatsapp: "PENDENTE"` só em rascunho (2 testes). Vai para Bloqueados. 1º segmento: 14 min, US$ 4,83. |
 | 2026-10-03 18:55 | Claude Opus 5.5 | Ivan C M Moura | `monica-santos` **publicada como proposta** com WhatsApp fictício (DDD 20), por decisão do dono; pendências para a cliente em `entrada/`. Ajuste **`entrada-no-repo`** (ADR-010): `entrada/` versionada no repositório público. Pausado aguardando a cliente. 2º segmento: 43 min (parede), US$ 2,27. |
 | 2026-10-05 08:54 | Claude Opus 5.5 | Ivan C M Moura | `monica-santos`: a cliente respondeu e escolheu a **Pérola**, que vira a página (Orla, Planta e a escolha saem). WhatsApp real, Instagram, e-mail; atuação só avulsos e lançamentos; crédito/MCMV/SBPE na abertura e a seção de financiamento logo depois da atuação. Conferência COFECI C-11 a C-15. Publicada como proposta. 3º segmento: 3 min, US$ 1,25 (sem agentes). |
+| 2026-10-05 11:04 | Claude Opus 5.5 | Ivan C M Moura | `rudolf-specht`: o cliente escolheu a **opção 2 "Noturno"**, que vira a página (Tinta, Trilha, a escolha, miniaturas e prévias saem). Nenhum texto mudou; conferência OAB de 28/09 vale. Publicada como proposta; segue em Bloqueados até a OAB conferida e a aprovação do escritório. 2º segmento: 4 min, US$ 1,14 (sem agentes). |

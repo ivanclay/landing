@@ -30,3 +30,23 @@ Saída de `node .claude/skills/registro-implementacao-landing/scripts/tokens-por
   - Publicou.
 - **Agente a8b3952d (Sonnet 5):** advocacia aceita `proposta`; razão social com "Sociedade Individual de Advocacia"; registro da sociedade opcional na proposta; JSON-LD sem `identifier` vazio; 6 testes; emenda do ADR-006; manual do desenvolvedor.
 - **Agentes a347d134, ad84645f, ad57e00b (Sonnet 5):** opções 1, 2 e 3, com capturas; a 2 e a 3 com uma rodada de correção cada.
+
+---
+
+## 2º segmento — escolha da opção 2 (2026-10-05)
+
+- 2026-10-05 11:01 → ~11:05 (UTC−03:00), sessão `2dca1f08…` dedicada
+- Tempo ativo: 4 min
+- Tokens: entrada 40 · saída 9.538 · cache 1.719.200 (criação 77.826 + leitura 1.641.374)
+- Custo: US$ 1,14 (`npx ccusage@latest session --json`)
+- Esforço: `●○○○○`. Opção já construída e escolhida, levada para a página principal
+- **Total do projeto até aqui:** 33 min, US$ 17,10 (2 segmentos, 2 sessões). Segue como proposta.
+
+| Quem | Tarefa | Modelo | Entrada | Saída | Cache criação | Cache leitura |
+|---|---|---|---|---|---|---|
+| principal | conversa com o dono, decisões, revisão | claude-opus-5-5 | 40 | 9.538 | 77.826 | 1.641.374 |
+| **Total** | | | **40** | **9.538** | **77.826** | **1.641.374** |
+
+- **Conversa principal (Opus 5.5), sem agentes:** promoveu a opção 2 a `index.html`/`tema.css`/`pagina.css`,
+  apagou o resto, conferiu o construído (verificar, 4 larguras, capturas), atualizou briefing, checkpoint, QA,
+  índice e a tabela de projetos, e publicou.

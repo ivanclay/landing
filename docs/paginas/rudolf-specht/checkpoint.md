@@ -1,17 +1,15 @@
 # Checkpoint — `rudolf-specht`
 
-- **Estado (2026-09-28):** 3 opções construídas (Tinta, Noturno, Trilha) e a página de escolha (`index.html`),
-  como proposta (`"proposta": true`, noindex, etiqueta "Proposta · em avaliação" no índice). Cada opção tem
-  cabeçalho gerado e prévia de link própria (`imagens/social-opcao-N.jpg`). Conferência OAB feita
-  (`conferencia-oab.md`); ferramentas estendidas (ADR-006, emenda de 2026-09-28; 50 testes verdes).
-  Branch `pagina/rudolf-specht`, **commitada e não publicada**: o dono pediu para ver antes.
-- **Verificação:** `npm run verificar:rascunhos` aprovado. Aviso de peso da pasta (1264 KB): é a soma das 3
-  opções, das miniaturas e das prévias; cada página carrega só o que é dela. Decidido: aceito enquanto for
-  proposta; o que sobrar depois da escolha sai da pasta.
-- **Próximo passo concreto:** com o aval do dono, ff no `main`, push, apagar a branch e mandar ao Rudolf o
-  link `https://ivanclay.github.io/landing/rudolf-specht/` junto do questionário
-  (`entrada/adv-rudolf-mateus/questionario-enviar.md`).
-- **Depois da escolha:** a opção escolhida vira `index.html`, `tema.css` e `pagina.css`; saem as outras
-  opções, as miniaturas e as prévias. Ajustes do cliente; razão social e registro da sociedade na OAB/BA;
-  `oabConferidaEm` (dono, no CNA); `aprovadoPeloEscritorioEm`; Lighthouse e NVDA (`qa.md`).
-- **Não feito ainda:** Lighthouse das opções (fica para a escolhida) e leitor de tela.
+- **Estado (2026-10-05):** o cliente escolheu a **opção 2 "Noturno"**, que virou a página
+  (`index.html`, `tema.css`, `pagina.css`, `imagens/social.jpg`). Saíram a página de escolha, as opções 1 e 3,
+  as miniaturas e as prévias das outras opções. No ar como **proposta** (`"proposta": true`, noindex, etiqueta
+  "Proposta · em avaliação" no índice) em `https://ivanclay.github.io/landing/rudolf-specht/`.
+- **Verificação:** `npm run verificar:rascunhos` aprovado; o aviso de peso da pasta sumiu. Larguras 320, 375,
+  1440 e 1920 sem rolagem lateral (Playwright); capturas em `capturas/pagina-375.png` e `pagina-1440.png`.
+- **Para sair da proposta (regra 4):** `oabConferidaEm` (dono, no CNA da OAB) e `aprovadoPeloEscritorioEm`
+  (o Rudolf viu a página inteira e aprovou por escrito). Depois, `"proposta": false`.
+- **Pendências do cliente:** razão social e registro da sociedade na OAB/BA (`sociedade.registros` vazio);
+  endereço do escritório; original da foto (a atual veio comprimida do WhatsApp).
+- **Não feito ainda:** Lighthouse e leitor de tela (NVDA) da página escolhida (`qa.md`).
+- **Próximo passo concreto:** mandar ao Rudolf o link sem `?` (ou com `?v=2` para a prévia do WhatsApp atualizar)
+  e pedir a aprovação por escrito e as pendências acima.
