@@ -3,7 +3,7 @@
   "tipo": "imobiliario",
   "publicar": true,
   "proposta": true,
-  "atualizadoEm": "2026-10-03",
+  "atualizadoEm": "2026-10-05",
   "corretor": {
     "nome": "Mônica Santos",
     "generoGramatical": "F",
@@ -13,11 +13,15 @@
       "numero": "37.685"
     }
   },
-  "resumo": "Mônica Santos, corretora de imóveis em Salvador e Região Metropolitana: imóveis prontos, na planta e lançamentos, com apoio no financiamento.",
+  "resumo": "Mônica Santos, corretora de imóveis em Salvador e Região Metropolitana: avulsos e lançamentos, com crédito habitacional pelo MCMV e pelo SBPE.",
   "cidade": "Salvador",
   "uf": "BA",
   "contato": {
-    "whatsapp": "+5520900000000"
+    "whatsapp": "+5571983952496",
+    "email": "monicasantos.corretora@creci.org.br"
+  },
+  "redes": {
+    "instagram": "https://www.instagram.com/moniandrade.corretora/"
   },
   "imagemSocial": "imagens/social.jpg",
   "revisao": {

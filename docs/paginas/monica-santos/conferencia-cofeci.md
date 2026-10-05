@@ -32,3 +32,14 @@ O piso `termos-vedados-cofeci.json` roda no `verificar.mjs`.
   prévia fica local, na branch; não publica.
 - `"garantia"` (aviso do piso, nas três opções): vem de "Fundo de **Garantia**" (FGTS), nome próprio do fundo. Decidido: legítimo, fica.
 - Peso da pasta (1119 KB): soma das três opções, miniaturas e prévia; cada página carrega só o que é dela. Decidido: aceito enquanto for proposta; o que sobrar depois da escolha sai da pasta.
+
+## Revisão — 2026-10-05 (versão final, Pérola, com a resposta da cliente)
+| # | Frase nova ou mudada | Parecer |
+|---|---|---|
+| C-11 | Rubrica: "Corretora de Imóveis · Crédito e financiamento habitacional" | ✅ descreve a atuação [R]; sem qualificação promocional |
+| C-12 | "Imóveis avulsos e lançamentos em Salvador e Região Metropolitana — com acompanhamento no crédito e no financiamento habitacional, pelo Minha Casa, Minha Vida e pelo SBPE." | ✅ "acompanhamento" é método, não aprovação; a nota "a análise de crédito e as condições… são definidas pela instituição financeira" continua na seção, e a seção sobe para logo depois da atuação |
+| C-13 | Atuação "em duas frentes" (sai "imóveis na planta") | ✅ fato [R 6] |
+| C-14 | Instagram e e-mail no fechamento; rodapé "O contato acontece pelo WhatsApp, pelo Instagram ou por e-mail." | ✅ contato; e-mail é `mailto:`, nada é coletado |
+| C-15 | Meta description / resumo: "…avulsos e lançamentos, com crédito habitacional pelo MCMV e pelo SBPE." | ✅ |
+
+Avisos do CI: só `"garantia"` (Fundo de Garantia — decidido acima). O aviso de peso sumiu com as opções.

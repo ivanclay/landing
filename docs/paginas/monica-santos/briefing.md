@@ -46,3 +46,25 @@ Mônica. A página segue como proposta (noindex, fora do sitemap, só por link).
 - P-04 **Instituição** de que é correspondente bancária (opcional na página; se entrar, com o nome exato).
 - P-05 Se atua por uma imobiliária, o CRECI-J dela também pode ser exigido no anúncio (Res. 458/1995, art. 2º).
 - P-06 **Escolha da opção** e **aprovação da Mônica** (`revisao.aprovadoPelaCorretoraEm`).
+
+## Resposta da cliente — 2026-10-05 (`entrada/cor-monica-santos/resposta.md`, **[R n]** = item n)
+| Fato | Valor | Fonte |
+|---|---|---|
+| Opção escolhida | **Pérola** (vira `index.html`; Orla e Planta saem) | [R] "A opção escolhida é a Pérola" |
+| WhatsApp | **+55 71 98395-2496** (substitui o fictício) | [R 1] |
+| Instagram | `@moniandrade.corretora` → `https://www.instagram.com/moniandrade.corretora/` | [R 2] |
+| E-mail | `monicasantos.corretora@creci.org.br` | [R 3] |
+| Nome completo | **Mônica Santos** (como ela informou; a consulta ao CRECI-BA ainda confere) | [R 4] |
+| CRECI | **CRECI-BA 37685** — a UF agora é dela, não inferida | [R 5] |
+| Atuação | **imóveis avulsos e lançamentos imobiliários** — "imóveis na planta" **saiu** da página | [R 6] |
+| Imobiliária | **não mencionar** (P-05 fechada) | [R 7] |
+| Destaque | crédito e financiamento habitacional, MCMV e SBPE, na apresentação | [R] último parágrafo |
+
+- **Correspondente bancária — instituição (P-04):** ela não respondeu; a página segue sem o nome do banco. FGTS
+  continua (fonte [T 3]).
+- ⚠️ O Instagram usa "moniandrade" e o nome da página é "Mônica Santos": o perfil é o que ela informou; vale o dono
+  confirmar que é dela mesmo antes de divulgar.
+
+### Pendências restantes
+- P-03 `creciConferidoEm`: **dono**, na consulta pública do CRECI-BA (nome e inscrição 37685).
+- P-06 `aprovadoPelaCorretoraEm`: ela escolheu a opção; falta **aprovar a versão final** (com estes dados) por escrito.

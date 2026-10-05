@@ -1,5 +1,7 @@
 # Texto da página — `monica-santos` (comum às três opções)
 
+> ⚠️ **Superado em 2026-10-05:** a versão final (Pérola) está em `site/monica-santos/index.html` — sem "imóveis na planta", com crédito/MCMV/SBPE na abertura, Instagram e e-mail. As mudanças estão em `conferencia-cofeci.md` (C-11 a C-15).
+
 > As três opções usam **este** texto, palavra por palavra (a cliente compara o visual, não a redação).
 > Cada opção pode omitir um bloco se o layout pedir, nunca acrescentar fato. Conferido em `conferencia-cofeci.md`.
 
